@@ -3,9 +3,21 @@ import {Entity, Scene} from 'aframe-react';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import SkyCity from "./images/SkyCity.jpg"
-import Room from "./images/Room.jpg"
+import Room from "./images/Room.jpg";
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
 
-class App extends React.Component {
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+
+/* class App extends React.Component {
   
   changeScene() {
     var back = document.querySelector("#background");
@@ -47,4 +59,5 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App/>, document.querySelector('#sceneContainer'));
+ReactDOM.render(<App/>, document.querySelector('#sceneContainer')); */
+reportWebVitals();
