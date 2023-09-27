@@ -1,7 +1,6 @@
 import 'aframe';
 import {Entity, Scene} from 'aframe-react';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import SkyCity from "./images/SkyCity.jpg"
 import Room from "./images/Room.jpg";
 import ReactDOM from 'react-dom/client';
