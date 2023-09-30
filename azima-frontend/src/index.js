@@ -3,9 +3,10 @@ import {Entity, Scene} from 'aframe-react';
 import React from 'react';
 import SkyCity from "./images/SkyCity.jpg"
 import Room from "./images/Room.jpg";
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import ReactDOM from 'react-dom';
+//import ReactDOM from 'react-dom/client';
+//import './index.css';
+//import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 // const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -16,7 +17,7 @@ import reportWebVitals from './reportWebVitals';
 // );
 
 
- class App extends React.Component {
+class App extends React.Component {
   
   changeScene() {
     var back = document.querySelector("#background");
@@ -58,5 +59,5 @@ import reportWebVitals from './reportWebVitals';
   }
 }
 
-ReactDOM.render(<App/>, document.querySelector('#sceneContainer')); 
+ReactDOM.render(<App/>, document.querySelector('#root')); 
 reportWebVitals();
