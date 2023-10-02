@@ -1,0 +1,178 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+
+
+
+body{
+  background-color: #2b2b2b;
+  color: white; 
+ 
+  
+}
+h1{
+  font-family: Mazzard;
+  font-weight: 700;
+  font-size: 25px;
+}
+@font-face {
+  font-family: 'Mazzard';
+  src: local('Mazzard M Bold'), local('Mazzard-M-Bold'),
+      url('/frontend/fonts/MazzardM-Bold.woff2') format('woff2'),
+      url('/frontend/fonts/MazzardM-Bold.woff') format('woff'),
+      url('/frontend/fonts/MazzardM-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Mazzard';
+  src: local('Mazzard M Regular'), local('Mazzard-M-Regular'),
+      url('/frontend/fonts/MazzardM-Regular.woff2') format('woff2'),
+      url('/frontend/fonts/MazzardM-Regular.woff') format('woff'),
+      url('/frontend/fonts/MazzardM-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+.content{
+  max-width: 1920px;
+  margin: 100 0 ;
+
+}
+nav{
+
+  padding: 20px 40px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+nav .logo{
+  margin-right: auto;
+  
+}
+nav h1 {
+  margin-left: 120px;
+}
+
+#cursors {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: auto;
+  width: 35px;
+  height: 35px;
+  opacity: 0;
+  border: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#add{
+  position: fixed;
+  z-index: 1000;
+  pointer-events: auto;
+  width: 35px;
+  height: 35px;
+  color: #4ABFAA;
+  border: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(20%, -120%);
+  background-color: transparent;
+  font-size: 40px;
+}
+#embed-frame {
+ width: 700px;
+ height: 700px;
+ position: relative;
+ padding-left: 30px;
+ padding-top: 30px;
+  transform: translate(0%,3%);
+}
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
+
+.color-picker-container {
+  position: fixed;
+  left:800px;
+  bottom:60px;
+
+}
+
+
+.color-picker-container input[type="color"] {
+  width: 200px;
+  height: 100px;
+  cursor: pointer;
+  border-radius: 20px;
+  
+}
+
+
+input[type="file"] {
+  display: none;
+}
+.custom-file-upload {
+  border: 3px solid #ccc;
+  position: fixed;
+  padding: 12px 24px;
+  cursor: pointer;
+  border-radius: 20px;
+font-family: Mazzard;
+font-weight: 700;
+left:800px;
+top:400px;
+}
+input[type="text"]{
+  font-family: Mazzard;
+  font-weight: 700;
+  border-radius: 15px;
+  padding: 6px 12px;
+  font-size: 20px;
+}
+input[type="submit"]{
+  font-family: Mazzard;
+  font-weight: 700;
+  border-radius: 15px;
+  padding: 6px 12px;
+  font-size: 20px;
+}
+#input{
+  position:fixed;
+  left:800px;
+top:200px;
+}
+h1{
+  font-family: Mazzard;
+  font-weight: 700;
+  font-size: 40px;
+}
+@font-face {
+  font-family: 'Mazzard';
+  src: local('Mazzard M Bold'), local('Mazzard-M-Bold'),
+      url('/fonts/MazzardM-Bold.woff2') format('woff2'),
+      url('/fonts/MazzardM-Bold.woff') format('woff'),
+      url('/fonts/MazzardM-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Mazzard';
+  src: local('Mazzard M Regular'), local('Mazzard-M-Regular'),
+      url('/fonts/MazzardM-Regular.woff2') format('woff2'),
+      url('/fonts/MazzardM-Regular.woff') format('woff'),
+      url('/fonts/MazzardM-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}

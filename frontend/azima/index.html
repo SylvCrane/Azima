@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./styles/globals.css">
+    <meta charset="utf-8">
+    <title>Azima</title>
+    <meta name="description" content="Azima">
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.misc.min.js"></script>
+  <script src="https://unpkg.com/super-hands@^3.0.3/dist/super-hands.min.js"></script>
+   <script src="./components/build.js"></script>
+   <script src="./components/loadin.js"></script>
+  <script src="./components/superhands.js"></script>
+ 
+    
+  <script src ="./components/link.js"></script>
+  <script src ="./components/points.js"></script>
+
+  </head>
+  <body>
+   
+
+
+ <div id="overlay">  </div>
+    <a-scene>
+      
+
+      
+      <a-entity camera  look-controls capture-mouse position="0 1 1" >
+        <!-- Cursor Entity -->
+        <a-entity id="cursorRing" class="cursor-ring"
+                          position="0 0 -1" 
+                  geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03" 
+                  material="color: white"
+                  cursor="rayOrigin: entity"
+                  raycaster="showLine: true; "
+                  super-hands="colliderEvent: raycaster-intersection; 
+                              colliderEventProperty: els;
+                              colliderEndEvent: raycaster-intersection-cleared; 
+                              colliderEndEventProperty: clearedEls;"
+                  body="type:static" toggle-thickness >
+        </a-entity>
+      </a-entity>
+
+
+      <a-entity new-room
+
+      ></a-entity>
+
+
+      <a-sky src="./assets/IMG_20230607_150934_00_118.jpg" rotation= "0 180 0 " radius="20" 
+      ></a-sky>
+
+   
+    </a-scene>
+ 
+    <script src ="./components/cursor.js"></script>
+  </body>
+</html>
