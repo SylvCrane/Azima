@@ -15,11 +15,11 @@ export const SignUp = (props) => {
         <div className="account-container">
             <br/><h1>Sign Up</h1><br/>
             <form className="signup-form" onSubmit={handleSubmit}>
-                <label htmlFor="usersname">Full name</label>
+                <label htmlFor="usersname">Full Name</label>
                 <input value={name} name="usersname" onChange={(e) => setName(e.target.value)} id="usersname" placeholder="Name" />
-                <label htmlFor="email">email</label>
+                <label htmlFor="email">Email</label>
                 <input value={email} onChange={(e) => setEmail(e.target.value)}type="email" placeholder="email@gmail.com" id="email" name="email" />
-                <label htmlFor="password">password</label>
+                <label htmlFor="password">Password</label>
                 <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" />
                 <button type="submit">Sign Up</button>
             </form>
