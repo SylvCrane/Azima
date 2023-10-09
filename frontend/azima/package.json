@@ -8,8 +8,8 @@
     "deploy": "ghpages"
   },
   "devDependencies": {
-    "ghpages": "0.0.3",
-    "live-server": "^1.2.0"
+    "ghpages": "^0.0.10",
+    "live-server": "^1.1.0"
   },
   "keywords": [
     "aframe",

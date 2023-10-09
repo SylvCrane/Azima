@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,108 +6,91 @@
 
 
 
-
-
-
 body{
   background-color: #2b2b2b;
   color: white; 
- 
+  width: 100vw;
+  height: 100vh;
+
+  margin:0;
+  overflow:hidden;
+  display: flex;
   
+
 }
 h1{
   font-family: Mazzard;
   font-weight: 700;
   font-size: 25px;
 }
-@font-face {
+/* @font-face {
   font-family: 'Mazzard';
   src: local('Mazzard M Bold'), local('Mazzard-M-Bold'),
-      url('/frontend/fonts/MazzardM-Bold.woff2') format('woff2'),
-      url('/frontend/fonts/MazzardM-Bold.woff') format('woff'),
-      url('/frontend/fonts/MazzardM-Bold.ttf') format('truetype');
+      url('/frontend/azima/fonts/MazzardM-Bold.woff2') format('woff2'),
+      url('/frontend/azima/fonts/MazzardM-Bold.woff') format('woff'),
+      url('/frontend/azima/fonts/MazzardM-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
 }
 @font-face {
   font-family: 'Mazzard';
   src: local('Mazzard M Regular'), local('Mazzard-M-Regular'),
-      url('/frontend/fonts/MazzardM-Regular.woff2') format('woff2'),
-      url('/frontend/fonts/MazzardM-Regular.woff') format('woff'),
-      url('/frontend/fonts/MazzardM-Regular.ttf') format('truetype');
+      url('/frontend/azima/fonts/MazzardM-Regular.woff2') format('woff2'),
+      url('/frontend/azima/fonts/MazzardM-Regular.woff') format('woff'),
+      url('/frontend/amzima/fonts/MazzardM-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
 }
-.content{
-  max-width: 1920px;
-  margin: 100 0 ;
+ */
 
-}
-nav{
 
-  padding: 20px 40px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
+#aframe-container {
+  width: 100vw;
+  height: 100vh;
+ 
+ 
 }
-nav .logo{
-  margin-right: auto;
-  
-}
-nav h1 {
-  margin-left: 120px;
-}
-
-#cursors {
-  position: fixed;
-  z-index: 1000;
-  pointer-events: auto;
-  width: 35px;
-  height: 35px;
-  opacity: 0;
-  border: none;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-#add{
-  position: fixed;
-  z-index: 1000;
-  pointer-events: auto;
-  width: 35px;
-  height: 35px;
-  color: #4ABFAA;
-  border: none;
-  top: 50%;
-  left: 50%;
-  transform: translate(20%, -120%);
-  background-color: transparent;
-  font-size: 40px;
-}
-#embed-frame {
- width: 700px;
- height: 700px;
- position: relative;
- padding-left: 30px;
- padding-top: 30px;
-  transform: translate(0%,3%);
+#aframe-container-add {
+  width: 75vw;
+  height: 75vh;
+  padding:50px;
+ 
+ 
 }
 #overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+
+  width: 100vw;
+  height: 100vh;
   background: black;
   z-index: 1000;
   opacity: 1;
   transition: opacity 1s ease-in-out;
 }
+#saveButton {
+  position: fixed;     
+  bottom: 10px;       
+  right: 10px;         
+  padding: 10px 15px;  
+  border: none;        
+  background-color: #007BFF;  
+  color: white;       
+  font-size: 16px;     
+  border-radius: 4px;  
+  cursor: pointer;    
+  outline: none;       
+}
+
+#saveButton:hover {
+  background-color: #0056b3;  
+}
+
+
 
 .color-picker-container {
   position: fixed;
-  left:800px;
-  bottom:60px;
+  left:80%;
+  top:5%;
 
 }
 
@@ -115,24 +99,58 @@ nav h1 {
   width: 200px;
   height: 100px;
   cursor: pointer;
-  border-radius: 20px;
+ 
   
 }
 
 
+.plus-button {
+  position: absolute;
+  
+  width: 50px;
+  height: 50px;
+
+  top: 50%;        /* Place the top edge of the button at the center of the container */
+  left: 50%;       /* Place the left edge of the button at the center of the container */
+  transform: translate(-10%, -90%);  
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  color: white;
+  font-size: 36px;
+  font-weight: bold;
+  font-family: Mazzard;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s;
+  z-index: 1000; /* Ensure it appears above the A-Frame content */
+}
+
+.plus-button:hover {
+  color:#4ABFAA;
+}
 input[type="file"] {
   display: none;
 }
-.custom-file-upload {
+
+.fileForm {
   border: 3px solid #ccc;
   position: fixed;
   padding: 12px 24px;
   cursor: pointer;
   border-radius: 20px;
-font-family: Mazzard;
-font-weight: 700;
-left:800px;
-top:400px;
+  font-family: Mazzard;
+  font-weight: 700;
+  left: 800px;
+  bottom: 5%;
+  transition: background-color 0.2s; /* smooth transition for hover effect */
+}
+
+/* Add a hover effect to visually indicate it's clickable */
+.fileForm:hover {
+  background-color: #eee;
 }
 input[type="text"]{
   font-family: Mazzard;
@@ -140,6 +158,7 @@ input[type="text"]{
   border-radius: 15px;
   padding: 6px 12px;
   font-size: 20px;
+  
 }
 input[type="submit"]{
   font-family: Mazzard;
@@ -147,32 +166,16 @@ input[type="submit"]{
   border-radius: 15px;
   padding: 6px 12px;
   font-size: 20px;
+  position:absolute;
 }
 #input{
   position:fixed;
   left:800px;
 top:200px;
 }
-h1{
-  font-family: Mazzard;
-  font-weight: 700;
-  font-size: 40px;
+.inputForm{
+  position:absolute;
+  bottom:5%;
+  left: 10%;
 }
-@font-face {
-  font-family: 'Mazzard';
-  src: local('Mazzard M Bold'), local('Mazzard-M-Bold'),
-      url('/fonts/MazzardM-Bold.woff2') format('woff2'),
-      url('/fonts/MazzardM-Bold.woff') format('woff'),
-      url('/fonts/MazzardM-Bold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Mazzard';
-  src: local('Mazzard M Regular'), local('Mazzard-M-Regular'),
-      url('/fonts/MazzardM-Regular.woff2') format('woff2'),
-      url('/fonts/MazzardM-Regular.woff') format('woff'),
-      url('/fonts/MazzardM-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}
+

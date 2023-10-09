@@ -15,8 +15,8 @@
     <script src="./components/superhands.js"></script>
     <script src="./components/points.js"></script>
 <script src ="./components/loadin.js"></script>
-<script src="./components/link.js">
-
+<script src="./components/link.js"></script>
+<script src="./components/customization.js"></script>
 </script>
   </head>
   <body>
@@ -24,42 +24,52 @@
       <h1>Pick a color:</h1>
       <input type="color" id="colorWheel" name="colorWheel" value="#ffffff" border-radius="300px">
     </div>
-    <form id="inputForm">
+    <form class="inputForm">
       <h1>View name:</h1>
       <input type="text" id="textInput" placeholder="Enter text">
       <input type="submit" value="Submit">
     </form>
-    <label for="file-upload" class="custom-file-upload">
-      Upload 360• Image
-  </label>
+    <form class="fileForm">
+      <h1>Upload a 360° image:</h1>
     <input id="file-upload"type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"name="filename">
-
+    <p>Selected file: <span id="file-name">None</span></p>
+  </form>
+  <button id="saveButton">Save</button>
 
    
-    <div id="embed-frame" >
-      <div id="overlay"></div>
-    <a-scene embedded>
-      <a-entity camera="fov: 20;" wasd-controls look-controls position="0 1 1" >
-        <!-- Cursor Entity -->
-        <a-entity id="cursorRing" 
-                  position="0 0 -1" 
-                  geometry="primitive: ring; radiusInner: 0.002; radiusOuter: 0.003" 
-                  material="color: white"
-                  cursor="rayOrigin: entity"
-                  raycaster="showLine: true; "
-                  super-hands="colliderEvent: raycaster-intersection; 
-                              colliderEventProperty: els;
-                              colliderEndEvent: raycaster-intersection-cleared; 
-                              colliderEndEventProperty: clearedEls;"
-                  body="type:static">
-        </a-entity>
-      </a-entity>
-     <a-entity new-room></a-entity>
-      <a-sky src="./assets/IMG_20230607_150934_00_118.jpg" rotation= "0 180 0 " radius=20 markable></a-sky>
+    <div id="aframe-container-add">
+      <div id="overlay">  </div>
+         <a-scene embedded> 
+           
+          <a-assets>
+            
+          </a-assets>
+           
+           <a-entity camera wasd-controls look-controls position="0 1 1" >
+             <!-- Cursor Entity -->
+             <a-entity id="cursorRing" 
+                       position="0 0 -1" 
+                       geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03" 
+                       material="color: white"
+                       cursor="rayOrigin: entity;"
+                       raycaster="showLine: true; lineColor: red; lineOpacity: 1"
+                       raycaster="far: 10; showLine: true"
+                       super-hands=" colliderEvent: raycaster-intersection; colliderEventProperty: els; colliderEndEvent:raycaster-intersection-cleared; colliderEndEventProperty: clearedEls;"
+                       >
+             </a-entity>
+           </a-entity>
      
-    </a-scene>
-  </div>
-  
+           <a-entity linker></a-entity>
+     
+     
+     
+           <a-sky class="Living Room" src="./assets/IMG_20230607_150934_00_118.jpg" rotation= "0 180 0 " radius="20" 
+          markable></a-sky>
+     
+        
+         </a-scene>
+      
+        </div>
 
 
   </body>
