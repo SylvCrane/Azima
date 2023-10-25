@@ -24,7 +24,7 @@ AFRAME.registerComponent('toggle-thickness', {
       this.plus.addEventListener('click', this.boundHandlePlusClick);
       this.cursor.addEventListener('click', this.boundHandleCursorClick);
 
-   
+    
        this.cursor.addEventListener('raycaster-intersection', this.handleHover.bind(this));
        this.cursor.addEventListener('raycaster-intersection-cleared', this.handleHoverEnd.bind(this));
   },
@@ -39,7 +39,8 @@ AFRAME.registerComponent('toggle-thickness', {
       if (evt.detail.els.includes(this.button)) {
           this.cursor.setAttribute('material','opacity: 0.5');
       }
-  },handleHoverEnd: function(evt) {
+  },
+  handleHoverEnd: function(evt) {
     if (!evt.detail.els) {
         this.cursor.setAttribute('material','opacity:1');
     }
@@ -93,7 +94,7 @@ AFRAME.registerComponent('toggle-thickness', {
     this.plus.remove();
     let link = document.createElement('a-entity');
     link.setAttribute('linker', {});
-    link.setAttribute('class',sky.getAttribute('class'));
+   
     console.log("linker made:");
     this.el.sceneEl.appendChild(link);
 
@@ -114,8 +115,11 @@ AFRAME.registerComponent('toggle-thickness', {
         // Use the bound version of the function to remove
         this.cursor.removeEventListener('click', this.boundHandleCursorClick);
         console.log("tick");
-
+        
+        console.log('Adding markable component to sky');
         sky.setAttribute('markable', '');
+        console.log('Markable component added to sky');
+        
     }
 }
 else{
