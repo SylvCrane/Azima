@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./styles/globals.css">
+    <meta charset="utf-8">
+    <title>Azima</title>
+    <meta name="description" content="Azima">
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.misc.min.js"></script>
+  <script src="https://unpkg.com/super-hands@^3.0.3/dist/super-hands.min.js"></script>
+   <script src="./components/build.js"></script>
+   <script src="./components/loadin.js"></script>
+  <script src="./components/link.js"></script>
+  
+  </head>
+  <body>
+    <button id="cursors"></button>
+
+
+    <button id="add" style="display: none">
+      +
+    </button>
+    <div id="overlay"> </div>
+    <a-scene>
+
+        <a-sky src="./assets/IMG_20230607_150934_00_118.jpg" rotation= "0 180 0 " radius="20" ></a-sky>
+
+      <a-box id="box" position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+      <a-camera fov-zoom-control>
+        <a-entity id="cursorRing" 
+                  cursor="fuse: true; fuseTimeout: 500"
+                  position="0 0 -1"
+                  geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+                  material="color: white; shader: flat"
+                  toggle-thickness>
+        </a-entity>
+      </a-camera>
+
+
+     
+    
+
+   
+    </a-scene>
+  <script src="./components/zoom.js"></script>
+
+    
+  </body>
+</html>

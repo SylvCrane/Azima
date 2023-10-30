@@ -1,0 +1,181 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+body{
+  background-color: #2b2b2b;
+  color: white; 
+  width: 100vw;
+  height: 100vh;
+
+  margin:0;
+  overflow:hidden;
+  display: flex;
+  
+
+}
+h1{
+  font-family: Mazzard;
+  font-weight: 700;
+  font-size: 25px;
+}
+/* @font-face {
+  font-family: 'Mazzard';
+  src: local('Mazzard M Bold'), local('Mazzard-M-Bold'),
+      url('/frontend/azima/fonts/MazzardM-Bold.woff2') format('woff2'),
+      url('/frontend/azima/fonts/MazzardM-Bold.woff') format('woff'),
+      url('/frontend/azima/fonts/MazzardM-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Mazzard';
+  src: local('Mazzard M Regular'), local('Mazzard-M-Regular'),
+      url('/frontend/azima/fonts/MazzardM-Regular.woff2') format('woff2'),
+      url('/frontend/azima/fonts/MazzardM-Regular.woff') format('woff'),
+      url('/frontend/amzima/fonts/MazzardM-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+ */
+
+
+#aframe-container {
+  width: 100vw;
+  height: 100vh;
+ 
+ 
+}
+#aframe-container-add {
+  width: 75vw;
+  height: 75vh;
+  padding:50px;
+ 
+ 
+}
+#overlay {
+  position: fixed;
+
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
+#saveButton {
+  position: fixed;     
+  bottom: 10px;       
+  right: 10px;         
+  padding: 10px 15px;  
+  border: none;        
+  background-color: #007BFF;  
+  color: white;       
+  font-size: 16px;     
+  border-radius: 4px;  
+  cursor: pointer;    
+  outline: none;       
+}
+
+#saveButton:hover {
+  background-color: #0056b3;  
+}
+
+
+
+.color-picker-container {
+  position: fixed;
+  left:80%;
+  top:5%;
+
+}
+
+
+.color-picker-container input[type="color"] {
+  width: 200px;
+  height: 100px;
+  cursor: pointer;
+ 
+  
+}
+
+
+.plus-button {
+  position: absolute;
+  
+  width: 50px;
+  height: 50px;
+
+  top: 50%;        /* Place the top edge of the button at the center of the container */
+  left: 50%;       /* Place the left edge of the button at the center of the container */
+  transform: translate(-10%, -90%);  
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  color: white;
+  font-size: 36px;
+  font-weight: bold;
+  font-family: Mazzard;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s;
+  z-index: 1000; /* Ensure it appears above the A-Frame content */
+}
+
+.plus-button:hover {
+  color:#4ABFAA;
+}
+input[type="file"] {
+  display: none;
+}
+
+.fileForm {
+  border: 3px solid #ccc;
+  position: fixed;
+  padding: 12px 24px;
+  cursor: pointer;
+  border-radius: 20px;
+  font-family: Mazzard;
+  font-weight: 700;
+  left: 800px;
+  bottom: 5%;
+  transition: background-color 0.2s; /* smooth transition for hover effect */
+}
+
+/* Add a hover effect to visually indicate it's clickable */
+.fileForm:hover {
+  background-color: #eee;
+}
+input[type="text"]{
+  font-family: Mazzard;
+  font-weight: 700;
+  border-radius: 15px;
+  padding: 6px 12px;
+  font-size: 20px;
+  
+}
+input[type="submit"]{
+  font-family: Mazzard;
+  font-weight: 700;
+  border-radius: 15px;
+  padding: 6px 12px;
+  font-size: 20px;
+  position:absolute;
+}
+#input{
+  position:fixed;
+  left:800px;
+top:200px;
+}
+.inputForm{
+  position:absolute;
+  bottom:5%;
+  left: 10%;
+}
+
