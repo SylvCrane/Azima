@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+
+
+
+body{
+  background-color: #0a7a68;
+  color: white; 
+ 
+  
+}
+h1{
+  font-family: Mazzard;
+  font-weight: 700;
+  font-size: 25px;
+}
+@font-face {
+  font-family: 'Mazzard';
+  src: local('Mazzard M Bold'), local('Mazzard-M-Bold'),
+      url('/frontend/fonts/MazzardM-Bold.woff2') format('woff2'),
+      url('/frontend/fonts/MazzardM-Bold.woff') format('woff'),
+      url('/frontend/fonts/MazzardM-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Mazzard';
+  src: local('Mazzard M Regular'), local('Mazzard-M-Regular'),
+      url('/frontend/fonts/MazzardM-Regular.woff2') format('woff2'),
+      url('/frontend/fonts/MazzardM-Regular.woff') format('woff'),
+      url('/frontend/fonts/MazzardM-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+.content{
+  max-width: 1920px;
+  margin: 100 0 ;
+
+}
+nav{
+
+  padding: 20px 40px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+nav .logo{
+  margin-right: auto;
+  
+}
+nav h1 {
+  margin-left: 120px;
+}
