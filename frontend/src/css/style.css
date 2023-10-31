@@ -20,14 +20,10 @@
     width: 100%;
   }
   
-  
   /* div styling for the pages */
-  .about-page, 
-  .real-estate-page, 
   .tours-page, 
   .editor-page, 
-  .other-page, 
-  .contact-page,
+  .about-page, 
   .account-container {
     font-family: "Arial";
     display: flex;
@@ -67,11 +63,13 @@
   }
   
   label {
+    font-size: 18px;
     width: 100px;
     margin-right: 1rem;
   }
   
   input {
+    font-size: 18px;
     margin: 0.5rem 0;
     padding: 1rem;
     border: solid #00664d;
@@ -85,6 +83,7 @@
     border-radius: 10px;
     cursor: pointer;
     color: #ffff;
+
   }
   
   .link-btn {

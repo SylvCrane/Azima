@@ -22,7 +22,7 @@ export const Login = (props) => {
                 <br/>    
                 <button type="submit">Log In</button>
             </form>
-            <button className="link-btn" onClick={() => props.onFormSwitch('signup-form')}>Don't have an account? Sign Up here.</button>
+            <button className="link-btn" onClick={() => props.onFormSwitch('signup-form')}>Don't have an account with Azima? Sign Up here.</button>
         </div>
     )
 }
