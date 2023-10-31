@@ -22,7 +22,7 @@ export const SignUp = (props) => {
                 <label htmlFor="lastName">Last Name *</label>
                 <input value={lastName} name="lastName" onChange={(e) => setLastName(e.target.value)} id="lastName" placeholder="Last Name" required title="Last name cannot be blank."/>
                 <label htmlFor="company">Company </label>
-                <input value={company} name="company" onChange={(e) => setCompany(e.target.value)} id="" placeholder="First Name" required/>
+                <input value={company} name="company" onChange={(e) => setCompany(e.target.value)} id="" placeholder="Company" required/>
                 <label htmlFor="email">Email *</label>
                 <input value={email} onChange={(e) => setEmail(e.target.value)}type="email" placeholder="email@gmail.com" id="email" name="email" required title="Email cannot be blank."/>
                 <label htmlFor="password">Password *</label>
