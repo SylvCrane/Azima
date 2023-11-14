@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "ghpages": "^0.0.10",
-    "live-server": "^1.1.0"
+    "live-server": "^1.2.2"
   },
   "keywords": [
     "aframe",

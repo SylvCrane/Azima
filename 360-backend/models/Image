@@ -1,0 +1,19 @@
+const mongoose = require('mongoose');
+
+const Schema = mongoose.Schema;
+
+const userSchema = new Schema({
+    imageName: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    imageID: {
+        type: String
+    },
+    imageClass: {
+        type: String
+    }
+});
+
+module.exports = User = mongoose.model('User', userSchema);
