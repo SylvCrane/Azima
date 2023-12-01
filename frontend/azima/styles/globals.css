@@ -67,22 +67,56 @@ h1{
   opacity: 1;
   transition: opacity 1s ease-in-out;
 }
+#overlay-add{
+  position: fixed;
+  margin: 50px;
+  width: 75vw;
+  height: 75vh;
+  background: black;
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
 #saveButton {
   position: fixed;     
-  bottom: 10px;       
-  right: 10px;         
-  padding: 10px 15px;  
+  bottom: 50px;       
+  right: 30px;         
+  padding: 10px 100px;  
   border: none;        
-  background-color: #007BFF;  
+  background-color: #0EB49A;  
   color: white;       
   font-size: 16px;     
   border-radius: 4px;  
   cursor: pointer;    
-  outline: none;       
+  outline: none;      
+  font-family: Mazzard; 
+  font-weight: 700;
+  font-size: 25px;
 }
 
 #saveButton:hover {
-  background-color: #0056b3;  
+  background-color: #4ABFAA;  
+}
+
+#cancelButton {
+  position: fixed;     
+  bottom: 14.3%;       
+  right: 30px;         
+  padding: 10px 88px;  
+  border: none;        
+  background-color: #0EB49A;  
+  color: white;       
+  font-size: 16px;     
+  border-radius: 4px;  
+  cursor: pointer;    
+  outline: none;      
+  font-family: Mazzard; 
+  font-weight: 700;
+  font-size: 25px;
+}
+
+#cancelButton:hover {
+  background-color: #4ABFAA;  
 }
 
 
@@ -138,13 +172,13 @@ input[type="file"] {
 .fileForm {
   border: 3px solid #ccc;
   position: fixed;
-  padding: 12px 24px;
+  padding: 0px 12px;
   cursor: pointer;
   border-radius: 20px;
   font-family: Mazzard;
   font-weight: 700;
-  left: 800px;
-  bottom: 5%;
+  right: 2%;
+  bottom: 22%;
   transition: background-color 0.2s; /* smooth transition for hover effect */
 }
 
@@ -154,28 +188,63 @@ input[type="file"] {
 }
 input[type="text"]{
   font-family: Mazzard;
+  color: white;
   font-weight: 700;
   border-radius: 15px;
   padding: 6px 12px;
   font-size: 20px;
-  
-}
-input[type="submit"]{
-  font-family: Mazzard;
-  font-weight: 700;
-  border-radius: 15px;
-  padding: 6px 12px;
-  font-size: 20px;
-  position:absolute;
-}
-#input{
-  position:fixed;
-  left:800px;
-top:200px;
-}
-.inputForm{
-  position:absolute;
-  bottom:5%;
-  left: 10%;
+  background-color: transparent; 
+  display: block;  /* Added to move the input to its own line */
+  width: 100%;  /* Takes full width of its parent */
+  box-sizing: border-box;  /* Ensures padding and border are included in total width */
 }
 
+
+
+.inputForm{
+  position: absolute;
+  bottom: 32%;
+  right: 2.5%;
+  width: 250px;
+ 
+}
+
+.inputForm h1 {
+  margin-bottom: 5px;  /* Brings the header closer to the input box */
+}
+
+.color-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: fixed;
+  right: 10%;  
+  top: 4%;
+  
+   /* Ensures it appears above most other content */
+}
+.color-picker h1{
+  margin-bottom: 5px;
+}
+
+.color-option {
+  position: relative;
+}
+
+.color-option input[type="radio"] {
+  visibility: hidden;
+  position: absolute;
+}
+
+.color-display {
+  display: block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.color-option input[type="radio"]:checked + .color-display {
+  border: 2px solid #ffffff;
+}

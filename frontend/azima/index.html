@@ -22,21 +22,46 @@
   <script src="./components/window.js"></script>
   </head>
   <body>
-    <div class="color-picker-container">
-      <h1>Pick a color:</h1>
-      <input type="color" id="colorWheel" name="colorWheel" value="#ffffff" border-radius="300px">
-    </div>
+    <div class="color-picker">
+      <h1>Select a color:</h1>
+      <label class="color-option">
+          <input type="radio" name="color" value="#FFffff">
+          <span class="color-display" style="background-color: #Ffffff;"></span>
+      </label>
+      <label class="color-option">
+          <input type="radio" name="color" value="#9FD3CB">
+          <span class="color-display" style="background-color: #9FD3CB;"></span>
+      </label>
+      <label class="color-option">
+          <input type="radio" name="color" value="#4ABFAA">
+          <span class="color-display" style="background-color: #4ABFAA;"></span>
+      </label>
+      <label class="color-option">
+          <input type="radio" name="color" value="#0EB49A">
+          <span class="color-display" style="background-color: #0EB49A;"></span>
+      </label>
+      <label class="color-option">
+          <input type="radio" name="color" value="#0A7A68">
+          <span class="color-display" style="background-color: #0A7A68"></span>
+      </label>
+      <label class="color-option">
+          <input type="radio" name="color" value="#09483E">
+          <span class="color-display" style="background-color: #09483E;"></span>
+      </label>
+  </div>
     <form class="inputForm">
       <h1>View name:</h1>
       <input type="text" id="textInput" placeholder="Enter text">
-      <input type="submit" value="Submit">
+    
     </form>
     <form class="fileForm">
       <h1>Upload a 360° image:</h1>
     <input id="file-upload"type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"name="filename">
     <p>Selected file: <span id="file-name">None</span></p>
   </form>
+  <button id="cancelButton">Cancel</button>
   <button id="saveButton">Save</button>
+
 
  <div id="overlay">  </div>
     <div id="aframe-container">
