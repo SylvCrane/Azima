@@ -6,12 +6,12 @@ AFRAME.registerComponent('linker', {
   this.triangles = null;
   this.identifier = null;
   this.hovertimeout;
-  this.drawCount =0;
+
   
   this.el.sceneEl.addEventListener('fourPointsCaptured', (event) => {
     console.log("[linker] 'fourPointsCaptured' event received with detail:", event.detail);
   
-    // If the identifier has already been set and the new event's identifier doesn't match it, then ignore the event.
+   
     if (this.identifier && event.detail.identifier !== this.identifier) {
       console.log("[linker] Identifier mismatch. Ignoring event.");
       return;
@@ -23,14 +23,14 @@ AFRAME.registerComponent('linker', {
     }
   
     this.positions = event.detail.positions;
-    if (this.positions && this.positions.length >= 4&& this.drawCount<1) {
+    if (this.positions && this.positions.length >= 4) {
       this.createTriangles(this.positions, event);
     }
   });
   this.el.sceneEl.addEventListener('fourPointsRemoved', (event) => {
     console.log("[linker] 'fourPointsRemoved' event received with detail:", event.detail);
   
-    // If the identifier has already been set and the new event's identifier doesn't match it, then ignore the event.
+   
     if (this.identifier && event.detail.identifier !== this.identifier) {
       console.log("[linker] Identifier mismatch. Ignoring event.");
       return;
@@ -108,20 +108,19 @@ this.save();
     },
   
     save : function(){
-   
+      let eventData = {
+        id: this.el.getAttribute('id'),
+        class: this.el.getAttribute('class'),
+        triangles: this.serializeTriangles(this.triangles),
+        textData: this.serializeText(this.triangles)
     
-      let sky = document.querySelector('a-sky');
+    };
+    console.log(eventData);
+ 
       let container = document.getElementById('aframe-container');
       let overlay = document.getElementById('overlay');
       let camera = this.el.sceneEl.querySelector('[camera]');
-      const colorOptions = document.querySelectorAll('.color-picker input[type="radio"]');
-      colorOptions.forEach(option => {
-        option.removeEventListener('change', this.handleColorInput);
-      });
-
-    const inputForm = document.querySelector('.inputForm');
-    inputForm.removeEventListener('submit', this.handleFormSubmit);
-inputForm.removeEventListener('input', this.handleFormSubmit);
+      
       this.cursor.setAttribute('toggle-thickness', '');
 
       this.cursor.setAttribute('geometry', {
@@ -130,12 +129,28 @@ inputForm.removeEventListener('input', this.handleFormSubmit);
     });
 
       camera.setAttribute('camera', 'fov', '80');
+      this.el.removeAttribute('linker');
+      const colorOptions = document.querySelectorAll('.color-picker input[type="radio"]');
+      colorOptions.forEach(option => {
+        option.removeEventListener('change', this.handleColorInput);
+      });
+
+    const inputForm = document.querySelector('.inputForm');
+    inputForm.removeEventListener('submit', this.handleFormSubmit);
+inputForm.removeEventListener('input', this.handleFormSubmit);
+   
+      
+
      
-      this.el.setAttribute('window', '');
+  
+      this.el.sceneEl.emit('createWindow', eventData);
+     console.log("[linker] Event 'createWindow' emitted.");
+      console.log(this.identifier);
+      this.identifier =null;
 
     
     
-      this.el.removeAttribute('linker');
+      
 
       if (container) {
       container.style.width = "100vw";
@@ -145,17 +160,44 @@ inputForm.removeEventListener('input', this.handleFormSubmit);
         container.style.padding = "0px";
       }
 
-
+      this.el.remove();
 
 
 
     },
-    cancel : function(){
-      if(this.drawCount ===1){
-        this.drawCount-=1;
-      }
+    serializeTriangles: function(triangles) {
+      return triangles.map(triangle => {
+          return {
+              vertexA: triangle.getAttribute('vertex-a'),
+              vertexB: triangle.getAttribute('vertex-b'),
+              vertexC: triangle.getAttribute('vertex-c'),
+              color: triangle.getAttribute('material').color // Assuming color is a property
+          };
+      });
+  },
+  serializeText: function(triangles) {
+    return triangles.map(triangle => {
+        let textEl = triangle.querySelector('a-text');
+        if (textEl) {
+            return {
+                value: textEl.getAttribute('value'),
+                position: textEl.getAttribute('position'),
+                rotation: textEl.getAttribute('rotation'),
+                width: textEl.getAttribute('width'),
+                align: textEl.getAttribute('align')
+            };
+        }
+        return null;
+    }).filter(text => text !== null); // Filter out any nulls if a triangle has no text
+},
+
     
-      let sky = document.querySelector('a-sky');
+
+    cancel : function(){
+    
+ 
+      
+   
       let container = document.getElementById('aframe-container');
       let overlay = document.getElementById('overlay');
       let camera = this.el.sceneEl.querySelector('[camera]');
@@ -176,13 +218,9 @@ inputForm.removeEventListener('input', this.handleFormSubmit);
 
       camera.setAttribute('camera', 'fov', '80');
      
-      if(this.triangles)
-{
-  this.removeTriangles();
-  this.removeText();
-}    
     
-      this.el.removeAttribute('linker');
+      window.remove();
+      this.el.remove();
 
       if (container) {
       container.style.width = "100vw";
@@ -281,7 +319,10 @@ removeText: function() {
 
 
   createTriangles: function (positions, event) {
-    this.drawCount+=1;
+    let window = document.createElement('a-entity');
+    window.setAttribute('window','');
+    console.log('window created');
+    this.el.sceneEl.appendChild(window);
 
     let sky = document.querySelector('a-sky');
 

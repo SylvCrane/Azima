@@ -2,7 +2,12 @@ AFRAME.registerComponent('window', {
  
   init: function() {
     console.log('init function called');
-      this.triangles = [];
+    this.el.sceneEl.addEventListener('createWindow', (event) => {
+      console.log("Received createWindow event", event.detail);
+
+      // Use event.detail to build your window object
+      this.buildWindow(event.detail);
+  });
 
 
       this.delete = document.createElement('a-entity');
@@ -12,13 +17,14 @@ AFRAME.registerComponent('window', {
   this.delete.setAttribute('text', 'value:Remove Portal; align: center; width: 3');
   this.delete.setAttribute('visible', false);
   this.el.sceneEl.appendChild(this.delete);
-    this.data.triangles = Array.from(this.el.querySelectorAll('a-triangle'));
+   
 
       this.cursor = document.getElementById('cursorRing');
 
-      this.cursor.addEventListener('raycaster-intersection', this.hover.bind(this));
-      this.cursor.addEventListener('raycaster-intersection-cleared', this.hoverEnd.bind(this));
- 
+    
+
+    // this.cursor.addEventListener('raycaster-intersection', this.hover.bind(this));
+    // this.cursor.addEventListener('raycaster-intersection-cleared', this.hoverEnd.bind(this));
 
 
       
@@ -69,10 +75,47 @@ AFRAME.registerComponent('window', {
 
    
   },
+
+  buildWindow: function(data) {
+    // Clear existing content if necessary
+    while (this.el.firstChild) {
+        this.el.removeChild(this.el.firstChild);
+    }
+
+    // Create and add triangles
+    data.triangles.forEach(triangleData => {
+        let triangleEl = document.createElement('a-triangle');
+        triangleEl.setAttribute('vertex-a', triangleData.vertexA);
+        triangleEl.setAttribute('vertex-b', triangleData.vertexB);
+        triangleEl.setAttribute('vertex-c', triangleData.vertexC);
+        triangleEl.setAttribute('material', `color: ${triangleData.color}`);
+        this.el.appendChild(triangleEl);
+    });
+
+    // Create and add text elements
+    data.textData.forEach(textInfo => {
+        let textEl = document.createElement('a-text');
+        textEl.setAttribute('value', textInfo.value);
+        textEl.setAttribute('position', textInfo.position);
+        textEl.setAttribute('rotation', textInfo.rotation);
+        textEl.setAttribute('width', textInfo.width);
+        textEl.setAttribute('align', textInfo.align);
+        this.el.appendChild(textEl);
+    });
+
+    // Set class and ID from data
+    this.el.setAttribute('class', data.class);
+    this.el.setAttribute('id', data.id);
+
+    // Additional setup or adjustments can be done here
+},
+
+
+
   hoverEnd: function(e) {
     let clearedEl = e.detail.clearedEls[0];
     console.log(clearedEl.parentNode);
-  console.log(clearedEl.parentNode.tagName);
+
     if (clearedEl.parentNode.tagName.toLowerCase() === 'a-entity') {
      let triangles = Array.from(clearedEl.parentNode.querySelectorAll('a-triangle'));
     

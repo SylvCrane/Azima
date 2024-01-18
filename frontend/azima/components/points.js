@@ -7,6 +7,7 @@ AFRAME.registerComponent('markable', {
     this.newPoints = [];
     this.initPos = null;
     let release = null;
+    this.maxPoints = 4;
     this.cursor = document.getElementById('cursorRing');
 
     document.body.addEventListener('save',()=>{
@@ -14,7 +15,7 @@ AFRAME.registerComponent('markable', {
 
     })
     document.body.addEventListener('cancel', ()=>{
-this.save();
+this.cancel();
     })
    
     this.boundMouseDownHandler = this.mouseDownHandler.bind(this);
@@ -23,18 +24,13 @@ this.save();
     this.el.addEventListener('mousedown', this.boundMouseDownHandler);
     this.el.addEventListener('mouseup', this.boundMouseUpHandler);
 
-      if (this.initPos &&release && release.equals(this.initPos)) {
-        console.log("draw");
-        this.draw();  
-      } else {
-       
-      }
+      
       this.cursor.addEventListener('raycaster-intersection', (e)=>{
         if (this.newPoints) {
           this.newPoints.forEach((point) => {
             if (e.detail.els.includes(point)){
               point.setAttribute('material','color:white');
-              
+             
             }
           });
         }
@@ -54,8 +50,8 @@ this.save();
   
   draw : function () {
 
-    const maxPoints = 4;
-    if (this.pointCounter < maxPoints) {
+    
+    
       console.log("[markable] Point captured at:", this.initPos);
       console.log(this.el);
    
@@ -69,8 +65,10 @@ this.save();
       newPoint.setAttribute('material', 'color: #09483E');
       newPoint.setAttribute('position', `${this.initPos.x} ${this.initPos.y} ${this.initPos.z}`);
       newPoint.setAttribute('id', this.pointCounter);
-      newPoint.setAttribute('markable', '');
-
+      
+      newPoint.addEventListener('click', (event) => {
+        this.erase(event.target);
+    });
 
     
       this.clickPositions.push(this.initPos);
@@ -80,13 +78,34 @@ this.save();
       
       
       this.pointCounter++;
-    }
-    if (this.pointCounter >= maxPoints) {
+    
+    if (this.pointCounter >= this.maxPoints) {
      this.initTriangles();
     }
   
 
   },
+  erase: function(point) {
+    
+    const index = this.newPoints.indexOf(point);
+    if (this.pointCounter === 4) {
+      this.el.emit("fourPointsRemoved", { identifier: this.identifier });
+  }
+ 
+    if (index > -1) {
+        this.newPoints.splice(index, 1);
+        this.clickPositions.splice(index, 1);
+        this.pointCounter--;
+        
+    }
+
+
+    if (point && point.parentNode) {
+      point.remove();
+  }
+  
+    
+},
 
 
   initTriangles: function() {
@@ -98,23 +117,59 @@ this.save();
   save : function(){
     console.log("saved recieved");
  
-    if(this.el.getAttribute('radius')){
-      let sky = document.querySelector('a-sky');
-      let data = sky.components.markable;
-        console.log(sky.components);
+    
+      
+        
         console.log("save event triggered");
       
-        if (data.newPoints) {
-          data.newPoints.forEach((point) => {
+        if (this.newPoints) {
+          this.newPoints.forEach((point) => {
            
             
             point.remove();
            
          });
-       sky.removeAttribute('markable');
+       
+       
+        
+       
+  
+  
+        
+        
+       
+        this.pointCounter =0;
+        this.clickPositions =[];
+        this.newPoints =[];
+        this.el.removeAttribute('markable');
        this.el.removeEventListener('mousedown', this.boundMouseDownHandler);
        this.el.removeEventListener('mouseup', this.boundMouseUpHandler);
-       }
+    }
+    
+
+
+
+  },
+  cancel : function(){
+    console.log("cancel recieved");
+ 
+    
+      
+        
+        console.log("cancel event triggered");
+      
+        if (this.newPoints) {
+          this.newPoints.forEach((point) => {
+           
+            
+            point.remove();
+           
+         });
+        }
+         if (this.pointCounter === 4) {
+          this.el.emit("fourPointsRemoved", { identifier: this.identifier });
+       
+       
         
        
   
@@ -122,10 +177,12 @@ this.save();
         
         
        
-        data.pointCounter =0;
-        data.clickPositions =[];
-        data.newPoints =[];
-        sky.removeAttribute('markable');
+        this.pointCounter =0;
+        this.clickPositions =[];
+        this.newPoints =[];
+        this.el.removeAttribute('markable');
+       this.el.removeEventListener('mousedown', this.boundMouseDownHandler);
+       this.el.removeEventListener('mouseup', this.boundMouseUpHandler);
     }
     
 
@@ -134,32 +191,7 @@ this.save();
   },
   
 
-  erase: function(point){
-    let sky = document.querySelector('a-sky');
-    let data = sky.components.markable;
-    console.log('erase');
-    console.log(data.pointCounter);
-    console.log(data.clickPositions);
-    if(data.pointCounter === 4){
-      
-      this.el.emit("fourPointsRemoved", {identifier: data.identifier});
-    }
-    const index = data.newPoints.indexOf(point);
   
-    if (index > -1) {
-        data.newPoints.splice(index, 1);
-        data.clickPositions.splice(index, 1);
-        data.pointCounter--;  
-    }
-    if(point && point.parentNode){
-        point.remove();
-    }
-   
-    console.log('erased');
-    console.log(data.pointCounter);
-    console.log(data.clickPositions);
-},
-
 
 
 mouseDownHandler: function(e) {
@@ -179,7 +211,7 @@ mouseUpHandler: function(e) {
   if (e.detail && e.detail.intersection) {
    
       release = e.detail.intersection.point;
-   
+  
 
     }
 
@@ -190,15 +222,12 @@ mouseUpHandler: function(e) {
 
 
      
-        if(this.el.getAttribute('radius')){
+        if(this.pointCounter<this.maxPoints){
         console.log("draw");
         this.draw();  
      
         }
-        else {
-          
-          this.erase(this.el);
-        }
+       
       
         
     } else {

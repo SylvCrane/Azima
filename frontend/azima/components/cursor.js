@@ -157,7 +157,7 @@ else{
     radiusOuter: 0.003,
     radiusInner: 0.002
 });
-this.cursor.removeAttribute('toggle-thickness');
+this.el.removeAttribute('toggle-thickness');
   return;
 }
 

@@ -23,7 +23,12 @@ h1{
   font-weight: 700;
   font-size: 25px;
 }
-/* @font-face {
+h2{
+  font-family: Mazzard;
+  font-weight: 700;
+  font-size: 15px;
+}
+ @font-face {
   font-family: 'Mazzard';
   src: local('Mazzard M Bold'), local('Mazzard-M-Bold'),
       url('/frontend/azima/fonts/MazzardM-Bold.woff2') format('woff2'),
@@ -41,7 +46,7 @@ h1{
   font-weight: 400;
   font-style: normal;
 }
- */
+ 
 
 
 #aframe-container {
@@ -167,6 +172,7 @@ h1{
 }
 input[type="file"] {
   display: none;
+
 }
 
 .fileForm {
@@ -177,7 +183,8 @@ input[type="file"] {
   border-radius: 20px;
   font-family: Mazzard;
   font-weight: 700;
-  right: 2%;
+  font-size: 10px;
+  left: 80%;
   bottom: 22%;
   transition: background-color 0.2s; /* smooth transition for hover effect */
 }
