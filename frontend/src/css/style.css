@@ -1,8 +1,7 @@
 /* CSS style sheet for application / for all files to have for consistency */ 
-
 * {
     /* font-family: "Konkhmer Sleokchher"; */
-    font-family: Arial;
+    font-family: Tahoma;
     font-size: 20px;
     box-sizing: border-box;
     margin: 0;
@@ -64,7 +63,6 @@
   
   label {
     font-size: 18px;
-    width: 100px;
     margin-right: 1rem;
   }
   
@@ -76,18 +74,28 @@
     border-radius: 10px;
   }
   
-  button {
+  .login-button,
+  .signup-button {
     border: none;
     background-color: #00664d;
     padding: 20px;
     border-radius: 10px;
     cursor: pointer;
     color: #ffff;
-
   }
   
+  /* For login and signup pages */
   .link-btn {
     background: none;
     color: #00664d;
     text-decoration: underline;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* For alert message when user either signups or logs in */
+  .alert {
+    font-family: "Arial";
+    font-size: 18px; 
+    color: red;
   }

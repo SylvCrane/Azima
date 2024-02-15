@@ -8,8 +8,8 @@ nav {
     background-color: #00664d;
     color: white;
     position: sticky;
-    top: 0;
-    bottom: 50%;
+
+
 }
 
 nav .title {
@@ -26,19 +26,32 @@ nav ul {
 
 nav ul li {
    list-style: none; 
+   display: flex;
+   align-items: center;
 }
 
 nav ul li a {
-    display: block;
     text-decoration: none;
     color: white;
     padding: 0.5rem;
-    margin: 0 0.5rem;
-    border-radius: 0.5rem;
+    margin: 0 0.2rem;
+    border-radius: 0.5rem; /* Makes the border curvy */
+    display: flex; /* Make the link and button flex containers */
+    align-items: center; /* Align items vertically in the center */
 }
 
-/* changes colouur of link component when mouse hovers it */
-nav ul li a:not(.active):hover {
+nav ul li button {
+    background: none; /* Remove button background */
+    border: none; /* Remove button border */
+    cursor: pointer;
+    align-items: center;
+    margin: 0 0.2rem;
+    padding: 0.1px;
+}
+
+/* changes colour of link component when mouse hovers it */
+nav ul li a:not(.active):hover,
+nav u1 li button:hover {
     border: 1px solid #207963;
     
 }
@@ -53,7 +66,6 @@ nav .menu {
     width: 2.25rem;
     height: 2rem;
 }
-
 
 /* div that sets the colour of the active tab/link different to the rest */
 .active{

@@ -9,7 +9,7 @@ import {useState } from "react";
 function Account() {
 
   // Line allows us to get the state 
-  const [currentForm, setCurrentForm] = useState('login');
+  const [currentForm, setCurrentForm] = useState('');
 
   const toggleForm = (formName) => {
     setCurrentForm(formName);
