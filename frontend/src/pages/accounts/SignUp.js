@@ -12,8 +12,8 @@ export const SignUp = (props) => {
     const [alertMessage, setAlertMessage] = useState(''); // Variable that stores message at the bottom of page depending on whether user input.
 
     // Variables to store pattern regex for password and email (dont add semicolon)
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d!@#$%^&*()\-_=+{};:,<.>`~]{8,}$/
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/ 
 
     // Function that handles what happens signup button is clicked.
     const handleSubmit = (e) => {
@@ -32,7 +32,7 @@ export const SignUp = (props) => {
         if (!passwordRegex.test(password)) {
             /* setAlertMessage("Password must contain a minimum of eight characters, at least one uppercase letter, one lowercase letter and one number.");
             return; */
-            incorrectMessage += "Password must contain a minimum of eight characters, at least one uppercase letter, one lowercase letter and one number.";
+            incorrectMessage += "Password must contain a minimum of eight characters, at least one uppercase letter and one number.";
         } 
 
         if (incorrectMessage) {
