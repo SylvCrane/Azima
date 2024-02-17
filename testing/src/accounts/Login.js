@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import "../../css/style.css";
-import * as Components from './Components';
+import "../styles.css";
 
-export const Login = () => {
+export const Login = (props) => {
 
     // Use state variables
     const [email, setEmail] = useState('');
@@ -59,16 +58,19 @@ export const Login = () => {
     }
 
     return (
-        <Components.Container>
-            <Components.Form onSubmit={handleSubmit}>
-            <Components.Title>Sign In</Components.Title>
-            <Components.Input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email@gmail.com" id="email" name="email" required/>
-            <Components.Input value={password} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" required/>
-            <Components.Button>Sign In</Components.Button>
+        <div className="account-container">
+            <br/><br/><h1>Login</h1><br/><br/>
+            <form className="login-form" onSubmit={handleSubmit}>
+                <label htmlFor="email">Email </label>
+                <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email@gmail.com" id="email" name="email" required/>
+                <label htmlFor="password"><br/>Password</label>
+                <input value={password} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" required/>
+                <br/>    
+                <button className="login-button" type="submit">Log In</button>
+            </form>
             <br/>
+            <button className="link-btn" onClick={() => props.onFormSwitch('signup-form')}>Don't have an account with Azima? Sign Up here.</button><br/><br/>
             <br/>{alertMessage && <div className="alert">{alertMessage}</div>}<br/>
-        
-        </Components.Form>
-        </Components.Container>
+        </div>
     )
 }

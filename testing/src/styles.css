@@ -14,3 +14,7 @@ body {
   height: 100vh;
   margin: -20px 0 50px;
 }
+
+p {
+  font-size: 12px;
+}

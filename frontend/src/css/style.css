@@ -1,11 +1,15 @@
 /* CSS style sheet for application / for all files to have for consistency */ 
-* {
+  * {
     /* font-family: "Konkhmer Sleokchher"; */
     font-family: Tahoma;
     font-size: 20px;
     box-sizing: border-box;
     margin: 0;
     
+  }
+
+  p {
+    font-size: 12px;
   }
   
   h1 {
@@ -99,3 +103,9 @@
     font-size: 18px; 
     color: red;
   }
+
+  .required-text {
+    font-size: 12px;
+  }
+
+

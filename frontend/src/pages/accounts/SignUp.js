@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "../../css/style.css";
+import * as Components from './Components';
 
-export const SignUp = (props) => {
+export const SignUp = () => {
     
     /* State variables for the input types - useState hook will first get the user input then set that input into the second variable */
     const [firstName, setFirstName] = useState('');
@@ -72,24 +73,20 @@ export const SignUp = (props) => {
     }
 
     return (
-        <div className="account-container">
-            <br/><br/><h1>Sign Up</h1><br/><br/>
-            <form className="signup-form" onSubmit={handleSubmit}>
-                <label htmlFor="firstName">First Name *</label>
-                <input value={firstName} name="firstName" onChange={(e) => setFirstName(e.target.value)} id="firstName" placeholder="First Name" required/>
-                <label htmlFor="lastName">Last Name *</label>
-                <input value={lastName} name="lastName" onChange={(e) => setLastName(e.target.value)} id="lastName" placeholder="Last Name" required/>
-                <label htmlFor="company">Company </label>
-                <input value={company} name="company" onChange={(e) => setCompany(e.target.value)} id="" placeholder="Company"/>
-                <label htmlFor="email">Email *</label>
-                <input value={email} onChange={(e) => setEmail(e.target.value)} id="email" placeholder="email@gmail.com" required/>
-                <label htmlFor="password">Password *</label>
-                <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="********" id="password" minLength="8" required/>
-                <br/><button className="signup-button" type="submit">Sign Up</button><br/>
-            </form>
-            <br/><p>(* Required fields must be filled in to create an account)</p> <br/>
-            <button className="link-btn" onClick={() => props.onFormSwitch('login')}>Already have an account with Azima? Login here.</button><br/><br/>
+        <Components.Container>
+        <Components.Form onSubmit={handleSubmit}>
+            <Components.Title> Sign Up </Components.Title>
+            <Components.Input value={firstName} name="firstName" onChange={(e) => setFirstName(e.target.value)} id="firstName" placeholder="First Name *" required/>
+            <Components.Input value={lastName} name="lastName" onChange={(e) => setLastName(e.target.value)} id="lastName" placeholder="Last Name *" required/>
+            <Components.Input value={company} name="company" onChange={(e) => setCompany(e.target.value)} id="" placeholder="Company"/>
+            <Components.Input value={email} onChange={(e) => setEmail(e.target.value)} id="email" placeholder="email@gmail.com *" required/>
+            <Components.Input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="********" id="password" minLength="8" required/>
+            <Components.Button>Sign Up</Components.Button>
+            
+            <br/>(* Required fields must be filled in to create an account)<br/>
             <br/>{alertMessage && <div className="alert">{alertMessage}</div>}<br/>
-        </div>
+
+        </Components.Form>
+        </Components.Container>
     )
 }
