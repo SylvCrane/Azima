@@ -16,13 +16,14 @@
     font-size: 40px;
   }
   
-  /* for app.js file */
-  .App {
+  /* for app.js and account.js file */
+  .App, 
+  .Account {
     background-color: #fefefe;
     height: 100vh;
     width: 100%;
   }
-  
+
   /* div styling for the pages */
   .tours-page, 
   .editor-page, 
@@ -47,16 +48,17 @@
   
   /** FOR THE ACCOUNTS PAGES **/
   
-  .login-form,
+  /*.login-form,
   .signup-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 50vh; /* Minimum height of the page to fill the viewport */
+    min-height: 50vh; // Minimum height of the page to fill the viewport 
     text-align: center;
   }
-  
+  */
+
   .email-form {
     align-items: flex-start;
   }
@@ -104,8 +106,7 @@
     color: red;
   }
 
+  /* For signup page */
   .required-text {
-    font-size: 12px;
+    font-size: 14px;
   }
-
-

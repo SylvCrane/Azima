@@ -1,18 +1,25 @@
 import React, {useState} from "react";
 import * as Components from './Components';
+import { SignUp } from "./accounts/Signup";
 
-function App() {
+function App(props) {
+
     const [signIn, toggle] = useState(true);
      return(
         <Components.Container>
         <Components.SignUpContainer signinIn={signIn}>
-            <Components.Form>
-                <Components.Title>Create Account</Components.Title>
-                <Components.Input type='text' placeholder='Name' />
+
+            {/* CALL SIGN UP CLASS*/}
+            {/*<Components.Form>
+                <Components.Title>Sign Up</Components.Title>
+                <Components.Input type='text' placeholder=' First Name' />
                 <Components.Input type='email' placeholder='Email' />
                 <Components.Input type='password' placeholder='Password' />
                 <Components.Button>Sign Up</Components.Button>
-            </Components.Form>
+            </Components.Form> */}
+            <SignUp/>
+
+            {/* CALL SIGN UP CLASS*/}
         </Components.SignUpContainer>
 
         <Components.SignInContainer signinIn={signIn}>
@@ -23,6 +30,8 @@ function App() {
                  <Components.Anchor href='#'>Forgot your password?</Components.Anchor>
                  <Components.Button>Sigin In</Components.Button>
              </Components.Form>
+
+             {/* CALL LOGIN CLASS*/}
         </Components.SignInContainer>
 
         <Components.OverlayContainer signinIn={signIn}>

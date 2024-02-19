@@ -62,9 +62,9 @@ export const Login = () => {
         <Components.Container>
             <Components.Form onSubmit={handleSubmit}>
             <Components.Title>Sign In</Components.Title>
-            <Components.Input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email@gmail.com" id="email" name="email" required/>
-            <Components.Input value={password} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" required/>
-            <Components.Button>Sign In</Components.Button>
+            <Components.Input value={email} onChange={(e) => setEmail(e.target.value)} id="loginEmail" placeholder="email@gmail.com" required/>
+            <Components.Input value={password} onChange={(e) => setPass(e.target.value)} type="password" id="loginPassword" placeholder="********" required/>
+            <Components.Button type="submit">Sign In</Components.Button>
             <br/>
             <br/>{alertMessage && <div className="alert">{alertMessage}</div>}<br/>
         

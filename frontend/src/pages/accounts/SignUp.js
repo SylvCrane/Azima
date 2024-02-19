@@ -76,14 +76,14 @@ export const SignUp = () => {
         <Components.Container>
         <Components.Form onSubmit={handleSubmit}>
             <Components.Title> Sign Up </Components.Title>
-            <Components.Input value={firstName} name="firstName" onChange={(e) => setFirstName(e.target.value)} id="firstName" placeholder="First Name *" required/>
+            <Components.Input value={firstName} name="firstName" onChange={(e) => setFirstName(e.target.value)} id="firstName" placeholder="First Name *" required />
             <Components.Input value={lastName} name="lastName" onChange={(e) => setLastName(e.target.value)} id="lastName" placeholder="Last Name *" required/>
-            <Components.Input value={company} name="company" onChange={(e) => setCompany(e.target.value)} id="" placeholder="Company"/>
-            <Components.Input value={email} onChange={(e) => setEmail(e.target.value)} id="email" placeholder="email@gmail.com *" required/>
-            <Components.Input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="********" id="password" minLength="8" required/>
-            <Components.Button>Sign Up</Components.Button>
+            <Components.Input value={company} name="company" onChange={(e) => setCompany(e.target.value)} id="company" placeholder="Company" autoComplete="off"/>
+            <Components.Input value={email} onChange={(e) => setEmail(e.target.value)} id="signupEmail" placeholder="email@gmail.com *" required/>
+            <Components.Input value={password} onChange={(e) => setPassword(e.target.value)} type="password" id="signupPassword" placeholder="********" minLength="8" required/>
+            <Components.Button type="submit">Sign Up</Components.Button>
             
-            <br/>(* Required fields must be filled in to create an account)<br/>
+            <div className= "required-text"> <br/> (* Required fields must be filled in to create an account)<br/> </div>
             <br/>{alertMessage && <div className="alert">{alertMessage}</div>}<br/>
 
         </Components.Form>

@@ -32,8 +32,9 @@ export const Navbar = () => {
             <NavLink to="/about">About</NavLink>
           </li>
           <li>
-            <NavLink to="/account" className='account-button'>
-              <button><img src={account} alt="" /></button></NavLink>
+          <NavLink to="/account" className='account-logo' aria-label="Account">
+            <img src={account} alt="Account" />
+          </NavLink>
           </li>
         </ul>
       </nav>

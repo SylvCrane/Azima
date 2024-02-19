@@ -15,7 +15,7 @@ app.use(cors({origin: true, credentials: true}));
 // Init middleware
 app.use(express.json({extended: false})); // Allows Express to read data sent using a POST or PUT request. It is used for recognizing incoming objects as JSON objects. 
 
-const user = require("./models/Signup"); // import Signup model
+const user = require("./models/UserDetails"); // import user details model
 
 // Signup API
 app.post("/signup", async(req,res) => {
@@ -40,7 +40,6 @@ app.post("/signup", async(req,res) => {
         res.send({status: "ok", message: "user registered"});
     } catch (e) {
         console.log(e);
-        //res.send({status: "error registering user"});
         res.status(500).send({status: "error", message: e.message});
     }
 });

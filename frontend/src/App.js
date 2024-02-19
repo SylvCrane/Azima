@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import "./css/style.css";
 import About from './pages/About';
 import Editor from './pages/Editor';
@@ -11,7 +11,7 @@ function App() {
         <div className="App">
             <Navbar/> 
                 <Routes>
-                    {/* <Route path="/" element={} /> */}
+                    <Route path="/" element={<Navigate to="/tours" />} />
                     <Route path="/tours" element={<Tours />} />
                     <Route path="/editor" element={<Editor />} />
                     <Route path="/about" element={<About />} />

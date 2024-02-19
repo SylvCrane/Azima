@@ -6,7 +6,6 @@ import styled from 'styled-components';
 export const Container = styled.div`
 background-color: #fff;
 border: #004d38;
-
 box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 position: relative; /* Need this otherwise container will fill up whole screen */
 overflow: hidden;
@@ -26,7 +25,7 @@ export const SignUpContainer = styled.div`
  opacity: 0;
  z-index: 1;
  /* function that applies the following, if */
- ${props => props.signinIn !== true ? `
+ ${props => props.$signingin !== true ? `
    transform: translateX(100%);
    opacity: 1;
    z-index: 5;
@@ -43,7 +42,7 @@ transition: all 0.6s ease-in-out;
 left: 0;
 width: 50%;
 z-index: 2; 
-${props => (props.signinIn !== true ? `transform: translateX(100%);` : null)}
+${props => (props.$signingin !== true ? `transform: translateX(100%);` : null)}
 `;
 
 export const Form = styled.form`
@@ -68,9 +67,7 @@ border: none;
 padding: 12px 15px;
 margin: 8px 0;
 width: 100%;
-font-size: 12px;
 `;
-
 
 export const Button = styled.button`
    border-radius: 20px;
@@ -90,6 +87,7 @@ export const Button = styled.button`
        outline: none;
    }
 `;
+
 export const GhostButton = styled(Button)`
 background-color: transparent;
 border-color: #ffffff;
@@ -107,14 +105,12 @@ overflow: hidden;
 transition: transform 0.6s ease-in-out;
 z-index: 100;
 ${props =>
- props.signinIn !== true ? `transform: translateX(-100%);` : null}
+ props.$signingin !== true ? `transform: translateX(-100%);` : null}
 `;
 
 /* Component for the side that will slide / allow user to either sign up or sign in */
 export const Overlay = styled.div`
 background: #00664d;
-background: -webkit-linear-gradient(to right, #00664d, #009973);
-background: linear-gradient(to right, #00664d, #009973);
 background-repeat: no-repeat;
 background-size: cover;
 background-position: 0 0;
@@ -125,7 +121,7 @@ height: 100%;
 width: 200%;
 transform: translateX(0);
 transition: transform 0.6s ease-in-out;
-${props => (props.signinIn !== true ? `transform: translateX(50%);` : null)}
+${props => (props.$signingin !== true ? `transform: translateX(50%);` : null)}
 `;
 
 export const OverlayPanel = styled.div`
@@ -145,15 +141,13 @@ export const OverlayPanel = styled.div`
 
 export const LeftOverlayPanel = styled(OverlayPanel)`
   transform: translateX(-20%);
-  ${props => props.signinIn !== true ? `transform: translateX(0);` : null}
-  height: 100vh;
+  ${props => props.$signingin !== true ? `transform: translateX(0);` : null}
 `;
 
 export const RightOverlayPanel = styled(OverlayPanel)`
     right: 0;
     transform: translateX(0);
-    ${props => props.signinIn !== true ? `transform: translateX(20%);` : null}
-    height: 100vh;
+    ${props => props.$signingin !== true ? `transform: translateX(20%);` : null}
 `;
 
 export const ButtonText = styled.p`
