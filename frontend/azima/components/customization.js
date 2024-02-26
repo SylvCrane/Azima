@@ -30,8 +30,9 @@ document.addEventListener("DOMContentLoaded", function () {
       document.body.dispatchEvent(event);
       assetsContainer.appendChild(asset);
       console.log("saved sent");
-      console.log(assetsContainer);
-      asset = document.createElement("img"); // Reset asset for the next save
+      
+      asset = document.createElement("img"); 
+      console.log(assetsContainer);// Reset asset for the next save
     } else {
       console.log("Asset id or src is not set");
     }

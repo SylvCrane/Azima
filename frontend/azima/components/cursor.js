@@ -122,7 +122,7 @@ handlePlusClick: function() {
     this.el.sceneEl.removeChild(this.addMarker);
     this.plus.remove();
     let link = document.createElement('a-entity');
-    link.setAttribute('linker', {});
+    link.setAttribute('linker', '');
    
     console.log("linker made:");
     this.el.sceneEl.appendChild(link);
