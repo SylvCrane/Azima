@@ -1,0 +1,17 @@
+async function loadShowcasePhotos(houseID) {
+
+    const [images, setImages] = useState([]);
+
+    useEffect(() => {
+        axios
+            .get(`http://localhost:8082/api/showcaseimage/imagepuller/${houseID}`)
+            .then((res) => {
+                setImages(res.data);
+            })
+            .catch((err) => {
+                console.log('Cannot get images');
+            });
+    }, []);
+
+    return images;
+}

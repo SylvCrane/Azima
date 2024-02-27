@@ -14,10 +14,18 @@ app.use(express.json({ extended: false }));
 
 app.get('/', (req, res) => res.send('Hello world!'));
 
-
 //routes
 const userRouter = require('./routes/api/user');
+const teleporterRouter = require('./routes/api/teleporter');
+const markerRouter = require('./routes/api/marker');
+const houseRouter = require('./routes/api/house');
+const imageRouter = require('./routes/api/image');
+
 app.use('/api/user', userRouter);
+app.use('/api/teleporter', teleporterRouter);
+app.use('/api/marker', markerRouter);
+app.use('/api/house', houseRouter);
+app.use('/api/image', imageRouter);
 
 const port = process.env.PORT || 8082;
 

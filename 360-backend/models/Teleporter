@@ -87,8 +87,12 @@ const teleporterSchema = new Schema({
         type: String,
         required: true,
         trim: true
+    },
+    houseID: {
+        type: String,
+        required: true,
+        trim: true
     }
-    
 });
 
 module.exports = Teleporter = mongoose.model('Teleporter', teleporterSchema);
