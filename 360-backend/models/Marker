@@ -3,12 +3,17 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const markerSchema = new Schema({
-    House: {
+    houseID: {
         type: String,
         required: true,
         trim: true
     },
     Text: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    locationName: {
         type: String,
         required: true,
         trim: true

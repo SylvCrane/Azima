@@ -88,7 +88,7 @@ const teleporterSchema = new Schema({
         required: true,
         trim: true
     },
-    House: {
+    houseID: {
         type: String,
         required: true,
         trim: true
