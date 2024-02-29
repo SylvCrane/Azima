@@ -1,20 +1,23 @@
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./css/style.css";
-import About from './pages/About';
-import Editor from './pages/Editor';
-import Tours from './pages/Tours';
-import Account from './pages/accounts/Account';
 import { Navbar } from "./NavBar";
+import { Home } from './pages/Home';
+import { Tours } from './pages/Tours';
+import { Editor}  from './pages/Editor';
+import { About } from './pages/About';
+import { Account } from './pages/accounts/Account';
 
 function App() {
     return (
         <div className="App">
-            <Navbar/> 
+            <Navbar /> 
                 <Routes>
-                    <Route path="/" element={<Navigate to="/tours" />} />
+                    <Route path="/" element={<Home />} />
+                    <Route path="/home" element={<Home />} />
                     <Route path="/tours" element={<Tours />} />
-                    <Route path="/editor" element={<Editor />} />
                     <Route path="/about" element={<About />} />
+                    {/*{userLoggedIn && <Route path="/editor" element={<Editor />} />} {/* Editor will only be rendered if user is logged in*/}
+                    <Route path="/editor" element={<Editor />} />
                     <Route path="/account" element={<Account />} />
                 </Routes>
         </div>

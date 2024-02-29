@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/style.css"; // NOTE: put 2 . ("..") since this file is in it's own folder too. 
 
-function Editor() {
+export const Editor = () => {
     return (
         <div className="editor-page">
             <h1>Editor</h1>
@@ -10,5 +10,3 @@ function Editor() {
         </div>
     );
 }
-
-export default Editor;

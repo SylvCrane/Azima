@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "../../css/style.css";
-import * as Components from './Components';
+import "../../css/accounts.css";
+import { useNavigate } from 'react-router-dom';
 
-export const Login = () => {
+export const Login = (props) => {
 
     // Use state variables
     const [email, setEmail] = useState('');
@@ -12,8 +13,11 @@ export const Login = () => {
     // Variable for email pattern regex
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 
+    // Vairiable to user import useNavigate 
+    const navigate = useNavigate();
+
     // Function that handles what happens signup button is clicked.
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault(); 
         console.log(email, password);
 
@@ -24,7 +28,7 @@ export const Login = () => {
         }
 
         // Fetch api once validation of user input is successful 
-        fetch("http://localhost:5000/Login", {
+        fetch("http://localhost:5000/login", {
             method: "POST",
             crossDomain: true, 
             headers: {
@@ -44,6 +48,7 @@ export const Login = () => {
 
         if (data.status === "ok") {
             setAlertMessage("Logged in successfully!");
+            navigate('/editor'); // Will redirect user to the editor page to start creating their tours. 
         } 
         else if (data.error === "email_not_found") {
             setAlertMessage("Email not found. Please check email address again.");
@@ -59,16 +64,22 @@ export const Login = () => {
     }
 
     return (
-        <Components.Container>
-            <Components.Form onSubmit={handleSubmit}>
-            <Components.Title>Sign In</Components.Title>
-            <Components.Input value={email} onChange={(e) => setEmail(e.target.value)} id="loginEmail" placeholder="email@gmail.com" required/>
-            <Components.Input value={password} onChange={(e) => setPass(e.target.value)} type="password" id="loginPassword" placeholder="********" required/>
-            <Components.Button type="submit">Sign In</Components.Button>
-            <br/>
-            <br/>{alertMessage && <div className="alert">{alertMessage}</div>}<br/>
+        <div className="account-container">
+            <form className="login-form" onSubmit={handleSubmit}>
+                <h1>LOGIN</h1><br/>
+                <input value={email} onChange={(e) => setEmail(e.target.value)} id="loginEmail" placeholder="email@gmail.com" required/><br/>
+                <input value={password} onChange={(e) => setPass(e.target.value)} type="password" id="loginPassword" placeholder="********" required/>
+                <br/>
+                <br/><button type="submit">Sign In</button><br/>
+                <br/><button className="link-btn">Forgot password?</button><br/>
+                <br/>
+                { alertMessage && (
+                    <div className="alert">{ alertMessage }</div>
+                )} <br/>
+
+                <button className="link-btn" onClick={() => props.onFormSwitch('signup-form')}>Don't have an account? Register here.</button><br/>
+            </form>
+        </div>
         
-        </Components.Form>
-        </Components.Container>
     )
 }

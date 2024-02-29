@@ -1,13 +1,14 @@
 // page that allows user to either signup or sign in.
 
-import React from "react";
+/* import React from "react";
 import "../../css/style.css";
-import * as Components from './Components';
+import "../../css/accounts.css";
+import * as Components from './components/AccountComponents';
 import { Login } from "./Login";
 import { SignUp } from "./SignUp";
-import {useState } from "react";
+import { useState } from "react";
 
-function Account() {
+export const Account = () => {
     // Boolean variables that set whether user is signing in or not - toggle variable will be switched based on what user does.
     const [$signingin, toggle] = useState(true);
     // $signingin - transient prop
@@ -15,12 +16,12 @@ function Account() {
         <div className="Account">
             <Components.Container>
                 <Components.SignUpContainer $signingin={$signingin}>
-                    {/* CALL SIGN UP CLASS*/}
+             
                     <SignUp/>
                 </Components.SignUpContainer>
 
                 <Components.SignInContainer $signingin={$signingin}>
-                    {/* CALL LOGIN CLASS*/}
+             
                     <Login/>
                 </Components.SignInContainer>
 
@@ -41,8 +42,34 @@ function Account() {
                 </Components.OverlayContainer>
 
             </Components.Container>
+
+        
+
         </div>
     )
-}
+}*/
 
-export default Account;
+import React, { useState } from "react";
+import "../../css/style.css";
+import { Login } from "./Login";
+import { SignUp } from "./SignUp";
+
+export const Account = () =>  {
+  // Line allows us to get the state 
+  const [currentForm, setCurrentForm] = useState('login-form');
+
+  // Function to toggle between login and signup forms
+  const toggleForm = () => {
+    setCurrentForm(currentForm === 'login-form' ? 'signup-form' : 'login-form');
+  }
+
+  return (
+    <div className="Account">
+      {
+        currentForm === "login-form" ? 
+          <Login onFormSwitch={toggleForm} /> : 
+          <SignUp onFormSwitch={toggleForm} />
+      }
+    </div>
+  );
+}

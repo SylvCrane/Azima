@@ -8,8 +8,6 @@ nav {
     background-color: #00664d;
     color: white;
     position: sticky;
-
-
 }
 
 nav .title {
@@ -40,6 +38,18 @@ nav ul li a {
     align-items: center; /* Align items vertically in the center */
 }
 
+nav ul li.dropdown li{
+    display: block;
+}
+
+nav ul li.dropdown {
+    width: 100%;
+    background-color: #00664d;
+    position: absolute;
+    z-index: 999;
+    display: none;
+}
+
 nav ul li button {
     background: none; /* Remove button background */
     border: none; /* Remove button border */
@@ -52,10 +62,11 @@ nav ul li button {
 /* changes colour of link component when mouse hovers it */
 nav ul li a:not(.active):hover,
 nav u1 li button:hover {
-    border: 1px solid #207963;
+    border: 2px solid #207963;
     
 }
 
+/* hamburger menu */
 nav .menu {
     display: flex;
     position: absolute;
@@ -72,6 +83,22 @@ nav .menu {
     /*background-color: #207963; */
     border: 2px solid #258d73;
 }
+/* Allows svg account image in NavBar to have pointer cursor when mouse hovers it */
+.account-logo {
+    svg path: hover {
+        cursor: pointer;
+    }
+}
+
+.logo {
+    svg path: hover {
+        cursor: pointer;
+    }
+}
+.fixed-size-svg {
+    width: 30px; /* Set the desired width */
+    height: 30px; /* Set the desired height */
+  }
 
 @media (max-width: 59em) {
     nav .menu {
@@ -104,9 +131,10 @@ nav .menu {
     }
 
     nav .menu span {
-        height: 0.4rem;
+        height: 0.3rem;
         width: 100%;
         background-color: #ffffff;
         border-radius: 0.2rem;
+        align-items: center;
     }
 }

@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import "./css/style.css";
 import "./css/navbar.css";
 import TextAsset from './assets/TextAsset.svg';
-import account from "./assets/azima-account-logo.png";
-
+import AccountLogo from './assets/AzimaAccountLogo.svg';
 import { Link, NavLink } from "react-router-dom";
 
 export const Navbar = () => {
@@ -23,17 +22,20 @@ export const Navbar = () => {
         </div>
         <ul className={menuOpen ? "open" : ""}>
           <li>
-            <NavLink to="/tours">Tours</NavLink>
+            <NavLink to="/home"><h3>Home</h3></NavLink>
           </li>
           <li>
-            <NavLink to="/editor">Editor</NavLink>
+            <NavLink to="/tours"><h3>Tours</h3></NavLink>
           </li>
           <li>
-            <NavLink to="/about">About</NavLink>
+            <NavLink to="/editor"><h3>Editor</h3></NavLink>
+          </li>
+          <li>
+            <NavLink to="/about"><h3>About</h3></NavLink>
           </li>
           <li>
           <NavLink to="/account" className='account-logo' aria-label="Account">
-            <img src={account} alt="Account" />
+              <img src={AccountLogo} className="logo" alt="Account" />
           </NavLink>
           </li>
         </ul>

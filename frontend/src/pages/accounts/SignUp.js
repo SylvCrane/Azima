@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "../../css/style.css";
-import * as Components from './Components';
+import "../../css/accounts.css";
+import { useNavigate } from 'react-router-dom';
 
-export const SignUp = () => {
+export const SignUp = (props) => {
     
     /* State variables for the input types - useState hook will first get the user input then set that input into the second variable */
     const [firstName, setFirstName] = useState('');
@@ -16,23 +17,22 @@ export const SignUp = () => {
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d!@#$%^&*()\-_=+{};:,<.>`~]{8,}$/
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/ 
 
+    // Vairiable to user import useNavigate 
+    const navigate = useNavigate();
+
     // Function that handles what happens signup button is clicked.
-    const handleSubmit = (e) => {
-        e.preventDefault(); 
+    const handleSubmit = async (e) => {
+        e.preventDefault(); // Prevents page from reloading on empty 
         console.log(firstName, lastName, company, email, password);
 
         let incorrectMessage = "";
 
         // First check the pattern for password and email is correct before making API call 
         if (!emailRegex.test(email)) {
-            /* setAlertMessage("Invalid email address.");
-            return; */
             incorrectMessage += "Invalid email address. \n" ;
         }
 
         if (!passwordRegex.test(password)) {
-            /* setAlertMessage("Password must contain a minimum of eight characters, at least one uppercase letter, one lowercase letter and one number.");
-            return; */
             incorrectMessage += "Password must contain a minimum of eight characters, at least one uppercase letter and one number.";
         } 
 
@@ -42,7 +42,7 @@ export const SignUp = () => {
         }
 
         // Fetch api once validation of user input is successful 
-        fetch("http://localhost:5000/Signup", {
+        fetch("http://localhost:5000/signup", {
             method: "POST",
             crossDomain: true, 
             headers: {
@@ -65,6 +65,8 @@ export const SignUp = () => {
         
         if (data.status === "ok") {
             setAlertMessage("You are now registered with Azima!");
+            navigate('/editor'); // Will redirect user to the editor page to start creating their tours. 
+
         } else {
             setAlertMessage("Email is already in use. Please login instead.");
         }
@@ -73,20 +75,28 @@ export const SignUp = () => {
     }
 
     return (
-        <Components.Container>
-        <Components.Form onSubmit={handleSubmit}>
-            <Components.Title> Sign Up </Components.Title>
-            <Components.Input value={firstName} name="firstName" onChange={(e) => setFirstName(e.target.value)} id="firstName" placeholder="First Name *" required />
-            <Components.Input value={lastName} name="lastName" onChange={(e) => setLastName(e.target.value)} id="lastName" placeholder="Last Name *" required/>
-            <Components.Input value={company} name="company" onChange={(e) => setCompany(e.target.value)} id="company" placeholder="Company" autoComplete="off"/>
-            <Components.Input value={email} onChange={(e) => setEmail(e.target.value)} id="signupEmail" placeholder="email@gmail.com *" required/>
-            <Components.Input value={password} onChange={(e) => setPassword(e.target.value)} type="password" id="signupPassword" placeholder="********" minLength="8" required/>
-            <Components.Button type="submit">Sign Up</Components.Button>
-            
-            <div className= "required-text"> <br/> (* Required fields must be filled in to create an account)<br/> </div>
-            <br/>{alertMessage && <div className="alert">{alertMessage}</div>}<br/>
 
-        </Components.Form>
-        </Components.Container>
+        <div className="account-container">
+            <br/>
+            <form className="signup-form" onSubmit={handleSubmit}>
+                <br/><h1>SIGN UP</h1><br/>
+                <input value={firstName} name="firstName" onChange={(e) => setFirstName(e.target.value)} id="firstName" placeholder="First Name *" required /><br/>
+                <input value={lastName} name="lastName" onChange={(e) => setLastName(e.target.value)} id="lastName" placeholder="Last Name *" required/><br/>
+                <input value={company} name="company" onChange={(e) => setCompany(e.target.value)} id="company" placeholder="Company" autoComplete="off"/><br/>
+                <input value={email} onChange={(e) => setEmail(e.target.value)} id="loginEmail" placeholder="email@gmail.com *" required/><br/>
+                <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" id="loginPassword" placeholder="******** *" required/><br/>
+                <br/>
+                <button type="submit">Sign up</button>
+                <div className= "required-text"> <br/> (* Required fields must be filled in to create an account)<br/> </div>
+                <br/>
+                { alertMessage && (
+                    <div className="alert">{ alertMessage }</div>
+                )} <br/>
+
+                <button className="link-btn" onClick={() => props.onFormSwitch('login-form')}>Already have an account? Sign in here.</button><br/>
+            </form>
+            <br/>
+        </div>
+    
     )
 }

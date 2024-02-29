@@ -1,12 +1,13 @@
-const mongoose = require('mongoose');
-//const config = require ('config');
-//const db = config.get("mongoURI"); // getting mongoURI variable from default.json 
-const db = "mongodb+srv://maxinnesjs:AzimaPassword20!@cluster0.5ofofcm.mongodb.net/?retryWrites=true&w=majority";
+
+const mongoose = require("mongoose");
+const mongodb = process.env.MONGODB_URI;
+const dot = require("dotenv");
+dot.config();
 
 const connectDB = async () => {
     try {
       mongoose.set('strictQuery', true);
-      await mongoose.connect(db, {
+      await mongoose.connect( mongodb, {
         useNewUrlParser: true,
       });
 

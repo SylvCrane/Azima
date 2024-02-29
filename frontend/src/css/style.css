@@ -1,19 +1,32 @@
 /* CSS style sheet for application / for all files to have for consistency */ 
+
+@import url('https://fonts.googleapis.com/css2?family=Alatsi&family=Flow+Circular&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Ramabhadra&family=Rubik:ital,wght@0,300..900;1,300..900&family=Varela+Round&display=swap');
+/* https://fonts.google.com/selection/embed */
+
   * {
     /* font-family: "Konkhmer Sleokchher"; */
-    font-family: Tahoma;
-    font-size: 20px;
+    font-family: "Rubik", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-style: normal;
+    font-size: 14px;
     box-sizing: border-box;
     margin: 0;
     
   }
-
-  p {
-    font-size: 12px;
-  }
   
   h1 {
     font-size: 40px;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  h2 {
+    font-size: 30px;
+  }
+
+  h3 {
+    font-size: 20px;
   }
   
   /* for app.js and account.js file */
@@ -28,48 +41,19 @@
   .tours-page, 
   .editor-page, 
   .about-page, 
-  .account-container {
-    font-family: "Arial";
+  .home-page {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 85vh; /* Minimum height of the page to fill the viewport */
     text-align: center;
-    
   }
   
   /* need this div so that the vg file appears */
   .logo {
-    height: 5vmin;
+    height: 7vmin;
     pointer-events: none;
-  }
-  
-  
-  /** FOR THE ACCOUNTS PAGES **/
-  
-  /*.login-form,
-  .signup-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 50vh; // Minimum height of the page to fill the viewport 
-    text-align: center;
-  }
-  */
-
-  .email-form {
-    align-items: flex-start;
-  }
-  
-  .password-form {
-    flex-direction: row;
-  }
-  
-  label {
-    font-size: 18px;
-    margin-right: 1rem;
   }
   
   input {
@@ -90,23 +74,3 @@
     color: #ffff;
   }
   
-  /* For login and signup pages */
-  .link-btn {
-    background: none;
-    color: #00664d;
-    text-decoration: underline;
-    border: none;
-    cursor: pointer;
-  }
-
-  /* For alert message when user either signups or logs in */
-  .alert {
-    font-family: "Arial";
-    font-size: 18px; 
-    color: red;
-  }
-
-  /* For signup page */
-  .required-text {
-    font-size: 14px;
-  }
