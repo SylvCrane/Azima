@@ -1,3 +1,5 @@
+
+
 const express = require('express');
 const connectDB = require('./config/db');
 const cors = require('cors');
@@ -21,4 +23,5 @@ app.use("/login", loginRouter);
 // print server is running when starting server - nodemon app
 app.listen(5000, () => {
     console.log("Server is running!");
+    
 });

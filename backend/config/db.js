@@ -1,8 +1,7 @@
-
+const dot = require("dotenv");
+dot.config().parsed; // ENSURE THIS IS ADDED BEFORE MONGOOSE IMPORT OR MONGODB WILL NOT CONNECT.
 const mongoose = require("mongoose");
 const mongodb = process.env.MONGODB_URI;
-const dot = require("dotenv");
-dot.config();
 
 const connectDB = async () => {
     try {
