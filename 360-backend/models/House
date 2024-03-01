@@ -42,6 +42,26 @@ const houseSchema = new Schema({
         type: String,
         required: true,
         trim: true
+    },
+    kitchen: {
+        type: Number,
+        required: true,
+        trim: true
+    },
+    backyard: {
+        type: Boolean,
+        required: true,
+        trim: true
+    },
+    laundryRoom: {
+        type: Boolean,
+        required: true,
+        trim: true
+    },
+    backyard: {
+        type: Boolean,
+        required: true,
+        trim: true
     }
 });
 
