@@ -8,6 +8,7 @@ A list with each index having the following)
     - image (The image itself)
     - imageTimeline (The point the image is at in the timeline. At the moment, I have it working for numbers
 */
+
 export async function savePhotos(images, houseID) {
 
     for (const input of images) {
