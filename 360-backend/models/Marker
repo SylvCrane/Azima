@@ -8,12 +8,7 @@ const markerSchema = new Schema({
         required: true,
         trim: true
     },
-    Text: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    locationName: {
+    markerDetails: {
         type: String,
         required: true,
         trim: true

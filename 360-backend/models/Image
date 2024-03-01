@@ -1,9 +1,12 @@
 const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema;
-
-const imageSchema = new Schema({
-    imageName: {
+const imageSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    imageURL: {
         type: String,
         required: true,
         trim: true

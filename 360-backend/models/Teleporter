@@ -3,92 +3,12 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const teleporterSchema = new Schema({
-    locationName: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    destinationName: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    LocationXYZ: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    locationSphere1X: {
-        type: mongoose.Types.Decimal128,
-        required: true,
-        trim: true
-    },
-    locationSphere1Y: {
-        type: mongoose.Types.Decimal128,
-        required: true,
-        trim: true
-    },
-    locationSphere1Z: {
-        type: mongoose.Types.Decimal128,
-        required: true,
-        trim: true
-    },
-    locationSphere2X: {
-        type: mongoose.Types.Decimal128,
-        required: true,
-        trim: true
-    },
-    locationSphere2Y: {
-        type: mongoose.Types.Decimal128,
-        required: true,
-        trim: true
-    },
-    locationSphere2Z: {
-        type: mongoose.Types.Decimal128,
-        required: true,
-        trim: true
-    },
-    locationSphere3X: {
-        type: mongoose.Types.Decimal128,
-        required: true,
-        trim: true
-    },
-    locationSphere3Y: {
-        type: mongoose.Types.Decimal128,
-        required: true,
-        trim: true
-    },
-    locationSphere3Z: {
-        type: mongoose.Types.Decimal128,
-        required: true,
-        trim: true
-    },
-    locationSphere4X: {
-        type: mongoose.Types.Decimal128,
-        required: true,
-        trim: true
-    },
-    locationSphere4Y: {
-        type: mongoose.Types.Decimal128,
-        required: true,
-        trim: true
-    },
-    locationSphere4Z: {
-        type: mongoose.Types.Decimal128,
-        required: true,
-        trim: true
-    },
-    Colour: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    text: {
-        type: String,
-        required: true,
-        trim: true
-    },
     houseID: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    teleporterDetails: {
         type: String,
         required: true,
         trim: true
