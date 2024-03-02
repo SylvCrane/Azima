@@ -26,7 +26,7 @@ router.put('/marker/:id', (req, res) => {
 });
 
 //This method will get multiple images based on the houseID.
-router.get('/marker/markerpuller', (req, res) => {
+router.get('/markerpuller/:houseID', (req, res) => {
     marker.find( { "houseID" : req.params.houseID} )
         .then(images => res.json(images))
         .catch(err => res.status(404).json({ noimagefound: 'No Image Found'}));

@@ -14,7 +14,7 @@ router.get('/teleporter/:id', (req, res) => {
 });
 
 //This method will get multiple images based on the houseID.
-router.get('/teleporter/puller/:houseID', (req, res) => {
+router.get('/puller/:houseID', (req, res) => {
     Teleporter.find( { "houseID" : req.params.houseID} )
         .then(images => res.json(images))
         .catch(err => res.status(404).json({ noimagefound: 'Teleporters cannot be loaded'}));

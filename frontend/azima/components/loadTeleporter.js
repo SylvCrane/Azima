@@ -2,18 +2,12 @@ import axios from 'axios';
 
 export async function loadTeleporter(houseID) {
 
-    const [teleporters, setTeleporters] = useState([]);
-
-    useEffect(() => {
-        axios
-            .get(`http://localhost:8082/api/teleporter/puller/${houseID}`)
-            .then((res) => {
-                setTeleporters(res.data);
-            })
-            .catch((err) => {
-                console.log('Cannot get teleporters');
-            });
-    }, []);
-
-    return teleporters;
+    try {
+        const response = await axios.get(`http://localhost:8082/api/teleporter/puller/${houseID}`);
+        return response.data;
+    }
+    catch (err) {
+        console.log("No teleporters loaded", err);
+        throw err;
+    }
 }

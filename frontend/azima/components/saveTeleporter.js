@@ -10,11 +10,13 @@ export async function saveTeleporter(teleporterData, houseID) {
     console.log(teleporterForm.append('houseID'));
     console.log(teleporterForm.append('teleporterDetails'));
 
-    axios.post('http://localhost:8082/api/teleporter/teleporter/', teleporterForm)
-        .then (res => {
-            console.log(res);
-        })
-        .catch(err => {
-            console.log("The teleporter submission failed");
-        })
+    try {
+        const response = await axios.post('http://localhost:8082/api/teleporter/teleporter/', teleporterForm);
+        console.log(response);
+    }
+    catch (err)
+    {
+        console.log("The teleporter save did not work", err);
+        throw err;
+    }
 };
