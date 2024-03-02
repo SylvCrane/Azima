@@ -1,4 +1,6 @@
-async function loadTeleporter(houseID) {
+import axios from 'axios';
+
+export async function loadTeleporter(houseID) {
 
     const [teleporters, setTeleporters] = useState([]);
 

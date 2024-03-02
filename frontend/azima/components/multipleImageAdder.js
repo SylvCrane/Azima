@@ -43,6 +43,7 @@ const MultipleImageAdder = () => {
     }
 
     async function handleSubmit(e) {
+        e.preventDefault();
         savePhotos(images, houseID);
     };
 

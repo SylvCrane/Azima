@@ -1,4 +1,6 @@
-async function loadMarker(houseID) {
+import axios from 'axios';
+
+export async function loadMarker(houseID) {
 
     const [marker, setMarker] = useState([]);
 
