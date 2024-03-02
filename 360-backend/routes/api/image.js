@@ -25,4 +25,10 @@ router.get('/:id', (req, res) => {
         .catch(err => res.status(404).json({ noimagefound: 'No Image Found'}));
 });
 
+router.get('/groupimage/:houseID', (req, res) => {
+    Image.find( { "houseID" : req.params.houseID} )
+        .then(image => res.json(image))
+        .catch(err => res.status(404).json({ noimagefound: 'No Image Found'}));
+});
+
 module.exports = router;

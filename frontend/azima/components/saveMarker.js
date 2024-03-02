@@ -10,11 +10,14 @@ export async function saveMarker(markerData, houseID) {
     console.log(markerForm.append('houseID'));
     console.log(markerForm.append('markerDetails'));
 
-    axios.post('http://localhost:8082/api/marker/marker/', markerForm)
-        .then (res => {
-            console.log(res);
-        })
-        .catch(err => {
-            console.log("The marker submission failed");
-        })
+    try {
+        const response = await axios.post('http://localhost:8082/api/marker/marker/', markerForm);
+        console.log(response);
+    }
+    catch (err)
+    {
+        console.log("The marker save did not work", err);
+        throw err;
+    }
+
 };
