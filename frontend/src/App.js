@@ -6,10 +6,12 @@ import { Tours } from './pages/Tours';
 import { Editor}  from './pages/Editor';
 import { About } from './pages/About';
 import { Account } from './pages/accounts/Account';
+import { SessionProvider } from "next-auth/react";
 
 function App() {
     return (
-        <div className="App">
+        <SessionProvider>
+            <div className="App">
             <Navbar /> 
                 <Routes>
                     <Route path="/" element={<Home />} />
@@ -20,7 +22,8 @@ function App() {
                     <Route path="/editor" element={<Editor />} />
                     <Route path="/account" element={<Account />} />
                 </Routes>
-        </div>
+            </div>
+        </SessionProvider>
     );
 }
 

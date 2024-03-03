@@ -4,10 +4,17 @@ import "./css/navbar.css";
 import TextAsset from './assets/TextAsset.svg';
 import AccountLogo from './assets/AzimaAccountLogo.svg';
 import { Link, NavLink } from "react-router-dom";
+import { useSession, signOut } from "next-auth/react";
 
 export const Navbar = () => {
 
+  const { data: session } = useSession(); 
+
   const [menuOpen, setMenuOpen] = useState(0);
+
+  const handleLogout = async () => {
+    await signOut(); 
+  }
 
   return (
     <header className="main-header">
@@ -33,11 +40,20 @@ export const Navbar = () => {
           <li>
             <NavLink to="/about"><h3>About</h3></NavLink>
           </li>
-          <li>
-          <NavLink to="/account" className='account-logo' aria-label="Account">
-              <img src={AccountLogo} className="logo" alt="Account" />
-          </NavLink>
-          </li>
+          { session ? ( 
+            <li>
+              <div className="account-info">
+                <span>{session.user.email}</span>
+                <button onClick={handleLogout}>Logout</button>
+              </div>
+            </li>
+          ) : (
+            <li>
+              <NavLink to="/account" className='account-logo' aria-label="Account">
+                <img src={AccountLogo} className="logo" alt="Account" />
+              </NavLink>
+            </li>
+          )}
         </ul>
       </nav>
     </header>
