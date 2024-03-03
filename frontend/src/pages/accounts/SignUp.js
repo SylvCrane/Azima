@@ -6,12 +6,12 @@ import { useNavigate } from 'react-router-dom';
 export const SignUp = (props) => {
     
     /* State variables for the input types - useState hook will first get the user input then set that input into the second variable */
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [company, setCompany] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [alertMessage, setAlertMessage] = useState(''); // Variable that stores message at the bottom of page depending on whether user input.
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [company, setCompany] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [alertMessage, setAlertMessage] = useState(""); // Variable that stores message at the bottom of page depending on whether user input.
 
     // Variables to store pattern regex for password and email (dont add semicolon)
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d!@#$%^&*()\-_=+{};:,<.>`~]{8,}$/
@@ -76,7 +76,7 @@ export const SignUp = (props) => {
 
     return (
 
-        <div className="account-container">
+        <div className="signup-container">
             <br/>
             <form className="signup-form" onSubmit={handleSubmit}>
                 <br/><h1>SIGN UP</h1><br/>
@@ -93,7 +93,7 @@ export const SignUp = (props) => {
                     <div className="alert">{ alertMessage }</div>
                 )} <br/>
 
-                <button className="link-btn" onClick={() => props.onFormSwitch('login-form')}>Already have an account? Sign in here.</button><br/>
+                <button className="link-btn" onClick={() => props.onFormSwitch('login-form')}>Already have an account? Sign in here.</button><br/><br/>
             </form>
             <br/>
         </div>

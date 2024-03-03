@@ -55,22 +55,5 @@
     height: 7vmin;
     pointer-events: none;
   }
-  
-  input {
-    font-size: 18px;
-    margin: 0.5rem 0;
-    padding: 1rem;
-    border: solid #00664d;
-    border-radius: 10px;
-  }
-  
-  .login-button,
-  .signup-button {
-    border: none;
-    background-color: #00664d;
-    padding: 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    color: #ffff;
-  }
+
   

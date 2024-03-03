@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import "../../css/style.css";
 import "../../css/accounts.css";
@@ -6,9 +8,9 @@ import { useNavigate } from 'react-router-dom';
 export const Login = (props) => {
 
     // Use state variables
-    const [email, setEmail] = useState('');
-    const [password, setPass] = useState('');
-    const [alertMessage, setAlertMessage] = useState(''); // Variable that stores message at the bottom of page depending on whether user input.
+    const [email, setEmail] = useState("");
+    const [password, setPass] = useState("");
+    const [alertMessage, setAlertMessage] = useState(""); // Variable that stores message at the bottom of page depending on whether user input.
 
     // Variable for email pattern regex
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
@@ -64,7 +66,7 @@ export const Login = (props) => {
     }
 
     return (
-        <div className="account-container">
+        <div className="login-container">
             <form className="login-form" onSubmit={handleSubmit}>
                 <h1>LOGIN</h1><br/>
                 <input value={email} onChange={(e) => setEmail(e.target.value)} id="loginEmail" placeholder="email@gmail.com" required/><br/>
