@@ -12,6 +12,7 @@ const authOptions = {
         // LOGIN CREDENTIALS
         CredentialsProvider({
             type: "credentials",
+            name: "login",
             id: "login",
             credentials: {
                 email: { label: "Email", input: "email", type: "text", placeholder: "email@gmail.com" },
@@ -27,7 +28,7 @@ const authOptions = {
                     // After find users email in db
                     const user = await UserDetails.findOne({ email });
 
-                    if (!UserDetails) {
+                    if (!user) {
                         console.log("User not found in db");
                         return null; 
                     }
@@ -52,6 +53,7 @@ const authOptions = {
         // SIGN UP CREDENTIALS 
         CredentialsProvider({
             type:"credentials",
+            name: "signup",
             id:"signup",
             credentials: {
                 firstName: { label: "First Name", input: "text", type: "text", placeholder: "First Name"},
@@ -102,6 +104,42 @@ const authOptions = {
     secret: process.env.NEXTAUTH_SECRET,
     peages: {
         account: "/"
+    },
+
+    callbacks: {
+        async jwt(token, user, account) {
+            if (user) {
+                token.accessToken = user.access_token;
+                token.id = account.id;
+            }
+            return token;
+        },
+
+        async session(token, session, user) {
+            session.accessToken = token.accessToken;
+            session.user.id = token.id;
+            return session;
+        },
+
+        async login({ email, password, credentials }) {
+            const isAllowedToLogin = true;
+            if (isAllowedToLogin) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        },
+
+        async signup({ firstName, lastName, company, email, password, credentials}) {
+            const isAllowedToSignUp = true;
+            if(isAllowedToSignUp) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
     }
 };
 

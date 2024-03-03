@@ -62,7 +62,24 @@ export const Login = (props) => {
             setAlertMessage("Cannot login. Please check details again.");
         }
 
-        });
+    });
+
+        /*// Authentication 
+
+        try {
+            const response = await account("login", {
+                email, 
+                password, 
+                redirect: false,
+            });
+
+            if (response.alertMessage) {
+                setAlertMessage("Invalid Credentials");
+                return;
+            }
+        } catch (error) {
+            console.log(error);
+        }*/
     }
 
     return (
