@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
       let sky = document.querySelector("a-sky");
     console.log("Class before:", sky.className); 
     if(e.target.src){
-    sky.setAttribute("src", "." + src);  
+    sky.setAttribute("src",  src);  
     sky.setAttribute("class", img.id);
     }
     });
