@@ -255,3 +255,92 @@ input[type="text"]{
 .color-option input[type="radio"]:checked + .color-display {
   border: 2px solid #ffffff;
 }
+.tab, .gallery {
+  clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+  background-color: #333;
+  color: white;
+  position: fixed;
+  top: 0;
+  right: 50%;
+  transform: translateX(50%);
+  z-index: 100;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab {
+  padding: 0px 20px;
+  /* Use a background image or pseudo-element for the arrow */
+
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px 20px;
+}
+
+.gallery {
+  opacity: 0; /* Start fully transparent */
+  transform: translateY(-100%); /* Start off-screen */
+  padding: 0px 10%;
+  white-space: nowrap;
+  max-width: 50vh;
+
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  background-color: #2b2b2b;
+  color: black;
+  transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition for opacity and transform */
+  position: fixed;
+  top: 0;
+  right: 50%;
+  transform: translateX(50%) translateY(-100%);
+  z-index: 100; /* Ensure it's below the tab */
+}
+.scroll-container{
+  overflow-x: scroll;
+width:103%;
+
+
+}
+.scroll-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
+.gallery::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
+.gallery.is-active {
+  opacity: 1; /* Fully visible */
+  transform: translateX(50%) translateY(0); /* Slide into final position */
+}
+.gallery img {
+  height: 80px; /* Adjust based on your preference */
+  margin-right: 4px;
+}
+
+.image-container {
+  display: inline-block; /* Align images horizontally */
+  text-align: center; /* Center the captions */
+ 
+
+  padding-top: 10px;
+ 
+}
+
+.caption {
+  display: block; /* Ensure captions appear below images */
+  color: white; /* Match the gallery's color scheme */
+  margin-top: 5px; /* Space between the image and its caption */
+}
+.close-gallery {
+  display: block;
+  margin: 1px auto; /* Center the button below the images */
+
+  background-color: transparent; /* Match gallery background */
+  color: #f0f0f0; /* Arrow color */
+  border: none; /* Remove default button styling */
+  cursor: pointer; /* Indicate clickable */
+  font-size: 20px; /* Adjust size of the arrow */
+}
+
+/* Optional: Add hover effect */
+.close-gallery:hover {
+  color:#ffffff /* Slightly lighter than gallery background */
+}

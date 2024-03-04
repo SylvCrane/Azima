@@ -149,6 +149,8 @@ handlePlusClick: function() {
         sky.setAttribute('markable', '');
         console.log('Markable component added to sky');
         
+        this.createAndInsertForms();
+        
     }
 
 }
@@ -161,5 +163,63 @@ this.el.removeAttribute('toggle-thickness');
   return;
 }
 
-  }
+  },
+  createAndInsertForms: function() {
+    let formContainer = document.getElementById('formContainer'); // Ensure you have this container in your HTML
+    if (!formContainer) {
+        console.error('Form container not found');
+        return;
+    }
+    formContainer.innerHTML = ''; // Clear existing content
+
+    // Dynamically create the input form elements
+    let viewNameForm = document.createElement('div');
+    viewNameForm.innerHTML = `
+    <div class="color-picker"> 
+    <h1>Select a color:</h1>
+    <label class="color-option">
+        <input type="radio" name="color" value="#FFffff">
+        <span class="color-display" style="background-color: #Ffffff;"></span>
+    </label>
+    <label class="color-option">
+        <input type="radio" name="color" value="#9FD3CB">
+        <span class="color-display" style="background-color: #9FD3CB;"></span>
+    </label>
+    <label class="color-option">
+        <input type="radio" name="color" value="#4ABFAA">
+        <span class="color-display" style="background-color: #4ABFAA;"></span>
+    </label>
+    <label class="color-option">
+        <input type="radio" name="color" value="#0EB49A">
+        <span class="color-display" style="background-color: #0EB49A;"></span>
+    </label>
+    <label class="color-option">
+        <input type="radio" name="color" value="#0A7A68">
+        <span class="color-display" style="background-color: #0A7A68"></span>
+    </label>
+    <label class="color-option">
+        <input type="radio" name="color" value="#09483E">
+        <span class="color-display" style="background-color: #09483E;"></span>
+    </label>
+  </div>
+  <form class="inputForm">
+    <h1>View name:</h1>
+    <input type="text" id="textInput" placeholder="Enter text">
+  
+  </form>
+  <form class="fileForm">
+    <h2>Upload a 360° image:</h2>
+  <input id="file-upload"type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"name="filename">
+  <p>Selected file: <span id="file-name">None</span></p>
+  </form>
+  <button id="cancelButton">Cancel</button>
+  <button id="saveButton">Save</button>
+    `;
+
+    // Append the form to the container
+    formContainer.appendChild(viewNameForm);
+},
+
+
+
 });
