@@ -4,17 +4,17 @@ import "./css/navbar.css";
 import TextAsset from './assets/TextAsset.svg';
 import AccountLogo from './assets/AzimaAccountLogo.svg';
 import { Link, NavLink } from "react-router-dom";
-import { useSession, signOut } from "next-auth/react";
+
 
 export const Navbar = () => {
 
-  const { data: session } = useSession(); 
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [accountMenuOpen, setAccountMenuOpen] = useState(false);
 
-  const [menuOpen, setMenuOpen] = useState(0);
-
-  const handleLogout = async () => {
-    await signOut(); 
-  }
+  const toggleAccountMenu = () => {
+    setMenuOpen(!menuOpen);
+    setAccountMenuOpen(false); // Close account submenu when main menu toggles
+  };
 
   return (
     <header className="main-header">
@@ -40,20 +40,25 @@ export const Navbar = () => {
           <li>
             <NavLink to="/about"><h3>About</h3></NavLink>
           </li>
-          { session ? ( 
-            <li>
-              <div className="account-info">
-                <span>{session.user.email}</span>
-                <button onClick={handleLogout}>Logout</button>
-              </div>
-            </li>
-          ) : (
-            <li>
-              <NavLink to="/account" className='account-logo' aria-label="Account">
+          <li>
+          <div className="account-nav" onMouseEnter={toggleAccountMenu} onMouseLeave={toggleAccountMenu}>
+              <Link className="account-logo" aria-label="Account">
                 <img src={AccountLogo} className="logo" alt="Account" />
-              </NavLink>
-            </li>
-          )}
+              </Link>
+              <ul className={accountMenuOpen ? "sub-menu open" : "sub-menu"}>
+                <div className=".sub-menu-content">
+                <li>
+                  <NavLink to="/account/login"><h3>Login</h3></NavLink>
+                </li>
+                <li>
+                  <NavLink to="/account/signup"><h3>Sign Up</h3></NavLink>
+                </li>
+                </div>
+                
+              </ul>
+            </div>
+          </li>
+      
         </ul>
       </nav>
     </header>

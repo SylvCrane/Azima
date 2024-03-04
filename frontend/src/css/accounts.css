@@ -10,13 +10,22 @@
 
 
 .signup-container { 
-    text-align:
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 90vh; /* Minimum height of the page to fill the viewport */
 
 }
 
 .login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   text-align: center;
+  min-height: 90vh; /* Minimum height of the page to fill the viewport */
 }
 
 .title {

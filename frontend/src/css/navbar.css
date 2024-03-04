@@ -20,6 +20,7 @@ nav .title {
 
 nav ul {
     display: flex;
+    background: #00664d
 }
 
 nav ul li {
@@ -87,6 +88,7 @@ nav .menu {
     svg path: hover {
         cursor: pointer;
     }
+    justify-content: center;
 }
 
 .logo {
@@ -137,3 +139,56 @@ nav .menu {
         align-items: center;
     }
 }
+
+
+.sub-menu {
+    position: relative;
+}
+
+.sub-menu-content {
+    display: none;
+    position: absolute;
+    background-color: #00664d;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1
+}
+
+.sub-menu-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  } 
+
+
+/* New styles */
+.account-nav {
+    position: relative; /* Make it relative to enable positioning of submenu */
+}
+
+.account-nav:hover .sub-menu-content {
+    display: block;
+}
+
+.account-nav .sub-menu-content {
+    top: 100%; /* Position the submenu underneath the account logo */
+    left: 0; /* Align submenu with the left edge of account logo */
+}
+
+/* Ensure submenu is hidden initially */
+.account-nav .sub-menu-content {
+    display: none;
+}
+
+/* Clearing default list styles for submenu */
+.account-nav .sub-menu-content {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+ 
+
+
+
