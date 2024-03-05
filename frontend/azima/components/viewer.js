@@ -52,6 +52,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if(e.target.src){
     sky.setAttribute("src",  src);  
     sky.setAttribute("class", img.id);
+    document.dispatchEvent(new Event("move"));
+    console.log("move sent");
     }
     });
     gallery.addEventListener('mousedown', (e) => {

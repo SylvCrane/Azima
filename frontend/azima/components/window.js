@@ -53,6 +53,30 @@ AFRAME.registerComponent("window", {
       console.log(sky.id);
       this.load(sky.id);
     });
+    
+    this.el.addEventListener("move", () => {
+      console.log("move received");
+
+      let room = document.querySelector('a-sky');
+      className = room.className;
+      current = document.getElementsByClassName(className);
+      
+      console.log(current);
+      
+     
+      let entities = document.querySelectorAll('a-entity');
+      entities.forEach((entity) => {
+        if (entity.className === className) {
+          this.pull(entity); 
+        }
+        else{
+          push(entity);
+        }
+      });
+    
+      console.log(room.id);
+     
+    });
   },
 
   hoverEnd: function (e) {

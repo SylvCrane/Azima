@@ -175,7 +175,7 @@ this.el.removeAttribute('toggle-thickness');
     // Dynamically create the input form elements
     let viewNameForm = document.createElement('div');
     viewNameForm.innerHTML = `
-    <div class="color-picker"> 
+    <div class= "color-picker id="color-picker"> 
     <h1>Select a color:</h1>
     <label class="color-option">
         <input type="radio" name="color" value="#FFffff">

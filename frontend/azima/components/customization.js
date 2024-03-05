@@ -1,7 +1,3 @@
-import { savePhotos } from './savePhotos.js';
-
-
-
   console.log("customization")
  
 
@@ -13,15 +9,10 @@ document.addEventListener("edit", function () {
   let caption = document.createElement('span');
   caption.className = 'caption';
   let asset = document.createElement("img");
-
+  // Change the background color of the container when the color wheel changes.
+ 
  
   
-  const photo = {
-    name: '',
-    image: '',
-    imageTimeline: '',
-  };
-
 
   
   
@@ -33,7 +24,7 @@ document.addEventListener("edit", function () {
     console.log("Form submitted, text input:", textInput);
     asset.id = textInput;
     caption.textContent = textInput;
-    photo.name = textinput;
+    
   });
 
 
@@ -57,8 +48,8 @@ document.addEventListener("edit", function () {
       fileNameDisplay.textContent = this.files[0].name;
       photo.image = this.files[0].name;
       photo.imageTimeline = 0;
-      savePhotos(photo, "HouseID");
       
+      asset.src = `./assets/${fileNameDisplay.textContent}`;
     } else {
       fileNameDisplay.textContent = "None";
     }
@@ -80,6 +71,10 @@ document.addEventListener("edit", function () {
     } else {
       console.log("Asset id or src is not set");
     }
+  });
+  document.getElementById("cancelButton").addEventListener("click", function () {
+    let event = new Event("cancel");
+    document.body.dispatchEvent(event);
   });
 
 });
