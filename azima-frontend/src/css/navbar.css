@@ -1,13 +1,31 @@
 /* STYLING FOR NAVBAR CLASS */
 
 /* div for the backround of the navbar component */
+
+* 
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+header {
+    position: absolute;
+    width: 100%;
+    min-height: 66px;
+    background: #00664d;
+    padding: 0 10px; /* provides space between the left and right side of the navbar */
+    justify-content: space-between;
+}
+
 nav {
     display: flex;
     justify-content: space-between; /* places content to the right */
     align-items: center;
     background-color: #00664d;
     color: white;
-    position: sticky;
+
 }
 
 nav .title {
@@ -201,3 +219,4 @@ nav ul li:hover .dropdown-menu ul li {
     padding: 10px;
     display: block;
 }
+

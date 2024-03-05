@@ -42,9 +42,9 @@ export const Navbar = () => {
             <NavLink to="/about" onClick={closeMenu}><h3>About</h3></NavLink>
           </li>
           <li>
-            <a href className="account-link" aria-label="Account" onClick={toggleMenu}>
+            <Link className="account-link" aria-label="Account" onClick={toggleMenu}>
               <img src={AccountLogo} onClick={closeMenu} className="logo" alt="Account"  />
-            </a>
+            </Link>
             <div className={`dropdown-menu ${menuOpen ? 'open' : ''}`}>
               <ul>
                 <Link to="/account/signup"><h4>Sign Up</h4></Link>
