@@ -39,18 +39,6 @@ nav ul li a {
     align-items: center; /* Align items vertically in the center */
 }
 
-nav ul li.dropdown li{
-    display: block;
-}
-
-nav ul li.dropdown {
-    width: 100%;
-    background-color: #00664d;
-    position: absolute;
-    z-index: 999;
-    display: none;
-}
-
 nav ul li button {
     background: none; /* Remove button background */
     border: none; /* Remove button border */
@@ -138,57 +126,78 @@ nav .menu {
         border-radius: 0.2rem;
         align-items: center;
     }
+
+    .dropdown-menu {
+        display: none;
+    }
+    
+    .navbar .account-link:hover + .dropdown-menu,
+    .dropdown-menu.open {
+        display: block;
+        position: absolute;
+        Left: 4%;
+        right: 4%;
+        background-color: var(--color-black);
+        width: 10%;
+        height: 20px;
+    }
+
+    .dropdown-menu ul {
+        display: row;
+    }
+    
+    .dropdown-menu ul li {
+        width: 50px;
+        padding: 10px;
+        display: sticky;
+    }
 }
 
-
-.sub-menu {
-    position: relative;
-}
-
-.sub-menu-content {
+/*.dropdown-menu {
     display: none;
+}
+
+nav ul li:hover .dropdown-menu {
+    display: block;
     position: absolute;
-    background-color: #00664d;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  padding: 12px 16px;
-  z-index: 1
+    right: 0;
+    top: 100%;
+    background-color: var(--color-black);
+    width: 10%;
+    height:20px;
 }
 
-.sub-menu-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  } 
-
-
-/* New styles */
-.account-nav {
-    position: relative; /* Make it relative to enable positioning of submenu */
-}
-
-.account-nav:hover .sub-menu-content {
+nav ul li:hover .dropdown-menu ul {
     display: block;
 }
 
-.account-nav .sub-menu-content {
-    top: 100%; /* Position the submenu underneath the account logo */
-    left: 0; /* Align submenu with the left edge of account logo */
-}
+nav ul li:hover .dropdown-menu ul li {
+    width: 50px;
+    padding: 10px;
+    display: block;
+}*/
 
-/* Ensure submenu is hidden initially */
-.account-nav .sub-menu-content {
+.dropdown-menu {
     display: none;
 }
 
-/* Clearing default list styles for submenu */
-.account-nav .sub-menu-content {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+.navbar .account-link:hover + .dropdown-menu,
+.dropdown-menu.open {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: var(--color-black);
+    width: 10%;
+    height: 20px;
 }
- 
 
+.dropdown-menu ul {
+    display: block;
+}
 
-
+.dropdown-menu ul li {
+    width: 30px;
+    padding: 10px;
+    display: block;
+}

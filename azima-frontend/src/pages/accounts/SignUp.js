@@ -93,7 +93,7 @@ export const SignUp = (props) => {
                     <div className="alert">{ alertMessage }</div>
                 )} <br/>
 
-                <button className="link-btn" onClick={() => props.onFormSwitch('login-form')}>Already have an account? Sign in here.</button><br/><br/>
+                <button className="link-btn" type ="button" onClick={() => props.onFormSwitch('login-form')}>Already have an account? Sign in here.</button><br/><br/>
             </form>
             <br/>
         </div>

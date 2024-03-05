@@ -62,23 +62,6 @@ export const Login = (props) => {
         }
 
     });
-
-        /*// Authentication 
-
-        try {
-            const response = await account("login", {
-                email, 
-                password, 
-                redirect: false,
-            });
-
-            if (response.alertMessage) {
-                setAlertMessage("Invalid Credentials");
-                return;
-            }
-        } catch (error) {
-            console.log(error);
-        }*/
     }
 
     return (
@@ -95,7 +78,7 @@ export const Login = (props) => {
                     <div className="alert">{ alertMessage }</div>
                 )} <br/>
 
-                <button className="link-btn" onClick={() => props.onFormSwitch('signup-form')}>Don't have an account? Register here.</button><br/>
+                <button className="link-btn" type ="button" onClick={() => props.onFormSwitch('signup-form')}>Don't have an account? Register here.</button><br/>
             </form>
         </div>
         
