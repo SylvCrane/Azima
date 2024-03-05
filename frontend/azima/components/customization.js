@@ -1,5 +1,5 @@
-import { savePhotos} from './savePhotos.js';
-import {useState} from 'react';
+import { savePhotos } from './savePhotos.js';
+
 
 
   console.log("customization")
@@ -16,13 +16,13 @@ document.addEventListener("edit", function () {
 
  
   
-  const [images, setImages] = useState([{
+  const photo = {
     name: '',
     image: '',
     imageTimeline: '',
-  }
-]); 
-const photo =[...images];
+  };
+
+
   
   
 
@@ -33,7 +33,7 @@ const photo =[...images];
     console.log("Form submitted, text input:", textInput);
     asset.id = textInput;
     caption.textContent = textInput;
-    photo[0].name = textinput;
+    photo.name = textinput;
   });
 
 
