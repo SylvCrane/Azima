@@ -1,15 +1,45 @@
-const asset = document.createElement("img");
-document.addEventListener("DOMContentLoaded", function () {
+import { savePhotos} from './savePhotos.js';
+import {useState} from 'react';
+
+
+  console.log("customization")
+ 
+
+document.addEventListener("edit", function () {
   const assetsContainer = document.querySelector("a-assets");
-
-
-
+  const scrollContainer = document.getElementById("scroll-container");
+  let imageContainer = document.createElement('div');
+  imageContainer.className = 'image-container';
+  let caption = document.createElement('span');
+  caption.className = 'caption';
   let asset = document.createElement("img");
-  // Change the background color of the container when the color wheel changes.
+
+ 
+  
+  const [images, setImages] = useState([{
+    name: '',
+    image: '',
+    imageTimeline: '',
+  }
+]); 
+const photo =[...images];
+  
+  
+
+  const inputForm = document.querySelector(".inputForm");
+  inputForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const textInput = document.getElementById("textInput").value;
+    console.log("Form submitted, text input:", textInput);
+    asset.id = textInput;
+    caption.textContent = textInput;
+    photo[0].name = textinput;
+  });
+
 
   const fileForm = document.querySelector(".fileForm");
+ 
   const fileUpload = document.getElementById("file-upload");
-
   fileForm.addEventListener("click", function () {
     fileUpload.click(); // Trigger the hidden file input
   });
@@ -20,39 +50,37 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log("File selected:", fileUpload.files[0].name);
     }
   });
-  document.getElementById("saveButton").addEventListener("click", function () {
-    let event = new Event("save");
-    let sky = document.querySelector("a-sky");
-    const inputForm = document.querySelector(".inputForm");
-    const textInput = document.getElementById("textInput").value;
-    asset.id = textInput;
-    if (asset.id && asset.src) {
-      document.body.dispatchEvent(event);
-      assetsContainer.appendChild(asset);
-      console.log("saved sent");
-      
-      asset = document.createElement("img"); 
-      console.log(assetsContainer);// Reset asset for the next save
-    } else {
-      console.log("Asset id or src is not set");
-    }
-  });
-  document.getElementById("cancelButton").addEventListener("click", function () {
-    let event = new Event("cancel");
-    document.body.dispatchEvent(event);
-    console.log("cancel sent");
-  });
   const fileInput = document.getElementById("file-upload");
   const fileNameDisplay = document.getElementById("file-name");
- 
-
   fileInput.addEventListener("change", function () {
     if (this.files && this.files[0]) {
       fileNameDisplay.textContent = this.files[0].name;
-
-      asset.src = `./assets/${fileNameDisplay.textContent}`;
+      photo.image = this.files[0].name;
+      photo.imageTimeline = 0;
+      savePhotos(photo, "HouseID");
+      
     } else {
       fileNameDisplay.textContent = "None";
     }
   });
+  document.getElementById("saveButton").addEventListener("click", function () {
+    let event = new Event("save");
+    let sky = document.querySelector("a-sky");
+
+    if (asset.id && asset.src) {
+      document.body.dispatchEvent(event);
+      assetsContainer.appendChild(asset);
+      imageContainer.appendChild(asset);
+      imageContainer.appendChild(caption);
+      scrollContainer.appendChild(imageContainer);
+      console.log("saved sent");
+      console.log(assetsContainer);
+      addImageToGallery('assets/your-image.jpg', 'NewImageId', 'New Image Caption');
+      asset = document.createElement("img"); 
+    } else {
+      console.log("Asset id or src is not set");
+    }
+  });
+
 });
+

@@ -20,6 +20,7 @@
     "vr"
   ],
   "dependencies": {
+    "react": "^18.2.0",
     "super-hands": "^3.0.4"
   }
 }

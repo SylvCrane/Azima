@@ -218,6 +218,8 @@ this.el.removeAttribute('toggle-thickness');
 
     // Append the form to the container
     formContainer.appendChild(viewNameForm);
+    document.dispatchEvent(new Event("edit"));
+    console.log("edit sent");
 },
 
 
