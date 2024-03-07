@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "../../css/style.css";
-import "../../css/accounts.css";
+import "../../../css/style.css";
+import "../../../css/accounts.css";
 import { useNavigate } from 'react-router-dom';
 
 export const SignUp = (props) => {
@@ -62,6 +62,7 @@ export const SignUp = (props) => {
         .then((res) => res.json())
         .then((data) => {
         console.log(data, "userSignup");
+        
         
         if (data.status === "ok") {
             setAlertMessage("You are now registered with Azima!");

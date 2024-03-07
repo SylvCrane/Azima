@@ -1,8 +1,8 @@
 // page that allows user to either signup or sign in.
 
 import React, { useState } from "react";
-import "../../css/style.css";
-import "../../css/accounts.css"
+import "../../../css/style.css";
+import "../../../css/accounts.css"
 import { Login } from "./Login";
 import { SignUp } from "./SignUp";
 

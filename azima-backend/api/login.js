@@ -18,12 +18,15 @@ router.post("/", async(req,res) => {
     if(await bcrypt.compare(password, User.password)) {
         const token = JWT.sign({}, JWT_SECRET); // will generate a token and pass the jwt_secret variable
 
-        // 201 - refers to request being fulfiled 
+        /*// 201 - refers to request being fulfiled 
         if(res.status(201)) {
             return res.json({status: "ok", data: token });
-        }
+        }*/
+
+        // Return user's email along with token
+        return res.json({status: "ok", user: { email }, token });
     }
-    res.json({status: "erorr", error: "incorrect_password"});
+    res.json({status: "error", error: "incorrect_password"});
 });
 
 module.exports = router;
