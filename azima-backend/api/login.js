@@ -9,24 +9,30 @@ const user = require("../models/UserDetails"); // import user details model
 router.post("/", async(req,res) => {
     const {email, password} = req.body;
 
-    // Check first if user's email exist in db or not 
-    const User = await user.findOne({email});
-    if (!User) {
-        return res.json({status: "error", error: "email_not_found"});
-    }
-    // Decrypt password and check whether password input matches input in mongo by generating jwt 
-    if(await bcrypt.compare(password, User.password)) {
-        const token = JWT.sign({}, JWT_SECRET); // will generate a token and pass the jwt_secret variable
+    try {
+        // Check first if user's email exist in db or not 
+        const existingUser = await user.findOne({email});
+        if (!existingUser) {
+            return res.json({status: "error", error: "email_not_found"});
+        }
+        // Decrypt password and check whether password input matches input in mongo by generating jwt 
+        if(await bcrypt.compare(password, existingUser.password)) {
+            const token = JWT.sign({}, JWT_SECRET); // will generate a token and pass the jwt_secret variable
 
-        /*// 201 - refers to request being fulfiled 
-        if(res.status(201)) {
-            return res.json({status: "ok", data: token });
-        }*/
+            /*// 201 - refers to request being fulfiled 
+            if(res.status(201)) {
+                return res.json({status: "ok", data: token });
+            }*/
 
-        // Return user's email along with token
-        return res.json({status: "ok", user: { email }, token });
+            // Return user's email along with token
+            return res.json({status: "ok", user: { email }, token });
+        }
+        res.json({status: "error", error: "incorrect_password"});
     }
-    res.json({status: "error", error: "incorrect_password"});
+    catch (e) {
+        console.log(e);
+        res.json({status: "error", message: e.message});
+    }
 });
 
 module.exports = router;
