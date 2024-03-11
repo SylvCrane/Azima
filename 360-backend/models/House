@@ -2,6 +2,91 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
+const portalSchema = new Schema({
+    destination: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    location: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    triangles: [{
+        vertexA: {
+            type: String,
+            required: true,
+            trim: true
+        },
+        vertexB: {
+            type: String,
+            required: true,
+            trim: true
+        },
+        vertexC: {
+            type: String,
+            required: true,
+            trim: true
+        },
+    }],
+    textData: [{
+        value: {
+            type: String,
+            required: true,
+            trim: true
+        },
+        position: {
+            type: String, 
+            required: true,
+            trim: true
+        },
+        rotation: {
+            x: {
+                type: Number,
+                required: true,
+                trim: true
+            },
+            y: {
+                type: Number,
+                required: true,
+                trim: true
+            },
+            z: {
+                type: Number,
+                required: true,
+                trim: true
+            },
+        }
+    }]
+});
+
+const imageSchema = new Schema({
+    name: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    imageURL: {
+        type: String,
+        required: true,
+        trim: true,
+    }
+});
+
+const showcaseImageSchema = new Schema({
+    name: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    imageURL: {
+        type: String,
+        required: true,
+        trim: true
+    }
+});
+
 const houseSchema = new Schema({
     houseID: {
         type: String,
@@ -62,7 +147,21 @@ const houseSchema = new Schema({
         type: Boolean,
         required: true,
         trim: true
+    },
+    teleporters: {
+        type: [portalSchema],
+        required: true,
+        trim: true
+    },
+    images: {
+        type: [imageSchema],
+        required: true,
+        trim: true
+    },
+    showcaseimages: {
+        type: showcaseImageSchema
     }
+
 });
 
 module.exports = House = mongoose.model('House', houseSchema);
