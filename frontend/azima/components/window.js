@@ -24,14 +24,14 @@ AFRAME.registerComponent("window", {
       this.hoverEnd.bind(this)
     );
 
-    this.el.addEventListener("click", (event) => {
+    this.el.addEventListener("click", () => {
       let id = this.el.getAttribute("id");
-
+      console.log(id);
       let className = this.el.getAttribute("class");
-
-      current = document.getElementsByClassName(className);
+      console.log(className);
+      let current = document.getElementsByClassName(className);
       console.log(current);
-      next = document.getElementsByClassName(id);
+      let next = document.getElementsByClassName(id);
       console.log(next);
       let sky = document.getElementById(id);
 
@@ -53,26 +53,53 @@ AFRAME.registerComponent("window", {
       console.log(sky.id);
       this.load(sky.id);
     });
-    
-    this.el.addEventListener("move", () => {
+    document.addEventListener("move", () => {
       console.log("move received");
 
       let room = document.querySelector('a-sky');
-      className = room.className;
-      current = document.getElementsByClassName(className);
+    let className = room.getAttribute("class");
+      console.log("class", className);
       
-      console.log(current);
+   
       
      
       let entities = document.querySelectorAll('a-entity');
       entities.forEach((entity) => {
-        if (entity.className === className) {
+        
+        if(entity.hasAttribute('window')){
+          console.log(entity.getAttribute("class"));
+        if (entity.getAttribute("class") === className) {
           this.pull(entity); 
         }
-        else{
-          push(entity);
+        else if (entity.getAttribute("position")!== "0 0 0"){
+          this.push(entity);
         }
+      }
       });
+    });
+      document.addEventListener("load", () => {
+        console.log("load received");
+  
+        let room = document.querySelector('a-sky');
+      let className = room.getAttribute("class");
+        
+        
+     
+        
+       
+        let entities = document.querySelectorAll('a-entity');
+        entities.forEach((entity) => {
+          
+          if(entity.hasAttribute('window')){
+            console.log(entity.getAttribute("class"));
+          if (entity.getAttribute("class") === className) {
+            this.pull(entity); 
+          }
+          else {
+            this.push(entity);
+          }
+        }
+        });
     
       console.log(room.id);
      
@@ -160,7 +187,7 @@ AFRAME.registerComponent("window", {
     let totalZ = 0;
     let vertexCount = 0;
 
-    triangles = this.el.querySelectorAll("a-triangle");
+   let triangles = this.el.querySelectorAll("a-triangle");
     triangles.forEach((triangle) => {
       ["vertex-a", "vertex-b", "vertex-c"].forEach((vertexAttribute) => {
         let vertex = triangle.getAttribute(vertexAttribute);
@@ -207,9 +234,10 @@ AFRAME.registerComponent("window", {
   },
   load: function (id) {
     console.log("ID:", id); // Log the value of id
+    
     let sky = document.querySelector("a-sky");
     console.log("Class before:", sky.className); // Log the class attribute before updating
-    sky.setAttribute("src", "#" + id);
+    sky.setAttribute("src", "#"+id);
     sky.setAttribute("class", id);
     console.log("Class after:", sky.className);
   },

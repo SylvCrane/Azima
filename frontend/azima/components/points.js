@@ -122,6 +122,7 @@ AFRAME.registerComponent("markable", {
     console.log("cancel recieved");
 
     console.log("cancel event triggered");
+    
 
     if (this.newPoints) {
       this.newPoints.forEach((point) => {
@@ -134,10 +135,12 @@ AFRAME.registerComponent("markable", {
       this.pointCounter = 0;
       this.clickPositions = [];
       this.newPoints = [];
-      this.el.removeAttribute("markable");
-      this.el.removeEventListener("mousedown", this.boundMouseDownHandler);
-      this.el.removeEventListener("mouseup", this.boundMouseUpHandler);
+      
+      
     }
+    this.el.removeEventListener("mousedown", this.boundMouseDownHandler);
+      this.el.removeEventListener("mouseup", this.boundMouseUpHandler);
+      this.el.removeAttribute("markable");
   },
 
   mouseDownHandler: function (e) {

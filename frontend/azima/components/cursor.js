@@ -175,7 +175,7 @@ this.el.removeAttribute('toggle-thickness');
     // Dynamically create the input form elements
     let viewNameForm = document.createElement('div');
     viewNameForm.innerHTML = `
-    <div class= "color-picker id="color-picker"> 
+    <div class="color-picker" id="color-picker"> 
     <h1>Select a color:</h1>
     <label class="color-option">
         <input type="radio" name="color" value="#FFffff">
@@ -202,16 +202,34 @@ this.el.removeAttribute('toggle-thickness');
         <span class="color-display" style="background-color: #09483E;"></span>
     </label>
   </div>
-  <form class="inputForm">
-    <h1>View name:</h1>
-    <input type="text" id="textInput" placeholder="Enter text">
-  
-  </form>
-  <form class="fileForm">
-    <h2>Upload a 360° image:</h2>
-  <input id="file-upload"type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"name="filename">
-  <p>Selected file: <span id="file-name">None</span></p>
-  </form>
+ 
+  <div class="select-gallery" id="select-gallery">
+      <div class="scroll-container" id="scroll">
+      <div class="image-container">
+      <img src="assets/IMG_20231018_161144_00_742.jpg" id="Entrance">
+      <span class="caption">Entrance</span>
+    </div>
+        <div class="image-container">
+            <img src="assets/IMG_20230725_120455_00_394.jpg" id="Bedroom">
+            <span class="caption">Bedroom</span>
+        </div>
+        <div class="image-container">
+            <img src="assets/IMG_20230731_115159_562.jpg" id="Bathroom">
+            <span class="caption">Bathroom</span>
+        </div>
+        <div class="image-container">
+            <img src="assets/IMG_20230731_115530_172.jpg" id="Kitchen">
+            <span class="caption">Kitchen</span>
+        </div>
+        <div class="image-container">
+          <img src="assets/IMG_20231018_161330_00_748.jpg" id="Dining Room">
+          <span class="caption">Dining Room</span>
+      </div>
+     
+      
+      </div>
+    </div>
+  </div>
   <button id="cancelButton">Cancel</button>
   <button id="saveButton">Save</button>
     `;

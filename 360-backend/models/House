@@ -63,6 +63,7 @@ const houseSchema = new Schema({
         required: true,
         trim: true
     }
+    
 });
 
 module.exports = House = mongoose.model('House', houseSchema);

@@ -2,6 +2,18 @@ AFRAME.registerComponent("loader", {
   init: function () {
     console.log("Loader component initialized.");
     console.log(this.el);
+    this.buildWindow = this.buildWindow.bind(this);
+   
+    this.el.sceneEl.addEventListener("loadWindows", (event) => {
+      console.log("Received loadWindows event id", event.detail.detail.id );
+      console.log(this.el.getAttribute('id'));
+      console.log("Event detail", event.detail.detail.data);
+      if(this.el.getAttribute('id')=== event.detail.detail.id){
+      this.buildWindow(JSON.stringify(event.detail.detail.data));
+
+      }
+      
+    });
     this.el.sceneEl.addEventListener("createWindow", (event) => {
       console.log("Received createWindow event", event.detail);
       console.log(this.el);
@@ -10,11 +22,18 @@ AFRAME.registerComponent("loader", {
       
       
     });
+
+     
+    
+
+    
   },
   buildWindow: function (dataString ) {
     let data = JSON.parse(dataString);
-    console.log(dataString);
-    console.log("Building window with data:", data);
+    
+
+
+
 
 
 if(!this.el.getAttribute('window')){
@@ -33,14 +52,14 @@ if(!this.el.getAttribute('window')){
       textEl.setAttribute("value", textInfo.value);
       textEl.setAttribute("position", textInfo.position);
       textEl.setAttribute("rotation", textInfo.rotation);
-      textEl.setAttribute("width", textInfo.width);
-      textEl.setAttribute("align", textInfo.align);
+      textEl.setAttribute("width", "30");
+      textEl.setAttribute("align", "center");
       this.el.appendChild(textEl);
     });
 
     // Set class and ID from data
-    this.el.setAttribute("class", data.class);
-    this.el.setAttribute("id", data.id);
+    this.el.setAttribute("class", data.location);
+    this.el.setAttribute("id", data.destination);
     
     this.el.setAttribute("window", '');
 
@@ -52,8 +71,10 @@ if(!this.el.getAttribute('window')){
     
   }
   },
-  remove: function(){
+  remove: function() {
+    document.dispatchEvent(new Event("load"));
     this.el.sceneEl.removeEventListener("createWindow", this.buildWindow);
-    console.log('createWindow listener removed')
+    this.el.sceneEl.removeEventListener("loadWindows", this.buildWindow);
+    console.log('Event listeners removed');
   }
 });

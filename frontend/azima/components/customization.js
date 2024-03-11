@@ -1,5 +1,6 @@
-  console.log("customization")
- 
+
+
+
 
 document.addEventListener("edit", function () {
   const assetsContainer = document.querySelector("a-assets");
@@ -9,6 +10,8 @@ document.addEventListener("edit", function () {
   let caption = document.createElement('span');
   caption.className = 'caption';
   let asset = document.createElement("img");
+  let select = document.getElementById("scroll");
+  let selected;
   // Change the background color of the container when the color wheel changes.
  
  
@@ -17,63 +20,47 @@ document.addEventListener("edit", function () {
   
   
 
-  const inputForm = document.querySelector(".inputForm");
-  inputForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const textInput = document.getElementById("textInput").value;
-    console.log("Form submitted, text input:", textInput);
-    asset.id = textInput;
-    caption.textContent = textInput;
+  select.addEventListener("click",function (e){
+    let img = e.target.closest(".image-container");
     
+    
+    
+    
+   
+        
+    
+    
+   
+  
+        image = img.children[0];
+        asset.src = image.src.replace("http://127.0.0.1:62523", "");
+        caption = img.children[1];
+        asset.id = caption.innerText;
+        selected = img
+        
   });
 
-
-  const fileForm = document.querySelector(".fileForm");
- 
-  const fileUpload = document.getElementById("file-upload");
-  fileForm.addEventListener("click", function () {
-    fileUpload.click(); // Trigger the hidden file input
-  });
-
-  // Optional: If you want to take action after a file is selected
-  fileUpload.addEventListener("change", function () {
-    if (fileUpload.files.length > 0) {
-      console.log("File selected:", fileUpload.files[0].name);
-    }
-  });
-  const fileInput = document.getElementById("file-upload");
-  const fileNameDisplay = document.getElementById("file-name");
-  fileInput.addEventListener("change", function () {
-    if (this.files && this.files[0]) {
-      fileNameDisplay.textContent = this.files[0].name;
-      photo.image = this.files[0].name;
-      photo.imageTimeline = 0;
-      
-      asset.src = `./assets/${fileNameDisplay.textContent}`;
-    } else {
-      fileNameDisplay.textContent = "None";
-    }
-  });
+  
   document.getElementById("saveButton").addEventListener("click", function () {
     let event = new Event("save");
     let sky = document.querySelector("a-sky");
-
+    let tab = document.getElementById('tab');
     if (asset.id && asset.src) {
       document.body.dispatchEvent(event);
       assetsContainer.appendChild(asset);
-      imageContainer.appendChild(asset);
-      imageContainer.appendChild(caption);
-      scrollContainer.appendChild(imageContainer);
-      console.log("saved sent");
       console.log(assetsContainer);
-      addImageToGallery('assets/your-image.jpg', 'NewImageId', 'New Image Caption');
+      console.log("saved sent");
+      console.log(asset.src);
+      tab.style.display ='';
       asset = document.createElement("img"); 
     } else {
       console.log("Asset id or src is not set");
     }
   });
   document.getElementById("cancelButton").addEventListener("click", function () {
+    let tab = document.getElementById('tab');
     let event = new Event("cancel");
+    tab.style.display ='';
     document.body.dispatchEvent(event);
   });
 

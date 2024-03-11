@@ -34,12 +34,98 @@ document.addEventListener('DOMContentLoaded', function() {
     
     
 });
+
+document.addEventListener('edit', function (){
+
+    
+
+
+    const gallery = document.getElementById('gallery');
+    const tab = document.getElementById('tab');
+    tab.style.display = 'none';
+    
+
+
+    const select = document.getElementById("scroll");
+
+    let isDown = false;
+    let startX;
+    let scrollLeft; 
+    let selected;
+     console.log(select);
+     select.addEventListener('click', (e) => {
+        let img = e.target.closest(".image-container");
+
+        if(selected){
+        selected.children[0].style.border = "";
+        selected.children[1].style.color = "white";
+        }
+      
+        
+        
+       
+            
+        
+        
+       
+      
+            image = img.children[0];
+            console.log(image.src);
+            image.style.border = '2px solid #0EB49A';
+            caption = img.children[1];
+            caption.style.color = "#0EB49A";
+            selected = img
+            
+          
+
+       
+        
+       
+     
+       });
+       select.addEventListener('mousedown', (e) => {
+           isDown = true;
+           startX = e.pageX - select.offsetLeft;
+           scrollLeft = select.scrollLeft;
+           
+       });
+   
+       select.addEventListener('mouseleave', () => {
+           isDown = false;
+       });
+   
+       select.addEventListener('mouseup', () => {
+           isDown = false;
+       });
+   
+       select.addEventListener('mousemove', (e) => {
+           if (!isDown) return;
+           e.preventDefault();
+           const x = e.pageX - select.offsetLeft;
+           const walk = (x - startX) * 3; // The number 3 determines the speed of the scroll
+           select.scrollLeft = scrollLeft - walk;
+       });
+
+
+    let inner = gallery.innerHTML;
+  
+});
 document.addEventListener('DOMContentLoaded', function() {
     const gallery = document.getElementById('scroll-container');
    
+     
     let isDown = false;
     let startX;
     let scrollLeft;
+
+
+
+
+   
+
+
+
+
   
     gallery.addEventListener('click', (e) => {
      let img = e.target;
@@ -78,4 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const walk = (x - startX) * 3; // The number 3 determines the speed of the scroll
         gallery.scrollLeft = scrollLeft - walk;
     });
+  
 });
+
+

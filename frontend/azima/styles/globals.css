@@ -282,7 +282,7 @@ input[type="text"]{
   transform: translateY(-100%); /* Start off-screen */
   padding: 0px 10%;
   white-space: nowrap;
-  max-width: 50vh;
+  max-width: 70vh;
 
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   background-color: #2b2b2b;
@@ -290,20 +290,40 @@ input[type="text"]{
   transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition for opacity and transform */
   position: fixed;
   top: 0;
-  right: 50%;
+
   transform: translateX(50%) translateY(-100%);
-  z-index: 100; /* Ensure it's below the tab */
+  z-index: 100; 
+}
+
+
+.select-gallery {
+  max-width: 35vh;
+  background-color: #2b2b2b;
+  padding: 10px 10px;
+  color: white;
+  position: fixed;
+  white-space: nowrap;
+  top: 60%;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  right: 11%;
+  transform: translateX(50%);
+  z-index: 100;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 .scroll-container{
   overflow-x: scroll;
-width:103%;
-
+width:100%;
 
 }
+
 .scroll-container::-webkit-scrollbar {
   display: none; /* Chrome, Safari, and Opera */
 }
 .gallery::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
+.select-gallery::-webkit-scrollbar {
   display: none; /* Chrome, Safari, and Opera */
 }
 .gallery.is-active {
@@ -311,6 +331,10 @@ width:103%;
   transform: translateX(50%) translateY(0); /* Slide into final position */
 }
 .gallery img {
+  height: 80px; /* Adjust based on your preference */
+  margin-right: 4px;
+}
+.select-gallery img {
   height: 80px; /* Adjust based on your preference */
   margin-right: 4px;
 }
