@@ -23,45 +23,22 @@
  
   <script  src="./components/loader.js"></script>
   <script  src="./components/loadin.js"></script>
- 
+  <script  src="./components/fileUpload.js"></script>
   </head>
   <body>
-    <div class="tab" id="tab"onclick="toggleGallery()">▼</div>
-
-    <div class="gallery" id="gallery">
-      
-      <div class="scroll-container" id="scroll-container">
-        <div class="image-container">
-          <img src="assets/IMG_20231018_161144_00_742.jpg" id="Entrance">
-          <span class="caption">Entrance</span>
-        </div>
-        <div class="image-container">
-            <img src="assets/IMG_20230725_120455_00_394.jpg" id="Bedroom">
-            <span class="caption">Bedroom</span>
-        </div>
-        <div class="image-container">
-            <img src="assets/IMG_20230731_115159_562.jpg" id="Bathroom">
-            <span class="caption">Bathroom</span>
-        </div>
-        <div class="image-container">
-            <img src="assets/IMG_20230731_115530_172.jpg" id="Kitchen">
-            <span class="caption">Kitchen</span>
-        </div>
-        <div class="image-container">
-          <img src="assets/IMG_20231018_161330_00_748.jpg" id="Dining Room">
-          <span class="caption">Dining Room</span>
-      </div>
-      
-
-
-  </div>
-        <button class="close-gallery" onclick="toggleGallery()">▲</button>
-    </div>
+  
 
     
 
    <div id="formContainer"></div>
 
+
+   <div id="formsContainer" class="forms-container">
+  <!-- Forms will be dynamically added here -->
+</div>
+  
+    <button id="addButton" class="add-button">Add Room</button>
+<button id="saveButton">Save</button>
 
 
 
