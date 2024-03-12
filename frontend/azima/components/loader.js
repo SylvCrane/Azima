@@ -62,7 +62,7 @@ if(!this.el.getAttribute('window')){
     this.el.setAttribute("id", data.destination);
     
     this.el.setAttribute("window", '');
-
+    this.el.setAttribute("position", `0 0 0`);
     this.el.removeAttribute("loader");
     this.remove();
     console.log("Loader attribute removed:", !this.el.hasAttribute("loader"));
@@ -72,7 +72,7 @@ if(!this.el.getAttribute('window')){
   }
   },
   remove: function() {
-    document.dispatchEvent(new Event("load"));
+    this.el.emit('load', this.el.getAttribute('class'));
     this.el.sceneEl.removeEventListener("createWindow", this.buildWindow);
     this.el.sceneEl.removeEventListener("loadWindows", this.buildWindow);
     console.log('Event listeners removed');

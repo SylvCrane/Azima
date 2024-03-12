@@ -23,7 +23,7 @@ h1{
   font-weight: 700;
   font-size: 25px;
 }
-h2{
+h2, span{
   font-family: Mazzard;
   font-weight: 700;
   font-size: 15px;
@@ -36,17 +36,19 @@ h2{
       url('/frontend/azima/fonts/MazzardM-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Mazzard';
   src: local('Mazzard M Regular'), local('Mazzard-M-Regular'),
       url('/frontend/azima/fonts/MazzardM-Regular.woff2') format('woff2'),
       url('/frontend/azima/fonts/MazzardM-Regular.woff') format('woff'),
-      url('/frontend/amzima/fonts/MazzardM-Regular.ttf') format('truetype');
+      url('/frontend/azima/fonts/MazzardM-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
- 
+
 
 
 #aframe-container {

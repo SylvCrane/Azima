@@ -12,7 +12,11 @@ document.addEventListener("DOMContentLoaded", function() {
     // Delay the fade-out to give the transition time to apply
     setTimeout(() => {
       overlay.style.opacity = '0';
-    }, 500); // Delay can be minimal since we're just waiting for the next frame
+
+    }, 500);
+    setTimeout(()=>{
+      document.dispatchEvent(new Event('load'));
+    }, 1000) // Delay can be minimal since we're just waiting for the next frame
   });
   function loadPortalData() {
     fetch('http://localhost:8082/api/portal/')

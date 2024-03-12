@@ -133,12 +133,13 @@ document.addEventListener('DOMContentLoaded', function() {
       src = img.src.replace("http://127.0.0.1:62523", "");
       
       console.log(src);
-      let sky = document.querySelector("a-sky");
-    console.log("Class before:", sky.className); 
+      
+let sky = document.querySelector('a-sky');
     if(e.target.src){
-    sky.setAttribute("src",  src);  
-    sky.setAttribute("class", img.id);
-    document.dispatchEvent(new Event("move"));
+        sky.setAttribute('src', '#'+img.id);
+        sky.setAttribute('class',img.id)
+        let detail = { id: img.id };
+        document.dispatchEvent(new CustomEvent("move", { detail: detail }));
     console.log("move sent");
     }
     });

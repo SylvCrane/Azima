@@ -53,55 +53,41 @@ AFRAME.registerComponent("window", {
       console.log(sky.id);
       this.load(sky.id);
     });
-    document.addEventListener("move", () => {
-      console.log("move received");
 
-      let room = document.querySelector('a-sky');
-    let className = room.getAttribute("class");
-      console.log("class", className);
-      
-   
-      
-     
-      let entities = document.querySelectorAll('a-entity');
-      entities.forEach((entity) => {
-        
-        if(entity.hasAttribute('window')){
-          console.log(entity.getAttribute("class"));
-        if (entity.getAttribute("class") === className) {
-          this.pull(entity); 
-        }
-        else if (entity.getAttribute("position")!== "0 0 0"){
-          this.push(entity);
-        }
+    document.addEventListener("move", (e) => {
+      let sky = document.querySelector("a-sky");
+      let className = sky.getAttribute("class");
+      if (this.el.getAttribute("class") === e.detail.id){
+        this.pull(this.el);  
       }
-      });
+      else if(this.el.getAttribute("id") === e.detail.id){
+        this.push(this.el);
+      }
+      else{
+        this.push(this.el);
+      }
+      
+      document.removeEventListener("move", (e));
     });
-      document.addEventListener("load", () => {
+    
+
+      this.el.addEventListener("load", (e) => {
         console.log("load received");
   
         let room = document.querySelector('a-sky');
       let className = room.getAttribute("class");
-        
+      if (e.target.getAttribute('class')===className){
+        this.pull(e.target);
+      }
+      else{
+        this.push(e.target);
+      }
+
         
      
         
        
-        let entities = document.querySelectorAll('a-entity');
-        entities.forEach((entity) => {
-          
-          if(entity.hasAttribute('window')){
-            console.log(entity.getAttribute("class"));
-          if (entity.getAttribute("class") === className) {
-            this.pull(entity); 
-          }
-          else {
-            this.push(entity);
-          }
-        }
-        });
-    
-      console.log(room.id);
+      
      
     });
   },
@@ -138,7 +124,7 @@ AFRAME.registerComponent("window", {
       triangles.forEach((triangle) => {
         triangle.setAttribute("material", "opacity: 0.7");
       }); // Change from parent check to this.el
-
+ 
       this.hoverTimeout = setTimeout(() => {
         let camera = this.el.sceneEl.querySelector("[camera]");
         let direction = new THREE.Vector3();
@@ -181,7 +167,7 @@ AFRAME.registerComponent("window", {
   },
 
   calcOffset: function (target) {
-    console.log(target);
+
     let totalX = 0;
     let totalY = 0;
     let totalZ = 0;
@@ -201,7 +187,7 @@ AFRAME.registerComponent("window", {
         }
       });
     });
-
+    
     let midpoint = {
       x: totalX / vertexCount,
       y: totalY / vertexCount,
@@ -212,25 +198,22 @@ AFRAME.registerComponent("window", {
   },
 
   push: function (target) {
+    target.setAttribute("position", `0 0 0`);
+    console.log("push" ,target, target.getAttribute("position"));
+
     let midpoint = this.calcOffset(target);
-    console.log("Midpoint:", midpoint);
+    console.log(midpoint);
     target.setAttribute(
       "position",
       `${midpoint.x} ${midpoint.y} ${midpoint.z}`
     );
+    console.log("pushed" ,target, target.getAttribute("position"));
   },
   pull: function (target) {
+    console.log("pull" ,target, target.getAttribute("position"));
     target.setAttribute("position", `0 0 0`);
-
-    if (target.triangles) {
-      target.triangles.forEach((triangle) => {
-        let textEntity = triangle.querySelector("a-text");
-        if (textEntity) {
-          vertex = triangle.getAttribute("vertex-a");
-          textEntity.setAttribute("position", "0 0 0 ");
-        }
-      });
-    }
+    console.log("pulled" ,target, target.getAttribute("position"));
+   
   },
   load: function (id) {
     console.log("ID:", id); // Log the value of id

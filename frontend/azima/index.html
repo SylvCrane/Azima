@@ -11,18 +11,18 @@
     <script src="https://unpkg.com/super-hands@^3.0.3/dist/super-hands.min.js"></script>
 
   
-  <script type="module" src="./components/superhands.js"></script>
- 
+  <script src="./components/superhands.js"></script>
+  <script src="./components/window.js"></script>
   <script  src="./components/viewer.js"></script>
  
   <script src ="./components/points.js"></script>
   <script src ="./components/link.js"></script>
-  <script type="module" src="./components/customization.js"></script>
+  <script  src="./components/customization.js"></script>
   <script src ="./components/cursor.js"></script>
   
-  <script type="module" src="./components/window.js"></script>
-  <script type="module" src="./components/loader.js"></script>
-  <script type="module" src="./components/loadin.js"></script>
+ 
+  <script  src="./components/loader.js"></script>
+  <script  src="./components/loadin.js"></script>
  
   </head>
   <body>
@@ -63,38 +63,12 @@
    <div id="formContainer"></div>
 
 
- <div id="overlay">  </div>
-    <div id="aframe-container">
-
-    <a-scene embedded> 
-      <a-assets>
-
-      </a-assets>
-
-      
-      <a-entity camera wasd-controls look-controls position="0 0 0" >
-        <!-- Cursor Entity -->
-        <a-entity id="cursorRing" 
-                  position="0 0 -1" 
-                  geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03" 
-                  material="color: white; shader: flat"
-                  cursor="rayOrigin: entity;"
-                  raycaster="showLine: true; lineColor: red; lineOpacity: 1"
-                  raycaster="far: 10; showLine: true"
-                  super-hands=" colliderEvent: raycaster-intersection; colliderEventProperty: els; colliderEndEvent:raycaster-intersection-cleared; colliderEndEventProperty: clearedEls;"
-                  toggle-thickness>
-        </a-entity>
-      </a-entity>
 
 
 
 
 
-      <a-sky class="Entrance"src="assets/IMG_20231018_161144_00_742.jpg" rotation= "3 180 0 " radius="20" 
-     ></a-sky>
-
-   
-    </a-scene>
+     
  
    </div>
   </body>
