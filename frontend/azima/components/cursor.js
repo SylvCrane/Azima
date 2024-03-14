@@ -1,5 +1,7 @@
 AFRAME.registerComponent('toggle-thickness', {
   init: function() {
+
+    console.log(AFRAME);
       this.isThick = false;
       this.isFocused = false;
       this.plus = document.createElement('button');
