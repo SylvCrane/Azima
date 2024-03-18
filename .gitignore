@@ -1,5 +1,4 @@
 .DS_Store
-=======
 # Logs
 logs
 *.log
@@ -133,3 +132,10 @@ dist
 .pnp.*
 
 frontend/azima/node_modules/.bin/browserslist
+
+
+frontend/azimareact/node_modules/yargs/locales/pt.json
+/frontend/azimareact
+/frontend/azima/node_modules
+/360-backend/node_modules
+/360-backend/node_modules/anymatch
