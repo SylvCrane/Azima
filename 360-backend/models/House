@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+<<<<<<< HEAD
 
 const Schema = mongoose.Schema;
 
@@ -87,12 +88,23 @@ const showcaseImageSchema = new Schema({
     }
 });
 
+=======
+const portalSchema = require('../models/Portal').schema;
+const imageSchema = require('../models/Image').schema;
+const Schema = mongoose.Schema;
+
+>>>>>>> Brandyn2
 const houseSchema = new Schema({
     houseID: {
         type: String,
         required: true,
         trim: true
     },
+<<<<<<< HEAD
+=======
+    portals: [portalSchema],
+    images: [imageSchema],
+>>>>>>> Brandyn2
     rooms: {
         type: Number,
         required: true,
@@ -147,6 +159,7 @@ const houseSchema = new Schema({
         type: Boolean,
         required: true,
         trim: true
+<<<<<<< HEAD
     },
     teleporters: {
         type: [portalSchema],
@@ -162,6 +175,10 @@ const houseSchema = new Schema({
         type: showcaseImageSchema
     }
 
+=======
+    }
+    
+>>>>>>> Brandyn2
 });
 
 module.exports = House = mongoose.model('House', houseSchema);
