@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-
+const portalSchema = require('../models/Portal').schema;
+const imageSchema = require('../models/Image').schema;
 const Schema = mongoose.Schema;
 
 const houseSchema = new Schema({
@@ -8,6 +9,8 @@ const houseSchema = new Schema({
         required: true,
         trim: true
     },
+    portals: [portalSchema],
+    images: [imageSchema],
     rooms: {
         type: Number,
         required: true,

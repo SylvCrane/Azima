@@ -1,0 +1,134 @@
+/* CSS style sheet for application / for all files to have for consistency */ 
+
+@import url('https://fonts.googleapis.com/css2?family=Alatsi&family=Flow+Circular&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Ramabhadra&family=Rubik:ital,wght@0,300..900;1,300..900&family=Varela+Round&display=swap');
+/* https://fonts.google.com/selection/embed */
+
+  * {
+    /* font-family: "Konkhmer Sleokchher"; */
+    font-family: "Rubik", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-style: normal;
+    font-size: 14px;
+    box-sizing: border-box;
+    margin: 0;
+    
+  }
+  
+  h1 {
+    font-size: 40px;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  h2 {
+    font-size: 30px;
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+  
+  /* for app.js and account.js file */
+  .App, 
+  .Account {
+    background-color: #fefefe;
+    height: 100vh;
+    width: 100%;
+  }
+
+  /* div styling for the pages */
+  .tours-page, 
+  .editor-page, 
+  .about-page, 
+  .home-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 85vh; /* Minimum height of the page to fill the viewport */
+    text-align: center;
+  }
+  
+  /* need this div so that the vg file appears */
+  .logo {
+    height: 7vmin;
+    pointer-events: none;
+  }
+  #saveButton {
+    position: fixed;     
+    bottom: 50px;       
+    right: 30px;         
+    padding: 10px 100px;  
+    border: none;        
+    background-color: #0EB49A;  
+    color: white;       
+    font-size: 16px;     
+    border-radius: 4px;  
+    cursor: pointer;    
+    outline: none;      
+  
+    font-weight: 700;
+    font-size: 25px;
+  }
+  
+  #saveButton:hover {
+    background-color: #4ABFAA;  
+  }
+  #addButton {
+
+  
+    position: fixed;     
+    bottom: 120px;       
+    right: 30px; 
+    padding: 10px 88px;  
+    border: none;        
+    background-color: #0EB49A;  
+    color: white;       
+    font-size: 16px;     
+    border-radius: 4px;  
+    cursor: pointer;    
+    outline: none;      
+  
+    font-weight: 700;
+    font-size: 25px;
+  }
+  .cancelButton {
+    
+    
+    padding: 10px 88px;  
+    border: none;        
+    background-color: #0EB49A;  
+    color: white;       
+    font-size: 16px;     
+    border-radius: 4px;  
+    cursor: pointer;    
+    outline: none;      
+
+    font-weight: 700;
+    font-size: 25px;
+  }
+  .forms-container {
+    display: flex; /* Use flexbox to layout child elements */
+    flex-wrap: wrap; /* Allow items to wrap to next line at the end of the container */
+    column-gap: 100px;
+    row-gap: 10px;/* Add some space between the forms */
+    justify-content: flex-start; /* Align forms to the start (left) horizontally */
+    align-items: flex-start; /* Align forms to the start (top) vertically */
+    padding: 20px; /* Add some padding around the container */
+    margin:100px 100px; /* Remove default margin */
+  /* Adjust margin to position the container closer to the top-left */
+    max-width: 100%; /* Adjust max-width to account for padding */
+    /* Hide overflow */
+    overflow-x: auto; 
+    flex-shrink: 0;
+  }
+  
+  .inputForm, .fileForm {
+   /* Remove default margin */
+    width: auto; /* Allow the form width to grow with content */
+    min-width: 250px; /* Set a minimum width for each form */
+  }
+  
+
+  

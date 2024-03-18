@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     }, 500);
     setTimeout(()=>{
-      document.dispatchEvent(new Event('load'));
+    
     }, 1000) // Delay can be minimal since we're just waiting for the next frame
   });
   function loadPortalData() {

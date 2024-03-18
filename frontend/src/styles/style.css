@@ -1,0 +1,58 @@
+/* CSS style sheet for application / for all files to have for consistency */ 
+
+@import url('https://fonts.googleapis.com/css2?family=Alatsi&family=Flow+Circular&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Ramabhadra&family=Rubik:ital,wght@0,300..900;1,300..900&family=Varela+Round&display=swap');
+/* https://fonts.google.com/selection/embed */
+
+  * {
+    /* font-family: "Konkhmer Sleokchher"; */
+    font-family: "Rubik", sans-serif;
+    font-optical-sizing: auto;
+      font-weight: <weight>;
+      font-style: normal;
+      font-size: 14px;
+      box-sizing: border-box;
+      margin: 0;
+    }
+  
+  h1 {
+    font-size: 40px;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  h2 {
+    font-size: 30px;
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+  
+  /* for app.js and account.js file */
+  .App, 
+  .Account {
+    background-color: #fefefe;
+    height: 100vh;
+    width: 100%;
+  }
+
+  /* div styling for the pages */
+  .tours-page, 
+  .editor-page, 
+  .about-page, 
+  .home-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 85vh; /* Minimum height of the page to fill the viewport */
+    text-align: center;
+  }
+  
+  /* need this div so that the vg file appears */
+  .logo {
+    height: 7vmin;
+    pointer-events: none;
+  }
+
+  
