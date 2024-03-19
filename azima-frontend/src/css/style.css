@@ -28,6 +28,10 @@
   h3 {
     font-size: 20px;
   }
+
+  h4 {
+    font-size: 14px;
+  }
   
   /* for app.js and account.js file */
   .App, 
@@ -50,10 +54,58 @@
     text-align: center;
   }
   
+
+  .home-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 40vh; /* Minimum height of the page to fill the viewport */
+    text-align: center;
+  }
+
+  .home-page-nav {
+    height: 80%;
+    width: 100%;
+    position: center;
+    text-align: center;
+    align-items: center;
+    background-color: #00664d;
+    color: white;
+    padding-top: 80px;
+  }
+
   /* need this div so that the vg file appears */
   .logo {
     height: 7vmin;
     pointer-events: none;
   }
 
-  
+  .join-btn {
+    border-radius: 25px;
+    border: 1px solid #004d39;
+    background-color: #00805e;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 15px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+    &:active{
+        transform: scale(0.95);
+    }
+    &:focus {
+        outline: none;
+    }
+  }
+
+  @media (max-width: 59em) {
+
+    .home-page-nav {
+      padding-left: 20px; /* Add padding to the left */
+      padding-right: 20px; /* Add padding to the right */
+    }
+  }
+
+
