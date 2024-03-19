@@ -28,13 +28,13 @@ router.use('/house/:houseId/portals', (req, res, next) => {
 router.get('/house/:id', (req, res) => {
     House.findById(req.params.id, req.body)
         .then(house => res.json({msg: 'House updated successfully'}))
-        .catch(err => res.status(400).json({error: 'Unable to update house'}));
+        .catch(err => res.status(400).json({error: 'House not found'}));
 });
 
 router.get('/house/puller/:houseID', (req, res) => {
     House.find( { "houseID" : req.params.houseID} )
-        .then(house => res.json({msg: 'House updated successfully'}))
-        .catch(err => res.status(400).json({error: 'Unable to update house'}));
+        .then(house => res.json(house))
+        .catch(err => res.status(400).json({error: 'House not found'}));
 });
 
 
