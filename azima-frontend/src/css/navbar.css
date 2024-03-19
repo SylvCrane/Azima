@@ -68,6 +68,10 @@ nav .menu {
     outline: none;
 }
 
+.dropdown {
+    margin-bottom: 5px;
+}
+
 /* Dropdown container */
 .account-dropdown {
     position: relative;
@@ -78,6 +82,7 @@ nav .menu {
 .dropdown-content {
     display: none;
     position: absolute;
+    justify-content: center;
     padding: 10px 10px;
     background-color: #00664d;
     z-index: 1;
@@ -110,6 +115,36 @@ nav .menu {
 /* Change color of dropdown links on hover */
 .dropdown-content .dropdown-link:hover {
     background-color: #207963;
+}
+
+.logout-btn,
+.logout-btn:hover,
+.logout-btn:focus,
+.logout-btn:active {
+    border-radius: 25px;
+    border: 1px solid #004d39;
+    background-color: #00805e;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 12px 42px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+    margin-top: 10px; /* Adjust margin-top to add space between the links */
+    /* Margin and display center logout button */
+    margin: auto; 
+    margin-bottom: 5px;
+    display: block;
+}
+
+.logout-btn:active {
+    transform: scale(0.95); /* Scale down on click */
+}
+
+.user-display {
+    margin-top: 10px;
+    margin-bottom: 10px; /* Adjust the value as needed */
 }
 
 /* Media query to handle when user is on smaller screen */

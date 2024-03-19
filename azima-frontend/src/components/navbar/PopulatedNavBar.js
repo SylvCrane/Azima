@@ -7,7 +7,6 @@ import { useState } from "react";
 import { useNavigate, NavLink, Link } from "react-router-dom";
 import { useUser } from "../UserState";
 import NavBar from "./NavBar";
-import NavBarItem from "./NavBarItem";
 import React from "react";
 
 // PopulatedNavBar component definition
@@ -95,12 +94,12 @@ export const PopulatedNavBar = () => {
                   </h3>
                 </button>
                 <div className="dropdown-content">
-                  <NavBarItem>
+                  <div className="user-display">
                     {user.email}
-                  </NavBarItem>
-                  <NavBarItem>
+                  </div>
+                  
                   <button className="logout-btn" onClick={handleLogout}>Logout</button>
-                  </NavBarItem>
+                  
                 </div>
             </div>
           </li>
