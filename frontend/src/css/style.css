@@ -131,4 +131,11 @@
   }
   
 
-  
+
+.editor-page {
+  width: 100%; /* full width */
+  height: 100vh; /* full viewport height */
+  overflow: hidden;
+  position: fixed; /* hide the overflow */
+  /* additional styles */
+}

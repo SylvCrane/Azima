@@ -19,5 +19,10 @@ router.get('/', (req, res) => {
         .catch(err => 
             console.error(err));
 });
+router.get('/:houseID', (req, res) => {
+    Portal.find( { "houseID" : req.params.houseID} )
+        .then(image => res.json(image))
+        .catch(err => res.status(404).json({ noimagefound: 'No Image Found'}));
+});
 
 module.exports = router;

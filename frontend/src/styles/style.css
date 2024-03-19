@@ -55,4 +55,12 @@
     pointer-events: none;
   }
 
+
+.editor-page {
+  width: 100%; /* full width */
+  height: 100vh; /* full viewport height */
+  overflow: hidden; /* hide the overflow */
+  /* additional styles */
+}
+
   
