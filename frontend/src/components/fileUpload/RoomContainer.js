@@ -25,7 +25,7 @@ useEffect(() => {
         window.dispatchEvent(event);
         console.log(event.detail.houseID);
         // Navigate to a different URL if needed, or handle the event in another way
-        window.location.href = `/editor/aframe/?houseID=${encodeURIComponent(houseName)}`;
+        window.location.href = `/editor/aframe?houseID=${encodeURIComponent(houseName)}`;
     }
 }, [saveSuccessful, houseName]); 
 
@@ -121,7 +121,7 @@ useEffect(() => {
           ))}
         </div>
         <button onClick={handleSave} id="saveButton">Save All</button>
-        <button onClick={setSaveSuccessful} id="saveButton">Debug</button>
+     
       </div>
     );
   }
