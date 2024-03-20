@@ -45,7 +45,8 @@
   .tours-page, 
   .editor-page, 
   .about-page, 
-  .home-page {
+  .home-page, 
+  .user-page {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -88,6 +89,7 @@
     color: #ffffff;
     font-size: 12px;
     font-weight: bold;
+    cursor: pointer;
     padding: 15px 45px;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -102,9 +104,17 @@
 
   @media (max-width: 59em) {
 
+    .tours-page, 
+    .editor-page, 
+    .about-page {
+      padding-left: 50px; /* Add padding to the left */
+      padding-right: 50px; /* Add padding to the right */
+    }
+
     .home-page-nav {
-      padding-left: 20px; /* Add padding to the left */
-      padding-right: 20px; /* Add padding to the right */
+      padding-left: 50px; /* Add padding to the left */
+      padding-right: 50px; /* Add padding to the right */
+      height: 90%;
     }
   }
 

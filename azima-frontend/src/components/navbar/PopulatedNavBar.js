@@ -45,7 +45,7 @@ export const PopulatedNavBar = () => {
   // JSX code for the PopulatedNavBar component
   return (
     <NavBar>
-      <Link to ="/"><img src={TextAsset} className="logo" onClick={closeMenu} alt="AZIMA"/></Link>
+      <Link to ="/"><img src={TextAsset} className="azima-logo" onClick={closeMenu} alt="AZIMA"/></Link>
       <div className="menu" onClick={toggleMenu}>
           <span></span>
           <span></span>
@@ -69,7 +69,7 @@ export const PopulatedNavBar = () => {
               <div className="account-dropdown">
                 <button className="account-button" onClick={toggleDropdown}>
                   <h3 className="account-image"> 
-                    <img src={AccountLogo} className="logo" alt="Account" />
+                    <img src={AccountLogo} className="account-logo" alt="Account" />
                   </h3>
                 </button>
                 <div className="dropdown-content">
@@ -88,19 +88,17 @@ export const PopulatedNavBar = () => {
         {user.isAuthenticated && (
           <li>
             <div className="account-dropdown">
-            <button className="account-button" onClick={toggleDropdown}>
-                  <h3 className="account-image"> 
-                    <img src={AccountLogo} className="logo" alt="Account" />
-                  </h3>
-                </button>
-                <div className="dropdown-content">
-                  <div className="user-display">
-                    {user.email}
-                  </div>
-                  
-                  <button className="logout-btn" onClick={handleLogout}>Logout</button>
-                  
-                </div>
+              <button className="account-button" onClick={toggleDropdown}>
+                <h3 className="account-image"> 
+                  <img src={AccountLogo} className="account-logo" alt="Account" />
+                </h3>
+              </button>
+              <div className="dropdown-content">
+                <NavLink to="/account/user" className="dropdown-link">
+                  {user.email}
+                </NavLink>
+                <button className="logout-btn" onClick={handleLogout}>Logout</button>
+              </div>
             </div>
           </li>
         )}

@@ -8,13 +8,15 @@ import { About } from "./components/pages/About";
 //import { Account } from "./components/pages/accounts/Account";
 import { SignUp } from "./components/pages/accounts/SignUp";
 import { Login } from "./components/pages/accounts/Login";
+import { User } from "./components/pages/accounts/User";
 import { Home } from "./components/pages/Home";
 import { UserProvider } from "./components/UserState";
 
 function App() {
-  const [email, setEmail] = useState(""); // State to hold authenticated user's email
+  const [email, setEmail] = useState(""); // State variable to hold authenticated user's email
   const location = useLocation();
 
+  // Hides navbar in specific pages
   const shouldHideNavbar = (pathname) => {
     return pathname === "/editor/tours";
   };
@@ -33,19 +35,10 @@ function App() {
           <Route path="/tours" element={<Tours />} />
           <Route path="/about" element={<About />} />
           <Route path="/editor" element={<Editor />} />
-          {/*<Route path="/account" element={<Account />} />*/}
-          <Route
-            path="/account/signup"
-            element={<SignUp setEmail={setEmail} />} 
-          />
-          <Route
-            path="/account/login"
-            element={<Login setEmail={setEmail} />} 
-          />
-          <Route
-            path="/editor/tours"
-            element={<Tours />} 
-          />
+          <Route path="/account/signup" element={<SignUp setEmail={setEmail} />} />
+          <Route path="/account/login" element={<Login setEmail={setEmail} />} />
+          <Route path="/account/user" element={<User />} />
+          <Route path="/editor/tours" element={<Tours />} />
         </Routes>
       </UserProvider>
     </div>

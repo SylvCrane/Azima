@@ -1,5 +1,6 @@
 /* STYLING FOR NAVBAR CLASS */
 
+
 nav {
     display: flex; /* places content to the right */
     justify-content: space-between; 
@@ -32,20 +33,15 @@ nav ul li a {
     height: 100%; /* Make the link cover the entire width */
 }
 
-.azima-logo {
+nav .azima-logo {
     /* Add a fixed width to the logo */
     width: 200px; /* Adjust the width as needed */
     height: auto; /* Maintain aspect ratio */
 }
 
-.account-logo {
-    width: 40px; /* Adjust the width as needed */
-    height: auto; /* Maintain aspect ratio */
 
-}
-
-li a:not(.active):hover,
-li :hover {
+ li a:not(.active):hover,
+ li :hover {
     background: #207963; /* Background color when link is hovered */
     cursor: pointer;
     border-radius: 0.5rem; /* Makes the border curvy */
@@ -61,7 +57,7 @@ li a.active {
 nav .menu {
     display: flex;
     position: absolute;
-    top: 1.4rem;
+    top: 0.75rem;
     right: 0.5rem;
     flex-direction: column;
     justify-content: space-between;
@@ -71,14 +67,18 @@ nav .menu {
     cursor: pointer;
 }
 
-/* Button where the account image is placed in navbar */
+.account-logo {
+    width: 40px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Account image button in navbar */
 .account-button {
     background-color: transparent;
     border: none;
     cursor: pointer;
     overflow: hidden;
     outline: none;
-    margin-top: 5px;
 }
 
 .dropdown {
@@ -91,21 +91,19 @@ nav .menu {
     display: inline-block;
 }
   
-/* Dropdown content container (hidden by Default) */
-.dropdown-content {
+  /* Dropdown content container (hidden by Default) */
+  .dropdown-content {
     display: none;
     position: absolute;
-    top: 100%;
-    padding: 10px 10px;
+    top: 100%; /* Position it below the account-dropdown */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Center horizontally */
+    white-space: nowrap; /* Ensures that the white space doesn't affect the width */
     background-color: #00664d;
+    padding: 10px; /* Adjust padding as needed */
     z-index: 1;
-    width: auto;
-    overflow: visible;
-    justify-content: center; /* Center the items horizontally */
-    white-space: nowrap; /* Ensures that the items remain in a row */
-    right: -30px; /* Ensures theres a gap between the right edge and the full screen */
-    padding-bottom: 10px;
-}
+    
+  }
 
 /* Show the dropdown menu on hover */
 .account-dropdown:hover .dropdown-content {
@@ -121,9 +119,10 @@ nav .menu {
     text-decoration: none;
     display: block;
     background: #00664d;
-    margin-bottom: 10px; /* Creates a gap between the dropdown links */
+    margin-bottom: 5px; /* Creates a gap between the dropdown links */
 }
- 
+
+  
 /* Change color of dropdown links on hover */
 .dropdown-content .dropdown-link:hover {
     background-color: #207963;
@@ -144,11 +143,10 @@ nav .menu {
     text-transform: uppercase;
     transition: transform 80ms ease-in;
     margin-top: 10px; /* Adjust margin-top to add space between the links */
-    /* Margin and display is what centers logout button in the dropdown-content div */
+    /* Margin and display center logout button */
     margin: auto; 
     margin-bottom: 5px;
     display: block;
-    cursor: pointer;
 }
 
 .logout-btn:active {
@@ -161,7 +159,8 @@ nav .menu {
 }
 
 /* Media query to handle when user is on smaller screen */
-@media (max-width: 50em) {
+@media (max-width: 59em) {
+
     nav .menu {
         display: flex;
     }
@@ -172,12 +171,11 @@ nav .menu {
     }
 
     nav ul {
-        display: none;
+        display: flex;
         flex-direction: column;
         width: 100%;
-        margin-bottom: 5px;
-        padding-top: 1rem; /* Add padding to the top of nav links */
-        padding-bottom: 1rem; /* Add padding to the bottom of nav links */
+        margin: 0;
+        padding: 1rem 0; /* Add padding to the top and bottom of nav links */
     }
 
     nav ul.open {
@@ -188,7 +186,6 @@ nav .menu {
         width: 100%;
         text-align: center;
         padding-bottom: 5px; /* Add padding to the bottom of nav links */
-        padding-left: 15px;
     }
 
     nav ul li a {
@@ -203,15 +200,23 @@ nav .menu {
         align-items: center;
     }
 
+    nav .azima-logo {
+        width: 200px; /* Keep the same width as defined above */
+    }
+
+    .account-dropdown {
+        padding-top: 5px; /* Add padding to the bottom of nav links */
+    }
+
     .dropdown-content {
         display: none;
         position: absolute;
         justify-content: center; /* Center the items horizontally */
         white-space: nowrap; /* Ensures that the items remain in a row */
-        transform: translateY(-80%); /* Center vertically */
+        padding: 5px; /* Adjust padding as needed */
+        transform: translateY(-90%); /* Center vertically */
         left: 100%; /*Ensures dropdown conntent is placed on the right of account-dropdown/image */
         padding-bottom: 2px; /* Add padding to the bottom of nav links */
-        padding: 5px; /* Adjust padding as needed */
     }
     
     /* Show the dropdown menu on hover */
@@ -220,7 +225,6 @@ nav .menu {
         flex-direction: row; /* Arrange items in a row */
         align-items: center; /* Center the items vertically */
         position: absolute;
-        pointer: cursor;
     }
       
     /* Dropdown links */
@@ -234,6 +238,6 @@ nav .menu {
 
     NavLink {
         position: left;
-        justify-conntent: center;
+        justify-content: center;
     }
 }
