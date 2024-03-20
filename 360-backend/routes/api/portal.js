@@ -13,16 +13,18 @@ router.post('/', (req, res) => {
         .then(portal => res.json({ msg: 'Portal added successfully' }))
         .catch(err => res.status(404).json({ error: 'Unable to add portal' }));
 });
+
 router.get('/', (req, res) => {
     Portal.find()
-        .then(images => res.json(images))
+        .then(portals => res.json(portals))
         .catch(err => 
             console.error(err));
 });
+
 router.get('/:houseID', (req, res) => {
     Portal.find( { "houseID" : req.params.houseID} )
         .then(image => res.json(image))
-        .catch(err => res.status(404).json({ noimagefound: 'No Image Found'}));
+        .catch(err => res.status(404).json({ noimagefound: 'No Portal Found'}));
 });
 
 module.exports = router;

@@ -64,6 +64,7 @@ useEffect(() => {
 
   const removeRoom = (id) => {
     setRooms(rooms.filter(room => room.id !== id));
+    counter--;
   };
 
   const updateRoom = (id, name, file) => {

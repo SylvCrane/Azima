@@ -134,14 +134,19 @@ AFRAME.registerComponent("linker", {
   },
 
   save: function () {
+    const params = new URLSearchParams(window.parent.location.search);
+    console.log(params);
+  const houseID = params.get('houseID');
+  console.log("houseID before loadImageData call: ", houseID);
     let eventData =  JSON.stringify({
       destination: this.el.getAttribute("id"),
       location: this.el.getAttribute("class"),
+      houseID: houseID,
       triangles: this.serializeTriangles(this.triangles),
       textData: this.serializeText(this.triangles),
     });
     
-    fetch('http://localhost:8082/api/portal/portal', {
+    fetch('http://localhost:8082/api/house/house/' +houseID+'/portals', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',
