@@ -15,6 +15,7 @@ app.use(express.json({ extended: true }));
 app.use(express.static(path.join(__dirname, '../frontend/azima/')));
 
 
+
 //routes
 
 const teleporterRouter = require('./routes/api/teleporter');

@@ -137,9 +137,5 @@ frontend/azima/node_modules/.bin/browserslist
 frontend/azimareact/node_modules/yargs/locales/pt.json
 /frontend/azimareact
 /frontend/azima/node_modules
-/360-backend/node_modules
-/360-backend/node_modules/anymatch
-/360-backend/node_modules
-/360-backend/node_modules/binary-extensions
-/360-backend/node_modules
-360-backend/node_modules/binary-extensions/license
+360-backend/node_modules
+360-backend/.DS_Store

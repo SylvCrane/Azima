@@ -3,6 +3,11 @@ const mongoose = require('mongoose');
 const portalSchema = new mongoose.Schema({
   destination: { type: String, required: true }, 
   location: { type: String, required: true }, 
+  houseID: {
+    type: String,
+    required: true,
+    trim: true
+},
   triangles: [{
     vertexA: { type: String, required: true },
     vertexB: { type: String, required: true },
@@ -19,6 +24,7 @@ const portalSchema = new mongoose.Schema({
     },
  
   }]
+  
 });
 
 const Portal = mongoose.model('Portal', portalSchema);

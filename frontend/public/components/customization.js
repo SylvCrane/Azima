@@ -32,8 +32,8 @@ document.addEventListener("edit", function () {
     
    
   
-        image = img.children[0];
-        asset.src = image.src.replace("http://127.0.0.1:62523", "");
+        let image = img.children[0];
+        asset.src = image.src;
         caption = img.children[1];
         asset.id = caption.innerText;
         selected = img
