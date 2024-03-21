@@ -8,6 +8,8 @@ const houseID = params.get('houseID');
 console.log("houseid: ",houseID)
   
   loadImageData(houseID);
+  loadPortalData(houseID);
+  loadWIPPortalData(houseID);
     const overlay = document.getElementById('overlay');
     
     // Ensure the initial opacity is set to '1'
@@ -62,6 +64,7 @@ console.log("houseid: ",houseID)
 
                 if (skyEl && firstImageUrl) {
                     skyEl.setAttribute('src', firstImageUrl);
+                    skyEl.setAttribute('class', data[0].images[0].name);
                     console.log('Sky image updated successfully with:', firstImageUrl);
                 }
             }
@@ -73,8 +76,8 @@ console.log("houseid: ",houseID)
 
 
 
-  function loadPortalData() {
-    fetch('http://localhost:8082/api/portal/')
+  function loadPortalData(houseId) {
+    fetch('http://localhost:8082/api/house/house/puller/' + houseId)
     .then(response => {
         if (!response.ok) {
             throw new Error(`Network response was not ok (${response.status})`);
@@ -82,10 +85,10 @@ console.log("houseid: ",houseID)
         return response.json(); // Parse the JSON of the response
     })
     .then(data => {
-      
+      console.log('House loaded successfully:', data[0].portals);
         const sceneEl = document.querySelector('a-scene');
         
-        if (sceneEl && Array.isArray(data)) { // Ensure data is an array
+        if (sceneEl && Array.isArray(data[0].portals)&&data[0].portals.length>0) { // Ensure data is an array
           data.forEach((windowData, index) => {
             let windowEntity = document.createElement("a-entity");
             windowEntity.setAttribute("loader", "");
@@ -109,4 +112,41 @@ console.log("houseid: ",houseID)
         console.error('Failed to load portal data:', error);
     });
 }
-loadPortalData();
+
+function loadWIPPortalData(houseId) {
+  fetch('http://localhost:8082/api/portal/'+houseId)
+  .then(response => {
+      if (!response.ok) {
+          throw new Error(`Network response was not ok (${response.status})`);
+      }
+      return response.json(); // Parse the JSON of the response
+  })
+  .then(data => {
+    console.log('House loaded successfully:', data[0]);
+      const sceneEl = document.querySelector('a-scene');
+      
+      if (sceneEl && Array.isArray(data)&&data.length>0) { // Ensure data is an array
+        data.forEach((windowData, index) => {
+         
+          let windowEntity = document.createElement("a-entity");
+          windowEntity.setAttribute("loader", "");
+          windowEntity.setAttribute("id", `window-${index}`);
+
+
+          sceneEl.appendChild(windowEntity);
+          
+          // Ensure the entity is part of the scene before emitting the event
+          if (sceneEl.contains(windowEntity)) {
+              // Use setTimeout to ensure the DOM has updated
+              setTimeout(() => {
+                sceneEl.emit('loadWindows', { detail: { id: `window-${index}`, data: windowData } }, false);
+                  
+              }, 100);
+          }
+        });
+      }
+  })
+  .catch(error => {
+      console.error('Failed to load portal data:', error);
+  });
+}

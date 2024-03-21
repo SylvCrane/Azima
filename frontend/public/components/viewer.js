@@ -1,3 +1,5 @@
+
+
 function toggleGallery() {
     var gallery = document.getElementById("gallery");
     var tab = document.querySelector(".tab");
@@ -51,7 +53,50 @@ function loadImages(houseId) {
             console.log('House loaded successfully:', data);
 
             const scroll  = document.querySelector('.scroll-container');
-      
+            
+
+            if (scroll && Array.isArray(data[0].images)) {
+                data[0].images.forEach((image) => {
+                  let container =  document.createElement("div");
+                  container.className = "image-container";
+                  container.id = "image-container"
+                    let imgEl = document.createElement("img");
+                    let caption = document.createElement('span');
+                    caption.className = "caption";
+                    caption.id = "caption";
+                    caption.textContent= image.name;
+                    imgEl.setAttribute("id", `${image.name}`);
+                    imgEl.setAttribute("src", image.imageURL);
+
+                  container.appendChild(imgEl);
+                  container.appendChild(caption);
+                    scroll.appendChild(container);
+                });
+
+                console.log('All images added to <viewer>.', scroll);
+
+                // Assuming the data is an array of image URLs, and you want the first one
+              
+            }
+        })
+        .catch(error => {
+            console.error('Failed to load image data:', error);
+        });
+}
+function loadImageSelector(houseId , scrollContainer) {
+    console.log("loadImageData called with houseId:", houseId);
+    fetch('http://localhost:8082/api/house/house/puller/' + houseId)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Network response was not ok (${response.status})`);
+            }
+            return response.json(); // Parse the JSON of the response
+        })
+        .then(data => {
+            console.log('House loaded successfully:', data);
+
+           let scroll = scrollContainer;
+            
 
             if (scroll && Array.isArray(data[0].images)) {
                 data[0].images.forEach((image) => {
@@ -82,11 +127,11 @@ function loadImages(houseId) {
         });
 }
 
-
 document.addEventListener('edit', function (){
 
+   
     
-
+    
 
     const gallery = document.getElementById('gallery');
     const tab = document.getElementById('tab');
@@ -95,6 +140,11 @@ document.addEventListener('edit', function (){
 
 
     const select = document.getElementById("scroll");
+    const params = new URLSearchParams(window.parent.location.search);
+    console.log(params);
+  const houseID = params.get('houseID');
+  console.log("houseID before loadImageData call: ", houseID);
+loadImageSelector(houseID, select);
 
     let isDown = false;
     let startX;
