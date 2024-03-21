@@ -1,12 +1,8 @@
 const mongoose = require('mongoose');
 
-<<<<<<< HEAD
-const markerSchema = new mongoose.Schema({
-=======
 const Schema = mongoose.Schema;
 
 const markerSchema = new Schema({
->>>>>>> Brandyn2
     houseID: {
         type: String,
         required: true,

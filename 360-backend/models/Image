@@ -11,23 +11,13 @@ const imageSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-<<<<<<< HEAD
-    imageTimeline: {
-        type: String
-    },
-    houseID: {
-=======
    houseID: {
->>>>>>> Brandyn2
         type: String,
         required: true,
         trim: true
     }
-<<<<<<< HEAD
-=======
     
     
->>>>>>> Brandyn2
 });
 
 module.exports = Image = mongoose.model('image', imageSchema);
