@@ -1,26 +1,40 @@
 const router = require('express').Router();
 const House = require('../../models/House');
+let Image = require('../../models/Image');
+const Portal = require('../../models/Portal');
 
+const multer = require('multer');
+const upload = multer(); 
+
+
+const imageRouter = require('./image');
 router.post('/house', (req, res) => {
     House.create(req.body)
         .then(house => res.json({ msg: 'House added successfully'}))
         .catch(err => res.status(400).json({error: 'Unable to add house'}));
 });
 
-/*
-    - Should include getting photo
-    - TBD whether this is done from here or the frontend, most likely the former
-*/
+router.use('/house/:houseId/images', (req, res, next) => {
+    req.houseId = req.params.houseId;
+    next();
+}, imageRouter);
+
+router.use('/house/:houseId/portals', (req, res, next) => {
+    req.houseId = req.params.houseId;
+    next();
+}, require('./portal')); 
+
+
 router.get('/house/:id', (req, res) => {
     House.findById(req.params.id, req.body)
         .then(house => res.json({msg: 'House updated successfully'}))
-        .catch(err => res.status(400).json({error: 'Unable to update house'}));
+        .catch(err => res.status(400).json({error: 'House not found'}));
 });
 
 router.get('/house/puller/:houseID', (req, res) => {
     House.find( { "houseID" : req.params.houseID} )
-        .then(house => res.json({msg: 'House loaded successfully'}))
-        .catch(err => res.status(400).json({error: 'Unable to load house'}));
+        .then(house => res.json(house))
+        .catch(err => res.status(400).json({error: 'House not found'}));
 });
 
 

@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
-const markerSchema = new mongoose.Schema({
+const Schema = mongoose.Schema;
+
+const markerSchema = new Schema({
     houseID: {
         type: String,
         required: true,

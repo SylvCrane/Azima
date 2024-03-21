@@ -1,0 +1,288 @@
+/* STYLING FOR NAVBAR CLASS */
+
+/* div for the backround of the navbar component */
+
+* 
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+header {
+    position: absolute;
+    width: 100%;
+    min-height: 66px;
+    background: #00664d;
+    padding: 0 10px; /* provides space between the left and right side of the navbar */
+    justify-content: space-between;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between; /* places content to the right */
+    align-items: center;
+    background-color: #00664d;
+    color: white;
+
+}
+
+nav .title {
+    font-size: 1.5rem;
+    margin: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+}
+
+nav ul {
+    display: flex;
+    background: #00664d
+}
+
+nav ul li {
+   list-style: none; 
+   display: flex;
+   align-items: center;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    padding: 0.5rem;
+    margin: 0 0.2rem;
+    border-radius: 0.5rem; /* Makes the border curvy */
+    display: flex; /* Make the link and button flex containers */
+    align-items: center; /* Align items vertically in the center */
+}
+
+nav ul li button {
+    background: none; /* Remove button background */
+    border: none; /* Remove button border */
+    cursor: pointer;
+    align-items: center;
+    margin: 0 0.2rem;
+    padding: 0.1px;
+}
+
+/* changes colour of link component when mouse hovers it */
+nav ul li a:not(.active):hover,
+nav u1 li button:hover {
+    border: 2px solid #207963;
+}
+
+/* hamburger menu */
+nav .menu {
+    display: flex;
+    position: absolute;
+    top: 0.75rem;
+    right: 0.5rem;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 2.25rem;
+    height: 2rem;
+}
+
+/* div that sets the colour of the active tab/link different to the rest */
+.active{
+    /*background-color: #207963; */
+    border: 2px solid #258d73;
+}
+/* Allows svg account image in NavBar to have pointer cursor when mouse hovers it */
+.account-logo {
+    svg path: hover {
+        cursor: pointer;
+    }
+    justify-content: center;
+}
+
+.logo {
+    svg path: hover {
+        cursor: pointer;
+    }
+}
+.fixed-size-svg {
+    width: 30px; /* Set the desired width */
+    height: 30px; /* Set the desired height */
+  }
+
+ @media (max-width: 59em) {
+    nav .menu {
+        display: flex;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 0.25rem;
+    }
+
+    nav ul.open {
+        display: flex;
+    }
+
+    nav ul li {
+        width: 100%;
+        text-align: center;
+    }
+
+    nav ul li a {
+        margin: 0.2rem 0.5rem;
+    }
+
+    nav .menu span {
+        height: 0.3rem;
+        width: 100%;
+        background-color: #ffffff;
+        border-radius: 0.2rem;
+        align-items: center;
+    }
+
+    .dropdown-menu {
+        display: none;
+    }
+    
+    .navbar .account-link:hover + .dropdown-menu,
+    .dropdown-menu.open {
+        display: block;
+        position: absolute;
+        Left: 4%;
+        right: 4%;
+        background-color: var(--color-black);
+        width: 10%;
+        height: 20px;
+    }
+
+    .dropdown-menu ul {
+        display: row;
+    }
+    
+    .dropdown-menu ul li {
+        width: 50px;
+        padding: 10px;
+        display: sticky;
+    }
+}
+
+.dropdown-menu {
+    display: none;
+}
+
+nav ul li:hover .dropdown-menu {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: var(--color-black);
+    width: 10%;
+    height:20px;
+}
+
+nav ul li:hover .dropdown-menu ul {
+    display: block;
+}
+
+nav ul li:hover .dropdown-menu ul li {
+    width: 50px;
+    padding: 10px;
+    display: block;
+}
+
+.dropdown-menu {
+    display: none;
+}
+
+.navbar .account-link:hover + .dropdown-menu,
+.dropdown-menu.open {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: var(--color-black);
+    width: 10%;
+    height: 20px;
+}
+
+.dropdown-menu ul {
+    display: block;
+}
+
+.dropdown-menu ul li {
+    width: 30px;
+    padding: 10px;
+    display: block;
+}
+
+
+
+
+//////////////////////////////////////
+
+.navbar {
+    display: flex;
+    position: relative;
+    top: 0;
+    flex-direction: row;
+    width: 100%;
+    background-color: #00664d;
+    align-items: center;
+    color: aliceblue;
+    font-size: 1.5em;
+    font-weight: bold;
+    transition: top 0.5s;
+    height: fit-content;
+  }
+  
+  .hide {
+    top: -3em;
+  }
+  
+  .navitem {
+    position: relative;
+    padding: 1em;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: default;
+    white-space: nowrap;
+  }
+  
+  .clickable {
+    @extend .navitem;
+    cursor: pointer;
+  }
+  
+  .clickable:hover {
+    backdrop-filter: brightness(50%);
+  }
+  
+  .dropdown_container {
+    visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: #00664d;
+    position: absolute;
+    top: 100%;
+    right: 0;
+  }
+  
+  .dropdown:hover {
+    cursor: pointer;
+    backdrop-filter: brightness(50%);
+  
+    .dropdown_container {
+      visibility: visible;
+    }
+  }
+  
+  .end {
+    margin-left: auto;
+  }
