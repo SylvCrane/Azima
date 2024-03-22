@@ -14,7 +14,7 @@ app.use(express.json({ extended: true }));
 
 app.use(express.static(path.join(__dirname, '../frontend/azima/')));
 
-
+app.get('/', (req, res) => res.send('Tester'));
 
 //routes
 
