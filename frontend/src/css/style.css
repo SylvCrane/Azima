@@ -1,141 +1,377 @@
-/* CSS style sheet for application / for all files to have for consistency */ 
-
+/* General Styles */
 @import url('https://fonts.googleapis.com/css2?family=Alatsi&family=Flow+Circular&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Ramabhadra&family=Rubik:ital,wght@0,300..900;1,300..900&family=Varela+Round&display=swap');
-/* https://fonts.google.com/selection/embed */
 
-  * {
-    /* font-family: "Konkhmer Sleokchher"; */
-    font-family: "Rubik", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: <weight>;
-    font-style: normal;
-    font-size: 14px;
-    box-sizing: border-box;
-    margin: 0;
-    
-  }
-  
-  h1 {
-    font-size: 40px;
-    font-weight: bold;
-    margin: 0;
-  }
+* {
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 14px;
+  box-sizing: border-box;
+  margin: 0;
+}
 
-  h2 {
-    font-size: 30px;
-  }
+h1, h2, h3 {
+  margin: 0;
+}
 
-  h3 {
-    font-size: 20px;
-  }
-  
-  /* for app.js and account.js file */
-  .App, 
-  .Account {
-    background-color: #fefefe;
-    height: 100vh;
-    width: 100%;
-  }
+h1 {
+  font-size: 40px;
+}
 
-  /* div styling for the pages */
-  .tours-page, 
-  .editor-page, 
-  .about-page, 
-  .home-page {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 85vh; /* Minimum height of the page to fill the viewport */
-    text-align: center;
-  }
-  
-  /* need this div so that the vg file appears */
-  .logo {
-    height: 7vmin;
-    pointer-events: none;
-  }
-  #saveButton {
-    position: fixed;     
-    bottom: 50px;       
-    right: 30px;         
-    padding: 10px 100px;  
-    border: none;        
-    background-color: #0EB49A;  
-    color: white;       
-    font-size: 16px;     
-    border-radius: 4px;  
-    cursor: pointer;    
-    outline: none;      
-  
-    font-weight: 700;
-    font-size: 25px;
-  }
-  
-  #saveButton:hover {
-    background-color: #4ABFAA;  
-  }
-  #addButton {
+h2 {
+  font-size: 30px;
+}
 
-  
-    position: fixed;     
-    bottom: 120px;       
-    right: 30px; 
-    padding: 10px 88px;  
-    border: none;        
-    background-color: #0EB49A;  
-    color: white;       
-    font-size: 16px;     
-    border-radius: 4px;  
-    cursor: pointer;    
-    outline: none;      
-  
-    font-weight: 700;
-    font-size: 25px;
-  }
-  .cancelButton {
-    
-    
-    padding: 10px 88px;  
-    border: none;        
-    background-color: #0EB49A;  
-    color: white;       
-    font-size: 16px;     
-    border-radius: 4px;  
-    cursor: pointer;    
-    outline: none;      
-
-    font-weight: 700;
-    font-size: 25px;
-  }
-  .forms-container {
-    display: flex; /* Use flexbox to layout child elements */
-    flex-wrap: wrap; /* Allow items to wrap to next line at the end of the container */
-    column-gap: 100px;
-    row-gap: 10px;/* Add some space between the forms */
-    justify-content: flex-start; /* Align forms to the start (left) horizontally */
-    align-items: flex-start; /* Align forms to the start (top) vertically */
-    padding: 20px; /* Add some padding around the container */
-    margin:100px 100px; /* Remove default margin */
-  /* Adjust margin to position the container closer to the top-left */
-    max-width: 100%; /* Adjust max-width to account for padding */
-    /* Hide overflow */
-    overflow-x: auto; 
-    flex-shrink: 0;
-  }
-  
-  .inputForm, .fileForm {
-   /* Remove default margin */
-    width: auto; /* Allow the form width to grow with content */
-    min-width: 250px; /* Set a minimum width for each form */
-  }
-  
+h3 {
+  font-size: 20px;
+}
 
 
+
+/* App and Account Base Styles */
+.App, .Account {
+  background-color: #fefefe;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden; /* Prevent scrollbars */
+}
+
+/* Page Layouts */
+.tours-page, .about-page, .home-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 85vh;
+  text-align: center;
+}
+
+/* Editor Page */
 .editor-page {
-  width: 100%; /* full width */
-  height: 100vh; /* full viewport height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
   overflow: hidden;
-  position: fixed; /* hide the overflow */
-  /* additional styles */
+}
+
+/* Forms and Buttons */
+.inputForm, .form-instance {
+  width: 0%; /* Take the full width */
+}
+
+.forms-container {
+  width: 100%; /* Container takes the full width */
+  /* Adjust based on header/footer height */
+  overflow-y: hidden; /* Scrollable if content overflows */
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center; /* Centralize the items */
+}
+
+.form-instance {
+  flex: 1 1 auto; /* Allow shrink and grow equally */
+  max-width: calc((100% / 3) - 40px); /* Three columns layout */
+}
+
+/* Fixed Buttons */
+#addButton, #saveButton {
+  position: fixed;
+  bottom: 5%; /* Adjust based on actual button size */
+  right: 30px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #0EB49A;
+  color: white;
+  font-size: 25px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 700;
+  z-index: 10;
+}
+
+#saveButton:hover, #addButton:hover {
+  background-color: #4ABFAA;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .form-instance {
+    max-width: calc(50% - 40px); /* Two columns layout */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .form-instance {
+    max-width: calc(100% - 40px); /* Single column layout */
+  }
+}
+
+/* Additional Elements */
+.logo {
+  height: 7vmin;
+  pointer-events: none;
+}
+
+.cancelButton {
+  padding: 10px 60px;
+  border: none;
+  margin-right: 100px;
+  background-color: #0EB49A;
+  color: white;
+  font-size: 25px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+
+
+
+
+
+.file-container, .file-upload-container{
+  padding: 20px;
+  border: 2px dashed #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.custom-upload, .custom-file-upload {
+  background-color: #f0f0f0;
+  padding: 10px 20px;
+  border-radius: 5px;
+  display: inline-block;
+  cursor: pointer;
+  
+}
+
+button[type="submit"] {
+  background-color: #0EB49A;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button[type="submit"]:hover {
+  background-color: #4ABFAA;
+}
+
+/* Clean-up for unused styles and ensure a consistent look across the app */
+.Save {
+  margin-top: -10%; /* This negative margin may pull elements up, potentially causing overlap. Adjust as needed. */
+}
+
+/* Layout Adjustments for Centralizing the Grid and Removing Scrollbars */
+:root {
+  --button-bottom-position: 20px; /* Adjust as needed for positioning buttons */
+}
+
+/* Ensure the editor page does not create horizontal scrollbars */
+.editor-page {
+  padding-left: 20px; /* Add padding to the left for centering the grid */
+}
+
+/* Adjust form-instance for consistent grid layout */
+.form-instance {
+  /* This assumes 3 columns on desktop, which will wrap into rows as you add more */
+  flex-basis: calc((100% / 3) - 40px); /* Three columns with gaps */
+  max-width: calc((100% / 3) - 40px); /* Prevent flex items from growing too large */
+}
+
+/* Clean up responsive styles for better mobile experience */
+@media screen and (max-width: 768px) {
+  .form-instance {
+    flex-basis: calc((100% / 2) - 40px); /* Two columns for smaller screens */
+    max-width: calc((100% / 2) - 40px);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .form-instance {
+    flex-basis: 100%; /* Single column for mobile */
+    max-width: 100%;
+  }
+}
+
+/* Container for the house name, which should not scroll */
+.inputForm {
+  width: 100%;
+ /* Add margin for spacing between the house name and the grid below */
+}
+
+/* Container that will hold the room forms */
+.forms-container {
+  width: 100%;
+  max-height: calc(100vh - 160px); /* Height should account for header, house name form, and buttons */
+  overflow-y: auto; /* Only this container will scroll if content overflows */
+  padding: 0 20px; /* Padding on the sides */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Space between items */
+  justify-content: center; /* Center items horizontally */
+}
+
+/* Individual room forms within the container */
+.form-instance {
+  flex: 1 1 auto; /* Allow forms to grow and shrink as needed */
+  min-width: 250px; /* Minimum width so forms don't squish too much */
+ gap: 100px; /* Maximum width for 3 columns, accounting for the gap */
+}
+
+/* Styling for buttons that should be fixed to the viewport */
+#addButton, #saveButton {
+  position: fixed;
+  bottom: 5%;
+  right: 30px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #0EB49A;
+  color: white;
+  font-size: 25px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 700;
+  z-index: 10; /* Ensure they are above other elements */
+}
+
+#saveButton:hover, #addButton:hover {
+  background-color: #4ABFAA;
+}
+
+/* Responsive adjustments for smaller screens */
+@media screen and (max-width: 768px) {
+  .form-instance {
+    max-width: calc(50% - 40px); /* Two column layout */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .form-instance {
+    max-width: 100%; /* One column layout */
+    min-width: 100%; /* Ensure it spans the full container width */
+  }
+}
+
+
+.Save {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+
+
+.inputForm {
+  flex: 3; /* Allocate more space for the form */
+  display: flex;
+  
+  justify-content: flex-start; /* Align items to the start (left) */
+  gap: 10px; /* Space between inputs */
+}
+
+.form-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 20px;
+  width: 40%;
+
+}
+
+.form-group > div {
+  width: calc(50% - 10px); /* Adjust width for two inputs per row, accounting for gap */
+}
+
+.file-container {
+  flex: 2; /* Allocate relatively more space for the file container */
+  padding: 20px;
+  border: 2px dashed #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 10px; /* Space between elements in the file container */
+}
+
+.custom-upload {
+  cursor: pointer;
+  background-color: #f0f0f0;
+  padding: 10px 20px;
+  border-radius: 5px;
+  display: inline-block; /* Make the label inline for better control */
+}
+button[type="submit"] {
+  background-color: #0A7A68;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button[type="submit"]:hover {
+  background-color: #0EB49A;  
+}
+
+.Save {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Align to the top */
+  padding: 20px;
+  margin-top: 20px; /* Add margin to the top if needed */
+}
+
+.inputForm {
+  display: flex;
+  justify-content: flex-start; /* Align items to the start (left) */
+  gap: 10px; /* Space between inputs */
+  width: 100%; /* Ensure the form takes the full width */
+}
+
+.form-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 20px;
+  width: 40%; /* Ensure the form group takes the full width */
+}
+
+.form-group > div {
+  flex-basis: calc(50% - 10px); /* Maintain the two-column layout */
+  display: flex;
+  flex-direction: column; /* Stack the span and input vertically */
+}
+
+.file-container {
+  padding: 20px;
+  border: 2px dashed #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 10px; /* Space between elements in the file container */
+  width: 100%; /* Ensure the file container takes the full width */
+}
+
+/* ...rest of your CSS... */
+
+.forms-container {
+  width: 100%; /* Container takes the full width */
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center children horizontally */
+  gap: 20px; /* Space between form and button */
 }

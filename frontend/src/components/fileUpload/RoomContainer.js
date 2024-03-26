@@ -111,7 +111,7 @@ useEffect(() => {
             onChange={handleHouseNameChange}
           />
         </form>
-        <button onClick={addRoom} id="addButton">Add Room</button>
+       
         <div className="forms-container">
           {rooms.map(room => (
             <RoomForm
@@ -120,8 +120,10 @@ useEffect(() => {
               onUpdate={(name, file) => updateRoom(room.id, name, file)}
             />
           ))}
+           <button onClick={addRoom} id="addButton">Add Room</button>
+           <button onClick={handleSave} id="saveButton">Save All</button>
         </div>
-        <button onClick={handleSave} id="saveButton">Save All</button>
+       
      
       </div>
     );

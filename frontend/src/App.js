@@ -10,7 +10,8 @@ import { SignUp } from "./components/pages/accounts/SignUp";
 import { Login } from "./components/pages/accounts/Login";
 import { Home } from "./components/pages/Home";
 import { UserProvider } from "./components/UserState";
-import { AFrame } from "./components/pages/AFrame"; // Import the AFrame component
+import { AFrame } from "./components/pages/AFrame"; 
+import { Save } from "./components/pages/Save";
 
 function App() {
   const [email, setEmail] = useState(""); // State to hold authenticated user's email
@@ -43,6 +44,10 @@ function App() {
           <Route
             path="/editor/aframe"
             element={<AFrame />} 
+          />
+          <Route
+            path="/editor/save"
+            element={<Save />} 
           />
         </Routes>
       </UserProvider>
