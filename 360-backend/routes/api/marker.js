@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const marker = require('../../models/marker');
+const marker = require('../../models/Marker');
 
 router.post('/marker', (req, res) => {
     Marker.create(req.body)
