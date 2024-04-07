@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../../css/style.css";
 import "../../../css/accounts.css";
 import { useNavigate } from 'react-router-dom';
+import { useUser } from "../../UserState";
 
 export const SignUp = (props) => {
     
@@ -9,9 +10,10 @@ export const SignUp = (props) => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [company, setCompany] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [signUpEmail, setSignUpEmail] = useState("");
+    const [signUpPassword, setSignUpPassword] = useState("");
     const [alertMessage, setAlertMessage] = useState(""); // Variable that stores message at the bottom of page depending on whether user input.
+    const [user, setUser] = useUser();
 
     // Variables to store pattern regex for password and email (dont add semicolon)
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d!@#$%^&*()\-_=+{};:,<.>`~]{8,}$/
@@ -23,16 +25,16 @@ export const SignUp = (props) => {
     // Function that handles what happens signup button is clicked.
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevents page from reloading on empty 
-        console.log(firstName, lastName, company, email, password);
+        console.log(firstName, lastName, company, signUpEmail, signUpPassword);
 
         let incorrectMessage = "";
 
         // First check the pattern for password and email is correct before making API call 
-        if (!emailRegex.test(email)) {
+        if (!emailRegex.test(signUpEmail)) {
             incorrectMessage += "Invalid email address. \n" ;
         }
 
-        if (!passwordRegex.test(password)) {
+        if (!passwordRegex.test(signUpPassword)) {
             incorrectMessage += "Password must contain a minimum of eight characters, at least one uppercase letter and one number.";
         } 
 
@@ -51,29 +53,39 @@ export const SignUp = (props) => {
                 "Access-Control-Allow-Origin": "*",
             },
             body: JSON.stringify({
-                firstName,
-                lastName,
-                company,
-                email,
-                password,
+                firstName: firstName,
+                lastName: lastName,
+                company: company,
+                email: signUpEmail,
+                password: signUpPassword,
             }),
         })
             
         .then((res) => res.json())
         .then((data) => {
-        console.log(data, "userSignup");
-        
-        
-        if (data.status === "ok") {
-            setAlertMessage("You are now registered with Azima!");
-            navigate('/editor'); // Will redirect user to the editor page to start creating their tours. 
+            console.log(data, "userSignup");
+            
+            if (data.status === "ok") {
+                setAlertMessage("You are now registered with Azima!");
+                setUser ({
+                    isAuthenticated: true,
+                    email: data.email, // Refer to email object directly (since the email is being registered it should not be in mongodb yet)
+                });
+                console.log("user registration authenticated");
 
-        } else {
-            setAlertMessage("Email is already in use. Please login instead.");
-        }
+            } else {
+                setAlertMessage("Email is already in use. Please login instead.");
+            }
 
         });  
     }
+
+    // Navigates to editor page once sign up is authenticated
+    useEffect (() => {
+        if (user.isAuthenticated) {
+            navigate("/editor");
+        }
+    });
 
     return (
 
@@ -84,8 +96,8 @@ export const SignUp = (props) => {
                 <input value={firstName} name="firstName" onChange={(e) => setFirstName(e.target.value)} id="firstName" placeholder="First Name *" required /><br/>
                 <input value={lastName} name="lastName" onChange={(e) => setLastName(e.target.value)} id="lastName" placeholder="Last Name *" required/><br/>
                 <input value={company} name="company" onChange={(e) => setCompany(e.target.value)} id="company" placeholder="Company" autoComplete="off"/><br/>
-                <input value={email} onChange={(e) => setEmail(e.target.value)} id="loginEmail" placeholder="email@gmail.com *" required/><br/>
-                <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" id="loginPassword" placeholder="******** *" required/><br/>
+                <input value={signUpEmail} onChange={(e) => setSignUpEmail(e.target.value)} id="loginEmail" placeholder="email@gmail.com *" required/><br/>
+                <input value={signUpPassword} onChange={(e) => setSignUpPassword(e.target.value)} type="password" id="loginPassword" placeholder="******** *" required/><br/>
                 <br/>
                 <button type="submit">Sign up</button>
                 <div className= "required-text"> <br/> (* Required fields must be filled in to create an account)<br/> </div>
@@ -94,10 +106,9 @@ export const SignUp = (props) => {
                     <div className="alert">{ alertMessage }</div>
                 )} <br/>
 
-                <button className="link-btn" type ="button" onClick={() => props.onFormSwitch('login-form')}>Already have an account? Sign in here.</button><br/><br/>
+                <button className="link-btn" type ="button" onClick={() => navigate('/account/login')}>Already have an account? Sign in here.</button><br/><br/>
             </form>
             <br/>
         </div>
-    
     )
 }

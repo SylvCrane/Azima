@@ -48,6 +48,7 @@ button[type=submit] {
   color: #ffffff;
   font-size: 12px;
   font-weight: bold;
+  cursor: pointer;
   padding: 15px 45px;
   letter-spacing: 1px;
   text-transform: uppercase;
