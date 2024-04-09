@@ -165,6 +165,10 @@ this.el.removeAttribute('toggle-thickness');
 
   },
   createAndInsertForms: function() {
+   
+   let saveContainer = document.getElementById('saveContainer');
+   saveContainer.style.display = 'none';
+    
     let formContainer = document.getElementById('formContainer'); // Ensure you have this container in your HTML
     if (!formContainer) {
         console.error('Form container not found');
@@ -212,6 +216,9 @@ this.el.removeAttribute('toggle-thickness');
       </div>
     </div>
   </div>
+  <div class="toggle-text-container">
+  <label><input type="checkbox" id="toggleText" checked>Show text</label>
+</div>
   <button id="cancelButton">Cancel</button>
   <button id="saveButton">Save</button>
     `;

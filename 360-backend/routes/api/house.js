@@ -1,17 +1,17 @@
-const router = require('express').Router();
+
+const { Router } = require('express');
 const House = require('../../models/House');
-let Image = require('../../models/Image');
-const Portal = require('../../models/Portal');
-
 const multer = require('multer');
-const upload = multer(); 
-
-
 const imageRouter = require('./image');
+const portalRouter = require('./portal');
+
+const router = Router();
+const upload = multer();
+
 router.post('/house', (req, res) => {
     House.create(req.body)
-        .then(house => res.json({ msg: 'House added successfully'}))
-        .catch(err => res.status(400).json({error: 'Unable to add house'}));
+        .then(() => res.json({ msg: 'House added successfully' }))
+        .catch(() => res.status(400).json({ error: 'Unable to add house' }));
 });
 
 router.use('/house/:houseId/images', (req, res, next) => {
@@ -22,26 +22,24 @@ router.use('/house/:houseId/images', (req, res, next) => {
 router.use('/house/:houseId/portals', (req, res, next) => {
     req.houseId = req.params.houseId;
     next();
-}, require('./portal')); 
-
+}, portalRouter);
 
 router.get('/house/:id', (req, res) => {
     House.findById(req.params.id, req.body)
-        .then(house => res.json({msg: 'House updated successfully'}))
-        .catch(err => res.status(400).json({error: 'House not found'}));
+        .then(() => res.json({ msg: 'House updated successfully' }))
+        .catch(() => res.status(400).json({ error: 'House not found' }));
 });
 
 router.get('/house/puller/:houseID', (req, res) => {
-    House.find( { "houseID" : req.params.houseID} )
+    House.find({ "houseID": req.params.houseID })
         .then(house => res.json(house))
-        .catch(err => res.status(400).json({error: 'House not found'}));
+        .catch(() => res.status(400).json({ error: 'House not found' }));
 });
-
 
 router.put('/house/:id', (req, res) => {
     House.findByIdAndUpdate(req.params.id, req.body)
-        .then(house => res.json({msg: 'House updated successfully'}))
-        .catch(err => res.status(400).json({error: 'Unable to update house'}));
+        .then(() => res.json({ msg: 'House updated successfully' }))
+        .catch(() => res.status(400).json({ error: 'Unable to update house' }));
 });
 
 /*
@@ -51,8 +49,40 @@ Notes:
 */
 router.delete('/house/:id', (req, res) => {
     House.findByIdAndRemove(req.params.id, req.body)
-        .then(house => res.json({msg: 'House successfully deleted'}))
-        .catch(err => res.status(404).json({error: 'No such house'}));
-})
+        .then(() => res.json({ msg: 'House successfully deleted' }))
+        .catch(() => res.status(404).json({ error: 'No such house' }));
+});
+
+router.put('/house/portals/:houseID', (req, res) => {
+    const { houseID } = req.params;
+    const portalData = req.body;
+
+    // Ensure you're querying by the correct field (e.g., 'houseID' if that's what your model uses)
+    House.findOneAndUpdate({ houseID }, { $push: { portals: { $each: portalData } } }, { new: true })
+        .then(house => {
+            if (!house) {
+                return res.status(404).json({ error: 'House not found' });
+            }
+            res.json({ msg: 'Portals added/updated successfully', house });
+        })
+        .catch(err => res.status(400).json({ error: 'Unable to update house with portals', details: err.message }));
+});
+router.put('/house/update/:houseID', (req, res) => {
+    const { houseID } = req.params;
+    const updateData = req.body;
+
+    // Remove the portals field from updateData if it exists to ensure it's not updated here
+    delete updateData.portals;
+
+    // Update the house document with the provided data
+    House.findOneAndUpdate({ houseID }, updateData, { new: true })
+        .then(house => {
+            if (!house) {
+                return res.status(404).json({ error: 'House not found' });
+            }
+            res.json({ msg: 'House updated successfully', house });
+        })
+        .catch(err => res.status(400).json({ error: 'Unable to update house', details: err.message }));
+});
 
 module.exports = router;

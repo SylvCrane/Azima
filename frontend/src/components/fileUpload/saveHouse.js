@@ -17,6 +17,7 @@ export async function saveHouse( houseID, imageReferences) {
         images: imageReferences, // Map your room data to your image schema
         // Add an empty array for portals
         portals: [],
+        thumbnail: imageReferences[0], // Assuming the first image is the thumbnail
         // Continue with other fields and their default or specified values
         bathrooms: 0, // Example default values
         livingAreas: 0,

@@ -11,6 +11,7 @@ const houseSchema = new Schema({
     },
     portals: [portalSchema],
     images: [imageSchema],
+    thumbnail: String, 
     rooms: {
         type: Number,
         required: true,
@@ -37,6 +38,11 @@ const houseSchema = new Schema({
         trim: true
     },
     dateListed: {
+        type: Date,
+        required: true,
+        trim: true
+    },
+    dateAvailable: {
         type: Date,
         required: true,
         trim: true
