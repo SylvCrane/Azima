@@ -27,7 +27,7 @@ app.use(express.json({extended: false})); // Allows Express to read data sent us
 
 
 // Pass routes into app variable. 
-app.use('api/login', loginRouter);
+app.use('/api/login', loginRouter);
 app.use('/api/signup', signupRouter);
 app.use('/api/teleporter', teleporterRouter);
 app.use('/api/marker', markerRouter);
