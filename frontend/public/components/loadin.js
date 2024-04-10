@@ -1,9 +1,7 @@
-
 document.addEventListener("DOMContentLoaded", function() {
 
-
-  const params = new URLSearchParams(window.parent.location.search);
-  console.log(params);
+const params = new URLSearchParams(window.parent.location.search);
+console.log(params);
 const houseID = params.get('houseID');
 console.log("houseid: ",houseID)
   
@@ -85,11 +83,12 @@ console.log("houseid: ",houseID)
         return response.json(); // Parse the JSON of the response
     })
     .then(data => {
-      console.log('House loaded successfully:', data[0].portals);
+      console.log('Portals:', data[0].portals);
         const sceneEl = document.querySelector('a-scene');
         
         if (sceneEl && Array.isArray(data[0].portals)&&data[0].portals.length>0) { // Ensure data is an array
-          data.forEach((windowData, index) => {
+          data[0].portals.forEach((windowData, index) => {
+            console.log(windowData)
             let windowEntity = document.createElement("a-entity");
             windowEntity.setAttribute("loader", "");
             windowEntity.setAttribute("id", `window-${index}`);

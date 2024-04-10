@@ -1,6 +1,3 @@
-
-
-
 #aframe-container {
   width: 100vw;
   height: 100vh;
@@ -10,6 +7,7 @@
   padding:0;
  
 }
+
 body{
   background-color: #2b2b2b;
   color: white; 
@@ -19,6 +17,7 @@ body{
   overflow:hidden;
   display: flex;
 }
+
 #aframe-container-add {
   width: 75vw;
   height: 75vh;
@@ -26,6 +25,7 @@ body{
  
  
 }
+
 #overlay {
   position: fixed;
 
@@ -51,7 +51,7 @@ body{
 }
 #saveButton {
   position: fixed;     
-  bottom: 50px;       
+  bottom: 3%;       
   right: 30px;         
   padding: 10px 100px;  
   border: none;        
@@ -84,7 +84,7 @@ body{
   font-family: Mazzard; 
   font-weight: 700;
   font-size: 25px;
-  bottom: 13%;       
+  bottom: 10%;       
   right: 30px;  
 
 }
@@ -254,6 +254,7 @@ input[type="text"]{
   
    /* Ensures it appears above most other content */
 }
+
 .color-picker h1{
   margin-bottom: 5px;
 }
@@ -266,7 +267,31 @@ input[type="text"]{
   visibility: hidden;
   position: absolute;
 }
+.toggle-text-container {
+  position: fixed; /* or `absolute` depending on your layout */
+  bottom: 17%; /* Adjust the value to place it under the scroll gallery */
+  right: 11%; /* Align with the right edge of the select-gallery */
+  transform: translateX(50%); /* Center align under the gallery */
+  z-index: 101; /* Ensure it's above the gallery and other content */
+  background-color: #2b2b2b; /* Match gallery background */
+  padding: 10px;
+  border-radius: 4px; /* Optional: Adds rounded corners */
+  color: white;
+  font-family: Mazzard; 
+  font-weight: 700;/* Text color */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3); /* Optional: Adds subtle shadow for depth */
+}
 
+/* Improve the look of the label and checkbox */
+.toggle-text-container label {
+  cursor: pointer; /* Indicates the label is clickable */
+  display: inline-flex; /* Aligns the checkbox and label text */
+  align-items: center; /* Centers items vertically */
+}
+
+.toggle-text-container input[type="checkbox"] {
+  margin-right: 5px; /* Space between the checkbox and label text */
+}
 .color-display {
   display: block;
   width: 50px;
@@ -321,7 +346,7 @@ input[type="text"]{
 
 
 .select-gallery {
-  max-width: 35vh;
+  max-width: 34vh;
   background-color: #2b2b2b;
   padding: 10px 10px;
   color: white;
@@ -391,4 +416,25 @@ width:100%;
 /* Optional: Add hover effect */
 .close-gallery:hover {
   color:#ffffff /* Slightly lighter than gallery background */
+}
+#saveHouseBtn {
+  position: absolute;
+  top: 20px; /* Adjust as needed */
+  right: 20px; /* Adjust as needed */
+  z-index: 1000; /* Ensure it's above the A-frame scene */
+  border: none;        
+  background-color: #0EB49A;  
+  color: white;       
+  font-size: 16px;     
+  border-radius: 4px;  
+  cursor: pointer;    
+  outline: none;      
+  font-family: Mazzard; 
+  font-weight: 700;
+  font-size: 25px;
+  padding: 15px 48px; 
+  /* Adjust as needed */
+}
+#saveHouseBtn:hover {
+  background-color:#4ABFAA;
 }
