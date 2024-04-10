@@ -4,7 +4,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs"); // using bycryptjs to encrypt passwords
 const JWT = require('jsonwebtoken') // using jsonwebtoken library
 const JWT_SECRET = "sdygfhf25433"; // secret key used to verify the json webtokens
-const user = require("../models/UserDetails"); // import user details model
+const user = require("../../models/UserDetails"); // import user details model
 
 router.post("/", async(req,res) => {
     const {email, password} = req.body;
