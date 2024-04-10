@@ -5,7 +5,6 @@ import { PopulatedNavBar } from "./components/navbar/PopulatedNavBar";
 import { Tours } from "./components/pages/Tours";
 import { Editor } from "./components/pages/Editor";
 import { About } from "./components/pages/About";
-//import { Account } from "./components/pages/accounts/Account";
 import { SignUp } from "./components/pages/accounts/SignUp";
 import { Login } from "./components/pages/accounts/Login";
 import { User } from "./components/pages/accounts/User";

@@ -30,7 +30,7 @@ export const Login = (props) => {
         }
 
         // Fetch api once validation of user input is successful 
-        fetch("http://localhost:5000/login", {
+        fetch("http://localhost:8082/api/login", {
             method: "POST",
             crossDomain: true, 
             headers: {
@@ -78,7 +78,8 @@ export const Login = (props) => {
     return (
         <div className="login-container">
             <form className="login-form" onSubmit={handleSubmit}>
-                <h1>SIGN IN</h1><br/>
+                <h1>Welcome back</h1>
+                <p>Please enter your details to sign in</p><br/>
                 <input value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} id="loginEmail" placeholder="email@gmail.com" required/><br/>
                 <input value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} type="password" id="loginPassword" placeholder="********" required/>
                 <br/>

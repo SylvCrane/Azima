@@ -4,7 +4,6 @@
 /* https://fonts.google.com/selection/embed */
 
   * {
-    /* font-family: "Konkhmer Sleokchher"; */
     font-family: "Rubik", sans-serif;
     font-optical-sizing: auto;
     font-weight: <weight>;
@@ -32,6 +31,28 @@
   h4 {
     font-size: 14px;
   }
+
+  input {
+    background-color: #ccc;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    border-radius: 10px;
+    width: 300px;
+  }
+  
+  button[type=submit] {
+    border-radius: 30px;
+    border: 1px solid #004d39;
+    background-color: #00805e;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 12px 30px;
+    width: 150px;
+    text-transform: uppercase;
+    
+  }
   
   /* for app.js and account.js file */
   .App, 
@@ -57,7 +78,7 @@
   
 
   .home-page {
-    display: flex;
+    display: center;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -66,7 +87,7 @@
   }
 
   .home-page-nav {
-    height: 80%;
+    height: 450px;
     width: 100%;
     position: center;
     text-align: center;
@@ -102,7 +123,7 @@
     }
   }
 
-  @media (max-width: 59em) {
+  @media (min-width: 50em) and (max-width: 59em) {
 
     .tours-page, 
     .editor-page, 
@@ -114,6 +135,6 @@
     .home-page-nav {
       padding-left: 50px; /* Add padding to the left */
       padding-right: 50px; /* Add padding to the right */
-      height: 90%;
+      height: 450px;
     }
   }

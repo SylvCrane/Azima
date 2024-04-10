@@ -1,13 +1,13 @@
 import React from "react";
 import "../../css/style.css"; // NOTE: put 2 . ("..") since this file is in it's own folder too. 
 import { useNavigate } from "react-router-dom";
+import MetaQuest from '../../assets/MetaQuest.png';
 
 export const Home = () => {
 
     const redirect = useNavigate();
 
     return (
-    
         <>
         <div className="home-page-nav">
             <h1>Create, Edit and Share <br/>
@@ -20,16 +20,10 @@ export const Home = () => {
             <button className="join-btn" onClick={() => redirect('/account/signup')}>Join Now! </button>
         </div>
 
-        {/*<div className="home-page ">
-            Easily create, edit and share virtual tours with Azima,<br/> 
-            the leading software for producing immersive 360° tours. Ideal for real estate, 
-            architecture construction, education and more!
-            <br/><br/>
-            
-            <button className="join-btn" onClick={() => redirect('/account/signup')}>Join Now! </button>
+        <div className="home-page ">
+            <img src={MetaQuest} alt="Meta Quest"  style={{ width: "800px", height: "auto", marginTop: "50px"}}></img>
         
-        </div>*/}
+        </div>
         </>
-        
     );
 }
