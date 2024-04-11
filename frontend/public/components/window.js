@@ -1,3 +1,5 @@
+import AFRAME from 'aframe';
+import * as THREE from 'three';
 AFRAME.registerComponent("window", {
   init: function () {
     console.log("init function called");
@@ -24,35 +26,67 @@ AFRAME.registerComponent("window", {
       this.hoverEnd.bind(this)
     );
 
-    this.el.addEventListener("click", () => {
-      let id = this.el.getAttribute("id");
-      console.log(id);
-      let className = this.el.getAttribute("class");
-      console.log(className);
-      let current = document.getElementsByClassName(className);
-      console.log(current);
-      let next = document.getElementsByClassName(id);
-      console.log(next);
-      let sky = document.getElementById(id);
 
-      if (current) {
-        for (let c of current) {
-          if (c.tagName.toLowerCase() == "a-entity") {
-            this.push(c);
-          } else {
-          }
-        }
-      }
-      if (next) {
-        for (let n of next) {
-          if (n.tagName.toLowerCase() == "a-entity") {
-            this.pull(n);
-          }
-        }
-      }
-      console.log(sky.id);
-      this.load(sky.id);
+    this.el.addEventListener("click", () => {
+      let overlay = document.getElementById('overlay');
+    
+      // Start fade-in effect
+      overlay.style.transition = 'opacity 0.5s';
+      overlay.style.opacity = '1';
+      overlay.style.zIndex = '1000'; 
+    
+      // Instead of using setTimeout to wait for the fade-in effect, directly proceed if not needed
+      // If fade-in needs completion, the transitionend event can be used similarly
+    
+      // Trigger scene change after fade-in (immediately in this case, adjust as needed)
+      setTimeout(() => {
+        let id = this.el.getAttribute("id");
+        console.log(id);
+        let className = this.el.getAttribute("class");
+        console.log(className);
+        let current = document.getElementsByClassName(className);
+                console.log(current);
+                let next = document.getElementsByClassName(id);
+                console.log(next);
+                let sky = document.getElementById(id);
+        
+                if (current) {
+                    for (let c of current) {
+                        if (c.tagName.toLowerCase() === "a-entity") {
+                            this.push(c);
+                        }
+                    }
+                }
+                if (next) {
+                    for (let n of next) {
+                        if (n.tagName.toLowerCase() === "a-entity") {
+                            this.pull(n);
+                        }
+                    }
+                }
+                console.log(sky.id);
+                this.load(sky.id);
+        // For demonstration, focusing on the fade-out part
+    
+        // Start fade-out
+        overlay.style.transition = 'opacity 1s'; // Longer duration for fade-out
+        overlay.style.opacity = '0';
+    
+        // Use the transitionend event to detect when the fade-out completes
+        overlay.addEventListener('transitionend', () => {
+          overlay.style.zIndex = '-1'; // Reset overlay after fade-out
+          
+          // Now that fade-out is complete, finalize scene change
+          console.log("Fade-out complete. Finalizing scene change.");
+    
+          // Place any code here that should execute after the fade-out is completely finished
+          // For example, updating the scene, loading new content, etc.
+    
+        }, { once: true });
+    
+      }, 500); // This delay allows for any necessary preparations before starting the fade-out
     });
+
 
     document.addEventListener("move", (e) => {
       let sky = document.querySelector("a-sky");
@@ -93,11 +127,77 @@ AFRAME.registerComponent("window", {
   },
 
   hoverEnd: function (e) {
-  
+    let clearedEl = e.detail.clearedEls[0];
+
+    if (clearedEl.parentNode === this.el) {
+      // Change from parent check to this.el
+      let triangles = this.el.querySelectorAll("a-triangle"); // Get triangles from this.el
+
+      triangles.forEach((triangle) => {
+        triangle.setAttribute("material", "opacity: 0.3");
+      });
+
+      // Clear the hover timeout and hide the delete button...
+      if (this.hoverTimeout) {
+        clearTimeout(this.hoverTimeout);
+        this.hoverTimeout = null;
+        // Hide the delete button...
+      }
+    }
+    this.delete.setAttribute("visible", false);
   },
 
   hover: function (e) {
-    
+    let intersectedEl = e.detail.els[0];
+    console.log(e.detail.els[0].parentNode);
+
+    if (intersectedEl.parentNode === this.el) {
+      // Change from parent check to this.el
+      let triangles = this.el.querySelectorAll("a-triangle"); // Get triangles from this.el
+
+      triangles.forEach((triangle) => {
+        triangle.setAttribute("material", "opacity: 0.7");
+      }); // Change from parent check to this.el
+ 
+      this.hoverTimeout = setTimeout(() => {
+        let camera = this.el.sceneEl.querySelector("[camera]");
+        let direction = new THREE.Vector3();
+        camera.object3D.getWorldDirection(direction);
+        direction.negate();
+        let distance = 3;
+        direction.multiplyScalar(distance);
+
+        let camPos = camera.getAttribute("position");
+        let camRot = camera.getAttribute("rotation").y;
+
+        function calculateButtonPosition(offsetAngle) {
+          let angle = THREE.MathUtils.degToRad(camRot + offsetAngle);
+          const offset = 0.5;
+          const offsetX = Math.sin(angle) * offset;
+          const offsetZ = Math.cos(angle) * offset;
+
+          return {
+            x: camPos.x + direction.x + offsetX,
+            y: camPos.y + direction.y,
+            z: camPos.z + direction.z + offsetZ,
+          };
+        }
+
+        let buttonPos1 = calculateButtonPosition(50); // Offset by 30 degrees
+        // Offset by -30 degrees
+
+        this.delete.setAttribute(
+          "position",
+          `${buttonPos1.x} ${buttonPos1.y} ${buttonPos1.z}`
+        );
+
+        this.delete.setAttribute("rotation", { x: 0, y: camRot, z: 0 });
+
+        this.delete.setAttribute("visible", true);
+
+        // You can add your code to show the delete button here
+      }, 3000);
+    }
   },
 
   calcOffset: function (target) {
@@ -142,6 +242,7 @@ AFRAME.registerComponent("window", {
       `${midpoint.x} ${midpoint.y} ${midpoint.z}`
     );
     console.log("pushed" ,target, target.getAttribute("position"));
+    
   },
   pull: function (target) {
     console.log("pull" ,target, target.getAttribute("position"));
@@ -151,11 +252,19 @@ AFRAME.registerComponent("window", {
   },
   load: function (id) {
     console.log("ID:", id); // Log the value of id
-    
-    let sky = document.querySelector("a-sky");
-    console.log("Class before:", sky.className); // Log the class attribute before updating
-    sky.setAttribute("src", "#"+id);
-    sky.setAttribute("class", id);
-    console.log("Class after:", sky.className);
-  },
+    let assets = document.querySelector('a-assets');
+    let images = assets.querySelectorAll('img');
+
+    // Now you have a NodeList of all the image elements inside <a-assets>
+    // You can iterate over this NodeList like an array
+    images.forEach((img) => {
+      if(img.id===id){
+        let sky = document.querySelector("a-sky");
+        console.log("Class before:", sky.className); // Log the class attribute before updating
+        sky.setAttribute("src", img.src);
+        sky.setAttribute("class", img.id);
+        console.log("Class after:", sky.className);
+      }
+    });
+  }
 });

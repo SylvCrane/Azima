@@ -1,3 +1,5 @@
+import AFRAME from 'aframe';
+import * as THREE from 'three';
 AFRAME.registerComponent('toggle-thickness', {
   init: function() {
       this.isThick = false;

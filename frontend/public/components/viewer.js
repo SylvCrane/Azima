@@ -226,20 +226,34 @@ document.addEventListener('DOMContentLoaded', function() {
 
   
     gallery.addEventListener('click', (e) => {
-     let img = e.target;
-     
-     let  src = img.src;
-      
-      console.log(src);
-      
-let sky = document.querySelector('a-sky');
-    if(e.target.src){
-        sky.setAttribute('src', src);
-        sky.setAttribute('class',img.id)
-        let detail = { id: img.id };
-        document.dispatchEvent(new CustomEvent("move", { detail: detail }));
-    console.log("move sent");
-    }
+        let img = e.target;
+        let src = img.src;
+        let overlay = document.getElementById('overlay'); // Assuming you have an overlay element
+    
+        // Start fade-in effect for the overlay
+        overlay.style.transition = 'opacity 0.5s ease-in-out';
+        overlay.style.opacity = '1';
+        overlay.style.zIndex = '1000';
+    
+        // Wait for the fade-in to complete
+        setTimeout(() => {
+            let sky = document.querySelector('a-sky');
+            if (img.src) {
+                sky.setAttribute('src', src);
+                sky.setAttribute('class', img.id);
+                let detail = { id: img.id };
+                document.dispatchEvent(new CustomEvent("move", { detail: detail }));
+                console.log("move sent");
+            }
+    
+            // Start fade-out after setting the new sky image
+            overlay.style.opacity = '0';
+            // Listen for the end of the fade-out transition
+            overlay.addEventListener('transitionend', () => {
+                overlay.style.zIndex = '-1'; // Ensure the overlay goes back to being non-interactive
+            }, { once: true }); // This ensures the event listener is removed after it fires once
+    
+        }, 500); // Adjust this timeout based on how long you want the transition to take
     });
     gallery.addEventListener('mousedown', (e) => {
         isDown = true;

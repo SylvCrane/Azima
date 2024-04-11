@@ -35,6 +35,7 @@ export async function saveHouse( houseID, imageReferences) {
         clearImages();
         return response.data.msg;
     }
+    
     async function clearImages() {
         try {
           const response = await axios.delete(`http://localhost:8082/api/image`);
