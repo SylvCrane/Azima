@@ -1,6 +1,5 @@
 // fovZoomControl.js
-import AFRAME from 'aframe';
-import * as THREE from 'three';
+
 AFRAME.registerComponent("fov-zoom-control", {
   schema: {
     zoomStep: { default: 1 }, // How much to adjust the fov for each "zoom" step

@@ -14,7 +14,7 @@ AFRAME.registerComponent("linker", {
     let window = document.createElement("a-entity");
     window.setAttribute("loader", "");
     this.el.sceneEl.appendChild(window);
-   this.color;
+    this.color;
 
     this.identifier = null;
     this.hoverTimeout = null;

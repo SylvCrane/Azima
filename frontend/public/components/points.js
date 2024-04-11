@@ -1,5 +1,4 @@
-import AFRAME from 'aframe';
-import * as THREE from 'three';
+
 AFRAME.registerComponent("markable", {
   init: function () {
     this.identifier = this.generateUniqueIdentifier();
