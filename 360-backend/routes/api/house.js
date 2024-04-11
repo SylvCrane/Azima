@@ -31,6 +31,13 @@ router.get('/house/:id', (req, res) => {
         .catch(err => res.status(400).json({error: 'House not found'}));
 });
 
+router.get('/', (req, res) => {
+    House.find()
+        .then(house => res.json(house))
+        .catch(err => 
+            console.error(err));
+});
+
 router.get('/house/puller/:houseID', (req, res) => {
     House.find( { "houseID" : req.params.houseID} )
         .then(house => res.json(house))
