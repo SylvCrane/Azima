@@ -18,7 +18,7 @@ export const PopulatedNavBar = () => {
   const [buttonOpen, setButtonOpen] = useState(false); // State variable for 
   const [user, setUser] = userState; 
 
-  // Function to handle user logout
+  // Function to handle user logout and initializing the state of the user
   const handleLogout = () => {
     setUser({
       isAuthenticated: false, 
@@ -40,7 +40,7 @@ export const PopulatedNavBar = () => {
 
   const toggleDropdown = () => {
     setButtonOpen(!buttonOpen);
-  }
+  };
   
   // JSX code for the PopulatedNavBar component
   return (
