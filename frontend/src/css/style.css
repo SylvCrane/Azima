@@ -97,6 +97,19 @@
     padding-top: 80px;
   }
 
+  .forgot-password-container {
+    width: 600px;
+    height: 300px;
+    margin: 0 auto;
+    margin-top: 10%; /* provides gap between bottom of navbar and top of the page */
+    border-radius: 15px; /* Adjust the value as needed for the curve */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a shadow effect */
+    
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
   /* need this div so that the vg file appears */
   .logo {
     height: 7vmin;
@@ -123,7 +136,7 @@
     }
   }
 
-  @media (min-width: 50em) and (max-width: 59em) {
+  @media (max-width: 767px){
 
     .tours-page, 
     .editor-page, 
@@ -136,5 +149,15 @@
       padding-left: 50px; /* Add padding to the left */
       padding-right: 50px; /* Add padding to the right */
       height: 450px;
+    }
+
+    .forgot-password-container {
+      width: 70%;
+      height: 60%;
+      margin: 0 auto;
+      margin-top: 25%; /* provides gap between bottom of navbar and top of the page */
+      justify-content: center;
+      align-items: center;
+      text-align: center;
     }
   }

@@ -1,4 +1,5 @@
-
+import AFRAME from 'aframe';
+import * as THREE from 'three';
 
 AFRAME.registerComponent("linker", {
 
@@ -14,6 +15,7 @@ AFRAME.registerComponent("linker", {
     let window = document.createElement("a-entity");
     window.setAttribute("loader", "");
     this.el.sceneEl.appendChild(window);
+   // eslint-disable-next-line no-unused-expressions
    this.color;
 
     this.identifier = null;
@@ -28,13 +30,28 @@ AFRAME.registerComponent("linker", {
     colorOptions.forEach((option) => {
       option.addEventListener("change", this.handleColorInput);
     });
-
+    // eslint-disable-next-line no-unused-expressions
     this.selected;
     const select = document.getElementById('scroll')
 
     select.addEventListener('click', (e) => {
       this.handleSelection(e);
     });
+    const toggleTextCheckbox = document.getElementById("toggleText");
+    if (toggleTextCheckbox) {
+      toggleTextCheckbox.addEventListener('change', (event) => {
+        if (event.target.checked) {
+          // If the checkbox is checked, re-add the text based on the current selection
+          if (this.selected) {
+            this.addText(this.selected.children[1].innerText);
+          }
+        } else {
+          // If the checkbox is unchecked, remove the text
+          this.removeText();
+        }
+      });
+    }
+  
     
   },
 
@@ -43,8 +60,6 @@ AFRAME.registerComponent("linker", {
       this.handleFourPointsCaptured.bind(this);
     this.boundHandleFourPointsRemoved = this.handleFourPointsRemoved.bind(this);
 
-
-    
     // Add event listeners
     this.el.sceneEl.addEventListener(
       "fourPointsCaptured",
@@ -167,11 +182,13 @@ AFRAME.registerComponent("linker", {
 
 
     let formContainer = document.getElementById("formContainer");
+    let saveContainer = document.getElementById("saveContainer");
     this.el.sceneEl.emit("createWindow", eventData);
     console.log("[linker] Event 'createWindow' emitted with event details:", eventData);
     let container = document.getElementById("aframe-container");
     let overlay = document.getElementById("overlay");
     let camera = this.el.sceneEl.querySelector("[camera]");
+    
     this.cursor.setAttribute("toggle-thickness", "");
     this.cursor.setAttribute("geometry", {
       radiusOuter: 0.03,
@@ -201,6 +218,7 @@ AFRAME.registerComponent("linker", {
 
   
     formContainer.innerHTML ='';
+    saveContainer.style.display = 'flex';
 this.remove();
   
   },
@@ -259,6 +277,7 @@ serializeText: function(triangles) {
     let sky = document.querySelector('a-sky');
     let camera = this.el.sceneEl.querySelector("[camera]");
     let formContainer = document.getElementById("formContainer");
+    let saveContainer = document.getElementById("saveContainer");
     const colorOptions = document.querySelectorAll(
       '.color-picker input[type="radio"]'
     );
@@ -288,6 +307,7 @@ serializeText: function(triangles) {
     }
 
     formContainer.innerHTML ='';
+    saveContainer.style.display = 'flex';
 this.remove();
   },
   
@@ -305,7 +325,7 @@ this.remove();
   addText: function (input) {
     if (this.triangles) {
       this.triangles.forEach((triangle, index) => {
-        if (index == 3) {
+        if (index === 3) {
           let text = document.createElement("a-text");
           let camera = this.el.sceneEl.querySelector("[camera]");
           let direction = new THREE.Vector3();
@@ -363,7 +383,7 @@ this.remove();
   removeText: function () {
     if (this.triangles) {
       this.triangles.forEach((triangle, index) => {
-        if (index == 3) {
+        if (index === 3) {
           // Find the a-text element within the triangle
           let textElement = triangle.querySelector("a-text");
 

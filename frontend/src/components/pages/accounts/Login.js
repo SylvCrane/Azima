@@ -84,7 +84,7 @@ export const Login = (props) => {
                 <input value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} type="password" id="loginPassword" placeholder="********" required/>
                 <br/>
                 <br/><button type="submit">Sign In</button><br/>
-                <br/><button className="link-btn">Forgot password?</button><br/>
+                <br/><button className="link-btn" type ="button" onClick={() => navigate('/account/forgot-password')}>Forgot password?</button><br/>
                 <br/>
                 { alertMessage && (
                     <div className="alert">{ alertMessage }</div>
