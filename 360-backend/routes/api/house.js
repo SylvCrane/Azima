@@ -60,6 +60,13 @@ router.delete('/house/:id', (req, res) => {
     House.findByIdAndRemove(req.params.id, req.body)
         .then(house => res.json({msg: 'House successfully deleted'}))
         .catch(err => res.status(404).json({error: 'No such house'}));
-})
+});
+
+router.get('/', (req, res) => {
+    House.find()
+        .then(houses => res.json(houses))
+        .catch(err => 
+        console.error(err));
+});
 
 module.exports = router;
