@@ -1,12 +1,13 @@
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import styles from "../../css/navbar.css";
 
-const NavBarItem = ({ children, route, end, dropdown, onClick, style }) => {
+const NavBarItem = ({ children, to, end, dropdown, onClick, style }) => {
   const navigate = useNavigate();
 
   const handleNavigate = (event) => {
-    if (typeof route === "string") {
-      navigate(route);
+    if (typeof to === "string") {
+      navigate(to);
     }
 
     if (typeof onClick === "function") {
@@ -16,15 +17,26 @@ const NavBarItem = ({ children, route, end, dropdown, onClick, style }) => {
     event.stopPropagation();
   };
 
+  const handleDropdownClick = (event) => {
+    // Stop event propagation to prevent the dropdown from closing immediately
+    event.stopPropagation();
+  };
+
   return (
     <div
       style={style}
-      className={`${route || onClick ? styles.clickable : styles.navitem}${
+      className={`${to || onClick ? styles.clickable : styles.navitem}${
         end ? ` ${styles.end}` : ""
       }${dropdown ? ` ${styles.dropdown}` : ""}`}
-      onClick={handleNavigate}
+      onClick={dropdown ? handleDropdownClick : handleNavigate}
     >
-      {children}
+      {to ? (
+        <NavLink to={to} activeClassName={styles.active}>
+          {children}
+        </NavLink>
+      ) : (
+        children
+      )}
     </div>
   );
 };
