@@ -93,77 +93,11 @@ AFRAME.registerComponent("window", {
   },
 
   hoverEnd: function (e) {
-    let clearedEl = e.detail.clearedEls[0];
-
-    if (clearedEl.parentNode === this.el) {
-      // Change from parent check to this.el
-      let triangles = this.el.querySelectorAll("a-triangle"); // Get triangles from this.el
-
-      triangles.forEach((triangle) => {
-        triangle.setAttribute("material", "opacity: 0.3");
-      });
-
-      // Clear the hover timeout and hide the delete button...
-      if (this.hoverTimeout) {
-        clearTimeout(this.hoverTimeout);
-        this.hoverTimeout = null;
-        // Hide the delete button...
-      }
-    }
-    this.delete.setAttribute("visible", false);
+  
   },
 
   hover: function (e) {
-    let intersectedEl = e.detail.els[0];
-    console.log(e.detail.els[0].parentNode);
-
-    if (intersectedEl.parentNode === this.el) {
-      // Change from parent check to this.el
-      let triangles = this.el.querySelectorAll("a-triangle"); // Get triangles from this.el
-
-      triangles.forEach((triangle) => {
-        triangle.setAttribute("material", "opacity: 0.7");
-      }); // Change from parent check to this.el
- 
-      this.hoverTimeout = setTimeout(() => {
-        let camera = this.el.sceneEl.querySelector("[camera]");
-        let direction = new THREE.Vector3();
-        camera.object3D.getWorldDirection(direction);
-        direction.negate();
-        let distance = 3;
-        direction.multiplyScalar(distance);
-
-        let camPos = camera.getAttribute("position");
-        let camRot = camera.getAttribute("rotation").y;
-
-        function calculateButtonPosition(offsetAngle) {
-          let angle = THREE.MathUtils.degToRad(camRot + offsetAngle);
-          const offset = 0.5;
-          const offsetX = Math.sin(angle) * offset;
-          const offsetZ = Math.cos(angle) * offset;
-
-          return {
-            x: camPos.x + direction.x + offsetX,
-            y: camPos.y + direction.y,
-            z: camPos.z + direction.z + offsetZ,
-          };
-        }
-
-        let buttonPos1 = calculateButtonPosition(50); // Offset by 30 degrees
-        // Offset by -30 degrees
-
-        this.delete.setAttribute(
-          "position",
-          `${buttonPos1.x} ${buttonPos1.y} ${buttonPos1.z}`
-        );
-
-        this.delete.setAttribute("rotation", { x: 0, y: camRot, z: 0 });
-
-        this.delete.setAttribute("visible", true);
-
-        // You can add your code to show the delete button here
-      }, 3000);
-    }
+    
   },
 
   calcOffset: function (target) {

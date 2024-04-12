@@ -11,11 +11,11 @@ let counter =0;
 
 
 function RoomContainer(props) {
-    let saved =false;
+  /*let saved =false;*/
   const [houseName, setHouseName] = useState('');
   const [rooms, setRooms] = useState([]);
   const [saveSuccessful, setSaveSuccessful] = useState(false);
-  let response = [];
+  /*let response = [];*/
 
 
 

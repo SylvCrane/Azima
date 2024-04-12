@@ -4,7 +4,6 @@
 /* https://fonts.google.com/selection/embed */
 
   * {
-    /* font-family: "Konkhmer Sleokchher"; */
     font-family: "Rubik", sans-serif;
     font-optical-sizing: auto;
     font-weight: <weight>;
@@ -28,6 +27,32 @@
   h3 {
     font-size: 20px;
   }
+
+  h4 {
+    font-size: 14px;
+  }
+
+  input {
+    background-color: #ccc;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    border-radius: 10px;
+    width: 300px;
+  }
+  
+  button[type=submit] {
+    border-radius: 30px;
+    border: 1px solid #004d39;
+    background-color: #00805e;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 12px 30px;
+    width: 150px;
+    text-transform: uppercase;
+    
+  }
   
   /* for app.js and account.js file */
   .App, 
@@ -41,7 +66,8 @@
   .tours-page, 
   .editor-page, 
   .about-page, 
-  .home-page {
+  .home-page, 
+  .user-page {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -50,92 +76,88 @@
     text-align: center;
   }
   
+
+  .home-page {
+    display: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 40vh; /* Minimum height of the page to fill the viewport */
+    text-align: center;
+  }
+
+  .home-page-nav {
+    height: 450px;
+    width: 100%;
+    position: center;
+    text-align: center;
+    align-items: center;
+    background-color: #00664d;
+    color: white;
+    padding-top: 80px;
+  }
+
+  .forgot-password-container {
+    width: 600px;
+    height: 300px;
+    margin: 0 auto;
+    margin-top: 10%; /* provides gap between bottom of navbar and top of the page */
+    border-radius: 15px; /* Adjust the value as needed for the curve */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a shadow effect */
+    
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
   /* need this div so that the vg file appears */
   .logo {
     height: 7vmin;
     pointer-events: none;
   }
-  #saveButton {
-    position: fixed;     
-    bottom: 50px;       
-    right: 30px;         
-    padding: 10px 100px;  
-    border: none;        
-    background-color: #0EB49A;  
-    color: white;       
-    font-size: 16px;     
-    border-radius: 4px;  
-    cursor: pointer;    
-    outline: none;      
-  
-    font-weight: 700;
-    font-size: 25px;
-  }
-  
-  #saveButton:hover {
-    background-color: #4ABFAA;  
-  }
-  #addButton {
 
-  
-    position: fixed;     
-    bottom: 120px;       
-    right: 30px; 
-    padding: 10px 88px;  
-    border: none;        
-    background-color: #0EB49A;  
-    color: white;       
-    font-size: 16px;     
-    border-radius: 4px;  
-    cursor: pointer;    
-    outline: none;      
-  
-    font-weight: 700;
-    font-size: 25px;
+  .join-btn {
+    border-radius: 25px;
+    border: 1px solid #004d39;
+    background-color: #00805e;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 15px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+    &:active{
+        transform: scale(0.95);
+    }
+    &:focus {
+        outline: none;
+    }
   }
-  .cancelButton {
-    
-    
-    padding: 10px 88px;  
-    border: none;        
-    background-color: #0EB49A;  
-    color: white;       
-    font-size: 16px;     
-    border-radius: 4px;  
-    cursor: pointer;    
-    outline: none;      
 
-    font-weight: 700;
-    font-size: 25px;
-  }
-  .forms-container {
-    display: flex; /* Use flexbox to layout child elements */
-    flex-wrap: wrap; /* Allow items to wrap to next line at the end of the container */
-    column-gap: 100px;
-    row-gap: 10px;/* Add some space between the forms */
-    justify-content: flex-start; /* Align forms to the start (left) horizontally */
-    align-items: flex-start; /* Align forms to the start (top) vertically */
-    padding: 20px; /* Add some padding around the container */
-    margin:100px 100px; /* Remove default margin */
-  /* Adjust margin to position the container closer to the top-left */
-    max-width: 100%; /* Adjust max-width to account for padding */
-    /* Hide overflow */
-    overflow-x: auto; 
-    flex-shrink: 0;
-  }
-  
-  .inputForm, .fileForm {
-   /* Remove default margin */
-    width: auto; /* Allow the form width to grow with content */
-    min-width: 250px; /* Set a minimum width for each form */
-  }
-  
+  @media (max-width: 767px){
 
+    .tours-page, 
+    .editor-page, 
+    .about-page {
+      padding-left: 50px; /* Add padding to the left */
+      padding-right: 50px; /* Add padding to the right */
+    }
 
-.editor-page {
-  width: 100%; /* full width */
-  height: 100vh; /* full viewport height */
-  overflow: hidden;
-  position: fixed; /* hide the overflow */
-  /* additional styles */
-}
+    .home-page-nav {
+      padding-left: 50px; /* Add padding to the left */
+      padding-right: 50px; /* Add padding to the right */
+      height: 450px;
+    }
+
+    .forgot-password-container {
+      width: 70%;
+      height: 60%;
+      margin: 0 auto;
+      margin-top: 25%; /* provides gap between bottom of navbar and top of the page */
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+  }

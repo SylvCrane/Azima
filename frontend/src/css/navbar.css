@@ -1,113 +1,167 @@
 /* STYLING FOR NAVBAR CLASS */
 
-/* div for the backround of the navbar component */
-
-* 
-{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-
-}
-
-header {
-    position: absolute;
-    width: 100%;
-    min-height: 66px;
-    background: #00664d;
-    padding: 0 10px; /* provides space between the left and right side of the navbar */
-    justify-content: space-between;
-}
-
 nav {
-    display: flex;
-    justify-content: space-between; /* places content to the right */
+    display: flex; /* places content to the right */
+    justify-content: space-between; 
     align-items: center;
     background-color: #00664d;
     color: white;
-
-}
-
-nav .title {
-    font-size: 1.5rem;
-    margin: 1rem;
-    font-weight: bold;
-    text-decoration: none;
-    color: white;
+    position: sticky;
+    margin: 0;
+    padding: 10px 20px; /* Add padding to the top and bottom of the nav element */
+    padding-left: 50px;
+    padding-right: 50px;
 }
 
 nav ul {
-    display: flex;
-    background: #00664d
+    display: flex; /* places content to the right */
+    background: #00664d;
+    align-items: center;
 }
 
 nav ul li {
-   list-style: none; 
    display: flex;
-   align-items: center;
 }
 
 nav ul li a {
-    text-decoration: none;
+    text-decoration: none; /* Removes the underline */
     color: white;
-    padding: 0.5rem;
-    margin: 0 0.2rem;
-    border-radius: 0.5rem; /* Makes the border curvy */
-    display: flex; /* Make the link and button flex containers */
-    align-items: center; /* Align items vertically in the center */
+    padding: 0.9rem;
+    margin: 0 0.5rem;
+    display: block; /* Make the link a block element */
+    height: 100%; /* Make the link cover the entire width */
 }
 
-nav ul li button {
-    background: none; /* Remove button background */
-    border: none; /* Remove button border */
+.azima-logo {
+    /* Add a fixed width to the logo */
+    width: 200px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.account-logo {
+    width: 40px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+
+}
+
+li a:not(.active):hover,
+li :hover {
+    background: #207963; /* Background color when link is hovered */
     cursor: pointer;
-    align-items: center;
-    margin: 0 0.2rem;
-    padding: 0.1px;
+    border-radius: 0.5rem; /* Makes the border curvy */
 }
 
-/* changes colour of link component when mouse hovers it */
-nav ul li a:not(.active):hover,
-nav u1 li button:hover {
-    border: 2px solid #207963;
+li a.active {
+    background-color: #207963; /* Background color for the active link */
+    cursor: pointer;
+    border-radius: 0.5rem; /* Makes the border curvy */
 }
 
 /* hamburger menu */
 nav .menu {
     display: flex;
     position: absolute;
-    top: 0.75rem;
+    top: 1.4rem;
     right: 0.5rem;
     flex-direction: column;
     justify-content: space-between;
     width: 2.25rem;
     height: 2rem;
+    margin-right: 30px;
+    cursor: pointer;
 }
 
-/* div that sets the colour of the active tab/link different to the rest */
-.active{
-    /*background-color: #207963; */
-    border: 2px solid #258d73;
-}
-/* Allows svg account image in NavBar to have pointer cursor when mouse hovers it */
-.account-logo {
-    svg path: hover {
-        cursor: pointer;
-    }
-    justify-content: center;
+/* Button where the account image is placed in navbar */
+.account-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    margin-top: 5px;
 }
 
-.logo {
-    svg path: hover {
-        cursor: pointer;
-    }
+.dropdown {
+    margin-bottom: 5px;
 }
-.fixed-size-svg {
-    width: 30px; /* Set the desired width */
-    height: 30px; /* Set the desired height */
-  }
 
- @media (max-width: 59em) {
+/* Dropdown container */
+.account-dropdown {
+    position: relative;
+    display: inline-block;
+}
+  
+/* Dropdown content container (hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    padding: 10px 10px;
+    background-color: #00664d;
+    z-index: 1;
+    width: auto;
+    overflow: visible;
+    justify-content: center; /* Center the items horizontally */
+    white-space: nowrap; /* Ensures that the items remain in a row */
+    right: -30px; /* Ensures theres a gap between the right edge and the full screen */
+    padding-bottom: 10px;
+}
+
+/* Show the dropdown menu on hover */
+.account-dropdown:hover .dropdown-content {
+    display: block; 
+    background: #00664d;
+    border-radius: 0.5rem; /* Makes the border curvy */
+}
+  
+/* Dropdown link for account dropdown menu */
+.dropdown-link {
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    display: block;
+    background: #00664d;
+    margin-bottom: 10px; /* Creates a gap between the dropdown links */
+}
+ 
+/* Change color of dropdown links on hover */
+.dropdown-content .dropdown-link:hover {
+    background-color: #207963;
+}
+
+.logout-btn,
+.logout-btn:hover,
+.logout-btn:focus,
+.logout-btn:active {
+    border-radius: 25px;
+    border: 1px solid #004d39;
+    background-color: #00805e;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 12px 42px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+    margin-top: 10px; /* Adjust margin-top to add space between the links */
+    /* Margin and display is what centers logout button in the dropdown-content div */
+    margin: auto; 
+    margin-bottom: 5px;
+    display: block;
+    cursor: pointer;
+}
+
+.logout-btn:active {
+    transform: scale(0.95); /* Scale down on click */
+}
+
+.user-display {
+    margin-top: 10px;
+    margin-bottom: 10px; /* Adjust the value as needed */
+}
+
+/* Media query to handle when user is on smaller screen */
+@media (max-width: 50em) {
     nav .menu {
         display: flex;
     }
@@ -121,7 +175,9 @@ nav .menu {
         display: none;
         flex-direction: column;
         width: 100%;
-        margin-bottom: 0.25rem;
+        margin-bottom: 5px;
+        padding-top: 1rem; /* Add padding to the top of nav links */
+        padding-bottom: 1rem; /* Add padding to the bottom of nav links */
     }
 
     nav ul.open {
@@ -131,6 +187,8 @@ nav .menu {
     nav ul li {
         width: 100%;
         text-align: center;
+        padding-bottom: 5px; /* Add padding to the bottom of nav links */
+        padding-left: 15px;
     }
 
     nav ul li a {
@@ -145,144 +203,37 @@ nav .menu {
         align-items: center;
     }
 
-    .dropdown-menu {
+    .dropdown-content {
         display: none;
-    }
-    
-    .navbar .account-link:hover + .dropdown-menu,
-    .dropdown-menu.open {
-        display: block;
         position: absolute;
-        Left: 4%;
-        right: 4%;
-        background-color: var(--color-black);
-        width: 10%;
-        height: 20px;
-    }
-
-    .dropdown-menu ul {
-        display: row;
+        justify-content: center; /* Center the items horizontally */
+        white-space: nowrap; /* Ensures that the items remain in a row */
+        transform: translateY(-80%); /* Center vertically */
+        left: 100%; /*Ensures dropdown conntent is placed on the right of account-dropdown/image */
+        padding-bottom: 2px; /* Add padding to the bottom of nav links */
+        padding: 5px; /* Adjust padding as needed */
     }
     
-    .dropdown-menu ul li {
-        width: 50px;
-        padding: 10px;
-        display: sticky;
+    /* Show the dropdown menu on hover */
+    .account-dropdown:hover .dropdown-content {
+        display: flex; /* Show the dropdown content as a flex container */
+        flex-direction: row; /* Arrange items in a row */
+        align-items: center; /* Center the items vertically */
+        position: absolute;
+        pointer: cursor;
+    }
+      
+    /* Dropdown links */
+    .dropdown-link {
+        /* Remove display: block */
+        color: white;
+        padding: 12px 16px;
+        text-decoration: none;
+        background: #00664d;
+    }
+
+    NavLink {
+        position: left;
+        justify-conntent: center;
     }
 }
-
-.dropdown-menu {
-    display: none;
-}
-
-nav ul li:hover .dropdown-menu {
-    display: block;
-    position: absolute;
-    right: 0;
-    top: 100%;
-    background-color: var(--color-black);
-    width: 10%;
-    height:20px;
-}
-
-nav ul li:hover .dropdown-menu ul {
-    display: block;
-}
-
-nav ul li:hover .dropdown-menu ul li {
-    width: 50px;
-    padding: 10px;
-    display: block;
-}
-
-.dropdown-menu {
-    display: none;
-}
-
-.navbar .account-link:hover + .dropdown-menu,
-.dropdown-menu.open {
-    display: block;
-    position: absolute;
-    right: 0;
-    top: 100%;
-    background-color: var(--color-black);
-    width: 10%;
-    height: 20px;
-}
-
-.dropdown-menu ul {
-    display: block;
-}
-
-.dropdown-menu ul li {
-    width: 30px;
-    padding: 10px;
-    display: block;
-}
-
-
-
-
-//////////////////////////////////////
-
-.navbar {
-    display: flex;
-    position: relative;
-    top: 0;
-    flex-direction: row;
-    width: 100%;
-    background-color: #00664d;
-    align-items: center;
-    color: aliceblue;
-    font-size: 1.5em;
-    font-weight: bold;
-    transition: top 0.5s;
-    height: fit-content;
-  }
-  
-  .hide {
-    top: -3em;
-  }
-  
-  .navitem {
-    position: relative;
-    padding: 1em;
-    width: auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    cursor: default;
-    white-space: nowrap;
-  }
-  
-  .clickable {
-    @extend .navitem;
-    cursor: pointer;
-  }
-  
-  .clickable:hover {
-    backdrop-filter: brightness(50%);
-  }
-  
-  .dropdown_container {
-    visibility: hidden;
-    display: flex;
-    flex-direction: column;
-    background-color: #00664d;
-    position: absolute;
-    top: 100%;
-    right: 0;
-  }
-  
-  .dropdown:hover {
-    cursor: pointer;
-    backdrop-filter: brightness(50%);
-  
-    .dropdown_container {
-      visibility: visible;
-    }
-  }
-  
-  .end {
-    margin-left: auto;
-  }
