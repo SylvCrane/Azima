@@ -15,7 +15,10 @@ import { ForgotPassword } from "./components/pages/ForgotPassword";
 
 function App() {
   const [email, setEmail] = useState(""); // State to hold authenticated user's email
+  const loggedIn = window.localStorage.getItem("isLoggedIn");
+  console.log(loggedIn, "login");
   const location = useLocation();
+
 
   const shouldHideNavbar = (pathname) => {
     return pathname.startsWith("/editor/aframe");

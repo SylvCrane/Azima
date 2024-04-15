@@ -47,6 +47,8 @@ export const Login = (props) => {
         .then((res) => res.json())
         .then((data) => {
             console.log(data, "userLogin");
+            // when the user is logged in creates a variable called isLoggedIn and sets the value to true
+            
 
             if (data.status === "ok") {
                 setAlertMessage("Logged in successfully!");

@@ -20,6 +20,7 @@ function RoomContainer(props) {
 
 
 useEffect(() => {
+  
     if (saveSuccessful) {
         const event = new CustomEvent('saveSuccessful', { detail: { houseID: houseName } });
         window.dispatchEvent(event);

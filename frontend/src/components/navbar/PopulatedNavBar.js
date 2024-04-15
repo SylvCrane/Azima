@@ -20,6 +20,9 @@ export const PopulatedNavBar = () => {
 
   // Function to handle user logout and initializing the state of the user
   const handleLogout = () => {
+    window.localStorage.removeItem("token");
+    window.localStorage.removeItem("isLoggedIn");
+    window.localStorage.removeItem("userEmail");
     setUser({
       isAuthenticated: false, 
       email: undefined, 
