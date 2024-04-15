@@ -8,7 +8,7 @@ const initialUser = {
 };
 
 /* Passing initialUser object as the default value - if user info 
-is not inputted/not found, email and password remain empty and authentication is false.
+  is not inputted/not found, email and password remain empty and authentication is false.
 */
 const UserContext = createContext(initialUser);
 
@@ -17,9 +17,9 @@ const UserProvider = ({ children }) => {
   const [user, setUser] = useState(initialUser); // State variable to handle state of the initial user.
 
   useEffect(() => {
-    const isLoggedIn = window.localStorage.getItem("isLoggedIn") === "true, user authenticated";
+    const isLoggedIn = window.localStorage.getItem("isLoggedIn") === "true";
     const email = window.localStorage.getItem("userEmail");
-    const lastActivityTime = window.localStorage.getItem("lastActivityTime");
+    const lastActivityTime = parseInt(window.localStorage.getItem("lastActivityTime"));
     const currentTime = new Date().getTime(); // get current time of the day
     /* Check if the user is logged and their email is valid and if lastActivityTime is not null
       and if the difference between the current time and lastActivityTime is less than or equal to 24 hours.

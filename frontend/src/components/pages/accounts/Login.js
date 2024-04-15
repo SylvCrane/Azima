@@ -73,7 +73,7 @@ export const Login = (props) => {
 
     useEffect (() => {
         if (user.isAuthenticated) {
-            navigate("/editor");
+            navigate("/editor"); // When user is authenticated, will open the editor page.
         }
     });
 
