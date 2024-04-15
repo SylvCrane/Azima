@@ -23,6 +23,13 @@ router.use('/house/:houseId/portals', (req, res, next) => {
     next();
 }, portalRouter);
 
+router.get('/', (req, res) => {
+    House.find()
+        .then(houses => res.json(houses))
+        .catch(err => 
+            console.error(err));
+});
+
 router.get('/house/:id', (req, res) => {
     House.findById(req.params.id, req.body)
         .then(() => res.json({ msg: 'House updated successfully' }))
