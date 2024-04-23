@@ -1,5 +1,4 @@
-import AFRAME from 'aframe';
-import * as THREE from 'three';
+
 
 AFRAME.registerComponent("linker", {
 
@@ -15,8 +14,7 @@ AFRAME.registerComponent("linker", {
     let window = document.createElement("a-entity");
     window.setAttribute("loader", "");
     this.el.sceneEl.appendChild(window);
-   // eslint-disable-next-line no-unused-expressions
-   this.color;
+    this.color;
 
     this.identifier = null;
     this.hoverTimeout = null;
@@ -30,7 +28,7 @@ AFRAME.registerComponent("linker", {
     colorOptions.forEach((option) => {
       option.addEventListener("change", this.handleColorInput);
     });
-    // eslint-disable-next-line no-unused-expressions
+
     this.selected;
     const select = document.getElementById('scroll')
 
@@ -60,6 +58,8 @@ AFRAME.registerComponent("linker", {
       this.handleFourPointsCaptured.bind(this);
     this.boundHandleFourPointsRemoved = this.handleFourPointsRemoved.bind(this);
 
+
+    
     // Add event listeners
     this.el.sceneEl.addEventListener(
       "fourPointsCaptured",
@@ -325,7 +325,7 @@ this.remove();
   addText: function (input) {
     if (this.triangles) {
       this.triangles.forEach((triangle, index) => {
-        if (index === 3) {
+        if (index == 3) {
           let text = document.createElement("a-text");
           let camera = this.el.sceneEl.querySelector("[camera]");
           let direction = new THREE.Vector3();
@@ -383,7 +383,7 @@ this.remove();
   removeText: function () {
     if (this.triangles) {
       this.triangles.forEach((triangle, index) => {
-        if (index === 3) {
+        if (index == 3) {
           // Find the a-text element within the triangle
           let textElement = triangle.querySelector("a-text");
 

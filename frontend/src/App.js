@@ -10,7 +10,8 @@ import { Login } from "./components/pages/accounts/Login";
 import { User } from "./components/pages/accounts/User";
 import { Home } from "./components/pages/Home";
 import { UserProvider } from "./components/UserState";
-import { AFrame } from "./components/pages/AFrame"; // Import the AFrame component
+import { AFrame } from "./components/pages/AFrame"; 
+import { Save } from "./components/pages/Save";
 import { ForgotPassword } from "./components/pages/ForgotPassword";
 
 function App() {
@@ -31,11 +32,20 @@ function App() {
           <Route path="/tours" element={<Tours />} />
           <Route path="/about" element={<About />} />
           <Route path="/editor" element={<Editor />} />
-          <Route path="/account/signup" element={<SignUp setEmail={setEmail} />} />
-          <Route path="/account/login" element={<Login setEmail={setEmail} />} />
-          <Route path="/account/forgot-password" element={<ForgotPassword />} />
-          <Route path="/account/user" element={<User />} />
-          <Route path="/editor/aframe" element={<AFrame />} />
+          <Route path="/account" element={<Account />} />
+          <Route
+            path="/account/signup"
+            element={<SignUp setEmail={setEmail} />} 
+          />
+          <Route
+            path="/account/login"
+            element={<Login setEmail={setEmail} />} 
+          />
+       
+          <Route
+            path="/editor/aframe"
+            element={<AFrame />} 
+          />
         </Routes>
       </UserProvider>
     </div>

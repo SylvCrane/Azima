@@ -49,9 +49,17 @@ console.log("houseid: ",houseID)
                     let imgEl = document.createElement("img");
                     imgEl.setAttribute("id", `${image.name}`);
                     imgEl.setAttribute("src", image.imageURL);
-
+                    imgEl.setAttribute("crossorigin", "anonymous");
                     // Append the <img> element to the <a-assets> element
                     assetsEl.appendChild(imgEl);
+                    imgEl.addEventListener('load', function () {
+                      console.log('Image loaded successfully:', imgEl);
+                      var entityEl = document.querySelector('a-entity');
+                      entityEl.setAttribute('material', 'src', '#'+imgEl.id);
+                    });
+                    
+                    // Also, listen for the error event in case the image fails to load
+                  
                 });
 
                 console.log('All images added to <a-assets>.', assetsEl);

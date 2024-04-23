@@ -90,3 +90,5 @@ function clearPortals(houseId){
 function navigateToSave() {
     window.parent.postMessage({ action: 'navigate', path: '/editor/save?houseID=' + encodeURIComponent(houseID) }, '*');
 }
+
+

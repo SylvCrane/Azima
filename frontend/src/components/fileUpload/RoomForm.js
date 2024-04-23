@@ -20,7 +20,7 @@ function RoomForm({ onRemove, onUpdate }) {
   return (
     <div className="form-instance">
       <form className="inputForm">
-        <h1>Room</h1>
+        <h2>Room</h2>
         <input
           type="text"
           placeholder="Enter text"
@@ -28,7 +28,7 @@ function RoomForm({ onRemove, onUpdate }) {
           onChange={handleNameChange}
         />
       </form>
-      <div className="file-upload-container" style={{ padding: '20px', border: '2px dashed #ccc', cursor: 'pointer', textAlign: 'center' }}>
+      <div className="file-container" onclick="document.getElementById('fileInput').click()" >
         <label className="custom-file-upload">
           Upload a 360° image:
           <input
