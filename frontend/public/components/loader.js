@@ -1,3 +1,6 @@
+
+
+
 AFRAME.registerComponent("loader", {
   init: function () {
     console.log("Loader component initialized.");

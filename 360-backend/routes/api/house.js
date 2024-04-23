@@ -1,3 +1,4 @@
+
 const { Router } = require('express');
 const House = require('../../models/House');
 const multer = require('multer');
@@ -8,9 +9,13 @@ const router = Router();
 const upload = multer();
 
 router.post('/house', (req, res) => {
+    console.log(req.body);  // Log incoming request data
     House.create(req.body)
         .then(() => res.json({ msg: 'House added successfully' }))
-        .catch(() => res.status(400).json({ error: 'Unable to add house' }));
+        .catch((error) => {
+            console.error('Error adding house:', error);  // Log the error
+            res.status(400).json({ error: 'Unable to add house', details: error.message });
+        });
 });
 
 router.use('/house/:houseId/images', (req, res, next) => {

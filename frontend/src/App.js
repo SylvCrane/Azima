@@ -11,11 +11,15 @@ import { User } from "./components/pages/accounts/User";
 import { Home } from "./components/pages/Home";
 import { UserProvider } from "./components/UserState";
 import { AFrame } from "./components/pages/AFrame"; // Import the AFrame component
+import { Save } from "./components/pages/Save";
 import { ForgotPassword } from "./components/pages/ForgotPassword";
 
 function App() {
   const [email, setEmail] = useState(""); // State to hold authenticated user's email
+  const loggedIn = window.localStorage.getItem("isLoggedIn");
+  console.log(loggedIn, "login");
   const location = useLocation();
+
 
   const shouldHideNavbar = (pathname) => {
     return pathname.startsWith("/editor/aframe");
@@ -36,6 +40,10 @@ function App() {
           <Route path="/account/forgot-password" element={<ForgotPassword />} />
           <Route path="/account/user" element={<User />} />
           <Route path="/editor/aframe" element={<AFrame />} />
+          <Route
+            path="/editor/save"
+            element={<Save />} 
+          />
         </Routes>
       </UserProvider>
     </div>
