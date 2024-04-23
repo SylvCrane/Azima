@@ -15,7 +15,7 @@ export const PopulatedNavBar = () => {
   const userState = useUser(); 
   const redirect = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false); // State variable for hamburger menu
-  const [buttonOpen, setButtonOpen] = useState(false); // State variable for 
+  const [buttonOpen, setButtonOpen] = useState(false); // State variable for the dropdwon menu
   const [user, setUser] = userState; 
 
   // Function to handle user logout and initializing the state of the user
@@ -100,7 +100,7 @@ export const PopulatedNavBar = () => {
                 <NavLink to="/account/user" className="dropdown-link">
                   {user.email}
                 </NavLink>
-                <button className="logout-btn" onClick={handleLogout}>Logout</button>
+                <button className="logout-btn" onClick={handleLogout}>Log Out</button>
               </div>
             </div>
           </li>

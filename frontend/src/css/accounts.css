@@ -33,12 +33,6 @@
   margin: 0;
 }
 
-/* For alert message when user either signups or logs in */
-.alert {
-  font-size: 18px; 
-  color: red;
-}
-
 /* For login and signup pages */
 .link-btn {
   background: none;

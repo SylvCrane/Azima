@@ -1,4 +1,6 @@
-// model for user signup info
+/* Schema/model for user login info that defines the structure 
+    and required properties of the data and their types.
+*/
 
 const mongoose = require('mongoose');
 

@@ -4,7 +4,7 @@ nav {
     display: flex; /* places content to the right */
     justify-content: space-between; 
     align-items: center;
-    background-color: #00664d;
+    background: #00664d;
     color: white;
     position: sticky;
     margin: 0;
