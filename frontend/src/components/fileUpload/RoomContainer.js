@@ -39,7 +39,6 @@ useEffect(() => {
         const response = res.data; 
         if (response.length === counter) { // Assuming you want to check if there's any data
           saveHouse(e.detail.houseId, response).then(() => {
-            
             setSaveSuccessful(true);
           }).catch(error => {
             console.error('Failed to save house', error);
@@ -58,14 +57,14 @@ useEffect(() => {
     }, []);
 
   const addRoom = () => {
-    setRooms([...rooms, { id:counter++, name: '', file: null }]);
-    console.log(rooms);
-    console.log(counter);
+      setRooms([...rooms, { id:counter++, name: '', file: null }]);
+      console.log(rooms);
+      console.log(counter);
   };
 
   const removeRoom = (id) => {
-    setRooms(rooms.filter(room => room.id !== id));
-    counter--;
+      setRooms(rooms.filter(room => room.id !== id));
+      counter--;
   };
 
   const updateRoom = (id, name, file) => {

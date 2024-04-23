@@ -15,10 +15,9 @@ export async function mongoSubmit(cloudinary, mongo, houseId) {
         axios.post(`http://localhost:8082/api/house/house/`+houseId+`/images`, mongo)
         
             .then(res => {
-               
-              const event = new CustomEvent('imageUploadSuccess', { detail: { houseId: houseId } });
-             document.dispatchEvent(event);
-             console.log("The mongo submission was successful");
+               const event = new CustomEvent('imageUploadSuccess', { detail: { houseId: houseId } });
+                document.dispatchEvent(event);
+                console.log("The mongo submission was successful");
             })
             .catch(err => {
             console.log("The mongo submission failed");

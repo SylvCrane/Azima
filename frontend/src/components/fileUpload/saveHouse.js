@@ -1,6 +1,6 @@
-/*import RoomContainer from "./RoomContainer";*/
+import RoomContainer from "./RoomContainer";
 import axios from 'axios';
-/*import { mongoSubmit } from "./mongoSubmit";*/
+import { mongoSubmit } from "./mongoSubmit";
 
 
 
@@ -20,13 +20,14 @@ export async function saveHouse( houseID, imageReferences) {
         // Continue with other fields and their default or specified values
         bathrooms: 0, // Example default values
         livingAreas: 0,
-        sqFootage: "0", // Assuming your backend expects a string for Decimal128 type
-        price: "0.00",
+        sqFootage: 0.0, // Assuming your backend expects a string for Decimal128 type
+        price: 0.00,
         dateListed: new Date().toISOString(),
         location: "Unknown",
         kitchen: 1,
         backyard: false,
-        laundryRoom: false
+        laundryRoom: false,
+        dateAvailable: new Date().toString(),
       };
 
         const response = await axios.post('http://localhost:8082/api/house/house', houseData);
