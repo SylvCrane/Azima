@@ -51,13 +51,13 @@ function savePortals(houseId){
                 .then(data => {
                     console.log('Success:', data);
                     clearPortals(houseId);
-                    navigateToSave();// Consider whether you still want to clear all portals after this
+                    navigateToSave();
                 })
                 .catch((error) => console.error('Error:', error));
             } else {
+               
                 console.log('No new portals to add. Skipping update.');
-   
-                navigateToSave();
+                navigateToSave();                
             }
         })
         .catch(error => {

@@ -27,4 +27,17 @@ router.get('/:houseID', (req, res) => {
         .catch(err => res.status(404).json({ noimagefound: 'No Portal Found'}));
 });
 
+router.delete('/:houseID', (req, res) => {
+    Portal.deleteMany({ houseID: req.params.houseID })
+        .then(result => {
+            if(result.deletedCount === 0) {
+                // No documents found and deleted
+                return res.status(404).json({ msg: 'No portals found to delete' });
+            }
+            // Successfully deleted one or more documents
+            res.json({ msg: 'Portals deleted successfully' });
+        })
+        .catch(err => res.status(400).json({ error: 'Unable to delete portals', details: err.message }));
+});
+
 module.exports = router;
