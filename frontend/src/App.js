@@ -18,8 +18,9 @@ function App() {
   const location = useLocation();
 
   const shouldHideNavbar = (pathname) => {
-    return pathname.startsWith("/editor/aframe");
-  };
+    return pathname.startsWith("/editor/aframe") || pathname.startsWith("/tours/aframe");
+};
+
 
   return (
     <div className="App">
@@ -43,6 +44,10 @@ function App() {
        
           <Route
             path="/editor/aframe"
+            element={<AFrame />} 
+          />
+           <Route
+            path="/tours/aframe"
             element={<AFrame />} 
           />
           <Route

@@ -39,7 +39,14 @@ router.get('/house/puller/:houseID', (req, res) => {
         .then(house => res.json(house))
         .catch(() => res.status(400).json({ error: 'House not found' }));
 });
-
+router.get('/house', (req, res) => {
+    House.find({})
+        .then(houses => res.json(houses))
+        .catch(err => {
+            console.error('Error fetching all houses:', err);
+            res.status(500).json({ error: 'Internal server error', details: err.message });
+        });
+});
 router.put('/house/:id', (req, res) => {
     House.findByIdAndUpdate(req.params.id, req.body)
         .then(() => res.json({ msg: 'House updated successfully' }))

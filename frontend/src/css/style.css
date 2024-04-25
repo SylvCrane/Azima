@@ -23,6 +23,7 @@ h2, h3 {
   font-size: 20px;
 }
 
+
 /* App and Account Base Styles */
 .App, .Account {
   background-color: #fefefe;
@@ -32,15 +33,27 @@ h2, h3 {
 }
 
 /* Page Layouts */
-.tours-page, .about-page, .home-page {
+ .about-page, .home-page {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 85vh;
   text-align: center;
+
 }
 
+.tours-page {
+  flex: 1; /* Allows the page to expand to fill available space in a flex container */
+  display: block;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow-y: scroll; /* Ensures that content can scroll */
+  padding: 20px;
+  max-height: 100vh;
+/* Ensures it fills the width of its container */
+}
 /* Editor Page */
 .editor-page {
   display: flex;
@@ -391,3 +404,6 @@ padding-top: 5%;
 }
 /* ...rest of your CSS... */
 
+
+
+/* Additional styling for aesthetics */
