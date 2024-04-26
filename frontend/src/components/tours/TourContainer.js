@@ -29,7 +29,7 @@ const TourContainer = ({ house }) => {
                         <div className="stats">
                             <div className="detail">
                                 <img src={bedIcon} className="Bedrooms" alt="Bedrooms" />
-                                <span>{house.rooms} Bedroom(s)</span>
+                                <span>{house.bedrooms} Bedroom(s)</span>
                             </div>
                             <div className="detail">
                                 <img src={floorAreaIcon} className="sqFoot" alt="sqFoot" />
@@ -48,7 +48,7 @@ const TourContainer = ({ house }) => {
                         </div>
                         <div className="price">
                             <span>
-                                {house.price && house.price.$numberDecimal ? `$${house.price.$numberDecimal}/mo` : 'Price data not available'}
+                                {house.price && house.price.$numberDecimal ? `$${house.price.$numberDecimal}/wk` : 'Price data not available'}
                             </span>
                         </div>
                     </div>

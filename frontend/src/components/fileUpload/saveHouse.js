@@ -25,7 +25,7 @@ export async function saveHouse( houseID, imageReferences) {
         price: 0.00,
         dateListed: new Date().toISOString(),
         location: "Unknown",
-        kitchen: 1,
+        bedrooms: 1,
         backyard: false,
         laundryRoom: false,
         dateAvailable: new Date().toISOString(),

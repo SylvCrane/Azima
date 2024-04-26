@@ -45,44 +45,53 @@
     
 
    <div id="formContainer"></div>
-
+   <div id="detailsBox"></div>
 
  <div id="overlay">  </div>
-    <div id="aframe-container">
+ <div id="aframe-container">
 
-    <a-scene embedded> 
-      <a-assets>
+  <a-scene embedded> 
+    <a-assets>
 
-      </a-assets>
+    </a-assets>
 
-      
-      <a-entity camera wasd-controls look-controls position="0 0 0" >
-        <!-- Cursor Entity -->
-        <a-entity id="cursorRing" 
-                  position="0 0 -1" 
-                  geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03" 
-                  material="color: white; shader: flat"
-                  cursor="rayOrigin: entity;"
-                  raycaster="showLine: true; lineColor: red; lineOpacity: 1"
-                  raycaster="far: 10; showLine: true"
-                  super-hands=" colliderEvent: raycaster-intersection; colliderEventProperty: els; colliderEndEvent:raycaster-intersection-cleared; colliderEndEventProperty: clearedEls;"
-             >
-        </a-entity>
+    
+    <a-entity camera wasd-controls look-controls position="0 0 0" >
+      <!-- Cursor Entity -->
+      <a-entity id="cursorRing" 
+                position="0 0 -1" 
+                geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03" 
+                material="color: white; shader: flat"
+                cursor="rayOrigin: entity;"
+                raycaster="showLine: true; lineColor: red; lineOpacity: 1"
+                raycaster="far: 10; showLine: true"
+                super-hands=" colliderEvent: raycaster-intersection; colliderEventProperty: els; colliderEndEvent:raycaster-intersection-cleared; colliderEndEventProperty: clearedEls;"
+               >
       </a-entity>
+    </a-entity>
 
 
 
 
 
-      <a-sky  rotation= "1 180 2 " radius="20" 
-     ></a-sky>
+    <a-sky  rotation= "1 180 2 " radius="20" 
+   ></a-sky>
 
-   
-    </a-scene>
-   <div id="saveContainer"> 
-    <button id="saveHouseBtn">Save House</button>
-  </div>
+ 
+  </a-scene>
+ 
    </div>
+   <div class="exitContainer"> 
+    <button id="exitBtn" style="border: none; background: none;">
+      <img src="./xmark-solid.svg" alt="Close" style="width: 40px; height: 40px;">
+      
+  </button>
+  <div id="exitOptions">
+    <span id="exitTour">Exit Tour</span>
+    <span id="Details">House Details</span>
+
+  </div>
+  </div>
   </body>
 
 </html>

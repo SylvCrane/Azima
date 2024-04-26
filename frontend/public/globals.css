@@ -417,13 +417,13 @@ width:100%;
 .close-gallery:hover {
   color:#ffffff /* Slightly lighter than gallery background */
 }
-#saveHouseBtn {
+#saveBtn {
   position: absolute;
   top: 20px; /* Adjust as needed */
-  right: 20px; /* Adjust as needed */
+  left: 20px; /* Adjust as needed */
   z-index: 1000; /* Ensure it's above the A-frame scene */
   border: none;        
-  background-color: #0EB49A;  
+ 
   color: white;       
   font-size: 16px;     
   border-radius: 4px;  
@@ -435,6 +435,202 @@ width:100%;
   padding: 15px 48px; 
   /* Adjust as needed */
 }
-#saveHouseBtn:hover {
-  background-color:#4ABFAA;
+
+#exitBtn {
+  position: fixed; /* Use fixed positioning to keep the button in view */
+  top: 20px;       /* Distance from the top of the viewport */
+  left: 20px;     /* Distance from the right of the viewport, adjusted for typical close button placement */
+  z-index: 1000;   /* High z-index to ensure it appears above other content */
+  border: none;    /* No border for a cleaner look */
+  background-color: transparent; /* Transparent background to let the X image show through */
+  cursor: pointer; /* Cursor indicates clickable */
+  outline: none;   /* Remove outline to avoid focus border */
+  padding: 10px;   /* Padding around the image for easier clicking */
+   /* Height of the button */
+
+}
+
+.exitContainer{
+  flex-direction: column;
+}
+
+.exitContainer #exitOptions{
+  visibility: hidden; /* Hide by default */
+  opacity: 0; 
+  display:flex;
+ color:white;
+ position: fixed; /* Use fixed positioning to keep the button in view */
+   /* Distance from the right of the viewport, adjusted for typical close button placement */
+ z-index: 1000;   /* High z-index to ensure it appears above other content */
+ border: none;    /* No border for a cleaner look */
+ background-color: transparent; /* Transparent background to let the X image show through */
+ cursor: pointer; /* Cursor indicates clickable */
+ outline: none;   /* Remove outline to avoid focus border */
+ font-family: Mazzard; 
+  font-weight: 600;
+  font-size: 25px;
+  left:40px;
+  top: 80px;
+  flex-direction: column; 
+  transition: opacity 0.5s ease, visibility 0.5s;
+}
+
+.exitContainer:hover #exitOptions {
+  visibility: visible; /* Make visible on hover */
+  opacity: 1; 
+  
+}
+#exitBtn img {
+  display: block; /* Remove any extra space below the image */
+  width: 100%;    /* Full width of the button */
+  height: auto;   /* Maintain aspect ratio */
+
+}
+#exitOptions{
+  flex-direction: column;
+}
+
+
+#exitOptions span {
+  transition: color 0.3s ease; /* Smooth transition for the color change */
+  cursor: pointer; /* Indicates that the item is clickable */
+  padding: 5px 0; /* Add some padding for better readability and clickability */
+}
+
+#exitOptions span:hover {
+  color: #0EB49A; /* Change to a different color on hover */
+}
+
+#saveBtn {
+  position: fixed; /* Use fixed positioning to keep the button in view */
+  top: 20px;       /* Distance from the top of the viewport */
+  left: 20px;     /* Distance from the right of the viewport, adjusted for typical close button placement */
+  z-index: 1000;   /* High z-index to ensure it appears above other content */
+  border: none;    /* No border for a cleaner look */
+  background-color: transparent; /* Transparent background to let the X image show through */
+  cursor: pointer; /* Cursor indicates clickable */
+  outline: none;   /* Remove outline to avoid focus border */
+  padding: 10px;   /* Padding around the image for easier clicking */
+   /* Height of the button */
+
+}
+
+.saveContainer{
+  flex-direction: row;
+}
+
+.saveContainer #saveOptions{
+  visibility: hidden; /* Hide by default */
+  opacity: 0; 
+ color:white;
+ position: fixed; /* Use fixed positioning to keep the button in view */
+   /* Distance from the right of the viewport, adjusted for typical close button placement */
+ z-index: 1000;   /* High z-index to ensure it appears above other content */
+ border: none;    /* No border for a cleaner look */
+ background-color: transparent; /* Transparent background to let the X image show through */
+ cursor: pointer; /* Cursor indicates clickable */
+ outline: none;   /* Remove outline to avoid focus border */
+ font-family: Mazzard; 
+  font-weight: 600;
+  font-size: 25px;
+  left:40px;
+  top: 70px;
+  transition: opacity 0.5s ease, visibility 0.5s;
+  display: flex;           /* Enables flexbox */
+  flex-direction: column; 
+gap:10px;
+}
+#saveOptions{
+  flex-direction: column;
+}
+
+#saveOptions span {
+  transition: color 0.3s ease; /* Smooth transition for the color change */
+  cursor: pointer; /* Indicates that the item is clickable */
+  padding: 5px 0; /* Add some padding for better readability and clickability */
+}
+
+#saveOptions span:hover {
+  color: #0EB49A; /* Change to a different color on hover */
+}
+
+
+.saveContainer:hover #saveOptions{
+  visibility: visible; /* Make visible on hover */
+  opacity: 1; 
+  
+}
+#saveBtn img {
+  display: block; /* Remove any extra space below the image */
+  width: 100%;    /* Full width of the button */
+  height: auto;   /* Maintain aspect ratio */
+
+}
+
+
+
+.details {
+  position: fixed; /* Fixed position relative to the viewport */
+  bottom: 0;
+  left: 0;
+  background: rgba(22, 22, 22, 0.8); /* Semi-transparent background */
+  color: #ffffff; /* Text color */
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 9999;
+  border-top-right-radius: 30px; /* Rounded top right corner */
+}
+.details-content {
+  display: flex;
+  align-items: center;
+}
+#closeBtn{
+  visibility: hidden; /* Hide by default */
+  opacity: 0; 
+  transition: opacity 0.5s ease, visibility 0.5s;
+}
+.details:hover #closeBtn
+{
+  visibility: visible; /* Hide by default */
+  opacity: 1; 
+}
+.house-icon {
+  font-size: 24px; /* Large size for the house icon */
+  margin-right: 10px;
+}
+
+.house-address {
+  font-family: Mazzard;
+
+  margin-right: 20px;
+}
+
+.house-details {
+  display: flex;
+  align-items: center;
+}
+
+.details-icon {
+  font-size: 20px; /* Slightly smaller size for detail icons */
+}
+
+.details-text {
+  margin-right: 15px;
+font-family: mazzard;
+
+}
+.details-content {
+  display: flex;
+  align-items: center;
+}
+
+.house-icon, .details-icon {
+  margin-right: 8px;
+}
+
+.details-text {
+  margin-right: 16px; /* Adjust as needed */
 }

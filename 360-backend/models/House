@@ -52,7 +52,7 @@ const houseSchema = new Schema({
         required: true,
         trim: true
     },
-    kitchen: {
+    bedrooms: {
         type: Number,
         required: true,
         trim: true
@@ -67,11 +67,7 @@ const houseSchema = new Schema({
         required: true,
         trim: true
     },
-    backyard: {
-        type: Boolean,
-        required: true,
-        trim: true
-    }
+  
     
 });
 

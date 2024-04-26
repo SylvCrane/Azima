@@ -118,7 +118,7 @@ function Save() {
 
   return (
     <div className="Save">
-      <h1>House info</h1>
+      <h1>Publish House</h1>
       <div className="form-container">
         <form onSubmit={handleSubmit} className="inputForm">
           <div className="form-group">
@@ -131,8 +131,8 @@ function Save() {
               <input type="number" name="livingAreas" placeholder="" value={formData.livingAreas} onChange={handleChange} required /><br />
             </div>
             <div>
-              <span>Number of Kitchens</span>
-              <input type="number" name="kitchen" placeholder="" value={formData.kitchen} onChange={handleChange} required /><br />
+              <span>Number of Bedrooms</span>
+              <input type="number" name="bedrooms" placeholder="" value={formData.bedrooms} onChange={handleChange} required /><br />
             </div>
 
             <label>
@@ -155,7 +155,7 @@ function Save() {
             </div>
             <div>
               <span>Date Available</span>
-              <input type="date" name="dateListed" value={formData.dateListed} onChange={handleChange} required /><br />
+              <input type="date" name="dateListed" value={formData.dateAvailable} onChange={handleChange} required /><br />
             </div>
             <div>
               <span>Address</span>
