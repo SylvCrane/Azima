@@ -1,7 +1,27 @@
 
+ @font-face {
+  font-family: 'Mazzard';
+  src: local('Mazzard M Bold'), local('Mazzard-M-Bold'),
+      url('/frontend/azima/fonts/MazzardM-Bold.woff2') format('woff2'),
+      url('/frontend/azima/fonts/MazzardM-Bold.woff') format('woff'),
+      url('/frontend/azima/fonts/MazzardM-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Mazzard';
+  src: local('Mazzard M Regular'), local('Mazzard-M-Regular'),
+      url('/frontend/azima/fonts/MazzardM-Regular.woff2') format('woff2'),
+      url('/frontend/azima/fonts/MazzardM-Regular.woff') format('woff'),
+      url('/frontend/azima/fonts/MazzardM-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+ 
 
 
 #aframe-container {
+  position: relative; 
   width: 100vw;
   height: 100vh;
  overflow: hidden;
@@ -105,6 +125,7 @@ body{
   /* Hide overflow */
   overflow-x: auto; 
   flex-shrink: 0;
+
 }
 
 .inputForm, .fileForm {
@@ -240,9 +261,135 @@ input[type="text"]{
  
 }
 
+
+.zoom-controls {
+  display: flex;
+  z-index: 1000;
+  position: absolute;
+  justify-content: center; /* Center the buttons horizontally */
+  align-items: center; /* Align the buttons vertically */
+left: 71%;
+  top: 75%;
+  gap: 10px; /* Space between buttons */
+}
+
+/* General style for both zoom buttons */
+.zoom-controls button {
+  border: none;
+  
+  background: none;
+  cursor: pointer;
+  width: 40px;        /* Consistent size for easy clicking */
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease-in-out; /* Smooth scaling transition */
+}
+
+/* Hover effect to provide visual feedback */
+.zoom-controls button:hover {
+  transform: scale(1.1); /* Slightly enlarge buttons on hover */
+}
+
+/* Style for the images within the buttons to ensure they fit well */
+.zoom-controls img {
+  width: 100%;        /* Take up full button size */
+  height: auto;       /* Maintain aspect ratio */
+  display: block;     /* Remove any extra spacing */
+}
+
+/* Accessibility: Focus styles */
+
+.portal-sidebar {
+  position: fixed;
+ /* Start off screen */
+  top: 20%;
+  right: 0;
+  width: 300px;
+  height: 60vh;
+  border-radius: 10px;
+  background: #ffffff6a;
+  z-index: 1000; /* Ensure it appears above the scene */
+  transform: translateX(300px); /* Start off-screen to the right */
+  transition: transform 0.5s ease-out;
+  font-family: 'Mazzard', sans-serif; /* Set the font-family to Mazzard */
+}
+.portal-sidebar-content {
+  position: fixed;
+ /* Start off screen */
+  
+  right: 0;
+  width: 300px;
+  height: 49vh;
+
+  overflow-y: auto;
+  z-index: 1000; /* Ensure it appears above the scene */
+  
+  font-family: 'Mazzard', sans-serif; /* Set the font-family to Mazzard */
+}
+
+.portal-sidebar-content ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+.portal-sidebar-content li {
+  padding: 10px;
+  margin: 10px;
+  cursor: pointer;
+  display:flex;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: #ffffff; /* Slightly more transparency for contrast */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border for separating items */
+  transition: background-color 0.3s; /* Smooth background color transition on hover */
+  border-radius: 10px;;
+  flex-direction: row;
+}
+
+
+.portal-sidebar-content li:hover {
+  background: #eeeeee; /* Lighter background on hover for better contrast */
+}
+.portal-sidebar-content{
+  scrollbar-width: none; /* For Firefox */
+  scrollbar-gutter: stable both-edges; /* Avoids content reflow in supporting browsers */
+}
+
+/* For Chrome, Edge, and Safari */
+.portal-sidebar-content::-webkit-scrollbar {
+  display: none;
+}
+.portal-sidebar-content li img {
+  flex-shrink: 0; /* Prevent the image from shrinking */
+  margin-right: 10px; /* Add some space between the image and the text */
+}
+
+.portal-sidebar-header {
+  color: #09483E; /* Choose a text color that stands out against the background */
+  padding: 16px; /* Adjust padding to your preference */
+  font-size: 1.5em; /* Adjust font size to your preference */
+  text-align: center; /* Center the header text */
+ /* Slightly different background for contrast */
+ font-weight:700;
+}
+.toggle-list-btn {
+  position: absolute;
+  top: 50%; /* Center the button vertically */
+  right: 100%; /* Position it to the left of the sidebar */
+  transform: translateY(-50%); /* Align the center of the button with the vertical center of the sidebar */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1010; /* Above the sidebar-content */
+}
+
 .inputForm h1 {
   margin-bottom: 5px;  /* Brings the header closer to the input box */
 }
+
 
 .color-picker {
   display: flex;
@@ -347,6 +494,8 @@ input[type="text"]{
 
 .select-gallery {
   max-width: 34vh;
+  font-family: Mazzard;
+  font-weight: 700;
   background-color: #2b2b2b;
   padding: 10px 10px;
   color: white;

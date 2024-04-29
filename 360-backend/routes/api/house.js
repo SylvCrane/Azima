@@ -95,5 +95,33 @@ router.put('/house/update/:houseID', (req, res) => {
         })
         .catch(err => res.status(400).json({ error: 'Unable to update house', details: err.message }));
 });
+router.delete('/house/:houseID/portal', async (req, res) => {
+    const { houseID } = req.params;  // Corrected way to access houseID
+    const { location, destination } = req.query;  // Assuming these are passed as query parameters
+
+    try {
+        console.log('Deleting portal...');
+        console.log('House ID:', houseID);
+        console.log('Location:', location);
+        console.log('Destination:', destination);
+
+        const house = await House.findOneAndUpdate(
+            { houseID: houseID },  // Pass houseID as an object to match the _id field
+            { $pull: { portals: { location: location, destination: destination } } },
+            { new: true }  // Returns the modified document
+        );
+
+        if (!house) {
+            console.log('House not found or Portal not found with the specified criteria');
+            return res.status(404).json({ error: 'House not found or Portal not found with the specified criteria' });
+        }
+
+        console.log('Portal deleted successfully');
+        res.json({ msg: 'Portal deleted successfully', updatedHouse: house });
+    } catch (err) {
+        console.error('Error deleting portal:', err);
+        res.status(400).json({ error: 'Unable to delete portal', details: err.message });
+    }
+});
 
 module.exports = router;

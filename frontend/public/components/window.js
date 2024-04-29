@@ -28,7 +28,10 @@ AFRAME.registerComponent("window", {
 
     this.el.addEventListener("click", () => {
       let overlay = document.getElementById('overlay');
-    
+      let sidebar = document.getElementById('portal-sidebar');
+      if(sidebar){
+      sidebar.style.display = 'none';
+      }
       // Start fade-in effect
       overlay.style.transition = 'opacity 0.5s';
       overlay.style.opacity = '1';
@@ -90,6 +93,10 @@ AFRAME.registerComponent("window", {
     document.addEventListener("move", (e) => {
       let sky = document.querySelector("a-sky");
       let className = sky.getAttribute("class");
+      let sidebar = document.getElementById('portal-sidebar');
+      if(sidebar){
+    sidebar.style.display = 'none';
+      }
       if (this.el.getAttribute("class") === e.detail.id){
         this.pull(this.el);  
       }
@@ -126,11 +133,30 @@ AFRAME.registerComponent("window", {
   },
 
   hoverEnd: function (e) {
-   
+    let clearedEl = e.detail.clearedEls[0];
+
+    if (clearedEl.parentNode === this.el) {
+      // Change from parent check to this.el
+      let triangles = this.el.querySelectorAll("a-triangle"); // Get triangles from this.el
+
+      triangles.forEach((triangle) => {
+        triangle.setAttribute("material", "opacity: 0.3");
+      });
+    }
   },
 
   hover: function (e) {
-   
+    let intersectedEl = e.detail.els[0];
+    console.log(e.detail.els[0].parentNode);
+
+    if (intersectedEl.parentNode === this.el) {
+      // Change from parent check to this.el
+      let triangles = this.el.querySelectorAll("a-triangle"); // Get triangles from this.el
+
+      triangles.forEach((triangle) => {
+        triangle.setAttribute("material", "opacity: 0.7");
+      }); // Change from parent check to this.el
+    }
   },
 
   calcOffset: function (target) {

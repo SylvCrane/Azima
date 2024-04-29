@@ -57,6 +57,9 @@ if(!this.el.getAttribute('window')){
       textEl.setAttribute("rotation", textInfo.rotation);
       textEl.setAttribute("width", "30");
       textEl.setAttribute("align", "center");
+      textEl.setAttribute("font", "./assets/MazzardM-Regular-msdf.json");
+      textEl.setAttribute("negate", "false");
+
       this.el.appendChild(textEl);
     });
 

@@ -24,6 +24,8 @@
     <script  src="./components/loader.js"></script>
     <script  src="./components/loadin.js"></script>
     <script  src="./components/save.js"></script>
+    <script  src="./components/capture.js"></script>
+    <script  src="./components/remove.js"></script>
    
  
   </head>
@@ -41,6 +43,18 @@
   </div>
         <button class="close-gallery" onclick="toggleGallery()">▲</button>
     </div>
+    <div id="portal-sidebar" class="portal-sidebar" > 
+   
+      <header class="portal-sidebar-header">
+        Select a portal to remove
+      </header>
+      <button id="toggle-list-btn" class="toggle-list-btn" >
+        <img src="./assets/chevron-right-solid.svg" alt="Toggle list" style="width: 20px; height: 20px;" /> <!-- Use the appropriate chevron icon here -->
+      </button>
+      <div class="portal-sidebar-content"> <!-- This div will handle the scrolling content -->
+        <ul id="portal-list"></ul>
+      </div>
+</div>
 
     
 
@@ -52,7 +66,7 @@
 
     <a-scene embedded> 
       <a-assets>
-
+        <a-asset-item id="mazzard-font" src="./assets/MazzardM-Bold-msdf.json"></a-asset-item>
       </a-assets>
 
       
@@ -83,7 +97,7 @@
   
   <div class=saveContainer id="saveContainer"> 
     <button id="saveBtn" style="border: none; background: none;">
-      <img src="./xmark-solid.svg" alt="Close" style="width: 40px; height: 40px;">
+      <img src=" ./assets/xmark-solid.svg" alt="Close" style="width: 40px; height: 40px;">
       
   </button>
   <div id="saveOptions">

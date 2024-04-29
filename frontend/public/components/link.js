@@ -190,12 +190,10 @@ AFRAME.registerComponent("linker", {
     let camera = this.el.sceneEl.querySelector("[camera]");
     
     this.cursor.setAttribute("toggle-thickness", "");
-    this.cursor.setAttribute("geometry", {
-      radiusOuter: 0.03,
-      radiusInner: 0.02,
-    });
-
-    camera.setAttribute("camera", "fov", "80");
+    
+    let newFov = 80;
+    camera.setAttribute("camera", "fov", "newFov");
+    this.el.sceneEl.emit('fovChanged', { fov: newFov });
     
     const colorOptions = document.querySelectorAll(
       '.color-picker input[type="radio"]'
@@ -288,13 +286,10 @@ serializeText: function(triangles) {
 
     this.cursor.setAttribute("toggle-thickness", "");
     sky.removeAttribute("markable");
-    this.cursor.setAttribute("geometry", {
-      radiusOuter: 0.03,
-      radiusInner: 0.02,
-    });
-
-    camera.setAttribute("camera", "fov", "80");
-
+    
+    let newFov =80;
+    camera.setAttribute("camera", "fov", newFov );
+    this.el.sceneEl.emit('fovChanged', { fov: newFov });
   
   
 
@@ -336,6 +331,8 @@ this.remove();
 
           text.setAttribute("value", input);
           text.setAttribute("align", "center");
+          text.setAttribute("font", "./assets/MazzardM-Regular-msdf.json");
+          text.setAttribute("negate", "false");
 
           let rotation = camera.getAttribute("rotation").y;
           let angle = THREE.MathUtils.degToRad(rotation);

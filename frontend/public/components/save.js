@@ -74,30 +74,30 @@ document.addEventListener('DOMContentLoaded', () => {
           const detailsHtml = `
           <div class="details">
           <div class="details-content">
-  <img class="house-icon" src="./LogoAsset.svg" alt="House" style="width: 24px; height: 24px;" />
+  <img class="house-icon" src=./assets/LogoAsset.svg" alt="House" style="width: 24px; height: 24px;" />
   <span class="house-address">${houseDetails[0].location}</span>
   <div class="house-details">
-    <img class="details-icon" src="./bed-solid.svg" alt="Bedrooms" style="width: 20px; height: 20px;" /><span class="details-text">${houseDetails[0].bedrooms}</span>
-    <img class="details-icon" src="./bath-solid.svg" alt="Bathrooms" style="width: 20px; height: 20px;" /><span class="details-text">${houseDetails[0].bathrooms}</span>
-    <img class="details-icon" src="./couch-solid.svg" alt="Living Areas" style="width: 20px; height: 20px;" /><span class="details-text">${houseDetails[0].livingAreas}</span>
-    <img class="details-icon" src="./expand-solid.svg" alt="Floor Area" style="width: 20px; height: 20px;" /><span class="details-text">${houseDetails[0].sqFootage.$numberDecimal}m²</span>
+    <img class="details-icon" src="./assets/bed-solid.svg" alt="Bedrooms" style="width: 20px; height: 20px;" /><span class="details-text">${houseDetails[0].bedrooms}</span>
+    <img class="details-icon" src="./assets/bath-solid.svg" alt="Bathrooms" style="width: 20px; height: 20px;" /><span class="details-text">${houseDetails[0].bathrooms}</span>
+    <img class="details-icon" src="./assets/couch-solid.svg" alt="Living Areas" style="width: 20px; height: 20px;" /><span class="details-text">${houseDetails[0].livingAreas}</span>
+    <img class="details-icon" src="./assets/expand-solid.svg" alt="Floor Area" style="width: 20px; height: 20px;" /><span class="details-text">${houseDetails[0].sqFootage.$numberDecimal}m²</span>
     <div class="house-details">
-    <img class="details-icon" src="./tree-solid.svg" alt="Backyard" style="width: 20px; height: 20px;" />
+    <img class="details-icon" src="./assets/tree-solid.svg" alt="Backyard" style="width: 20px; height: 20px;" />
     <span class="details-text">
-      <img src="${houseDetails[0].backyard ? './check-solid.svg' : './xmark-solid.svg'}" alt="${houseDetails[0].backyard ? 'Yes' : 'No'}" style="width: 20px; height: 20px;">
+      <img src="${houseDetails[0].backyard ? './assets/check-solid.svg' : './assets/xmark-solid.svg'}" alt="${houseDetails[0].backyard ? 'Yes' : 'No'}" style="width: 20px; height: 20px;">
     </span>
     <div class="house-details">
     <img class="details-icon" src="./jug-detergent-solid.svg" alt="Laundry" style="width: 20px; height: 20px;" />
     <span class="details-text">
-      <img src="${houseDetails[0].laundry ? './check-solid.svg' : './xmark-solid.svg'}" alt="${houseDetails[0].laundry ? 'Yes' : 'No'}" style="width: 20px; height: 20px;">
+      <img src="${houseDetails[0].laundry ? './assets/check-solid.svg' : './assets/xmark-solid.svg'}" alt="${houseDetails[0].laundry ? 'Yes' : 'No'}" style="width: 20px; height: 20px;">
     </span>
-    <img class="details-icon" src="./dollar-sign-solid.svg" alt="Price" style="width: 20px; height: 20px;" /><span class="details-text">${houseDetails[0].price.$numberDecimal}/wk</span>
-    <img class="details-icon" src="./calendar-regular.svg" alt="Date Available" style="width: 20px; height: 20px;" /><span class="details-text">${formatDate(houseDetails[0].dateListed )}</span>
+    <img class="details-icon" src="./assets/dollar-sign-solid.svg" alt="Price" style="width: 20px; height: 20px;" /><span class="details-text">${houseDetails[0].price.$numberDecimal}/wk</span>
+    <img class="details-icon" src="./assets/calendar-regular.svg" alt="Date Available" style="width: 20px; height: 20px;" /><span class="details-text">${formatDate(houseDetails[0].dateListed )}</span>
   
 
 </div>
 <button id="closeBtn" style="border: none; background: none;">
-<img src="./xmark-solid.svg" alt="Close" style="width: 30px; height: 30px;">
+<img src="./assets/xmark-solid.svg" alt="Close" style="width: 30px; height: 30px;">
 
 </button>
         </div>
