@@ -6,7 +6,7 @@ AFRAME.registerComponent('portal-manager', {
         this.renderer = new THREE.WebGLRenderer({ antialias: true });
         this.captureCamera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000); // Aspect ratio 1 for square images
         this.renderTarget = new THREE.WebGLRenderTarget(256, 256);
-        
+        this.counter = 1;
         // Container for sidebar
         this.sidebar = document.getElementById('portal-sidebar');
         if (!this.sidebar) {
@@ -27,8 +27,25 @@ AFRAME.registerComponent('portal-manager', {
         console.log('Event listener for portal-update added');
         const list = document.getElementById('portal-list');
         list.addEventListener('click', this.handleListClick);
+        
+        this.el.sceneEl.addEventListener('reloadScene', (event) => {
+            console.log("reloadScene event received", event.detail.detail.portalEntity);
+            let portalEntity = event.detail.detail.portalEntity;
+            const portals = this.el.sceneEl.querySelectorAll('[window]');
+            portals.forEach((portal) => {
+                if (portal.class === portalEntity.class&& portal.id === portalEntity.id) {
+                    console.log("Portal found and will be removed:", portal);
 
-
+                    if (portal && portal.parentNode) {  // Ensure the entity and its parent exist
+                        portal.parentNode.removeChild(portal);  // Use the proper DOM method to remove
+                        console.log("Portal entity removed:", portal);
+                    } else {
+                        console.error("Portal entity or parent not found", portal);
+                    }
+                }
+            });
+        });
+  
        
     
         // Set up the click event listener for the portal list
@@ -39,7 +56,7 @@ AFRAME.registerComponent('portal-manager', {
     
 
     selectPortal: function(portalEntity) {
-        // Logic to handle the selected portal entity
+      
         if (portalEntity) {
           console.log('Portal selected:', portalEntity);
           
@@ -53,6 +70,7 @@ AFRAME.registerComponent('portal-manager', {
             console.log('Portal deletion cancelled.');
           }
         }
+    
       },
       handleListClick: function(event) {
         const target = event.target.closest('li');
@@ -74,6 +92,7 @@ AFRAME.registerComponent('portal-manager', {
         const sky = document.querySelector('a-sky');
         const allEntities = Array.from(this.el.sceneEl.querySelectorAll('a-entity'))
         .filter(entity => !portalEntity.contains(entity));
+        console.log('Hiding entities for capture');
         allEntities.forEach(entity => entity.object3D.visible = false);
         sky.setAttribute('visible','false');
         // Show only the relevant portal triangles and text for the capture
@@ -110,15 +129,22 @@ AFRAME.registerComponent('portal-manager', {
         this.captureCamera.updateProjectionMatrix();
     
         // Render the scene from the perspective of the captureCamera
+        console.log('Capturing portal');
+
         this.renderer.setSize(256, 256); // Set the desired size
-        this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-this.renderer.setClearColor(0x000000, 0);
+        
+
+            this.renderer = new THREE.WebGLRenderer({ antialias: true });
+        
+        this.renderer.setClearColor(0x000000, 0);
         this.renderer.render(this.el.sceneEl.object3D, this.captureCamera);
         let imgData = this.renderer.domElement.toDataURL();
         this.el.sceneEl.object3D.remove(light);
         // Restore visibility of all entities
+        console.log('Restoring entity visibility');
         allEntities.forEach(entity => entity.object3D.visible = true);
         sky.setAttribute('visible','true');
+        
         console.log('Captured image data:', imgData);
         return imgData;
     },

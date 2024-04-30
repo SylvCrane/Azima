@@ -6,7 +6,8 @@ AFRAME.registerComponent('toggle-thickness', {
       this.plus = document.createElement('button');
       this.plus.className = "plus-button";
       this.plus.innerText = "+";
-  
+      this.removecounter =1;
+      this.addcounter = 1;
 
 
       this.portalManager = document.createElement('a-entity');
@@ -68,12 +69,16 @@ AFRAME.registerComponent('toggle-thickness', {
 },
 
   handleaddPortalClick: function(e) {
+    this.addcounter *= -1;
+    if(this.addcounter === -1){
+
     this.addPortal.removeEventListener('click', this.boundHandleAddPortalClick);
     this.removePortal.removeEventListener('click', this.boundHandleRemovePortalClick);
     this.plus.removeEventListener('click', this.handlePlusClick.bind(this));
     this.cursor.removeEventListener('click', this.handleCursorClick.bind(this));
       console.log("click button");
       this.addRoom();
+    }
   },
 
   toggleSidebar: function() {
@@ -91,6 +96,8 @@ AFRAME.registerComponent('toggle-thickness', {
   },
 
   handleRemovePortalClick: function() {
+    this.removecounter *= -1;
+    if( this.removecounter === -1){
     this.removePortal.removeEventListener('click', this.boundHandleRemovePortalClick);
     this.addPortal.removeEventListener('click', this.handleaddPortalClick.bind(this));
     this.portalManager.emit('portal-update');
@@ -106,6 +113,7 @@ AFRAME.registerComponent('toggle-thickness', {
         this.plus.addEventListener('click', this.boundHandlePlusClick);  // Reattach listener if necessary
  
     }
+  }
 },
 
 
@@ -120,6 +128,8 @@ AFRAME.registerComponent('toggle-thickness', {
         this.cursor.setAttribute('material','opacity:1');
     }
 },
+
+
 
 handlePlusClick: function() {
     this.addPortal = this.createPortal('Add Portal', '#4ABFAA');
@@ -183,6 +193,7 @@ handlePlusClick: function() {
       this.isThick = !this.isThick;
   },
   addRoom: function() {
+    console.log()
     let sky = document.querySelector('a-sky');
     if (this.el.sceneEl.contains(this.addPortal && this.removePortal)) {
       

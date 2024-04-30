@@ -198,7 +198,7 @@ function saveQuit(houseId){
             console.log('Portals loaded successfully:', newPortals);
             
             // Filter out duplicate portals based on a unique attribute (e.g., portalId)
-            const uniquePortals = newPortals.filter(np => !existingPortals.some(ep => ep.portalId === np.portalId));
+            const uniquePortals = newPortals.filter(np => !existingPortals.some(ep => ep._id === np._id));
 
             if (uniquePortals.length > 0) {
                 // Proceed with update if there are new, unique portals
@@ -213,13 +213,14 @@ function saveQuit(houseId){
                 .then(data => {
                     console.log('Success:', data);
                     clearPortals(houseId);
-                    navigateToTours();// Consider whether you still want to clear all portals after this
+               // Consider whether you still want to clear all portals after this
+               navigateToTours();
                 })
                 .catch((error) => console.error('Error:', error));
             } else {
                 console.log('No new portals to add. Skipping update.');
-   
                 navigateToTours();
+           
             }
         })
         .catch(error => {

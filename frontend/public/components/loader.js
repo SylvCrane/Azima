@@ -46,6 +46,7 @@ if(!this.el.getAttribute('window')){
       triangleEl.setAttribute("vertex-b", triangleData.vertexB);
       triangleEl.setAttribute("vertex-c", triangleData.vertexC);
       triangleEl.setAttribute("material", `color: ${triangleData.color}`);
+      
       this.el.appendChild(triangleEl);
     });
 

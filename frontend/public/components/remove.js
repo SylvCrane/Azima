@@ -1,3 +1,4 @@
+var counter = 1;
 document.addEventListener('DOMContentLoaded', function() {
     var toggleListBtn = document.getElementById('toggle-list-btn');
 
@@ -38,6 +39,8 @@ function exitSidebar() {
 
 
 function sendDeleteRequest(portalEntity, houseID) {
+counter *= -1;
+if (counter === -1){
     const location = portalEntity.className; // Assuming this is the intended use of 'className'
     const destination = portalEntity.id; // Assuming 'id' maps to 'destination'
 
@@ -81,12 +84,27 @@ function sendDeleteRequest(portalEntity, houseID) {
     .then(data => {
             if (data.msg) {
                     console.log('Portal delete successful', data);
+                    refreshScene(portalEntity);
+
             } else {
                     // This block handles the response from the nested portal deletion attempt
                     console.log('Nested portal delete successful', data);
+                    refreshScene(portalEntity);
             }
     })
     .catch((error) => {
             console.error('Error removing portal:', error);
     });
+
+}
+function refreshScene(portalEntity) {
+        const sceneEl = document.querySelector('a-scene');
+        if (sceneEl) {
+            console.log('Emitting reloadScene event with details:', portalEntity);
+            sceneEl.emit('reloadScene', { detail: { portalEntity: portalEntity } });
+            console.log('reloadScene event emitted');
+        } else {
+            console.error('Scene element not found for refreshScene');
+        }
+    }
 }

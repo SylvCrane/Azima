@@ -4,6 +4,7 @@ AFRAME.registerComponent("linker", {
 
 
   init: function () {
+
     console.log("[linker] Component initialized.");
     console.log(this.el);
     this.initializeVariables();
@@ -38,6 +39,7 @@ AFRAME.registerComponent("linker", {
     const toggleTextCheckbox = document.getElementById("toggleText");
     if (toggleTextCheckbox) {
       toggleTextCheckbox.addEventListener('change', (event) => {
+
         if (event.target.checked) {
           // If the checkbox is checked, re-add the text based on the current selection
           if (this.selected) {
@@ -57,7 +59,7 @@ AFRAME.registerComponent("linker", {
     this.boundHandleFourPointsCaptured =
       this.handleFourPointsCaptured.bind(this);
     this.boundHandleFourPointsRemoved = this.handleFourPointsRemoved.bind(this);
-
+    
 
     
     // Add event listeners
@@ -132,6 +134,7 @@ AFRAME.registerComponent("linker", {
  
     this.triangles = [];
     this.positions = null;
+    console.log(this.el, this.el.parentNode);
     if (this.el && this.el.parentNode) {
       this.el.parentNode.removeChild(this.el);
       console.log('linker removed');
@@ -149,79 +152,78 @@ AFRAME.registerComponent("linker", {
   },
 
   save: function () {
+    console.log("Save called at:", new Date().toISOString()); // Log the exact time the save is called
     const params = new URLSearchParams(window.parent.location.search);
-    console.log(params);
-  const houseID = params.get('houseID');
-  console.log("houseID before loadImageData call: ", houseID);
-    let eventData =  JSON.stringify({
-      destination: this.el.getAttribute("id"),
-      location: this.el.getAttribute("class"),
-      houseID: houseID,
-      triangles: this.serializeTriangles(this.triangles),
-      textData: this.serializeText(this.triangles),
+    const houseID = params.get('houseID');
+    console.log("House ID:", houseID);
+
+    let eventData = JSON.stringify({
+        destination: this.el.getAttribute("id"),
+        location: this.el.getAttribute("class"),
+        houseID: houseID,
+        triangles: this.serializeTriangles(this.triangles),
+        textData: this.serializeText(this.triangles),
     });
-    
-    fetch('http://localhost:8082/api/house/house/' +houseID+'/portals', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json',
-      },
-      body: eventData,
-  })
-  .then(response => {
-      if (!response.ok) {
-          throw new Error('Network response was not ok');
-      }
-      return response.json();
-  })
-  .then(data => console.log('Document saved:', data))
-  .catch(error => console.error('Error saving document:', error));
 
+    console.log("Event data prepared:", eventData);
 
+    fetch('http://localhost:8082/api/house/house/' + houseID + '/portals', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: eventData,
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Document saved:', data);
+        console.log("Processing UI changes post-save");
 
+        let formContainer = document.getElementById("formContainer");
+        let saveContainer = document.getElementById("saveContainer");
 
+        console.log("Emitting createWindow now with eventData:", eventData);
+        this.el.sceneEl.emit("createWindow", eventData);
+        console.log("[linker] Event 'createWindow' emitted with event details:", eventData);
 
-    let formContainer = document.getElementById("formContainer");
-    let saveContainer = document.getElementById("saveContainer");
-    this.el.sceneEl.emit("createWindow", eventData);
-    console.log("[linker] Event 'createWindow' emitted with event details:", eventData);
-    let container = document.getElementById("aframe-container");
-    let overlay = document.getElementById("overlay");
-    let camera = this.el.sceneEl.querySelector("[camera]");
-    
-    this.cursor.setAttribute("toggle-thickness", "");
-    
-    let newFov = 80;
-    camera.setAttribute("camera", "fov", "newFov");
-    this.el.sceneEl.emit('fovChanged', { fov: newFov });
-    
-    const colorOptions = document.querySelectorAll(
-      '.color-picker input[type="radio"]'
-    );
-    colorOptions.forEach((option) => {
-      option.removeEventListener("change", this.handleColorInput);
-    });
-    
-   
+        let container = document.getElementById("aframe-container");
+        let overlay = document.getElementById("overlay");
+        let camera = this.el.sceneEl.querySelector("[camera]");
 
-    this.remove();
+        console.log("Setting cursor thickness and FOV changes");
+        this.cursor.setAttribute("toggle-thickness", "");
 
-    if (container) {
-      container.style.width = "100vw";
-      container.style.height = "100vh";
-      overlay.style.width = "100vw";
-      overlay.style.height = "100vh";
-      container.style.padding = "0px";
-    }
+        let newFov = 80;
+        camera.setAttribute("camera", "fov", newFov);
+        this.el.sceneEl.emit('fovChanged', { fov: newFov });
 
-  
-    formContainer.innerHTML ='';
-    saveContainer.style.display = 'flex';
-this.remove();
-  
-  },
+        console.log("Removing color-picker event listeners");
+        const colorOptions = document.querySelectorAll('.color-picker input[type="radio"]');
+        colorOptions.forEach((option) => {
+            option.removeEventListener("change", this.handleColorInput);
+        });
 
+        if (container) {
+            console.log("Adjusting container and overlay dimensions and padding");
+            container.style.width = "100vw";
+            container.style.height = "100vh";
+            overlay.style.width = "100vw";
+            overlay.style.height = "100vh";
+            container.style.padding = "0px";
+        }
 
+        formContainer.innerHTML = '';
+        saveContainer.style.display = 'flex';
+        console.log("Calling remove method to clean up");
+        this.remove();
+    })
+    .catch(error => console.error('Error saving document:', error));
+},
 
   serializeTriangles: function(triangles) {
     console.log("Serializing triangles:", triangles);

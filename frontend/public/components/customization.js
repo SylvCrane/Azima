@@ -16,7 +16,7 @@ document.addEventListener("edit", function () {
   let selected;
   // Change the background color of the container when the color wheel changes.
  
- 
+  
  let  sceneEl=   document.querySelector('a-scene');
  sceneEl.addEventListener('fovChanged', (evt) => {
   console.log(evt.detail.fov);
@@ -36,25 +36,34 @@ document.addEventListener("edit", function () {
   
   
 
- 
+select.addEventListener('click', (e) => {
+ asset.src = e.target.src;
+ asset.id = e.target.id;
+});
+
 
   
-  document.getElementById("saveButton").addEventListener("click", function () {
-    let event = new Event("save");
-    let sky = document.querySelector("a-sky");
-    let tab = document.getElementById('tab');
-    if (asset.id && asset.src) {
-      document.body.dispatchEvent(event);
-      assetsContainer.appendChild(asset);
-      console.log(assetsContainer);
-      console.log("saved sent");
-      console.log(asset.src);
-      tab.style.display ='';
-      asset = document.createElement("img"); 
-    } else {
-      console.log("Asset id or src is not set");
-    }
-  });
+document.getElementById("saveButton").addEventListener("click", function () {
+  console.log("Save button clicked.");  // Logs when the button is clicked
+
+  let event = new Event("save");  // Create a 'save' event
+  let sky = document.querySelector("a-sky");  // Find the <a-sky> element
+  let tab = document.getElementById('tab');  // Find the 'tab' element
+  let assetsContainer = document.querySelector("a-assets");  // Find the assets container
+
+  console.log("Checking if asset ID and source are set");  // Log before checking asset conditions
+  if (asset.id && asset.src) {
+      console.log("Asset ID and src are set, dispatching save event.");  // Log if conditions are met
+      document.body.dispatchEvent(event);  // Dispatch the 'save' event
+      assetsContainer.appendChild(asset);  // Append asset to the assets container
+      console.log("Asset appended to assetsContainer:", assetsContainer);
+      console.log("Saved sent with asset src:", asset.src);  // Log asset source
+      tab.style.display = '';  // Adjust display of the 'tab' element
+      asset = document.createElement("img");  // Reset the asset element
+  } else {
+      console.log("Asset id or src is not set");  // Log if asset conditions are not met
+  }
+});
   document.getElementById("cancelButton").addEventListener("click", function () {
     let tab = document.getElementById('tab');
     let event = new Event("cancel");
@@ -132,8 +141,8 @@ function updateCursorScale(fov) {
   
   // Calculate the new scale based on the change in FOV
   const scale = baseScale * (fov / baseFov);
-  console.log(baseScale);
-  console.log(scale);
+
+
   cursorRing.setAttribute('scale', `${scale} ${scale} ${scale}`);
 
 
