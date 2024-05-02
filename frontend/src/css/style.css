@@ -3,22 +3,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Alatsi&family=Flow+Circular&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Ramabhadra&family=Rubik:ital,wght@0,300..900;1,300..900&family=Varela+Round&display=swap');
 /* https://fonts.google.com/selection/embed */
 
-  * {
-    font-family: "Rubik", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: <weight>;
-    font-style: normal;
-    font-size: 14px;
-    box-sizing: border-box;
-    margin: 0;
-    
-  }
+* {
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+  font-size: 14px;
+  box-sizing: border-box;
+  margin: 0;
+}
   
-  h1 {
-    font-size: 40px;
-    font-weight: bold;
-    margin: 0;
-  }
+h1 {
+  font-size: 40px;
+  font-weight: bold;
+  margin: 0;
+}
 
   h2 {
     font-size: 30px;
@@ -105,9 +104,6 @@
     height: 300px;
     margin: 0 auto;
     margin-top: 10%; /* provides gap between bottom of navbar and top of the page */
-    border-radius: 15px; /* Adjust the value as needed for the curve */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a shadow effect */
-    
     justify-content: center;
     align-items: center;
     text-align: center;

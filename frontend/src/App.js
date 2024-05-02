@@ -9,10 +9,11 @@ import { SignUp } from "./components/pages/accounts/SignUp";
 import { Login } from "./components/pages/accounts/Login";
 import { User } from "./components/pages/accounts/User";
 import { Home } from "./components/pages/Home";
-import { UserProvider } from "./components/UserState";
+import { UserProvider } from "./authentication/UserState";
 import { AFrame } from "./components/pages/AFrame"; // Import the AFrame component
 import { Save } from "./components/pages/Save";
 import { ForgotPassword } from "./components/pages/ForgotPassword";
+import { ProtectedRoute } from "./authentication/ProtectedRoute";
 
 function App() {
   const [email, setEmail] = useState(""); // State to hold authenticated user's email
@@ -34,15 +35,15 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/tours" element={<Tours />} />
           <Route path="/about" element={<About />} />
-          <Route path="/editor" element={<Editor />} />
+          <Route path="/editor" element={<ProtectedRoute> <Editor /> </ProtectedRoute>} /> {/* User must be authenticated to go to this page */}
           <Route path="/account/signup" element={<SignUp setEmail={setEmail} />} />
           <Route path="/account/login" element={<Login setEmail={setEmail} />} />
           <Route path="/account/forgot-password" element={<ForgotPassword />} />
-          <Route path="/account/user" element={<User />} />
-          <Route path="/editor/aframe" element={<AFrame />} />
+          <Route path="/account/user" element={<ProtectedRoute> <User /> </ProtectedRoute>} /> {/* User must be authenticated to go to this page */}
+          <Route path="/editor/aframe" element={<ProtectedRoute><AFrame /></ProtectedRoute>} /> {/* User must be authenticated to go to this page */}
           <Route
             path="/editor/save"
-            element={<Save />} 
+            element={<ProtectedRoute><Save /></ProtectedRoute>} 
           />
         </Routes>
       </UserProvider>

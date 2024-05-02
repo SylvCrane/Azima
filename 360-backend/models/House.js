@@ -4,6 +4,9 @@ const imageSchema = require('../models/Image').schema;
 const Schema = mongoose.Schema;
 
 const houseSchema = new Schema({
+
+   
+
     houseID: {
         type: String,
         required: true,

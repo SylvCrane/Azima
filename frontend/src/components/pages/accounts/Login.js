@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "../../../css/style.css";
 import "../../../css/accounts.css";
 import { useNavigate } from 'react-router-dom';
-import { useUser } from "../../UserState";
+import { useUser } from "../../../authentication/UserState";
 
 export const Login = (props) => {
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../../../css/style.css";
 import "../../../css/accounts.css";
 import { useNavigate } from 'react-router-dom';
-import { useUser } from "../../UserState";
+import { useUser } from "../../../authentication/UserState";
 
 export const SignUp = (props) => {
     
@@ -110,7 +110,6 @@ export const SignUp = (props) => {
 
                 <button className="link-btn" type ="button" onClick={() => navigate('/account/login')}>Already have an account? Sign in here.</button><br/><br/>
             </form>
-            <br/>
         </div>
     )
 }

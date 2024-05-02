@@ -5,7 +5,7 @@ import TextAsset from '../../assets/TextAsset.svg';
 import AccountLogo from '../../assets/AzimaAccountLogo.svg';
 import { useState } from "react";
 import { useNavigate, NavLink, Link } from "react-router-dom";
-import { useUser } from "../UserState";
+import { useUser } from "../../authentication/UserState";
 import NavBar from "./NavBar";
 import React from "react";
 
