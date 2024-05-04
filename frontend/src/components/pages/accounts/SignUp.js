@@ -82,10 +82,10 @@ export const SignUp = (props) => {
 
     // Navigates to editor page once sign up is authenticated
     useEffect (() => {
-        if (user.isAuthenticated) {
+        if (user?.isAuthenticated) {
             navigate("/editor");
         }
-    });
+    }, [navigate, user]);
 
     return (
 

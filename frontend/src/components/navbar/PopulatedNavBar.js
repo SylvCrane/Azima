@@ -60,14 +60,14 @@ export const PopulatedNavBar = () => {
         <li><NavLink to ="/tours"><h3>Tours</h3></NavLink></li>
 
         {/* Editor page will appear when user logs in */}
-        {user.isAuthenticated && (
+        {user?.isAuthenticated && (
           <li><NavLink to ="/editor"><h3>Editor</h3></NavLink></li>
         )}
 
         <li><NavLink to ="/about"><h3>About</h3></NavLink></li>
 
         {/* When user is not logged in */}
-        {!user.isAuthenticated && (
+        {!user?.isAuthenticated && (
             <li>
               <div className="account-dropdown">
                 <button className="account-button" onClick={toggleDropdown}>
@@ -88,7 +88,7 @@ export const PopulatedNavBar = () => {
         )}
 
         {/* When user is logged in */}
-        {user.isAuthenticated && (
+        {user?.isAuthenticated && (
           <li>
             <div className="account-dropdown">
               <button className="account-button" onClick={toggleDropdown}>
@@ -97,7 +97,7 @@ export const PopulatedNavBar = () => {
                 </h3>
               </button>
               <div className="dropdown-content">
-                <NavLink to="/account/user" className="dropdown-link">
+                <NavLink to="/account" className="dropdown-link">
                   {user.email}
                 </NavLink>
                 <button className="logout-btn" onClick={handleLogout}>Log Out</button>

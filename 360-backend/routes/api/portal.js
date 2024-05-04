@@ -23,8 +23,8 @@ router.get('/', (req, res) => {
 
 router.get('/:houseID', (req, res) => {
     Portal.find( { "houseID" : req.params.houseID} )
-        .then(image => res.json(image))
-        .catch(err => res.status(404).json({ noimagefound: 'No Portal Found'}));
+        .then(portal => res.json(portal))
+        .catch(() => res.status(404).json({ noimagefound: 'No Portal Found'}));
 });
 
 router.delete('/:houseID', (req, res) => {
@@ -39,5 +39,22 @@ router.delete('/:houseID', (req, res) => {
         })
         .catch(err => res.status(400).json({ error: 'Unable to delete portals', details: err.message }));
 });
+router.delete('/portal/:houseID', (req, res) => {
+    const { houseID } = req.params;
+    const { location, destination } = req.query;  // Extracting location and destination from query parameters
+
+    Portal.findOneAndDelete({ houseID, location, destination })
+        .then(result => {
+            if (!result) {
+                // No document found and deleted
+                return res.status(404).json({ msg: 'No portal found with the specified location and destination to delete' });
+            }
+            // Successfully deleted the document
+            res.json({ msg: 'Portal deleted successfully' });
+        })
+        .catch(err => res.status(400).json({ error: 'Unable to delete portal', details: err.message }));
+});
+
+
 
 module.exports = router;

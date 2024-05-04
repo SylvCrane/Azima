@@ -4,9 +4,6 @@ const imageSchema = require('../models/Image').schema;
 const Schema = mongoose.Schema;
 
 const houseSchema = new Schema({
-
-   
-
     houseID: {
         type: String,
         required: true,
@@ -55,7 +52,7 @@ const houseSchema = new Schema({
         required: true,
         trim: true
     },
-    kitchen: {
+    bedrooms: {
         type: Number,
         required: true,
         trim: true
@@ -70,11 +67,7 @@ const houseSchema = new Schema({
         required: true,
         trim: true
     },
-    backyard: {
-        type: Boolean,
-        required: true,
-        trim: true
-    }
+  
     
 });
 

@@ -4,7 +4,7 @@ import "../../../css/accounts.css";
 import { useNavigate } from 'react-router-dom';
 import { useUser } from "../../../authentication/UserState";
 
-export const Login = (props) => {
+export const Login = () => {
 
     // Use state variables
     const [loginEmail, setLoginEmail] = useState("");
@@ -71,12 +71,7 @@ export const Login = (props) => {
         });
     }
 
-    useEffect (() => {
-        if (user.isAuthenticated) {
-            navigate("/editor"); // When user is authenticated, will open the editor page.
-        }
-    });
-
+    
     return (
         <div className="login-container">
             <form className="login-form" onSubmit={handleSubmit}>

@@ -17,8 +17,8 @@ import { ProtectedRoute } from "./authentication/ProtectedRoute";
 
 function App() {
   const [email, setEmail] = useState(""); // State to hold authenticated user's email
-  const loggedIn = window.localStorage.getItem("isLoggedIn");
-  console.log(loggedIn, "login");
+  // const loggedIn = window.localStorage.getItem("isLoggedIn");
+  // console.log(loggedIn, "login");
   const location = useLocation();
 
 
@@ -39,7 +39,7 @@ function App() {
           <Route path="/account/signup" element={<SignUp setEmail={setEmail} />} />
           <Route path="/account/login" element={<Login setEmail={setEmail} />} />
           <Route path="/account/forgot-password" element={<ForgotPassword />} />
-          <Route path="/account/user" element={<ProtectedRoute> <User /> </ProtectedRoute>} /> {/* User must be authenticated to go to this page */}
+          <Route path="/account" element={<ProtectedRoute> <User /> </ProtectedRoute>} /> {/* User must be authenticated to go to this page */}
           <Route path="/editor/aframe" element={<ProtectedRoute><AFrame /></ProtectedRoute>} /> {/* User must be authenticated to go to this page */}
           <Route
             path="/editor/save"

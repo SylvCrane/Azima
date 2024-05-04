@@ -4,7 +4,6 @@ const dot = require("dotenv");
 dot.config().parsed;
 const connectDB = require('./config/db');
 const cors = require('cors');
-const path = require('path');
 // Routes
 const teleporterRouter = require('./routes/api/teleporter');
 const markerRouter = require('./routes/api/marker');
@@ -19,7 +18,6 @@ connectDB(); // Call connectDB import so mongoDB is connected
 console.log("DB connected")
 
 app.use(express.json()); // allows the data from frontend to be transferred to backend/json file
-app.use(cors());
 app.use(cors({origin: true, credentials: true}));
 
 // Init middleware
