@@ -23,7 +23,7 @@ function App() {
 
 
   const shouldHideNavbar = (pathname) => {
-    return pathname.startsWith("/editor/aframe");
+    return pathname.startsWith("/editor/aframe") || pathname.startsWith("/tours/aframe");
   };
 
   return (
@@ -41,10 +41,8 @@ function App() {
           <Route path="/account/forgot-password" element={<ForgotPassword />} />
           <Route path="/account" element={<ProtectedRoute> <User /> </ProtectedRoute>} /> {/* User must be authenticated to go to this page */}
           <Route path="/editor/aframe" element={<ProtectedRoute><AFrame /></ProtectedRoute>} /> {/* User must be authenticated to go to this page */}
-          <Route
-            path="/editor/save"
-            element={<ProtectedRoute><Save /></ProtectedRoute>} 
-          />
+          <Route path="/tours/aframe" element={<ProtectedRoute><AFrame /></ProtectedRoute>} /> {/* User must be authenticated to go to this page */}
+          <Route path="/editor/save" element={<ProtectedRoute><Save /></ProtectedRoute>} />
         </Routes>
       </UserProvider>
     </div>

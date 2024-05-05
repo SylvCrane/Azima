@@ -8,12 +8,14 @@ const initialUser = {
 
 const UserContext = createContext([initialUser, () => {}]);
 
+// State hook for user information, initialized with localStorage data or the default initial state
 const UserProvider = ({ children }) => {
     const [user, setUser] = useState(() => {
         const savedUser = localStorage.getItem("user");
         return savedUser ? JSON.parse(savedUser) : initialUser;
     });
 
+    // useEffect hook to update localStorage whenever the user state changes
     useEffect(() => {
         if (user.isAuthenticated) {
             localStorage.setItem("user", JSON.stringify(user));

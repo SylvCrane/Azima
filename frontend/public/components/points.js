@@ -1,3 +1,4 @@
+
 AFRAME.registerComponent("markable", {
   init: function () {
     this.identifier = this.generateUniqueIdentifier();

@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./globals.css">
+    <meta charset="utf-8">
+    <title>Azima</title>
+    <meta name="description" content="Azima">
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.misc.min.js"></script>
+    <script src="https://unpkg.com/super-hands@^3.0.3/dist/super-hands.min.js"></script>
+
+  
+    <script src="./components/superhands.js"></script>
+    <script src="./components/window.js"></script>
+    <script src="./components/viewer.js"></script>
+   
+    <script src ="./components/points.js"></script>
+    <script src ="./components/link.js"></script>
+    <script  src="./components/customization.js"></script>
+    <script src ="./components/cursor.js"></script>
+    
+   
+    <script  src="./components/loader.js"></script>
+    <script  src="./components/loadin.js"></script>
+    <script  src="./components/save.js"></script>
+    <script  src="./components/capture.js"></script>
+    <script  src="./components/remove.js"></script>
+   
+ 
+  </head>
+  <body>
+    <div class="tab" id="tab"onclick="toggleGallery()">▼</div>
+
+    <div class="gallery" id="gallery">
+      
+      <div class="scroll-container" id="scroll-container">
+        
+      
+      
+
+
+  </div>
+        <button class="close-gallery" onclick="toggleGallery()">▲</button>
+    </div>
+    <div id="portal-sidebar" class="portal-sidebar" > 
+   
+      <header class="portal-sidebar-header">
+        Select a portal to remove
+      </header>
+      <button id="toggle-list-btn" class="toggle-list-btn" >
+        <img src="./assets/chevron-right-solid.svg" alt="Toggle list" style="width: 20px; height: 20px;" /> <!-- Use the appropriate chevron icon here -->
+      </button>
+      <div class="portal-sidebar-content"> <!-- This div will handle the scrolling content -->
+        <ul id="portal-list"></ul>
+      </div>
+</div>
+
+    
+
+   <div id="formContainer"></div>
+
+
+ <div id="overlay">  </div>
+    <div id="aframe-container">
+
+    <a-scene embedded> 
+      <a-assets>
+        <a-asset-item id="mazzard-font" src="./assets/MazzardM-Bold-msdf.json"></a-asset-item>
+      </a-assets>
+
+      
+      <a-entity camera wasd-controls look-controls position="0 0 0" >
+        <!-- Cursor Entity -->
+        <a-entity id="cursorRing" 
+                  position="0 0 -1" 
+                  geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03" 
+                  material="color: white; shader: flat"
+                  cursor="rayOrigin: entity;"
+                  raycaster="showLine: true; lineColor: red; lineOpacity: 1"
+                  raycaster="far: 10; showLine: true"
+                  super-hands=" colliderEvent: raycaster-intersection; colliderEventProperty: els; colliderEndEvent:raycaster-intersection-cleared; colliderEndEventProperty: clearedEls;"
+                  toggle-thickness>
+        </a-entity>
+      </a-entity>
+
+
+
+
+
+      <a-sky  rotation= "1 180 2 " radius="20" 
+     ></a-sky>
+
+   
+    </a-scene>
+    
+  
+  <div class=saveContainer id="saveContainer"> 
+    <button id="saveBtn" style="border: none; background: none;">
+      <img src=" ./assets/xmark-solid.svg" alt="Close" style="width: 40px; height: 40px;">
+      
+  </button>
+  <div id="saveOptions">
+  <span id="publish">Publish House</span>
+  <span id="saveQuit">Save and Quit</span>
+  <span id="exitNoSave">Quit without Saving</span>
+</div>
+  </div>
+   </div>
+  </body>
+
+</html>

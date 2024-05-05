@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import "../../css/editor.css";
 
 function RoomForm({ onRemove, onUpdate }) {
   const [name, setName] = useState('');
@@ -20,10 +21,10 @@ function RoomForm({ onRemove, onUpdate }) {
   return (
     <div className="form-instance">
       <form className="inputForm">
-        <h1>Room</h1>
+        <h2>Room</h2>
         <input
           type="text"
-          placeholder="Enter text"
+          placeholder="Enter your room name"
           value={name}
           onChange={handleNameChange}
         />
@@ -40,7 +41,7 @@ function RoomForm({ onRemove, onUpdate }) {
         </label>
         <p>Selected file: {file ? file.name : 'None'}</p>
       </div>
-      <button className="cancelButton" onClick={onRemove}>Remove</button>
+      <button id="cancelButton" onClick={onRemove}>Remove</button>
     </div>
   );
 }

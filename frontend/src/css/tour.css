@@ -1,0 +1,136 @@
+/* Start by resetting some default styles */
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    background: #f5f5f5;
+  } */
+  
+  .tours-page {
+    margin-top: 15px; 
+  }
+  
+  .card {
+    max-width: 80%; /* Adjust the width as needed */
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    background: #ffffff;
+  }
+
+  
+  .tours-content {
+    display: flex;
+    flex-direction: row;
+    padding: 20px 20px; 
+    gap: 20px
+  }
+  
+  .thumbnail{
+    position: relative;
+    display: flex; /* Assuming multiple images would be displayed in a row */
+    overflow-x: auto; /* Allows for horizontal scrolling */
+    border-radius: 10px;
+    max-width: 70%;
+  }
+  .address {
+    position: absolute; /* Position absolutely within .thumbnail */
+    bottom: 10px; /* Distance from the top of .thumbnail */
+    left: 10px; /* Distance from the left of .thumbnail */
+    color: white; /* Assuming you want the text to be white */
+    font-size: 20px; /* Make the address text a bit larger */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better readability */
+    padding: 5px 10px; /* Some padding around the text */
+    border-radius: 5px; /* Optionally round the corners */
+    max-width: 90%; /* Limit the width of the address box */
+    overflow: hidden; /* Prevents text spillover */
+    text-overflow: ellipsis; /* Adds ellipsis if text is too long */
+    white-space: nowrap; /* Keeps the address in a single line */
+  }
+  
+  .thumbnail img {
+    max-width: 100%;
+
+    display: block;
+  }
+  
+  
+  
+  .details {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Ensure it wraps on smaller screens */
+    padding: 15px;
+    background: #f9f9f9;
+    margin: auto auto;
+    border-radius: 10px;
+
+  }
+  .btn{
+    background:#0A7A68;
+    color: white;
+    padding: 20px 110px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 24px;
+    margin: 10px 0;
+    border: none;
+
+  }
+
+  .btn:hover{
+   background: #0EB49A
+  }
+  .detail {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    flex-direction: column;
+
+
+  }
+  .detail span {
+    font-size: 16px;
+    flex-wrap: wrap;
+
+  }
+  .stats{ 
+    display: flex;
+    flex-direction: row;
+justify-content:center;
+    margin: 10px 0;
+flex-wrap: wrap;
+
+margin:0 auto;
+column-gap: 20px;
+  }
+  .detail img {
+    margin-right: 8px;
+max-height: 40px;
+
+  }
+
+  
+
+  .price {
+    font-size: 30px;
+    color:#0A7A68;  /* Adjust color to match the theme */
+    padding: 10px 15px;
+
+    text-align: center;
+    font-weight: bold;
+    margin:0 auto;
+
+  }
+  .price span{
+    font-size: 40px;
+   
+    color:#0EB49A;
+  }
+  
