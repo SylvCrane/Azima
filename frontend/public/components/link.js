@@ -7,18 +7,16 @@ AFRAME.registerComponent("linker", {
 
     console.log("[linker] Component initialized.");
     console.log(this.el);
-    this.initializeVariables();
+  
     this.addEventListeners();
-  },
 
-  initializeVariables: function () {
-    let window = document.createElement("a-entity");
-    window.setAttribute("loader", "");
-    this.el.sceneEl.appendChild(window);
+
+
+    
     this.color;
 
-    this.identifier = null;
-    this.hoverTimeout = null;
+ 
+   
     this.triangles = [];
     this.cursor = document.getElementById("cursorRing");
     this.handleSelection = this.handleSelection.bind(this);
@@ -30,7 +28,7 @@ AFRAME.registerComponent("linker", {
       option.addEventListener("change", this.handleColorInput);
     });
 
-    this.selected;
+    
     const select = document.getElementById('scroll')
 
     select.addEventListener('click', (e) => {
@@ -396,6 +394,9 @@ this.remove();
   },
 
   createTriangles: function (positions, event) {
+    let window = document.createElement("a-entity");
+    window.setAttribute("loader", "");
+    this.el.sceneEl.appendChild(window);
     let sky = document.querySelector("a-sky");
 
     let m = document.createElement("a-triangle");
