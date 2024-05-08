@@ -91,28 +91,30 @@ export const SignUp = (props) => {
     }, [navigate, user]);
 
     return (
+        <div className="account-container">
+            <div className="signup-container">
+                <br/>
+                <form className="signup-form" onSubmit={handleSubmit}>
+                    <br/><h1>Create an account</h1>
+                    <p>Please enter your details to register</p>
+                    <br/>
+                    <input value={firstName} name="firstName" onChange={(e) => setFirstName(e.target.value)} id="firstName" placeholder="First Name *" required /><br/>
+                    <input value={lastName} name="lastName" onChange={(e) => setLastName(e.target.value)} id="lastName" placeholder="Last Name *" required/><br/>
+                    <input value={company} name="company" onChange={(e) => setCompany(e.target.value)} id="company" placeholder="Company" autoComplete="off"/><br/>
+                    <input value={signUpEmail} onChange={(e) => setSignUpEmail(e.target.value)} id="loginEmail" placeholder="email@gmail.com *" required/><br/>
+                    <input value={signUpPassword} onChange={(e) => setSignUpPassword(e.target.value)} type="password" id="loginPassword" placeholder="******** *" required/><br/>
+                    <br/>
+                    <button type="submit">sign up</button>
+                    <div className= "required-text"> <br/> (* Required fields must be filled in to create an account)<br/> </div>
+                    <br/>
+                    { alertMessage && (
+                        <div className="alert">{ alertMessage }</div>
+                    )} <br></br>
 
-        <div className="signup-container">
-            <br/>
-            <form className="signup-form" onSubmit={handleSubmit}>
-                <br/><h1>Create an account</h1>
-                <p>Please enter your details to register</p>
-                <br/>
-                <input value={firstName} name="firstName" onChange={(e) => setFirstName(e.target.value)} id="firstName" placeholder="First Name *" required /><br/>
-                <input value={lastName} name="lastName" onChange={(e) => setLastName(e.target.value)} id="lastName" placeholder="Last Name *" required/><br/>
-                <input value={company} name="company" onChange={(e) => setCompany(e.target.value)} id="company" placeholder="Company" autoComplete="off"/><br/>
-                <input value={signUpEmail} onChange={(e) => setSignUpEmail(e.target.value)} id="loginEmail" placeholder="email@gmail.com *" required/><br/>
-                <input value={signUpPassword} onChange={(e) => setSignUpPassword(e.target.value)} type="password" id="loginPassword" placeholder="******** *" required/><br/>
-                <br/>
-                <button type="submit">sign up</button>
-                <div className= "required-text"> <br/> (* Required fields must be filled in to create an account)<br/> </div>
-                <br/>
-                { alertMessage && (
-                    <div className="alert">{ alertMessage }</div>
-                )} <br/>
-
-                <button className="link-btn" type ="button" onClick={() => navigate('/account/login')}>Already have an account? Sign in here.</button><br/><br/>
-            </form>
+                    <button className="link-btn" type ="button" onClick={() => navigate('/account/login')}>Already have an account? Sign in here.</button><br/><br/>
+                </form>
+                <br></br>
+            </div>
         </div>
     )
 }

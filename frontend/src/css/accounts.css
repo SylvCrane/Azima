@@ -4,8 +4,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
   min-height: 90vh; /* Minimum height of the page to fill the viewport */
+  text-align: center;
 }
 
 .signup-container { 
@@ -14,7 +14,14 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  min-height: 90vh; /* Minimum height of the page to fill the viewport */
+  
+  margin: 20px auto;
+  height: 600px;
+  width: 40%; /* Increased width */
+  padding: 30px; /* More padding for better spacing */
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+  transition: box-shadow 0.3s ease-in-out;
 }
 
 .login-container {
@@ -23,7 +30,19 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  min-height: 90vh; /* Minimum height of the page to fill the viewport */
+  
+  margin: 20px auto;
+  height: 500px;
+  width: 40%; /* Increased width */
+  padding: 30px; /* More padding for better spacing */
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.signup-container:hover,
+.login-container:hover {
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* More pronounced hover shadow */
 }
 
 .title {
@@ -51,4 +70,16 @@
 /* For signup page */
 .required-text {
   font-size: 14px;
+}
+
+
+@media (max-width: 770px) {
+
+  .login-container {
+    width: 80%; /* Increased width */
+  }
+
+  .signup-container {
+    width: 80%; /* Increased width */
+  }
 }

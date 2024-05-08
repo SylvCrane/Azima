@@ -32,7 +32,7 @@ export const Tours = () => {
             <h1>Tours</h1><br></br>
             <p>Featured tours for you to view</p><br></br><br></br>
             <div className="new-tour-button-container">
-                <button className="new-tour-button" onClick={() => navigate("/editor")}>+ <br/>Create a new tour!</button>
+                <button className="new-tour-button" onClick={() => navigate("/editor")}> + Create a new tour! <br></br></button>
             </div>
             <br></br><br></br>
             {houses.map((house) => (

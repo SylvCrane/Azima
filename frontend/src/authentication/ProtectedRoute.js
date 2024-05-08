@@ -7,6 +7,7 @@ export const ProtectedRoute = ({ children }) => {
     const location = useLocation();
 
     if (!user.isAuthenticated) {
+        alert("You must be logged in");
         return <Navigate to="/account/login" />;
     }
 

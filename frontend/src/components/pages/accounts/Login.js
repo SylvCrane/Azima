@@ -84,22 +84,23 @@ export const Login = () => {
 
 
     return (
-        <div className="login-container">
-            <form className="login-form" onSubmit={handleSubmit}>
-                <h1>Welcome back</h1>
-                <p>Please enter your details to sign in</p><br/>
-                <input value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} id="loginEmail" placeholder="email@gmail.com" required/><br/>
-                <input value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} type="password" id="loginPassword" placeholder="********" required/>
-                <br/>
-                <br/><button type="submit">Sign In</button><br/>
-                <br/><button className="link-btn" type ="button" onClick={() => navigate('/account/forgot-password')}>Forgot password?</button><br/>
-                <br/>
-                { alertMessage && (
-                    <div className="alert">{ alertMessage }</div>
-                )} <br/>
-
-            <button className="link-btn" type ="button" onClick={() => navigate('/account/signup')}>Don't have an account? Register here.</button><br/>
-            </form>
-        </div>  
+        <div className="account-container">
+            <div className="login-container">
+                <form className="login-form" onSubmit={handleSubmit}>
+                    <h1>Welcome back</h1>
+                    <p>Please enter your details to sign in</p><br/>
+                    <input value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} id="loginEmail" placeholder="email@gmail.com" required/><br/>
+                    <input value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} type="password" id="loginPassword" placeholder="********" required/>
+                    <br/>
+                    <br/><button type="submit">Sign In</button><br/>
+                    <br/><button className="link-btn" type ="button" onClick={() => navigate('/account/forgot-password')}>Forgot password?</button><br/>
+                    <br/>
+                    { alertMessage && (
+                        <div className="alert">{ alertMessage }</div>
+                    )} <br/>
+                    <button className="link-btn" type ="button" onClick={() => navigate('/account/signup')}>Don't have an account? Register here.</button><br/>
+                </form>
+            </div>  
+        </div>
     )
 }

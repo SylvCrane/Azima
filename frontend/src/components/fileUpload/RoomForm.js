@@ -24,7 +24,7 @@ function RoomForm({ onRemove, onUpdate }) {
         <h2>Room</h2>
         <input
           type="text"
-          placeholder="Enter your room name"
+          placeholder="Type your room name"
           value={name}
           onChange={handleNameChange}
         />

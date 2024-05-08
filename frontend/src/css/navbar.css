@@ -79,11 +79,45 @@ nav .menu {
     overflow: hidden;
     outline: none;
     margin-top: 5px;
+
 }
 
 .account-button:hover {
     background-color: #087f6e; /* Darker shade for hover effect */
 }
+
+
+// PROFILE IMAGE
+.profile-image-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.profile-image-container {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;  
+    overflow: hidden;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-image {
+  
+    object-fit: cover;
+}
+
+/* Makes the profile image not go rectangular when hovered */
+.profile-image-container:hover {
+    border-radius: 50%;
+}
+
+
+
+
 
 .dropdown {
     margin-bottom: 5px;

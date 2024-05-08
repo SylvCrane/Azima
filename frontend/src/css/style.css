@@ -43,7 +43,7 @@ h1 {
 button[type=submit] {
   border-radius: 30px;
   border: 1px solid #004d39;
-  background-color: #4ABFAA;
+  background-color: #0EB49A;
   color: #ffffff;
   font-weight: bold;
   cursor: pointer;
@@ -115,7 +115,7 @@ button[type=submit]:hover {
   .join-btn {
     border-radius: 25px;
     border: 1px solid #004d39;
-    background-color: #4ABFAA;
+    background-color: #0EB49A;
     color: white;
     font-size: 14px;
     font-weight: bold;
@@ -132,6 +132,10 @@ button[type=submit]:hover {
     }
   }
 
+  .join-btn:hover {
+    background-color: #087f6e; /* Darker shade for hover effect */
+  }
+
   @media (max-width: 767px){
 
     .tours-page, 
@@ -145,15 +149,5 @@ button[type=submit]:hover {
       padding-left: 50px; /* Add padding to the left */
       padding-right: 50px; /* Add padding to the right */
       height: 450px;
-    }
-
-    .forgot-password-container {
-      width: 70%;
-      height: 60%;
-      margin: 0 auto;
-      margin-top: 25%; /* provides gap between bottom of navbar and top of the page */
-      justify-content: center;
-      align-items: center;
-      text-align: center;
     }
   }

@@ -1,16 +1,5 @@
-/* Start by resetting some default styles */
-/* * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: 'Arial', sans-serif;
-    background: #f5f5f5;
-  } */
-  
-.tours-page {
+
+  .tours-page {
     margin-top: 15px; 
 }
 
@@ -86,9 +75,8 @@
 }
 
 .btn:hover{
-    background-color: #4ABFAA;
+    background-color: #087f6e; /* Darker shade for hover effect */
 }
-
 
 .detail {
     display: flex;
@@ -136,17 +124,24 @@
 }
 
 .new-tour-button {
-    color: #00664d;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 20px;
+    color:  #003326;
+    background-color: #eff5f4;
+    padding: 12px 20px;  /* Adjust padding to match the desired button size */
+    font-size: 18px;  /* Adjust font size as needed */
     font-weight: bold;
-    border-radius: 10px; /* Adjust the value as needed for the curve */
-    box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.5); /* Add a shadow effect */
-    border: 1px solid #00664d;
-
+    border:  #003326;  /* No border */
+    border-radius: 30px;  /* Rounded corners */
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap; /* Ensures that the items remain in a row */
+    transition: box-shadow 0.3s ease-in-out, background-color 0.2s;  /* Smooth transitions for hover effects */
+    box-shadow: 
+        0 8px 16px rgba(0, 102, 77, 0.3),  /* Bottom shadow */
+        0 -8px 16px rgba(0, 102, 77, 0.2); /* Top shadow, slightly lighter */
 }
 
 .new-tour-button:hover {
-    background-color: #f0f0; /* Darker shade for hover effect */
+    box-shadow: 
+        0 5px 30px rgba(0, 102, 77, 0.45), /* More pronounced bottom shadow on hover */
+        0 -5px 30px rgba(0, 102, 77, 0.35); /* More pronounced top shadow on hover */
 }

@@ -1,33 +1,88 @@
+.container {
+  color: #004d38; 
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+  min-height: 85vh; 
+}
+
+.help-message {
+  margin: 0 auto; 
+  text-align: center; 
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+
+.help-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 20px auto;
+
+  width: 45%; /* Increased width */
+  padding: 30px; /* More padding for better spacing */
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.help-form input, 
+.help-form textarea {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc; /* Adding a border to inputs */
+  border-radius: 5px;
+  width: 80%;
+}
+
+.help-form textarea {
+  resize: none; /* Prevent textarea from being resizable */
+  height: 100px;
+  background-color: #ccc;
+  height: 150px;
+
+}
+
+.help-form:hover {
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* More pronounced hover shadow */
+}
+
+button[type=submit] {
+  border-radius: 30px;
+  border: 1px solid #004d39;
+  background-color: #0EB49A;
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 12px 30px;
+  width: 200px;
+  text-transform: uppercase;
+  white-space: nowrap; /* Ensures that the items remain in a row */
+}
+
+button[type=submit]:hover {
+  background-color: #087f6e; /* Darker shade for hover effect */
+}
 
 
 
-  
-  form input, textarea{
-    display: flex;
-    flex-direction: column;
-    width: 350px;
-    margin: 10px;
-    padding: 10px;
+@media (max-width: 770px) {
+  .help-form {
+    width: 90%; /* Adjusts the form width for smaller screens */
+    padding: 20px; /* Slightly less padding to fit small screens */
   }
   
-  form:hover {
-    transform: translateY(-15px);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-  }
-  
-  form button{
-    height: 28px;
-    width: 125px;
-    align-items: center;
-    background-color: rgba(205, 214, 214, 0.701);
+  .help-message {
+    width: 60%;
   }
 
-  .description {
-    max-width: 500px;
-    margin: 0 auto; 
-    text-align: center; 
-    display: flex;
-    justify-content: center;
-    align-items: center; 
+  .help-form input, 
+  .help-form textarea {
+    width: 70%; /* Inputs and textarea take full width of the form */
+
   }
-  
+
+}

@@ -14,6 +14,19 @@
     align-items: center;
     padding: 20px;
     margin-top: 20px; /* Added margin to separate from navbar */
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.tours-section { 
+    width: 100%;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    margin-top: 20px;
+    background-color: #f9f9f9;
 }
 
 .profile-image-container {
@@ -38,7 +51,7 @@
 }
 
 .user-details {
-    width: 100%;
+    width: 50%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -58,7 +71,24 @@
     margin: 0 0 10px 0;
 }
 
-.profile-buttons {
+.edit-btn {
+    border-radius: 30px;
+    border: 1px solid #004d39;
+    background-color: #0EB49A;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 12px 30px;
+    width: 200px;
+    text-transform: uppercase;
+    white-space: nowrap; /* Ensures that the items remain in a row */
+}
+
+.edit-btn:hover {
+    background-color: #087f6e; /* Darker shade for hover effect */
+}
+
+/* .profile-buttons {
     display: flex;
     justify-content: center;
     gap: 10px;
@@ -79,7 +109,6 @@
 
 .profile-buttons button:hover {
     background-color: #087f6e; /* Darker shade for hover effect */
-}
 
 .form-container {
     border: 2px solid #ccc;
