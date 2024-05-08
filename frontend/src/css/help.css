@@ -1,0 +1,33 @@
+
+
+
+  
+  form input, textarea{
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    margin: 10px;
+    padding: 10px;
+  }
+  
+  form:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  }
+  
+  form button{
+    height: 28px;
+    width: 125px;
+    align-items: center;
+    background-color: rgba(205, 214, 214, 0.701);
+  }
+
+  .description {
+    max-width: 500px;
+    margin: 0 auto; 
+    text-align: center; 
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+  }
+  

@@ -55,9 +55,10 @@ export const Login = () => {
                 setUser ({
                     isAuthenticated: true,
                     email: data.user.email,
+                    firstName: data.user.firstName,
+                    lastName: data.user.lastName
                 });
                 console.log("user login authenticated");
-                navigate('/editor'); // Will redirect user to the editor page to start creating their tours. 
             } 
             else if (data.error === "email_not_found") {
                 setAlertMessage("Email not found. Please check email address again.");
@@ -71,7 +72,13 @@ export const Login = () => {
         });
     }
 
-    
+    useEffect (() => {
+        if (user?.isAuthenticated) {
+            navigate("/account");
+        }
+    }, [navigate, user]);
+
+
     return (
         <div className="login-container">
             <form className="login-form" onSubmit={handleSubmit}>

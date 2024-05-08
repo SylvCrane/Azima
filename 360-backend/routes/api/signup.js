@@ -26,7 +26,16 @@ router.post("/", async(req,res) => {
         });
         
         // Return the registered email along with the response
-        return res.send({status: "ok", message: "User successfully registered.", email: newUser.email });
+        return res.json({
+            status: "ok",
+            message: "User successfully registered.",
+            user: {
+                email: newUser.email,
+                firstName: newUser.firstName,
+                lastName: newUser.lastName,
+                company: newUser.company,
+            }
+        });
     } catch (e) {
         console.log(e);
         res.json({status: "error", message: e.message});

@@ -25,6 +25,15 @@ const UserDetailsSchema = new mongoose.Schema({
     password: {
         type: String, 
         required: [true, "Must provide a password"]
+    },
+    bio: {
+        type: String,
+    },
+    profileImage: {
+        type: String,
+    },
+    location: {
+        type: String,
     }
 });
 

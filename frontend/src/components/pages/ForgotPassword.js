@@ -1,6 +1,6 @@
 // Inside the ForgotPassword.js file
 import React from 'react';
-import "../../css/style.css"; 
+import "../../css/forgotpassword.css"; 
 import { useNavigate } from 'react-router-dom';
 
 export const ForgotPassword = () => {

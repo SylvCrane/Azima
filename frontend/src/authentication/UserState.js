@@ -2,7 +2,12 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const initialUser = {
     email: '',
-    password: '',
+    firstName: '',
+    lastName: '',
+    company: '',
+    bio: '',
+    location: '',
+    profileImage: '',
     isAuthenticated: false,
 };
 
@@ -24,8 +29,19 @@ const UserProvider = ({ children }) => {
         }
     }, [user]);
 
+    // Wrapping setUser to update localStorage
+    const updateUser = (newUser) => {
+        console.log("Updating user with data:", newUser); // Log to see the data being set
+        setUser(newUser);
+        if (newUser.isAuthenticated) {
+            localStorage.setItem("user", JSON.stringify(newUser));
+        } else {
+            localStorage.removeItem("user");
+        }
+    };
+
     return (
-        <UserContext.Provider value={[user, setUser]}>
+        <UserContext.Provider value={[user, updateUser]}>
             {children}
         </UserContext.Provider>
     );

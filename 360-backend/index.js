@@ -12,6 +12,7 @@ const imageRouter = require('./routes/api/image');
 const portalRouter = require('./routes/api/portal');
 const signupRouter = require("./routes/api/signup"); 
 const loginRouter = require("./routes/api/login"); 
+const userProfileRouter = require("./routes/api/userprofile");
 
 
 connectDB(); // Call connectDB import so mongoDB is connected
@@ -27,6 +28,7 @@ app.use(express.json({extended: false})); // Allows Express to read data sent us
 // middleware/routes
 app.use('/api/login', loginRouter);
 app.use('/api/signup', signupRouter);
+app.use('/api/userprofile', userProfileRouter);
 app.use('/api/teleporter', teleporterRouter);
 app.use('/api/marker', markerRouter);
 app.use('/api/house', houseRouter);

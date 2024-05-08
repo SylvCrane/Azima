@@ -24,9 +24,8 @@ export const PopulatedNavBar = () => {
     window.localStorage.removeItem("isLoggedIn");
     window.localStorage.removeItem("userEmail");
     setUser({
-      isAuthenticated: false, 
-      email: undefined, 
-      password: undefined,
+    
+      isAuthenticated: false,
     });
     redirect("/");
   };
@@ -98,7 +97,10 @@ export const PopulatedNavBar = () => {
               </button>
               <div className="dropdown-content">
                 <NavLink to="/account" className="dropdown-link">
-                  {user.email}
+                  <div>
+                      {/* Will display both the user email and username in one div/navlink */}
+                      <h4>{user.firstName} {user.lastName}</h4>
+                  </div>
                 </NavLink>
                 <button className="logout-btn" onClick={handleLogout}>Log Out</button>
               </div>

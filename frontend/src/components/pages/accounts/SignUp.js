@@ -69,7 +69,10 @@ export const SignUp = (props) => {
                 setAlertMessage("You are now registered with Azima!");
                 setUser ({
                     isAuthenticated: true,
-                    email: data.email, // Refer to email object directly (since the email is being registered it should not be in mongodb yet)
+                    email: data.user.email, // Refer to email object directly (since the email is being registered it should not be in mongodb yet)
+                    firstName: data.user.firstName,
+                    lastName: data.user.lastName,
+                    company: data.user.company
                 });
                 console.log("user registration authenticated");
 
@@ -83,7 +86,7 @@ export const SignUp = (props) => {
     // Navigates to editor page once sign up is authenticated
     useEffect (() => {
         if (user?.isAuthenticated) {
-            navigate("/editor");
+            navigate("/account");
         }
     }, [navigate, user]);
 

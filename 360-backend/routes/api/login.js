@@ -3,31 +3,37 @@ const express = require("express");
 const router = express.Router();
 const dot = require("dotenv");
 dot.config().parsed;
-const bcrypt = require("bcryptjs"); // using bycryptjs to encrypt passwords
-const JWT = require('jsonwebtoken') // using jsonwebtoken library
-const JWT_SECRET = process.env.JWT_SECRET; // secret key used to verify the json webtokens
-const user = require("../../models/UserDetails"); // import user details model
+const bcrypt = require("bcryptjs");
+const JWT = require('jsonwebtoken');
+const JWT_SECRET = process.env.JWT_SECRET;
+const User = require("../../models/UserDetails");
 
 router.post("/", async(req,res) => {
     const {email, password} = req.body;
 
     try {
-        // Check first if user's email exist in db or not 
-        const existingUser = await user.findOne({email});
+        const existingUser = await User.findOne({email});
         if (!existingUser) {
             return res.json({status: "error", error: "email_not_found"});
         }
-        // Decrypt password and check whether password input matches input in mongo by generating jwt 
+
         if(await bcrypt.compare(password, existingUser.password)) {
-            const token = JWT.sign({}, JWT_SECRET); // will generate a token and pass the jwt_secret variable
+            const token = JWT.sign({}, JWT_SECRET);
 
-            /*// 201 - refers to request being fulfiled 
-            if(res.status(201)) {
-                return res.json({status: "ok", data: token });
-            }*/
-
-            // Return user's email along with token
-            return res.json({status: "ok", user: { email }, token });
+            // Return complete user profile
+            return res.json({
+                status: "ok",
+                user: {
+                    email: existingUser.email,
+                    firstName: existingUser.firstName,
+                    lastName: existingUser.lastName,
+                    bio: existingUser.bio,
+                    company: existingUser.company,
+                    location: existingUser.location,
+                    profileImage: existingUser.profileImage
+                },
+                token,
+            });
         }
         res.json({status: "error", error: "incorrect_password"});
     }
