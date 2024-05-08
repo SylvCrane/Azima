@@ -7,13 +7,27 @@ const path = require('path');
 // Set up multer for file storage
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, 'uploads/');
+        cb(null, 'public/uploads');
     },
     filename: function(req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+        const imageName = file.originalname;
+        cb(null, imageName);
     }
 });
-const upload = multer({ storage: storage });
+
+const fileFilter = (req, file, cb) => {
+    const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+
+    if (allowedFileTypes.includes(file.mimetype))
+    {
+        cb (null, true);
+    }
+    else
+    {
+        cb(null, false);
+    }
+}
+const upload = multer({ storage, fileFilter });
 
 // Update Profile
 router.put('/', upload.single('profileImage'), async (req, res) => {
@@ -33,7 +47,7 @@ router.put('/', upload.single('profileImage'), async (req, res) => {
 
         // Update the profile image if a new one was uploaded
         if (req.file) {
-            user.profileImage = `/uploads/${req.file.filename}`;
+            user.profileImage = `http://localhost:8082/uploads/${req.file.filename}`;
         }
 
         await user.save();

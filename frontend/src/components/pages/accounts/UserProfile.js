@@ -18,7 +18,7 @@ export const UserProfile = () => {
 
     return (
         <div className="user-page">
-            {user?.isAuthenticated && (
+            {user.isAuthenticated && (
                 <>
                     <div className="profile-section">
                         <div className="profile-image-container">

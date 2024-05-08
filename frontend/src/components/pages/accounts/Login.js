@@ -56,7 +56,11 @@ export const Login = () => {
                     isAuthenticated: true,
                     email: data.user.email,
                     firstName: data.user.firstName,
-                    lastName: data.user.lastName
+                    lastName: data.user.lastName,
+                    bio: data.user.bio,
+                    company: data.user.company,
+                    location: data.user.location,
+                    profileImage: data.user.profileImage
                 });
                 console.log("user login authenticated");
             } 
