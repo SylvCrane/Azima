@@ -26,7 +26,15 @@ AFRAME.registerComponent('portal-manager', {
         this.el.sceneEl.addEventListener('portal-update', this.updatePortals);
         console.log('Event listener for portal-update added');
         const list = document.getElementById('portal-list');
-        list.addEventListener('click', this.handleListClick);
+        list.addEventListener('click', (e) => {
+            console.log("clicked");
+            
+      
+      
+            this.handleListClick(e);
+            
+           
+        });
         
         this.el.sceneEl.addEventListener('reloadScene', (event) => {
             console.log("reloadScene event received", event.detail.detail.portalEntity);
@@ -73,10 +81,15 @@ AFRAME.registerComponent('portal-manager', {
     
       },
       handleListClick: function(event) {
+   
         const target = event.target.closest('li');
         if (target && target.portalData) {
+         
            this.selectPortal(target.portalData);
         }
+       
+     
+       
     },
 
 

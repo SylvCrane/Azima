@@ -85,11 +85,13 @@ if (counter === -1){
             if (data.msg) {
                     console.log('Portal delete successful', data);
                     refreshScene(portalEntity);
+                    exitSidebar();
 
             } else {
                     // This block handles the response from the nested portal deletion attempt
                     console.log('Nested portal delete successful', data);
                     refreshScene(portalEntity);
+                    exitSidebar();
             }
     })
     .catch((error) => {

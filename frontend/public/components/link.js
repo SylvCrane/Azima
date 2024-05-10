@@ -11,7 +11,7 @@ AFRAME.registerComponent("linker", {
     this.addEventListeners();
 
 
-
+    this.identifier = null;
     
     this.color;
 
