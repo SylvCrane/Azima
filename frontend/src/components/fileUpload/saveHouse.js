@@ -5,9 +5,11 @@ import axios from 'axios';
 
 
 
-export async function saveHouse( houseID, imageReferences) {
 
+export async function saveHouse( houseID, imageReferences, user) {
 
+  
+ 
 
 
 
@@ -29,6 +31,8 @@ export async function saveHouse( houseID, imageReferences) {
         backyard: false,
         laundryRoom: false,
         dateAvailable: new Date().toISOString(),
+        author: user,
+        public: false,
       };
 
         const response = await axios.post('http://localhost:8082/api/house/house', houseData);

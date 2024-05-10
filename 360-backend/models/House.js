@@ -67,6 +67,16 @@ const houseSchema = new Schema({
         required: true,
         trim: true
     },
+    public: {
+        type: Boolean,
+        default: false,
+      
+    },
+    author: {
+        type: String,
+        required: true,
+        trim: true
+    }
   
     
 });

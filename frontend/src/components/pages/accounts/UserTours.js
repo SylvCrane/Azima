@@ -4,22 +4,20 @@ import { useNavigate, useParams } from 'react-router-dom'; // Import useParams i
 import "../../../css/style.css";
 import "../../../css/tour.css";
 import TourContainer from '../../tours/TourContainer';
-    
+import { useUser } from "../../../authentication/UserState";
     
 export const UserTours = () => {
     const [houses, setHouses] = useState([]);
     const { houseId } = useParams(); // Get houseId from the URL parameters
     const navigate = useNavigate();
-      
+    const [user] = useUser();
     //const [user] = useUser();
     
     useEffect(() => {
         const fetchHouses = async () => {
             try {
-                let url = 'http://localhost:8082/api/house/house/';
-                if (houseId) {
-                    url += 'puller/'+houseId; // Fetch data for a specific house
-                } 
+                let url = 'http://localhost:8082/api/house/house/author/'+ user.firstName+" "+user.lastName  ;
+                
                 const response = await axios.get(url); // Adjust this URL based on your actual API endpoint
                 setHouses(response.data); // Axios wraps the response data inside a data property
             } catch (error) {
@@ -32,7 +30,7 @@ export const UserTours = () => {
     
     return (
         <body>
-            <div className="tours-page">
+            <div className="user-tours-page">
                 <h1>My Tours</h1><br></br>
                 <p>Tours you have created</p><br></br><br></br>
                 <div className="new-tour-button-container">

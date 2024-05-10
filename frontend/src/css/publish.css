@@ -1,0 +1,159 @@
+.Save .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    max-width: 90vw;
+    margin: auto;
+    padding: 20px;
+    background: #f9f9f9; /* Light background for the form area */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Soft shadow for depth */
+}
+
+.Save .inputForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.Save .text-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+}
+.Save .number-group {
+    display: flex;
+
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    width: 110%;
+}
+
+.Save .line-group{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+}
+ .Save .number-group label{
+    font-size: 14px;
+ }
+.Save .textbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+}
+.Save .date-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    width: 30%;
+}
+.Save .checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+   
+    flex-direction: row;
+    width: 60%;
+}
+.Save .checkbox-group label{
+    font-size: 14px;
+ }
+.Save .checkbox-group .form-group {
+    flex: 20px 1 1; /* Adjusts to fill space but not less than 220px */
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.Save .number-group .form-group {
+    flex:  1 1 100px; /* Adjusts to fill space but not less than 220px */
+    display: flex;
+    flex-direction: column;
+
+}
+.Save .text-group .form-group {
+    flex:  1 1 120px; /* Adjusts to fill space but not less than 220px */
+    display: flex;
+    flex-direction: column;
+
+}
+.Save .textbox-group .form-group {
+    flex:  1 1 120px; /* Adjusts to fill space but not less than 220px */
+    display: flex;
+    flex-direction: column;
+    
+}
+.Save .date-group .form-group {
+    flex:  1 1 120px; /* Adjusts to fill space but not less than 220px */
+    display: flex;
+    flex-direction: column;
+
+}
+
+.Save .form-group {
+    flex: 1 1 220px; /* Adjusts to fill space but not less than 220px */
+    display: flex;
+    flex-direction: row;
+
+}
+
+ input[type="text"], input[type="date"], input[type="checkbox"], select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+}
+input[type="number"]{
+    width: 70%;
+    padding: 10px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    margin: 0px auto;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+}
+
+.Save .file-container {
+    width: 90%;
+    padding: 20px;
+    
+    border: 2px dashed #ccc;
+    background-color: #fff; /* Makes file container stand out */
+}
+
+.Save .custom-file-upload {
+    width: 100%;
+    padding: 15px; /* Larger padding for bigger area */
+    background-color: #f0f0f0;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.Save .submit {
+    width: 100%; /* Larger width for emphasis */
+    padding: 20px 100px;
+    font-size: 18px; /* Larger font size */
+    background-color: #0EB49A; /* Green */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.Save .submit:hover {
+    background-color: #087f6e;
+}

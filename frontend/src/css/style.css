@@ -114,7 +114,7 @@ button[type=submit]:hover {
 
   .join-btn {
     border-radius: 25px;
-    border: 1px solid #004d39;
+    border: none;
     background-color: #0EB49A;
     color: white;
     font-size: 14px;

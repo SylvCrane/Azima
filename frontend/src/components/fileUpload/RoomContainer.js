@@ -4,6 +4,7 @@ import axios from 'axios';
 import { savePhotos } from './savePhotos.js';
 import { saveHouse } from './saveHouse.js';
 import "../../css/editor.css";
+import { useUser } from "../../authentication/UserState.js";
 
 let counter = 0;
 
@@ -11,6 +12,7 @@ function RoomContainer() {
     const [houseName, setHouseName] = useState('');
     const [rooms, setRooms] = useState([]);
     const [saveSuccessful, setSaveSuccessful] = useState(false);
+    const [user] = useUser();
 
     useEffect(() => {
         if (saveSuccessful) {
@@ -26,8 +28,9 @@ function RoomContainer() {
             try {
                 const res = await axios.get(`http://localhost:8082/api/image/${e.detail.houseId}`);
                 const response = res.data; 
+                const username = user.firstName + " " + user.lastName;
                 if (response.length === counter) {
-                    saveHouse(e.detail.houseId, response).then(() => {
+                    saveHouse(e.detail.houseId, response, username).then(() => {
                         setSaveSuccessful(true);
                     }).catch(error => {
                         console.error('Failed to save house', error);

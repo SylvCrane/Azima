@@ -15,6 +15,7 @@ export const UserProfile = () => {
     };
 
     return (
+        <div className="user">
         <div className="user-page">
             {user.isAuthenticated && (
                 <>
@@ -36,12 +37,15 @@ export const UserProfile = () => {
                         <br></br>
                             <button className="edit-btn" onClick={handleProfileEdit}>Edit Profile</button>
                     </div>
-                    <div className="tours-section">
-                        <UserTours/>
-                    </div>
+                   
                 </>
             )}
         </div>
+        <div className="tours-section">
+                        <UserTours/>
+                    </div>
+        </div>
+        
     );
 };
 
