@@ -40,21 +40,7 @@ router.put('/', upload.single('profileImage'), async (req, res) => {
             return res.status(404).json({ success: false, message: 'User not found' });
         }
 
-        // // Check if the email is changed to another existing email
-        // if (email === user.email) {
-        //     const existingUser = await User.findOne({ email: email });
-        //     if (existingUser === user.email) {
-        //         return res.json({ status: "error", error: "existing_email" });
-        //     }
-        // }
-
-        // Check if the email is changed to another existing email
-        if (email !== user.email) {
-            return res.json({ status: "message", message: "successful email change" });
-        }
-        else {
-            return res.json({ status: "error", error: "existing_email" });
-        }
+       
 
         // Update user details; only update if provided
         user.email = email ||  user.email;

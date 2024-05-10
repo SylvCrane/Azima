@@ -10,7 +10,7 @@ export const EditProfile = () => {
     const [user, setUser] = useUser();
     const [firstName, setFirstName] = useState(user.firstName);
     const [lastName, setLastName] = useState(user.lastName);
-    const [email, setEmail] = useState(user.email);
+    const [email] = useState(user.email);
     const [bio, setBio] = useState(user.bio);
     const [company, setCompany] = useState(user.company);
     const [location, setLocation] = useState(user.location);
@@ -26,20 +26,20 @@ export const EditProfile = () => {
     };
 
     // const handleRemoveProfileImage = () => {
-    //     setNewProfileImage("");
+    //     setNewProfileImage(AccountLogo);
     //     setNewProfileFile(null);
     //     // Optionally update the backend here if necessary
     //     setUser({
     //         ...user,
-    //         profileImage: "" // Use AccountLogo if profileImage is not returned
+    //         profileImage: AccountLogo // Use AccountLogo if profileImage is not returned
     //     });
     // };
 
     const handleSave = async () => {
         try {
 
-            if (!firstName || !lastName || !email) {
-                setAlertMessage("Name and email cannot be empty");
+            if (!firstName || !lastName ) {
+                setAlertMessage("First and last name cannot be empty");
                 return; // Don't proceed with saving if required fields are empty
             }
 
@@ -57,7 +57,6 @@ export const EditProfile = () => {
             else if (newProfileImage === "") {
                 formData.append("profileImage", ""); // Sending empty string to indicate removal
             }
-            console.log("form")
             
     
             axios.put("http://localhost:8082/api/userprofile", formData, {
@@ -81,7 +80,7 @@ export const EditProfile = () => {
                         bio: data.user.bio,
                         company: data.user.company,
                         location: data.user.location,
-                        profileImage: data.user.profileImage || ""
+                        profileImage: data.user.profileImage || AccountLogo
                     });
                     navigate("/account");
                 } 
@@ -103,27 +102,27 @@ export const EditProfile = () => {
     return (
         <div className="edit-profile-page">
             <br/>
-            <h1>Edit Profile</h1><br/>
+            <h1>Edit Profile</h1>
             <div className="profile-image-section">
                 <div className="profile-image-container">
                     {/* Set profile image to Account Logo if user doesnt add new profile image*/}
-                    <img className="profile-image" src={newProfileImage || AccountLogo} alt="Profile" />
+                    <img className="profile-image" src={newProfileImage} alt="Profile" />
                 </div>
                 <div className="profile-image-change">
-                    <label htmlFor="profileImageInput" className="profile-image-button">Change photo</label>
-                    <input 
-                        type="file"
-                        id="profileImageInput"
-                        accept="image/*"
-                        style={{ display: "none" }}
-                        onChange={handleProfileImageChange}
-                    />
-                    {/* {newProfileImage && (
-                        <button className="remove-photo-button" onClick={handleRemoveProfileImage}>Remove photo</button>
-                    )} */}
+                <label htmlFor="profileImageInput" className="profile-image-button">Change photo</label>
+                <input 
+                    type="file"
+                    id="profileImageInput"
+                    accept="image/*"
+                    style={{ display: "none" }}
+                    onChange={handleProfileImageChange} // Only handles adding new photos
+                />
+                {/* <button className="remove-photo-button" onClick={handleRemoveProfileImage}>
+                    Remove photo
+                </button> */}
                 </div>
             </div>
-            <br/>
+            
             <div className="form-section">
                 <div className="form-group">
                     <label htmlFor="firstName">First Name:</label>
@@ -134,17 +133,10 @@ export const EditProfile = () => {
                     />
                     <br></br>
                     <label htmlFor="lastName">Last Name:</label>
-                    <input value={lastName} onChange={(e) => setLastName(e.target.value)}
+                    <textarea value={lastName} onChange={(e) => setLastName(e.target.value)}
                         id="LastName"
                         className="edit-textarea"
                         placeholder="Enter your last name"
-                    />
-                    <br></br>
-                    <label htmlFor="email">Email:</label>
-                    <textarea value={email} onChange={(e) => setEmail(e.target.value)}
-                        id="email"
-                        className="edit-textarea"
-                        placeholder="Enter your email"
                     />
                     <br></br>
                     <label htmlFor="bio">Bio:</label>

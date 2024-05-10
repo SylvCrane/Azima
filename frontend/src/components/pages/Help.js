@@ -23,6 +23,11 @@ export const Help = () => {
     if(!emailRegex.test(email)) {
       setAlertMessage("Invalid email address");
       return;
+    }
+
+    if (!name || !email || !message ) {
+      setAlertMessage("First and last name cannot be empty");
+      return; // Don't proceed with saving if required fields are empty
   }
 
     fetch("http://localhost:8082/api/help", {

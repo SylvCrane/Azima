@@ -14,6 +14,7 @@ const signupRouter = require("./routes/api/signup");
 const loginRouter = require("./routes/api/login"); 
 const userProfileRouter = require("./routes/api/userprofile");
 const forgotPasswordRouter = require('./routes/api/forgotpassword');
+const helpRouter = require('./routes/api/help');
 
 
 connectDB(); // Call connectDB import so mongoDB is connected
@@ -37,6 +38,7 @@ app.use('/api/image', imageRouter);
 app.use('/api/portal', portalRouter);
 app.use('/api/forgot-password', forgotPasswordRouter);
 app.use('/', forgotPasswordRouter); // KEEP THIS SO THAT THE GET METHOD WORKS. 
+app.use('/api/help', helpRouter);
 
 
 
