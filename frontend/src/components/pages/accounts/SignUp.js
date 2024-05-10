@@ -4,7 +4,7 @@ import "../../../css/accounts.css";
 import { useNavigate } from 'react-router-dom';
 import { useUser } from "../../../authentication/UserState";
 
-export const SignUp = (props) => {
+export const SignUp = () => {
     
     /* State variables for the input types - useState hook will first get the user input then set that input into the second variable */
     const [firstName, setFirstName] = useState("");
@@ -107,11 +107,11 @@ export const SignUp = (props) => {
                     <button type="submit">sign up</button>
                     <div className= "required-text"> <br/> (* Required fields must be filled in to create an account)<br/> </div>
                     <br/>
+                    <button className="link-btn" type ="button" onClick={() => navigate('/account/login')}>Already have an account? Sign in here.</button><br/><br/>
                     { alertMessage && (
                         <div className="alert">{ alertMessage }</div>
                     )} <br></br>
 
-                    <button className="link-btn" type ="button" onClick={() => navigate('/account/login')}>Already have an account? Sign in here.</button><br/><br/>
                 </form>
                 <br></br>
             </div>

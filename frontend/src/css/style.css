@@ -136,6 +136,12 @@ button[type=submit]:hover {
     background-color: #087f6e; /* Darker shade for hover effect */
   }
 
+  /* For form pages */
+  .alert {
+    font-size: 15px; 
+    color: red;
+  }
+
   @media (max-width: 767px){
 
     .tours-page, 

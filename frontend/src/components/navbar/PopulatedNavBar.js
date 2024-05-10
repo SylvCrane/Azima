@@ -90,22 +90,11 @@ export const PopulatedNavBar = () => {
         {user?.isAuthenticated && (
           <li>
             <div className="account-dropdown">
-            
-            <div className="profile-image-section" style={{marginTop: '8px', justifyContent: 'center', alignItems: 'center', width: '50px', height: '45px'}}>
-            <div className="profile-image-container" style={{justifyContent: 'center', alignItems: 'center', width: '36px', height: '36px'}}>
-                <img className="profile-image" src={user.profileImage} alt="Profile" />
-            </div>
-              
-            </div>
-
-                {/* <button className="account-button" onClick={toggleDropdown}>
-                  <h3 className="account-image"> 
-                    <img src={user.profileImage} className="account-logo" alt="Account" />
-                  </h3>
-                </button> */}
-
-
-              
+              <div className="profile-image-section" style={{marginTop: '2px', justifyContent: 'center', alignItems: 'center', width: '50px', height: '45px'}}>
+                <div className="profile-image-container" style={{justifyContent: 'center', alignItems: 'center', width: '36px', height: '36px'}}>
+                <img className="profile-image" src={user.profileImage || AccountLogo} alt="Profile" />
+                </div>
+              </div>
               <div className="dropdown-content">
                 <NavLink to="/account" className="dropdown-link">
                   <div>

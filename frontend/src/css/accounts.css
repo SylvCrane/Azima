@@ -60,13 +60,6 @@
   font-size: 14px;
 }
 
-
-/* For alert message when user either signups or logs in */
-.alert {
-  font-size: 15px; 
-  color: red;
-}
-
 /* For signup page */
 .required-text {
   font-size: 14px;

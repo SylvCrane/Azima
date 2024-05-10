@@ -4,14 +4,15 @@ import "../../../css/style.css";
 import "../../../css/editprofile.css";
 import axios from "axios";
 import { useUser } from "../../../authentication/UserState";
+import AccountLogo from '../../../assets/AzimaAccountLogo.svg';
 
 export const EditProfile = () => {
     const [user, setUser] = useUser();
     const [email, setEmail] = useState(user.email);
     const [bio, setBio] = useState(user.bio);
     const [company, setCompany] = useState(user.company);
-    const [location, setLocation] = useState(user.location)
-    const [newProfileImage, setNewProfileImage] = useState(user.profileImage || "");
+    const [location, setLocation] = useState(user.location);
+    const [newProfileImage, setNewProfileImage] = useState(user.profileImage || AccountLogo);
     const [newProfileFile, setNewProfileFile] = useState(null);
     const [alertMessage, setAlertMessage] = useState("");
     const navigate = useNavigate();
@@ -26,17 +27,27 @@ export const EditProfile = () => {
     
     const handleCompanyChange = (event) => {
         setCompany(event.target.value);
-    }
+    };
 
     const handleLocationChange = (event) => {
         setLocation(event.target.value);
-    }
+    };
 
     const handleProfileImageChange = (event) => {
         const file = event.target.files[0];
         setNewProfileFile(file);
         setNewProfileImage(URL.createObjectURL(file));
     };
+
+    // const handleRemoveProfileImage = () => {
+    //     setNewProfileImage("");
+    //     setNewProfileFile(null);
+    //     // Optionally update the backend here if necessary
+    //     setUser({
+    //         ...user,
+    //         profileImage: "" // Use AccountLogo if profileImage is not returned
+    //     });
+    // };
 
     const handleSave = async () => {
         try {
@@ -48,6 +59,8 @@ export const EditProfile = () => {
             
             if (newProfileFile) {
                 formData.append("profileImage", newProfileFile);
+            } else if (newProfileImage === "") {
+                formData.append("profileImage", ""); // Sending empty string to indicate removal
             }
     
             const response = await axios.put("http://localhost:8082/api/userprofile", formData, {
@@ -65,9 +78,8 @@ export const EditProfile = () => {
                 bio: updatedUser.bio,
                 company: updatedUser.company,
                 location: updatedUser.location,
-                profileImage: updatedUser.profileImage
+                profileImage: updatedUser.profileImage || "" 
             });
-    
             navigate("/account");
     
         } catch (error) {
@@ -78,10 +90,12 @@ export const EditProfile = () => {
 
     return (
         <div className="edit-profile-page">
-            <h1>Edit Profile</h1><br></br>
+            <br/>
+            <h1>Edit Profile</h1><br/>
             <div className="profile-image-section">
                 <div className="profile-image-container">
-                    <img className="profile-image" src={newProfileImage} alt="Profile" />
+                    {/* Set profile image to Account Logo if user doesnt add new profile image*/}
+                    <img className="profile-image" src={newProfileImage || AccountLogo} alt="Profile" />
                 </div>
                 <div className="profile-image-change">
                     <label htmlFor="profileImageInput" className="profile-image-button">Change photo</label>
@@ -92,11 +106,15 @@ export const EditProfile = () => {
                         style={{ display: "none" }}
                         onChange={handleProfileImageChange}
                     />
+                    {/* {newProfileImage && (
+                        <button className="remove-photo-button" onClick={handleRemoveProfileImage}>Remove photo</button>
+                    )} */}
                 </div>
             </div>
+            <br></br>
             <div className="form-section">
                 <div className="form-group">
-                <label htmlFor="email">Email:</label>
+                    <label htmlFor="email">Email:</label>
                     <textarea
                         id="email"
                         className="email-textarea"
@@ -132,11 +150,11 @@ export const EditProfile = () => {
                         onChange={handleLocationChange}
                     />
                     <br></br>
-                    { alertMessage && (
+                    {alertMessage && (
                         <div className="alert">{ alertMessage }</div>
                     )} <br/>
                 </div>
-                <button className="save-button" onClick={handleSave}>Save Changes</button>
+                <center><button className="save-button" onClick={handleSave}>Save Changes</button></center><br></br>
             </div>
         </div>
     );

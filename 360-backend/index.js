@@ -13,12 +13,13 @@ const portalRouter = require('./routes/api/portal');
 const signupRouter = require("./routes/api/signup"); 
 const loginRouter = require("./routes/api/login"); 
 const userProfileRouter = require("./routes/api/userprofile");
+const forgotPasswordRouter = require('./routes/api/forgotpassword');
 
 
 connectDB(); // Call connectDB import so mongoDB is connected
 console.log("DB connected")
 
-app.use(express.json()); // allows the data from frontend to be transferred to backend/json file
+//app.use(express.json()); // allows the data from frontend to be transferred to backend/json file
 app.use(cors({origin: true, credentials: true}));
 
 // Init middleware
@@ -34,6 +35,9 @@ app.use('/api/marker', markerRouter);
 app.use('/api/house', houseRouter);
 app.use('/api/image', imageRouter);
 app.use('/api/portal', portalRouter);
+app.use('/api/forgot-password', forgotPasswordRouter);
+app.use('/', forgotPasswordRouter); // KEEP THIS SO THAT THE GET METHOD WORKS. 
+
 
 
 // print server is running when starting server - nodemon app

@@ -47,9 +47,7 @@ export const Login = () => {
         .then((res) => res.json())
         .then((data) => {
             console.log(data, "userLogin");
-            // when the user is logged in creates a variable called isLoggedIn and sets the value to true
             
-
             if (data.status === "ok") {
                 setAlertMessage("Logged in successfully!");
                 setUser ({
@@ -92,13 +90,14 @@ export const Login = () => {
                     <input value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} id="loginEmail" placeholder="email@gmail.com" required/><br/>
                     <input value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} type="password" id="loginPassword" placeholder="********" required/>
                     <br/>
-                    <br/><button type="submit">Sign In</button><br/>
+                    <br/><button type="submit">Sign In</button><br></br><br></br>
                     <br/><button className="link-btn" type ="button" onClick={() => navigate('/account/forgot-password')}>Forgot password?</button><br/>
                     <br/>
+                    <button className="link-btn" type ="button" onClick={() => navigate('/account/signup')}>Don't have an account? Register here.</button>
+                    <br></br><br></br>
                     { alertMessage && (
                         <div className="alert">{ alertMessage }</div>
-                    )} <br/>
-                    <button className="link-btn" type ="button" onClick={() => navigate('/account/signup')}>Don't have an account? Register here.</button><br/>
+                    )}
                 </form>
             </div>  
         </div>

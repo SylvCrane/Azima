@@ -11,7 +11,7 @@
 .profile-image-section {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
 }
 
 .profile-image-container {
@@ -22,6 +22,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 8px;
+    border: 1px solid #4d4d4d;
 }
 
 .profile-image {
@@ -36,8 +38,9 @@
     justify-content: center;
 }
 
-.profile-image-button {
-    padding: 10px 15px;
+.profile-image-button,
+.remove-photo-button {
+    padding: 8px 8px;
     border: none;
     background-color: #0EB49A;
     color: white;
@@ -48,7 +51,8 @@
     margin: 5px;
 }
 
-.profile-image-button:hover {
+.profile-image-button:hover,
+.remove-photo-button:hover {
     background-color: #087f6e; /* Darker shade for hover effect */
 }
 
@@ -85,6 +89,7 @@
     cursor: pointer;
     font-weight: 700;
     margin: 5px;
+    width: 200px;
 }
 
 label {
