@@ -8,6 +8,8 @@ import AccountLogo from '../../../assets/AzimaAccountLogo.svg';
 
 export const EditProfile = () => {
     const [user, setUser] = useUser();
+    const [firstName, setFirstName] = useState(user.firstName);
+    const [lastName, setLastName] = useState(user.lastName);
     const [email, setEmail] = useState(user.email);
     const [bio, setBio] = useState(user.bio);
     const [company, setCompany] = useState(user.company);
@@ -16,22 +18,6 @@ export const EditProfile = () => {
     const [newProfileFile, setNewProfileFile] = useState(null);
     const [alertMessage, setAlertMessage] = useState("");
     const navigate = useNavigate();
-
-    const handleEmailChange = (event) => {
-        setEmail(event.target.value);
-    };
-
-    const handleBioChange = (event) => {
-        setBio(event.target.value);
-    };
-    
-    const handleCompanyChange = (event) => {
-        setCompany(event.target.value);
-    };
-
-    const handleLocationChange = (event) => {
-        setLocation(event.target.value);
-    };
 
     const handleProfileImageChange = (event) => {
         const file = event.target.files[0];
@@ -51,7 +37,15 @@ export const EditProfile = () => {
 
     const handleSave = async () => {
         try {
+
+            if (!firstName || !lastName || !email) {
+                setAlertMessage("Name and email cannot be empty");
+                return; // Don't proceed with saving if required fields are empty
+            }
+
             const formData = new FormData();
+            formData.append("firstName", firstName);
+            formData.append("lastName", lastName);
             formData.append("email", email);
             formData.append("bio", bio);
             formData.append("company", company);
@@ -59,32 +53,50 @@ export const EditProfile = () => {
             
             if (newProfileFile) {
                 formData.append("profileImage", newProfileFile);
-            } else if (newProfileImage === "") {
+            } 
+            else if (newProfileImage === "") {
                 formData.append("profileImage", ""); // Sending empty string to indicate removal
             }
+            console.log("form")
+            
     
-            const response = await axios.put("http://localhost:8082/api/userprofile", formData, {
+            axios.put("http://localhost:8082/api/userprofile", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
                 }
-            });
-    
-            // Update user state
-            const updatedUser = response.data.user;
-            setAlertMessage("Profile updated successfully!");
-            console.log("Profile update successful!");
-            setUser({
-                ...user,
-                bio: updatedUser.bio,
-                company: updatedUser.company,
-                location: updatedUser.location,
-                profileImage: updatedUser.profileImage || "" 
-            });
-            navigate("/account");
-    
-        } catch (error) {
+            })
+            .then(res => {
+                const data = res.data;
+                console.log(data);
+                if (data.status === "ok") {
+                    // Assuming 'ok' means profile was updated successfully
+                    
+                    setAlertMessage("Profile updated successfully!");
+                    console.log("Profile update successful!");
+                    setUser({
+                        ...user,
+                        email: data.user.email,
+                        firstName: data.user.firstName,
+                        lastName: data.user.lastName,
+                        bio: data.user.bio,
+                        company: data.user.company,
+                        location: data.user.location,
+                        profileImage: data.user.profileImage || ""
+                    });
+                    navigate("/account");
+                } 
+                else if (data.error === "existing_email") {
+                    console.log("email in use");
+                    setAlertMessage("Email is already in use.");
+                }
+
+            })
+
+            
+        } 
+        catch (error) {
             console.error("Error updating profile:", error);
-            setAlertMessage("Failed to update profile.");
+            setAlertMessage("Failed to update profile. Please check your internet connection or contact support.");
         }
     };
 
@@ -99,7 +111,7 @@ export const EditProfile = () => {
                 </div>
                 <div className="profile-image-change">
                     <label htmlFor="profileImageInput" className="profile-image-button">Change photo</label>
-                    <input
+                    <input 
                         type="file"
                         id="profileImageInput"
                         accept="image/*"
@@ -111,43 +123,49 @@ export const EditProfile = () => {
                     )} */}
                 </div>
             </div>
-            <br></br>
+            <br/>
             <div className="form-section">
                 <div className="form-group">
+                    <label htmlFor="firstName">First Name:</label>
+                    <textarea value={firstName} onChange={(e) => setFirstName(e.target.value)}
+                        id="firstName"
+                        className="edit-textarea"
+                        placeholder="Enter your first name"
+                    />
+                    <br></br>
+                    <label htmlFor="lastName">Last Name:</label>
+                    <input value={lastName} onChange={(e) => setLastName(e.target.value)}
+                        id="LastName"
+                        className="edit-textarea"
+                        placeholder="Enter your last name"
+                    />
+                    <br></br>
                     <label htmlFor="email">Email:</label>
-                    <textarea
+                    <textarea value={email} onChange={(e) => setEmail(e.target.value)}
                         id="email"
-                        className="email-textarea"
+                        className="edit-textarea"
                         placeholder="Enter your email"
-                        value={email}
-                        onChange={handleEmailChange}
                     />
                     <br></br>
                     <label htmlFor="bio">Bio:</label>
-                    <textarea
+                    <textarea value={bio} onChange={(e) => setBio(e.target.value)}
                         id="bio"
-                        className="bio-textarea"
+                        className="edit-textarea"
                         placeholder="Enter your bio"
-                        value={bio}
-                        onChange={handleBioChange}
                     />
                     <br></br>
                     <label htmlFor="company">Company:</label>
-                    <textarea
+                    <textarea value={company} onChange={(e) => setCompany(e.target.value)}
                         id="company"
-                        className="company-textarea"
+                        className="edit-textarea"
                         placeholder="Enter your company"
-                        value={company}
-                        onChange={handleCompanyChange}
                     />
                     <br></br>
                     <label htmlFor="location">Location:</label>
-                    <textarea
+                    <textarea value={location} onChange={(e) => setLocation(e.target.value)}
                         id="location"
-                        className="location-textarea"
+                        className="edit-textarea"
                         placeholder="Enter your location"
-                        value={location}
-                        onChange={handleLocationChange}
                     />
                     <br></br>
                     {alertMessage && (

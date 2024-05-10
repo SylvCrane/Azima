@@ -40,8 +40,9 @@
 
 .profile-image-button,
 .remove-photo-button {
-    padding: 8px 8px;
+    padding: 6px 8px;
     border: none;
+    border: 1px solid #004d39;
     background-color: #0EB49A;
     color: white;
     font-size: 14px;
@@ -67,32 +68,44 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
-.email-textarea,
-.bio-textarea,
-.company-textarea,
-.location-textarea {
-    width: 100%;
+.edit-textarea {
+    width: 60%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid black;
     border-radius: 5px;
+    background-color: #ccc;
+    resize: none;
 }
 
 .save-button {
-    padding: 10px 20px;
-    border: none;
+    border-radius: 30px;
+    border: 1px solid #004d39;
     background-color: #0EB49A;
-    color: white;
-    font-size: 18px;
-    border-radius: 4px;
+    color: #ffffff;
+    font-weight: bold;
     cursor: pointer;
-    font-weight: 700;
-    margin: 5px;
+    padding: 12px 30px;
     width: 200px;
+    text-transform: uppercase;
+    white-space: nowrap; /* Ensures that the items remain in a row */
+  
 }
 
 label {
     font-weight: bold;
     font-size: 16px;
 }
+
+
+@media (max-width: 770px) {
+
+    .edit-textarea {
+      width: 60%; /* Increased width */
+    }
+
+  }

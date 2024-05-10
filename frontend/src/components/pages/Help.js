@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../css/style.css";
 import "../../css/help.css";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 
 export const Help = () => {
   const [alertMessage, setAlertMessage] = useState("");
@@ -13,7 +13,7 @@ export const Help = () => {
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 
   // Vairiable to user import useNavigate 
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
