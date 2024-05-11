@@ -4,6 +4,7 @@ const dot = require("dotenv");
 dot.config().parsed;
 const connectDB = require('./config/db');
 const cors = require('cors');
+const bodyParser = require("body-parser");
 // Routes
 const teleporterRouter = require('./routes/api/teleporter');
 const markerRouter = require('./routes/api/marker');

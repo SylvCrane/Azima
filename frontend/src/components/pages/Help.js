@@ -7,6 +7,7 @@ export const Help = () => {
   const [alertMessage, setAlertMessage] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
 
   // Variable for email pattern regex
@@ -17,71 +18,84 @@ export const Help = () => {
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
-    console.log(name, email, message);
+    console.log(name, email, subject, message);
 
     // First check is email address entered is a valid email address
     if(!emailRegex.test(email)) {
-      setAlertMessage("Invalid email address");
+      setAlertMessage("Invalid email address.");
       return;
     }
 
-    if (!name || !email || !message ) {
-      setAlertMessage("First and last name cannot be empty");
-      return; // Don't proceed with saving if required fields are empty
-  }
+    if (!name.trim() || !email.trim() || !subject.trim() || !message.trim()) {
+      setAlertMessage("Cannot be left empty.");
+      return; // Don't proceed with saving if required fields are empty or only contain whitespace
+    }
 
-    fetch("http://localhost:8082/api/help", {
-        method: "POST",
-        crossDomain: true, 
-        headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            "Access-Control-Allow-Origin": "*",
-        },
-        body: JSON.stringify({
-            name: name,
-            email: email,
-            message: message,
-        }),
-    })
+    // Prepare request options for the fetch call
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        subject: subject,
+        message: message,
+      }),
+    };
 
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data, "help");
-            
-      if (data.status === "ok") {
+    // Fetch call to send the help message to the server
+    fetch("http://localhost:8082/api/help", requestOptions)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data.status === "ok") {
           setAlertMessage("Message has been sent. The Azima team will get back to you when we can!");
-      } 
-      else {
-          setAlertMessage("Could not send email. Please check your email or try again later.");
-      }
-    });
-  }
+          setName("");  // Clear the form fields
+          setEmail("");
+          setSubject("");
+          setMessage("");
+        } else {
+          throw new Error(data.message || "Could not send email. Please try again later.");
+        }
+      })
+      .catch((error) => {
+        setAlertMessage(error.message || "An error occurred while sending the message.");
+      });
+  };
 
   return (
     <div className="container">
       <br></br>
       <center><h3>NEED TO GET IN TOUCH?</h3></center>
-      <center><h1>Contact Azima</h1></center><br/>
+      <center><h1>Contact Azima</h1></center>
       <div className="help-message">
-        <p>Have a question that needs to be answered? <br/>Fill out the form below and the Azima team will get back to you as soon as we can!</p>
+        <p>Have a question that needs to be answered?<br/> Fill out the form below and the Azima team will get back to you as soon as we can!</p>
       </div>
       <br></br>
       <form className="help-form" onSubmit={handleSendMessage}>
-        <b><label htmlFor="name-label">Your Name:</label></b>
-        <input value={name} onChange={(e) => setName(e.target.value)} id="name" placeholder="Enter name" required/>
+        <label htmlFor="name">Name:</label>
+        <input type="text" id="name" placeholder="Enter name" value={name} onChange={(e) => setName(e.target.value)} required />
 
-        <b><label htmlFor="email">Your Email:</label></b>
-        <input value={email} onChange={(e) => setEmail(e.target.value)} id="email" placeholder="Enter email" required/>
+        <label htmlFor="email">Email:</label>
+        <input type="email" id="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)} required />
 
-        <b><label htmlFor="message">Your Message:</label></b>
-        <textarea value={message} onChange={(e) => setMessage(e.target.value)} id="message" placeholder="Enter message" required/>
-        <br></br>
+        <label htmlFor="subject">Subject:</label>
+        <input type="text" id="subject" placeholder="Enter subject" value={subject} onChange={(e) => setSubject(e.target.value)} required />
 
-        <button type='submit'><b>Send Message</b></button><br></br>
-        { alertMessage && (
-            <div className="alert">{ alertMessage }</div>
-        )} <br/>
+        <label htmlFor="message">Message:</label>
+        <textarea id="message" placeholder="Enter message" value={message} onChange={(e) => setMessage(e.target.value)} required />
+        <button type="submit">Send Message</button>
+        <br/>
+        {alertMessage && (
+            <div className="alert">{alertMessage}</div>
+        )}
       </form>
     </div>
   );

@@ -38,7 +38,7 @@ export const EditProfile = () => {
     const handleSave = async () => {
         try {
 
-            if (!firstName || !lastName ) {
+            if (!firstName.trim() || !lastName.trim() ) {
                 setAlertMessage("First and last name cannot be empty");
                 return; // Don't proceed with saving if required fields are empty
             }

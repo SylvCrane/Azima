@@ -1,38 +1,44 @@
 const express = require("express");
 const router = express.Router();
-const dotenv = require("dotenv");
-dotenv.config();
-const nodemailer = require("nodemailer");
-
-// Retrieving environment variables
+const sendEmail = require("../../utils/sendEmail");
+const HelpDetails = require("../../models/Help");
 const azimaEmail = process.env.EMAIL;
-const password = process.env.PASSWORD;
 
-// Create a transport using nodemailer
-const transporter = nodemailer.createTransport({
-    service: 'gmail', // Assuming you're using Gmail; adjust as necessary
-    auth: {
-        user: azimaEmail,
-        pass: password
+router.post("/", async (req, res) => {
+    const { name, email, subject, message } = req.body;
+
+    try {
+        // Create and save a new help message entry directly
+        const newHelpDetails = await HelpDetails.create({
+            name,
+            email,
+            subject,
+            message
+        });
+
+        // Prepare detailed message with sender's info
+        const senderDetails = `Message from ${name} <${email}>:\n\n${message}`;
+
+        // Proceed to send an email
+        const send_to = azimaEmail; 
+        const sent_from = email;
+        const reply_to = email; // Set reply-to address to the user's email to direct responses
+
+        // Send email with detailed sender info in the message body
+        const emailInfo = await sendEmail(subject, senderDetails, send_to, sent_from, reply_to);
+        console.log("Email Info:", emailInfo);  
+
+        res.json({
+            status: "ok",
+            message: "Email sent successfully!"
+        });
+    } catch (error) {
+        console.error("Failed to save help details or send email:", error);
+        res.status(500).json({
+            status: "error",
+            message: "Failed to process your request due to an internal server error."
+        });
     }
 });
 
-router.post('/', (req, res) => {
-    const { name, email, message } = req.body;
-
-    const mailOptions = {
-        from: `${email}`,          // The Azima team's email address
-        to: azimaEmail,            // The recipient email is also the Azima team's email
-        subject: `Help Request from ${name}`, // Customize the subject line
-        text: `From: ${name}\nEmail: ${email}\nMessage: ${message}`, // Include the user's name and email in the message body
-    };
-
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            return res.status(500).json({ status: 'error', message: 'Error sending email: ' + error.message });
-        }
-        res.status(200).json({ status: 'ok', message: 'Email sent: ' + info.response });
-    });
-});
-
-module.exports = router; // Make sure to export the router
+module.exports = router;
