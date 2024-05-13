@@ -28,7 +28,7 @@ function RoomContainer() {
             try {
                 const res = await axios.get(`http://localhost:8082/api/image/${e.detail.houseId}`);
                 const response = res.data; 
-                const username = user.firstName + " " + user.lastName;
+                const username = user.email;
                 if (response.length === counter) {
                     saveHouse(e.detail.houseId, response, username, houseName).then(() => {
                         setSaveSuccessful(true);

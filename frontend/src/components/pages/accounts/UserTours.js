@@ -16,7 +16,7 @@ export const UserTours = () => {
     useEffect(() => {
         const fetchHouses = async () => {
             try {
-                let url = 'http://localhost:8082/api/house/house/author/'+ user.firstName+" "+user.lastName  ;
+                let url = 'http://localhost:8082/api/house/house/author/'+ user.email  ;
                 
                 const response = await axios.get(url); // Adjust this URL based on your actual API endpoint
                 setHouses(response.data); // Axios wraps the response data inside a data property

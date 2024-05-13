@@ -70,4 +70,27 @@ router.put('/', upload.single('profileImage'), async (req, res) => {
     }
 });
 
+// Search User by Email
+router.get('/search/:email', async (req, res) => {
+    const { email } = req.params;
+    try {
+        // Find the user by email
+        const user = await User.findOne({ email: email });
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'User not found' });
+        }
+        // Return user details
+        return res.json({
+            status: "ok",
+            user: {
+                email: user.email,
+                username: user.firstName + " " + user.lastName,
+            }
+        });
+    } catch (error) {
+        console.error("Error searching user:", error);
+        return res.status(500).json({ success: false, message: 'Server error' });
+    }
+});
+
 module.exports = router;
