@@ -9,6 +9,11 @@ const houseSchema = new Schema({
         required: true,
         trim: true
     },
+    houseName: {
+        type: String,
+        required: true,
+        trim: true
+    },
     portals: [portalSchema],
     images: [imageSchema],
     thumbnail: String, 

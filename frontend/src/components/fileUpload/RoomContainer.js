@@ -13,15 +13,15 @@ function RoomContainer() {
     const [rooms, setRooms] = useState([]);
     const [saveSuccessful, setSaveSuccessful] = useState(false);
     const [user] = useUser();
-
+    const [houseID, setHouseID] = useState('');
     useEffect(() => {
         if (saveSuccessful) {
-            const event = new CustomEvent('saveSuccessful', { detail: { houseID: houseName } });
+            const event = new CustomEvent('saveSuccessful', { detail: { houseID: houseID, houseName : houseName } });
             window.dispatchEvent(event);
             console.log(event.detail.houseID);
-            window.location.href = `/editor/aframe?houseID=${encodeURIComponent(houseName)}`;
+            window.location.href = `/editor/aframe?houseID=${encodeURIComponent(houseID)}`;
         }
-    }, [saveSuccessful, houseName]);
+    }, [saveSuccessful, houseName, houseID]);
 
     useEffect(() => {
         const handleImageUploadSuccess = async (e) => {
@@ -30,7 +30,7 @@ function RoomContainer() {
                 const response = res.data; 
                 const username = user.firstName + " " + user.lastName;
                 if (response.length === counter) {
-                    saveHouse(e.detail.houseId, response, username).then(() => {
+                    saveHouse(e.detail.houseId, response, username, houseName).then(() => {
                         setSaveSuccessful(true);
                     }).catch(error => {
                         console.error('Failed to save house', error);
@@ -44,7 +44,7 @@ function RoomContainer() {
         return () => {
             document.removeEventListener("imageUploadSuccess", handleImageUploadSuccess);
         };
-    }, []);
+    }, [houseName, user.firstName, user.lastName]);
 
     const addRoom = () => {
         setRooms([...rooms, { id: counter++, name: '', file: null }]);
@@ -66,11 +66,18 @@ function RoomContainer() {
 
     const handleSave = async () => {
         try {
-            await savePhotos(rooms, { houseID: houseName });
+            setHouseID(generateUniqueIdentifier());
+            await savePhotos(rooms, { houseID: houseID });
         } catch (error) {
             console.error('Error during the saving process:', error);
         }
     };
+
+    const generateUniqueIdentifier = () => {
+        return "id-" + Date.now() + "-" + Math.random().toString(36).substr(2, 9);
+    }
+
+   
 
     if (saveSuccessful) {
         return null;

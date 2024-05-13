@@ -12,7 +12,7 @@ export async function mongoSubmit(cloudinary, mongo, houseId) {
     console.log(mongo.get('imageURL'));
     console.log(mongo.get('houseID'));
     
-        axios.post(`http://localhost:8082/api/house/house/`+houseId+`/images`, mongo)
+        axios.post(`http://localhost:8082/api/house/house/`+houseId+`images`, mongo)
         
             .then(res => {
                const event = new CustomEvent('imageUploadSuccess', { detail: { houseId: houseId } });

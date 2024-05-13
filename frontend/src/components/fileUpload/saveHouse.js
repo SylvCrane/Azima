@@ -6,7 +6,7 @@ import axios from 'axios';
 
 
 
-export async function saveHouse( houseID, imageReferences, user) {
+export async function saveHouse( houseID, imageReferences, user, houseName) {
 
   
  
@@ -15,6 +15,7 @@ export async function saveHouse( houseID, imageReferences, user) {
 
     const houseData = {
         houseID: houseID,
+        houseName: houseName,
         rooms: imageReferences.length, // Or any other logic to determine room count
         images: imageReferences, // Map your room data to your image schema
         // Add an empty array for portals
