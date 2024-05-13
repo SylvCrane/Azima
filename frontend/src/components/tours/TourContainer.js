@@ -17,15 +17,19 @@ const TourContainer = ({ house }) => {
         // Navigate to the AFrame URL
         window.location.href = `/tours/aframe?houseID=${encodeURIComponent(house.houseID)}`;
     };
-
+    const cardClass = `card ${house.public ? 'public' : 'non-public'}`;
     return (
-        <div className="card">
+        <>
+        <br></br>
+        <div className={cardClass}>
             <div className="tours-content">
                 <div className="thumbnail">
                     <div className="address">{house.location}</div>
+                    <div className="author">{house.author}</div>
                     {/*<img src={house.thumbnail} alt="Main Photo of Property" />*/}
                     <img src={house.thumbnail} alt="Property" />
                 </div>
+                
                 <div className="sidebar">
                     <div className="details">
                         <div className="stats">
@@ -56,8 +60,14 @@ const TourContainer = ({ house }) => {
                     </div>
                     <button className="btn" onClick={handleExploreClick}>Explore</button>
                 </div>
+             
             </div>
+            <div className="public-private-indicator">
+                            {house.public ? 'Public' : 'Private'}
+                        </div>
         </div>
+        </>
+        
     );
 }
 

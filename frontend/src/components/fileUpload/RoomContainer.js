@@ -4,30 +4,33 @@ import axios from 'axios';
 import { savePhotos } from './savePhotos.js';
 import { saveHouse } from './saveHouse.js';
 import "../../css/editor.css";
+import { useUser } from "../../authentication/UserState.js";
 
 let counter = 0;
 
 function RoomContainer() {
-    const [houseName, setHouseName] = useState("");
+    const [houseName, setHouseName] = useState('');
     const [rooms, setRooms] = useState([]);
     const [saveSuccessful, setSaveSuccessful] = useState(false);
-
+    const [user] = useUser();
+    const [houseID, setHouseID] = useState('');
     useEffect(() => {
         if (saveSuccessful) {
-            const event = new CustomEvent('saveSuccessful', { detail: { houseID: houseName } });
+            const event = new CustomEvent('saveSuccessful', { detail: { houseID: houseID, houseName : houseName } });
             window.dispatchEvent(event);
             console.log(event.detail.houseID);
-            window.location.href = `/editor/aframe?houseID=${encodeURIComponent(houseName)}`;
+            window.location.href = `/editor/aframe?houseID=${encodeURIComponent(houseID)}`;
         }
-    }, [saveSuccessful, houseName]);
+    }, [saveSuccessful, houseName, houseID]);
 
     useEffect(() => {
         const handleImageUploadSuccess = async (e) => {
             try {
                 const res = await axios.get(`http://localhost:8082/api/image/${e.detail.houseId}`);
                 const response = res.data; 
+                const username = user.email;
                 if (response.length === counter) {
-                    saveHouse(e.detail.houseId, response).then(() => {
+                    saveHouse(e.detail.houseId, response, username, houseName).then(() => {
                         setSaveSuccessful(true);
                     }).catch(error => {
                         console.error('Failed to save house', error);
@@ -41,7 +44,7 @@ function RoomContainer() {
         return () => {
             document.removeEventListener("imageUploadSuccess", handleImageUploadSuccess);
         };
-    }, []);
+    }, [houseName, user.firstName, user.lastName]);
 
     const addRoom = () => {
         setRooms([...rooms, { id: counter++, name: '', file: null }]);
@@ -57,14 +60,24 @@ function RoomContainer() {
         setRooms(newRooms);
     };
 
+    const handleHouseNameChange = (e) => {
+        setHouseName(e.target.value);
+    };
 
     const handleSave = async () => {
         try {
-            await savePhotos(rooms, { houseID: houseName });
+            setHouseID(generateUniqueIdentifier());
+            await savePhotos(rooms, { houseID: houseID });
         } catch (error) {
             console.error('Error during the saving process:', error);
         }
     };
+
+    const generateUniqueIdentifier = () => {
+        return "id-" + Date.now() + "-" + Math.random().toString(36).substr(2, 9);
+    }
+
+   
 
     if (saveSuccessful) {
         return null;
@@ -77,7 +90,7 @@ function RoomContainer() {
                         type="text"
                         placeholder="Type your tour name"
                         value={houseName}
-                        onChange={(e) => setHouseName(e.target.value)} required
+                        onChange={handleHouseNameChange}
                     />
                 </form>
 

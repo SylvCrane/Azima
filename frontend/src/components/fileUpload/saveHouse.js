@@ -5,14 +5,17 @@ import axios from 'axios';
 
 
 
-export async function saveHouse( houseID, imageReferences) {
 
+export async function saveHouse( houseID, imageReferences, user, houseName) {
 
+  
+ 
 
 
 
     const houseData = {
         houseID: houseID,
+        houseName: houseName,
         rooms: imageReferences.length, // Or any other logic to determine room count
         images: imageReferences, // Map your room data to your image schema
         // Add an empty array for portals
@@ -29,6 +32,8 @@ export async function saveHouse( houseID, imageReferences) {
         backyard: false,
         laundryRoom: false,
         dateAvailable: new Date().toISOString(),
+        author: user,
+        public: false,
       };
 
         const response = await axios.post('http://localhost:8082/api/house/house', houseData);

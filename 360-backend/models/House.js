@@ -3,13 +3,16 @@ const portalSchema = require('../models/Portal').schema;
 const imageSchema = require('../models/Image').schema;
 const Schema = mongoose.Schema;
 
-/* ADDED UNIQUE TO HOUSE ID */
 const houseSchema = new Schema({
     houseID: {
-        type: String, unique: true, 
+        type: String,
         required: true,
-        trim: true,
-        unique: [true, "Must be unique."]
+        trim: true
+    },
+    houseName: {
+        type: String,
+        required: true,
+        trim: true
     },
     portals: [portalSchema],
     images: [imageSchema],
@@ -69,6 +72,16 @@ const houseSchema = new Schema({
         required: true,
         trim: true
     },
+    public: {
+        type: Boolean,
+        default: false,
+      
+    },
+    author: {
+        type: String,
+        required: true,
+        trim: true
+    }
   
     
 });

@@ -1,4 +1,3 @@
-
 const { Router } = require('express');
 const House = require('../../models/House');
 const multer = require('multer');
@@ -8,6 +7,17 @@ const portalRouter = require('./portal');
 const router = Router();
 const upload = multer();
 
+router.get('/house/public', (req, res) => {
+    House.find({ public: true })
+        .then(houses => {
+            if (houses.length > 0) {
+                res.json({ data: houses });
+            } else {
+                res.status(200).json({ data: [], message: 'No public houses found' });
+            }
+        })
+        .catch(err => res.status(500).json({ error: 'Server error', details: err.message }));
+});
 router.post('/house', (req, res) => {
     console.log(req.body);  // Log incoming request data
     House.create(req.body)
@@ -39,6 +49,12 @@ router.get('/house/puller/:houseID', (req, res) => {
         .then(house => res.json(house))
         .catch(() => res.status(400).json({ error: 'House not found' }));
 });
+router.get('/house/author/:author', (req, res) => {
+    House.find({ "author": req.params.author })
+        .then(house => res.json(house))
+        .catch(() => res.status(400).json({ error: 'House not found' }));
+});
+
 router.get('/house', (req, res) => {
     House.find({})
         .then(houses => res.json(houses))
