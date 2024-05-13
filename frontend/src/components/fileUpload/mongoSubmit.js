@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { cloudinarySubmit } from './cloudinarySubmit';
+//import { cloudinarySubmit } from './cloudinarySubmit';
 //import FormData from 'form-data';
 
 

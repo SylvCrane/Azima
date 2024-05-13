@@ -17,7 +17,7 @@ router.post("/", async (req, res) => {
         });
 
         // Prepare detailed message with sender's info
-        const senderDetails = `Message from ${name} <${email}>:\n\n${message}`;
+        const senderDetails = `\n\nMessage from [${name}] <${email}>:\n\n${message}`;
 
         // Proceed to send an email
         const send_to = azimaEmail; 

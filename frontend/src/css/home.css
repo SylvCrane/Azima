@@ -1,0 +1,97 @@
+.home-page {
+    display: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100px; /* Minimum height of the page to fill the viewport */
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.home-page-nav {
+    font-size: 16px;
+    height: 460px;
+    width: 100%;
+    position: center;
+    text-align: center;
+    align-items: center;
+    background-color: #00664d;
+    color: white;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background: #00664d;
+    background: -webkit-linear-gradient(top, #00664d, #008065);
+    background: linear-gradient(to bottom, #00664d, #008065)
+}
+
+h1.home-header {
+    font-size: 35px;
+}
+
+p.home-subheading {
+    font-size: 18px;
+}
+
+b.home-subheading {
+    font-size: 18px;
+}
+
+.edit-upload-container {
+    display: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    height: 70%; 
+    width: 70%; 
+    border-radius: 10px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3); 
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.capture-container,
+.save-view-container {
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-around; /* Distributes space evenly around items */
+    align-items: center; 
+    text-align: center;
+    height: 70%; 
+    width: 70%; 
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3); 
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.capture-container:hover,
+.edit-upload-container:hover,
+.save-view-container:hover {
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5); /* Slightly larger and a bit more opacity on hover */
+}
+
+.capture-text {
+    width: 30%; /* Ensures text takes up only necessary space */
+    margin: 0 20px; /* Adds margin on both sides */
+}
+
+.capture-image {
+    width: 60%; /* Restrict image width */
+    object-fit: contain; /* Keeps image aspect ratio */
+}
+
+.edit-upload-container {
+
+}
+
+@media (max-width: 767px){
+
+    .home-page-nav {
+      padding-left: 50px; /* Add padding to the left */
+      padding-right: 50px; /* Add padding to the right */
+      height: 600px;
+    }
+  }

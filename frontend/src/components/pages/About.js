@@ -1,7 +1,7 @@
 import React from "react";
 import "../../css/about.css";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export const About = () => {
 
@@ -58,7 +58,7 @@ export const About = () => {
 
       <div className="header-content">
         <h1>About Us & Frequently Asked Questions</h1><br/>
-        <p>Need assistance with Azima? Simply click on the '+' beside any question to learn more. </p>
+        <p className="about-text">Need assistance with Azima? Simply click on the '+' beside any question to learn more. </p>
       </div>
 
       <div className="about">
@@ -86,7 +86,8 @@ export const About = () => {
           ))}
         </div>
       </div>
-      <p> Do not see your Question here? Head over to our <a href ="/help"><u>Help Page</u></a> to send any enquiry! </p>
+      <br></br>
+      <p className="about-text"> Do not see your Question here? Head over to our <Link className="help-link" to ="/help">Help Page</Link> to send any enquiry! </p>
       <br/><br/>
     </div>
   );

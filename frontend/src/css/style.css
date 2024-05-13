@@ -8,7 +8,7 @@
   font-optical-sizing: auto;
   font-weight: <weight>;
   font-style: normal;
-  font-size: 14px;
+  font-size: 15px;
   box-sizing: border-box;
   margin: 0;
 }
@@ -80,32 +80,6 @@ button[type=submit]:hover {
   }
   
 
-  .home-page {
-    display: center;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100px; /* Minimum height of the page to fill the viewport */
-    text-align: center;
-    font-size: 14px;
-    
-  }
-
-  .home-page-nav {
-    font-size: 16px;
-    height: 450px;
-    width: 100%;
-    position: center;
-    text-align: center;
-    align-items: center;
-    background-color: #00664d;
-    color: white;
-    padding-top: 60px;
-    background: #00664d;
-    background: -webkit-linear-gradient(top, #00664d, #008065);
-    background: linear-gradient(to bottom, #00664d, #008065)
-  }
-
   /* need this div so that the vg file appears */
   .logo {
     height: 7vmin;
@@ -140,6 +114,11 @@ button[type=submit]:hover {
   .alert {
     font-size: 15px; 
     color: red;
+  }
+
+  .success {
+    font-size: 15px; 
+    color: #00B050;
   }
 
   @media (max-width: 767px){

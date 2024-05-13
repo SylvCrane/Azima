@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "../../css/style.css";
 import "../../css/help.css";
-//import { useNavigate } from "react-router-dom";
 
 export const Help = () => {
+  const [sentMessage, setSentMessage] = useState("");
   const [alertMessage, setAlertMessage] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -13,9 +13,6 @@ export const Help = () => {
   // Variable for email pattern regex
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 
-  // Vairiable to user import useNavigate 
-  //const navigate = useNavigate();
-
   const handleSendMessage = async (e) => {
     e.preventDefault();
     console.log(name, email, subject, message);
@@ -23,11 +20,13 @@ export const Help = () => {
     // First check is email address entered is a valid email address
     if(!emailRegex.test(email)) {
       setAlertMessage("Invalid email address.");
+      setSentMessage("");
       return;
     }
 
     if (!name.trim() || !email.trim() || !subject.trim() || !message.trim()) {
       setAlertMessage("Cannot be left empty.");
+      setSentMessage("");
       return; // Don't proceed with saving if required fields are empty or only contain whitespace
     }
 
@@ -56,17 +55,20 @@ export const Help = () => {
       })
       .then((data) => {
         if (data.status === "ok") {
-          setAlertMessage("Message has been sent. The Azima team will get back to you when we can!");
-          setName("");  // Clear the form fields
+          setSentMessage("Message has been sent. The Azima team will get back to you when we can!");
+          // Clear the input on the screen once the email has been sent.
+          setName("");  
           setEmail("");
           setSubject("");
           setMessage("");
+          setAlertMessage("");
         } else {
           throw new Error(data.message || "Could not send email. Please try again later.");
         }
       })
       .catch((error) => {
-        setAlertMessage(error.message || "An error occurred while sending the message.");
+        setAlertMessage(error.message || "An error occurred while sending the message. Please try again later.");
+        setSentMessage("");
       });
   };
 
@@ -74,9 +76,9 @@ export const Help = () => {
     <div className="container">
       <br></br>
       <center><h3>NEED TO GET IN TOUCH?</h3></center>
-      <center><h1>Contact Azima</h1></center>
+      <center><h1>Contact Azima</h1></center><br></br>
       <div className="help-message">
-        <p>Have a question that needs to be answered?<br/> Fill out the form below and the Azima team will get back to you as soon as we can!</p>
+        <p className="message">Have a question that needs to be answered?<br/> Fill out the form below and the Azima team will get back to you as soon as we can!</p>
       </div>
       <br></br>
       <form className="help-form" onSubmit={handleSendMessage}>
@@ -91,11 +93,16 @@ export const Help = () => {
 
         <label htmlFor="message">Message:</label>
         <textarea id="message" placeholder="Enter message" value={message} onChange={(e) => setMessage(e.target.value)} required />
+        <br></br>
         <button type="submit">Send Message</button>
-        <br/>
-        {alertMessage && (
-            <div className="alert">{alertMessage}</div>
-        )}
+        <br></br>
+        {sentMessage && 
+          <div className="success">{sentMessage}</div>
+        }
+        {alertMessage && 
+          <div className="alert">{alertMessage}</div>
+        }
+        <br></br>
       </form>
     </div>
   );

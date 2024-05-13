@@ -8,7 +8,7 @@ import "../../css/editor.css";
 let counter = 0;
 
 function RoomContainer() {
-    const [houseName, setHouseName] = useState('');
+    const [houseName, setHouseName] = useState("");
     const [rooms, setRooms] = useState([]);
     const [saveSuccessful, setSaveSuccessful] = useState(false);
 
@@ -57,9 +57,6 @@ function RoomContainer() {
         setRooms(newRooms);
     };
 
-    const handleHouseNameChange = (e) => {
-        setHouseName(e.target.value);
-    };
 
     const handleSave = async () => {
         try {
@@ -80,7 +77,7 @@ function RoomContainer() {
                         type="text"
                         placeholder="Type your tour name"
                         value={houseName}
-                        onChange={handleHouseNameChange}
+                        onChange={(e) => setHouseName(e.target.value)} required
                     />
                 </form>
 

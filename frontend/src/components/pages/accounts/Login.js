@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "../../../css/style.css";
 import "../../../css/accounts.css";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useUser } from "../../../authentication/UserState";
 
 export const Login = () => {
@@ -9,6 +9,7 @@ export const Login = () => {
     // Use state variables
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
     const [alertMessage, setAlertMessage] = useState(""); // Variable that stores message at the bottom of page depending on whether user input.
     const [user, setUser] = useUser();
 
@@ -26,6 +27,7 @@ export const Login = () => {
         // First check is email address entered is a valid email address
         if(!emailRegex.test(loginEmail)) {
             setAlertMessage("Invalid email address");
+            setSuccessMessage("");
             return;
         }
 
@@ -49,7 +51,7 @@ export const Login = () => {
             console.log(data, "userLogin");
             
             if (data.status === "ok") {
-                setAlertMessage("Logged in successfully!");
+                setSuccessMessage("Logged in successfully!");
                 setUser ({
                     isAuthenticated: true,
                     email: data.user.email,
@@ -60,16 +62,20 @@ export const Login = () => {
                     location: data.user.location,
                     profileImage: data.user.profileImage
                 });
+                setAlertMessage("");
                 console.log("user login authenticated");
             } 
             else if (data.error === "email_not_found") {
                 setAlertMessage("Email not found. Please check email address again.");
+                setSuccessMessage("");
             } 
             else if (data.error === "incorrect_password") {
                 setAlertMessage("Incorrect password. Please check password again.");
+                setSuccessMessage("");
             } 
             else {
                 setAlertMessage("Cannot login. Please check details again.");
+                setSuccessMessage("");
             }
         });
     }
@@ -93,11 +99,14 @@ export const Login = () => {
                     <br/><button type="submit">Sign In</button><br></br><br></br>
                     <br/><button className="link-btn" type ="button" onClick={() => navigate('/account/forgot-password')}>Forgot password?</button><br/>
                     <br/>
-                    <button className="link-btn" type ="button" onClick={() => navigate('/account/signup')}>Don't have an account? Register here.</button>
+                    <Link className="link-btn" to ="/account/signup">Don't have an account? Register here.</Link>
                     <br></br><br></br>
-                    { alertMessage && (
-                        <div className="alert">{ alertMessage }</div>
-                    )}
+                    {successMessage && 
+                        <div className="success">{successMessage}</div>
+                    }
+                    {alertMessage && 
+                        <div className="alert">{alertMessage}</div>
+                    }
                 </form>
             </div>  
         </div>

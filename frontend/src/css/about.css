@@ -20,12 +20,17 @@ h1 {
   font-size: 35px;
 }
 
+p.about-text {
+  font-size: 17px;
+}
+
 .about {
   display: flex;
   height:10wh;
   width: 100 vw;
   justify-content: center;
   align-items: center;
+  font-size: 20px;
 }
   
 .boxes {
@@ -54,6 +59,7 @@ h1 {
   max-height: 0;
   overflow: hidden;
   transition: all 0.5s cubic-bezier(0,1,0,1);
+  font-size: 15px;
 }
   
 .content.show {
@@ -63,9 +69,19 @@ h1 {
 }
 
 .link-text {
-  color: #004d38;
+  color: #00664d;
   text-decoration: underline;
   cursor: pointer;
+  font-size: 15px;
+}
+
+.help-link {
+  background: none;
+  color: #00664d;
+  text-decoration: underline;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
 }
 
 @media (max-width: 65em) {
@@ -82,7 +98,15 @@ h1 {
     font-size: 20px;
   }
 
-  p {
-    font-size: 14px; /* Smaller text in paragraphs */
+  p.about-text {
+    font-size: 16px; /* Smaller text in paragraphs */
+  }
+
+  .help-link {
+    font-size: 16px;
+  }
+
+  .container {
+    padding: 0 20px; /* Adds 20px padding to the left and right */
   }
 }

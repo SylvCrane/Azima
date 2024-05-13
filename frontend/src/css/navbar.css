@@ -82,9 +82,9 @@ nav .menu {
 
 }
 
-.account-button:hover {
-    background-color: #087f6e; /* Darker shade for hover effect */
-}
+/* .account-button:hover {
+    background-color: #087f6e; 
+} */
 
 
 // PROFILE IMAGE
@@ -114,8 +114,6 @@ nav .menu {
 .profile-image-container:hover {
     border-radius: 50%;
 }
-
-
 
 
 

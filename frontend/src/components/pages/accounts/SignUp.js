@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "../../../css/style.css";
 import "../../../css/accounts.css";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useUser } from "../../../authentication/UserState";
+
 
 export const SignUp = () => {
     
@@ -12,6 +13,7 @@ export const SignUp = () => {
     const [company, setCompany] = useState("");
     const [signUpEmail, setSignUpEmail] = useState("");
     const [signUpPassword, setSignUpPassword] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
     const [alertMessage, setAlertMessage] = useState(""); // Variable that stores message at the bottom of page depending on whether user input.
     const [user, setUser] = useUser();
 
@@ -40,6 +42,7 @@ export const SignUp = () => {
 
         if (incorrectMessage) {
             setAlertMessage(incorrectMessage);
+            setSuccessMessage("");
             return;
         }
 
@@ -66,7 +69,7 @@ export const SignUp = () => {
             console.log(data, "userSignup");
             
             if (data.status === "ok") {
-                setAlertMessage("You are now registered with Azima!");
+                setSuccessMessage("You are now registered with Azima!");
                 setUser ({
                     isAuthenticated: true,
                     email: data.user.email, // Refer to email object directly (since the email is being registered it should not be in mongodb yet)
@@ -74,10 +77,12 @@ export const SignUp = () => {
                     lastName: data.user.lastName,
                     company: data.user.company
                 });
+                setAlertMessage("");
                 console.log("user registration authenticated");
 
             } else {
                 setAlertMessage("Email is already in use. Please login instead.");
+                setSuccessMessage("");
             }
 
         });  
@@ -107,11 +112,14 @@ export const SignUp = () => {
                     <button type="submit">sign up</button>
                     <div className= "required-text"> <br/> (* Required fields must be filled in to create an account)<br/> </div>
                     <br/>
-                    <button className="link-btn" type ="button" onClick={() => navigate('/account/login')}>Already have an account? Sign in here.</button><br/><br/>
-                    { alertMessage && (
-                        <div className="alert">{ alertMessage }</div>
-                    )} <br></br>
-
+                    <Link className="link-btn" to = "/account/login">Already have an account? Sign in here.</Link><br/><br/>
+                    {successMessage && 
+                        <div className="success">{successMessage}</div>
+                    }
+                    {alertMessage && 
+                        <div className="alert">{alertMessage}</div>
+                    } 
+                    <br></br>
                 </form>
                 <br></br>
             </div>
