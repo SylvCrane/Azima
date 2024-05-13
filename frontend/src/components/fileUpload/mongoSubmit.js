@@ -3,16 +3,23 @@ import { cloudinarySubmit } from './cloudinarySubmit';
 //import FormData from 'form-data';
 
 
-export async function mongoSubmit(cloudinary, mongo, houseId) {
+export async function mongoSubmit(mongo, houseId, newImageName) {
 
-    const imageURL = await cloudinarySubmit(cloudinary);
+    //const imageURL = await cloudinarySubmit(cloudinary);
+
+    const imageURL = "http://localhost:8082/images/" + newImageName;
+
 
     mongo.append('imageURL', imageURL);
     console.log(mongo.get('name'));
     console.log(mongo.get('imageURL'));
     console.log(mongo.get('houseID'));
     
-        axios.post(`http://localhost:8082/api/house/house/`+houseId+`/images`, mongo)
+        axios.post(`http://localhost:8082/api/house/house/`+houseId+`/images`, mongo, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        })
         
             .then(res => {
                const event = new CustomEvent('imageUploadSuccess', { detail: { houseId: houseId } });
