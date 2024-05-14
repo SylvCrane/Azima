@@ -5,8 +5,7 @@ import "../../css/editor.css";
 function RoomForm({ onRemove, onUpdate }) {
   const [name, setName] = useState('');
   const [file, setFile] = useState(null);
-  const [alertMessage, setAlertMessage] = useState("");
-  
+
   const handleNameChange = (e) => {
     const newName = e.target.value;
     setName(newName);
