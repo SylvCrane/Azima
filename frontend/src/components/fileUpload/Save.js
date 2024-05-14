@@ -11,7 +11,7 @@ function Save() {
         laundryRoom: false,
         sqFootage: '',
         price: '',
-        dateListed: '',
+        dateListed: new Date().toISOString().substr(0, 10), // Set current date as default
         location: '',
         public: false,
     });
@@ -23,7 +23,7 @@ function Save() {
 
     useEffect(() => {
         if (saveSuccessful) {
-            window.location.href = `/tours`; // Redirect on successful save
+            window.location.href = `/account`; // Redirect to account page when save is successful (their tour should be saved here).
         }
     }, [saveSuccessful]);
 
