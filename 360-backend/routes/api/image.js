@@ -31,12 +31,12 @@ const upload = multer({ storage, fileFilter });
 router.post('/', upload.single('image'), (req, res) => {
     let imageData = {
         ...req.body,
-        houseID: req.houseId // Use the houseId passed from the parent route
+        houseID: req.body.houseID // Ensure this matches the field sent from the frontend
     };
 
     Image.create(imageData)
         .then(image => res.json({ msg: 'Image added successfully'}))
-        .catch(err => res.status(404).json({error: 'Unable to add image'}));
+        .catch(err => res.status(404).json({ error: 'Unable to add image' }));
 });
 
 router.get('/', (req, res) => {

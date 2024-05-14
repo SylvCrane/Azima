@@ -1,16 +1,14 @@
 import axios from 'axios';
-    
-    
-export async function mongoSubmit(mongo, newImageName, houseId) {
-    
-    const imageURL = "http://localhost:8082/images/" + newImageName;
-    
+
+export async function mongoSubmit(mongo, houseId, newImageName) {
+    const imageURL = "http://localhost:8082/images/"+ newImageName;
+    console.log("newImageName: " ,newImageName);
     mongo.append('imageURL', imageURL);
-    console.log(mongo.get('name'));
-    console.log(mongo.get('imageURL'));
-    console.log(mongo.get('houseID'));
-        
-    axios.post(`http://localhost:8082/api/house/house/`+houseId+`/images`, mongo, {
+    console.log("mongo name:", mongo.get('name'));
+    console.log("mongo imageURL:", mongo.get('imageURL'));
+    console.log("mongo houseID:", mongo.get('houseID'));
+    houseId = mongo.get('houseID');
+    axios.post('http://localhost:8082/api/image/' ,mongo, {
         headers: {
             "Content-Type": "multipart/form-data"
         }
@@ -23,7 +21,7 @@ export async function mongoSubmit(mongo, newImageName, houseId) {
     .catch(err => {
         console.log("The mongo submission failed");
         console.log(err.message);
-        
+
         if (err.response) {
             // The request was made and the server responded with a status code
             // that falls out of the range of 2xx
@@ -31,7 +29,7 @@ export async function mongoSubmit(mongo, newImageName, houseId) {
             console.log(err.response.status);
             console.log(err.response.headers);
         } 
-         else if (err.request) {
+        else if (err.request) {
             // The request was made but no response was received
             console.log(err.request);
         } 
@@ -39,5 +37,5 @@ export async function mongoSubmit(mongo, newImageName, houseId) {
             // Something happened in setting up the request that triggered an Error
             console.log('Error', err.message);
         }
-    })
-};
+    });
+}

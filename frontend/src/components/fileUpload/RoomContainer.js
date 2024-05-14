@@ -14,6 +14,9 @@ function RoomContainer() {
     const [saveSuccessful, setSaveSuccessful] = useState(false);
     const [user] = useUser();
     const [houseID, setHouseID] = useState('');
+
+
+  
     useEffect(() => {
         if (saveSuccessful) {
             const event = new CustomEvent('saveSuccessful', { detail: { houseID: houseID, houseName : houseName } });
@@ -65,9 +68,12 @@ function RoomContainer() {
     };
 
     const handleSave = async () => {
+        const houseid = generateUniqueIdentifier();
+    setHouseID(houseid);
+    console.log(houseid);
         try {
-            setHouseID(generateUniqueIdentifier());
-            await savePhotos(rooms, { houseID: houseID });
+           
+            await savePhotos(rooms, { houseID: houseid });
         } catch (error) {
             console.error('Error during the saving process:', error);
         }
@@ -76,6 +82,7 @@ function RoomContainer() {
     const generateUniqueIdentifier = () => {
         return "id-" + Date.now() + "-" + Math.random().toString(36).substr(2, 9);
     }
+    
 
    
 

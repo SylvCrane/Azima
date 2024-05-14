@@ -42,7 +42,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 function loadImages(houseId) {
     console.log("loadImageData called with houseId:", houseId);
+    console.log("URL = "    + 'http://localhost:8082/api/house/house/puller/' + houseId);
     fetch('http://localhost:8082/api/house/house/puller/' + houseId)
+    
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Network response was not ok (${response.status})`);
