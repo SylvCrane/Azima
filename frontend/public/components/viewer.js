@@ -42,7 +42,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 function loadImages(houseId) {
     console.log("loadImageData called with houseId:", houseId);
+    console.log("URL = "    + 'http://localhost:8082/api/house/house/puller/' + houseId);
     fetch('http://localhost:8082/api/house/house/puller/' + houseId)
+    
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Network response was not ok (${response.status})`);
@@ -130,8 +132,7 @@ function loadImageSelector(houseId , scrollContainer) {
 document.addEventListener('edit', function (){
 
    
-    
-    
+
 
     const gallery = document.getElementById('gallery');
     const tab = document.getElementById('tab');
@@ -160,12 +161,6 @@ loadImageSelector(houseID, select);
         }
       
         
-        
-       
-            
-        
-        
-       
       
             let image = img.children[0];
             console.log(image.src);
@@ -174,10 +169,6 @@ loadImageSelector(houseID, select);
             caption.style.color = "#0EB49A";
             selected = img
             
-          
-
-       
-        
        
      
        });
@@ -215,14 +206,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let isDown = false;
     let startX;
     let scrollLeft;
-
-
-
-
-   
-
-
-
 
   
     gallery.addEventListener('click', (e) => {
@@ -279,5 +262,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   
 });
-
-

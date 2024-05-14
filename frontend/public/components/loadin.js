@@ -1,13 +1,21 @@
+
 document.addEventListener("DOMContentLoaded", function() {
 
-const params = new URLSearchParams(window.parent.location.search);
-console.log(params);
+
+  const params = new URLSearchParams(window.parent.location.search);
+  console.log(params);
 const houseID = params.get('houseID');
 console.log("houseid: ",houseID)
   
   loadImageData(houseID);
   loadPortalData(houseID);
   loadWIPPortalData(houseID);
+
+
+
+
+
+
     const overlay = document.getElementById('overlay');
     
     // Ensure the initial opacity is set to '1'
@@ -121,7 +129,7 @@ console.log("houseid: ",houseID)
 }
 
 function loadWIPPortalData(houseId) {
-  fetch('http://localhost:8082/api/portal/'+houseId)
+  fetch('http://localhost:8082/api/portal/' + houseId)
   .then(response => {
       if (!response.ok) {
           throw new Error(`Network response was not ok (${response.status})`);
@@ -129,28 +137,33 @@ function loadWIPPortalData(houseId) {
       return response.json(); // Parse the JSON of the response
   })
   .then(data => {
-    console.log('House loaded successfully:', data[0]);
+      console.log('WIP Portal loaded:', data);
       const sceneEl = document.querySelector('a-scene');
-      
-      if (sceneEl && Array.isArray(data)&&data.length>0) { // Ensure data is an array
-        data.forEach((windowData, index) => {
-         
-          let windowEntity = document.createElement("a-entity");
-          windowEntity.setAttribute("loader", "");
-          windowEntity.setAttribute("id", `window-${index}`);
+      let loadedPortalIds = new Set(); // Set to keep track of loaded portal IDs
 
+      if (sceneEl && Array.isArray(data) && data.length > 0) {
+          data.forEach((windowData, index) => {
+              // Check if the portal ID has already been processed
+              console.log(windowData._id);
+              if (!loadedPortalIds.has(windowData._id)) {
+                  loadedPortalIds.add(windowData._id); // Mark this ID as loaded
+                  console.log(loadedPortalIds);
+                  // Create a new portal entity and append it to the scene
+                  let windowEntity = document.createElement("a-entity");
+                  windowEntity.setAttribute("loader", "");
+                  windowEntity.setAttribute("id", `wip-portal-${index}`);
+                  sceneEl.appendChild(windowEntity);
+                  console.log("appended", windowEntity);
 
-          sceneEl.appendChild(windowEntity);
-          
-          // Ensure the entity is part of the scene before emitting the event
-          if (sceneEl.contains(windowEntity)) {
-              // Use setTimeout to ensure the DOM has updated
-              setTimeout(() => {
-                sceneEl.emit('loadWindows', { detail: { id: `window-${index}`, data: windowData } }, false);
-                  
-              }, 100);
-          }
-        });
+                  // Optionally, emit an event after ensuring the entity is part of the scene
+                  setTimeout(() => {
+                      sceneEl.emit('loadWindows', { detail: { id: `wip-portal-${index}`, data: windowData } }, false);
+                      console.log("emitted loadwindows with", windowData);
+                  }, 100);
+              } else {
+                  console.log("Skipping duplicate portal ID:", windowData.id);
+              }
+          });
       }
   })
   .catch(error => {

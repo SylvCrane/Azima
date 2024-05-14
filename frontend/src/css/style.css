@@ -3,22 +3,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Alatsi&family=Flow+Circular&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Ramabhadra&family=Rubik:ital,wght@0,300..900;1,300..900&family=Varela+Round&display=swap');
 /* https://fonts.google.com/selection/embed */
 
-  * {
-    font-family: "Rubik", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: <weight>;
-    font-style: normal;
-    font-size: 14px;
-    box-sizing: border-box;
-    margin: 0;
-    
-  }
+* {
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+  font-size: 15px;
+  box-sizing: border-box;
+  margin: 0;
+}
   
-  h1 {
-    font-size: 40px;
-    font-weight: bold;
-    margin: 0;
-  }
+h1 {
+  font-size: 40px;
+  font-weight: bold;
+  margin: 0;
+}
 
   h2 {
     font-size: 30px;
@@ -29,7 +28,7 @@
   }
 
   h4 {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   input {
@@ -41,18 +40,21 @@
     width: 300px;
   }
   
-  button[type=submit] {
-    border-radius: 30px;
-    border: 1px solid #004d39;
-    background-color: #00805e;
-    color: #ffffff;
-    font-weight: bold;
-    cursor: pointer;
-    padding: 12px 30px;
-    width: 150px;
-    text-transform: uppercase;
-    
-  }
+button[type=submit] {
+  border-radius: 30px;
+  border: 1px solid #004d39;
+  background-color: #0EB49A;
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 12px 30px;
+  width: 150px;
+  text-transform: uppercase;
+}
+
+button[type=submit]:hover {
+  background-color: #087f6e; /* Darker shade for hover effect */
+}
   
   /* for app.js and account.js file */
   .App, 
@@ -67,7 +69,8 @@
   .editor-page, 
   .about-page, 
   .home-page, 
-  .user-page {
+  .user-page,
+  .edit-profile-page {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -76,39 +79,6 @@
     text-align: center;
   }
   
-
-  .home-page {
-    display: center;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 40vh; /* Minimum height of the page to fill the viewport */
-    text-align: center;
-  }
-
-  .home-page-nav {
-    height: 450px;
-    width: 100%;
-    position: center;
-    text-align: center;
-    align-items: center;
-    background-color: #00664d;
-    color: white;
-    padding-top: 80px;
-  }
-
-  .forgot-password-container {
-    width: 600px;
-    height: 300px;
-    margin: 0 auto;
-    margin-top: 10%; /* provides gap between bottom of navbar and top of the page */
-    border-radius: 15px; /* Adjust the value as needed for the curve */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a shadow effect */
-    
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
 
   /* need this div so that the vg file appears */
   .logo {
@@ -119,9 +89,9 @@
   .join-btn {
     border-radius: 25px;
     border: 1px solid #004d39;
-    background-color: #00805e;
-    color: #ffffff;
-    font-size: 12px;
+    background-color: #0EB49A;
+    color: white;
+    font-size: 14px;
     font-weight: bold;
     cursor: pointer;
     padding: 15px 45px;
@@ -134,6 +104,21 @@
     &:focus {
         outline: none;
     }
+  }
+
+  .join-btn:hover {
+    background-color: #087f6e; /* Darker shade for hover effect */
+  }
+
+  /* For form pages */
+  .alert {
+    font-size: 15px; 
+    color: red;
+  }
+
+  .success {
+    font-size: 15px; 
+    color: #00B050;
   }
 
   @media (max-width: 767px){
@@ -149,15 +134,5 @@
       padding-left: 50px; /* Add padding to the left */
       padding-right: 50px; /* Add padding to the right */
       height: 450px;
-    }
-
-    .forgot-password-container {
-      width: 70%;
-      height: 60%;
-      margin: 0 auto;
-      margin-top: 25%; /* provides gap between bottom of navbar and top of the page */
-      justify-content: center;
-      align-items: center;
-      text-align: center;
     }
   }

@@ -1,4 +1,3 @@
-
 const { Router } = require('express');
 const House = require('../../models/House');
 const multer = require('multer');
@@ -8,6 +7,17 @@ const portalRouter = require('./portal');
 const router = Router();
 const upload = multer();
 
+router.get('/house/public', (req, res) => {
+    House.find({ public: true })
+        .then(houses => {
+            if (houses.length > 0) {
+                res.json({ data: houses });
+            } else {
+                res.status(200).json({ data: [], message: 'No public houses found' });
+            }
+        })
+        .catch(err => res.status(500).json({ error: 'Server error', details: err.message }));
+});
 router.post('/house', (req, res) => {
     console.log(req.body);  // Log incoming request data
     House.create(req.body)
@@ -39,7 +49,20 @@ router.get('/house/puller/:houseID', (req, res) => {
         .then(house => res.json(house))
         .catch(() => res.status(400).json({ error: 'House not found' }));
 });
+router.get('/house/author/:author', (req, res) => {
+    House.find({ "author": req.params.author })
+        .then(house => res.json(house))
+        .catch(() => res.status(400).json({ error: 'House not found' }));
+});
 
+router.get('/house', (req, res) => {
+    House.find({})
+        .then(houses => res.json(houses))
+        .catch(err => {
+            console.error('Error fetching all houses:', err);
+            res.status(500).json({ error: 'Internal server error', details: err.message });
+        });
+});
 router.put('/house/:id', (req, res) => {
     House.findByIdAndUpdate(req.params.id, req.body)
         .then(() => res.json({ msg: 'House updated successfully' }))
@@ -87,6 +110,34 @@ router.put('/house/update/:houseID', (req, res) => {
             res.json({ msg: 'House updated successfully', house });
         })
         .catch(err => res.status(400).json({ error: 'Unable to update house', details: err.message }));
+});
+router.delete('/house/:houseID/portal', async (req, res) => {
+    const { houseID } = req.params;  // Corrected way to access houseID
+    const { location, destination } = req.query;  // Assuming these are passed as query parameters
+
+    try {
+        console.log('Deleting portal...');
+        console.log('House ID:', houseID);
+        console.log('Location:', location);
+        console.log('Destination:', destination);
+
+        const house = await House.findOneAndUpdate(
+            { houseID: houseID },  // Pass houseID as an object to match the _id field
+            { $pull: { portals: { location: location, destination: destination } } },
+            { new: true }  // Returns the modified document
+        );
+
+        if (!house) {
+            console.log('House not found or Portal not found with the specified criteria');
+            return res.status(404).json({ error: 'House not found or Portal not found with the specified criteria' });
+        }
+
+        console.log('Portal deleted successfully');
+        res.json({ msg: 'Portal deleted successfully', updatedHouse: house });
+    } catch (err) {
+        console.error('Error deleting portal:', err);
+        res.status(400).json({ error: 'Unable to delete portal', details: err.message });
+    }
 });
 
 module.exports = router;

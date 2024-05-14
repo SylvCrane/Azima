@@ -46,6 +46,7 @@ if(!this.el.getAttribute('window')){
       triangleEl.setAttribute("vertex-b", triangleData.vertexB);
       triangleEl.setAttribute("vertex-c", triangleData.vertexC);
       triangleEl.setAttribute("material", `color: ${triangleData.color}`);
+      
       this.el.appendChild(triangleEl);
     });
 
@@ -57,6 +58,9 @@ if(!this.el.getAttribute('window')){
       textEl.setAttribute("rotation", textInfo.rotation);
       textEl.setAttribute("width", "30");
       textEl.setAttribute("align", "center");
+      textEl.setAttribute("font", "./assets/MazzardM-Regular-msdf.json");
+      textEl.setAttribute("negate", "false");
+
       this.el.appendChild(textEl);
     });
 

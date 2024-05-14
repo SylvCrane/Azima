@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import "../../css/editor.css";
 
 function RoomForm({ onRemove, onUpdate }) {
   const [name, setName] = useState('');
@@ -23,24 +24,24 @@ function RoomForm({ onRemove, onUpdate }) {
         <h2>Room</h2>
         <input
           type="text"
-          placeholder="Enter text"
+          placeholder="Type your room name"
           value={name}
-          onChange={handleNameChange}
+          onChange={handleNameChange} required
         />
       </form>
-      <div className="file-container" onclick="document.getElementById('fileInput').click()" >
+      <div className="file-upload-container" style={{ padding: '20px', border: '2px dashed #ccc', cursor: 'pointer', textAlign: 'center' }}>
         <label className="custom-file-upload">
           Upload a 360° image:
           <input
             type="file"
             accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"
             style={{ display: 'none' }}
-            onChange={handleFileChange}
+            onChange={handleFileChange} required
           />
         </label>
         <p>Selected file: {file ? file.name : 'None'}</p>
       </div>
-      <button className="cancelButton" onClick={onRemove}>Remove</button>
+      <button id="cancelButton" onClick={onRemove}>Remove</button>
     </div>
   );
 }

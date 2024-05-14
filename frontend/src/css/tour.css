@@ -1,0 +1,198 @@
+.tours-page {
+    margin-top: 15px; 
+}
+
+
+.card {
+    max-width: 80%; /* Adjust the width as needed */
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+
+
+.card.non-public {
+    background-color: #ddd; /* a light red, for example */
+}
+
+.public-private-indicator {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+
+
+    color: #888; /* Example color, adjust as needed */
+    font-size: 20px; /* Adjust font size as needed */
+    font-weight: 700;
+}
+.tours-page .public-private-indicator {
+    display:none;
+    
+}
+.tours-content {
+    display: flex;
+    flex-direction: row;
+    padding: 20px 20px; 
+    gap: 20px
+}
+  
+.thumbnail{
+    position: relative;
+    display: flex; /* Assuming multiple images would be displayed in a row */
+    overflow-x: auto; /* Allows for horizontal scrolling */
+    border-radius: 10px;
+    max-width: 70%;
+}
+  
+.address {
+    position: absolute; /* Position absolutely within .thumbnail */
+    bottom: 10px; /* Distance from the top of .thumbnail */
+    left: 10px; /* Distance from the left of .thumbnail */
+    color: white; /* Assuming you want the text to be white */
+    font-size: 20px; /* Make the address text a bit larger */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better readability */
+    padding: 5px 10px; /* Some padding around the text */
+    border-radius: 5px; /* Optionally round the corners */
+    max-width: 90%; /* Limit the width of the address box */
+    overflow: hidden; /* Prevents text spillover */
+    text-overflow: ellipsis; /* Adds ellipsis if text is too long */
+    white-space: nowrap; /* Keeps the address in a single line */
+}
+  
+
+.author {
+    position: absolute; /* Position absolutely within .thumbnail */
+    top: 10px; /* Distance from the top of .thumbnail */
+    left: 10px; /* Distance from the left of .thumbnail */
+    color: white; /* Assuming you want the text to be white */
+    font-size: 14px; /* Make the address text a bit larger */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better readability */
+    padding: 5px 10px; /* Some padding around the text */
+    border-radius: 5px; /* Optionally round the corners */
+    max-width: 90%; /* Limit the width of the address box */
+    overflow: hidden; /* Prevents text spillover */
+    text-overflow: ellipsis; /* Adds ellipsis if text is too long */
+    white-space: nowrap; /* Keeps the address in a single line */
+}
+.thumbnail img {
+    max-width: 100%;
+    display: block;
+}
+  
+  
+.details {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Ensure it wraps on smaller screens */
+    padding: 15px;
+    background: #f9f9f9;
+    margin: auto auto;
+    border-radius: 10px;
+}
+.card.non-public  .details {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Ensure it wraps on smaller screens */
+    padding: 15px;
+    background: #f5f5f5;
+    margin: auto auto;
+    border-radius: 10px;
+}
+  
+.btn{
+    font-weight: bold;
+    background-color: #0EB49A;
+    color: white;
+    padding: 20px 110px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 22px;
+    margin: 10px 0;
+    border: none;
+}
+
+.btn:hover{
+    background-color: #087f6e; /* Darker shade for hover effect */
+}
+
+.detail {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    flex-direction: column;
+}
+
+.detail span {
+    font-size: 16px;
+    flex-wrap: wrap;
+}
+
+.stats{ 
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    margin: 10px 0;
+    flex-wrap: wrap;
+    margin:0 auto;
+    column-gap: 20px;
+}
+
+.detail img {
+    margin-right: 8px;
+    max-height: 40px;
+
+}
+
+.price {
+    font-size: 30px;
+    color:#0A7A68;  /* Adjust color to match the theme */
+    padding: 10px 15px;
+    text-align: center;
+    font-weight: bold;
+    margin:0 auto;
+}
+
+.price span{
+    font-size: 40px;
+    color:#0EB49A;
+}
+
+.new-tour-button-container {
+    display: flex;
+}
+
+.new-tour-button {
+    color:  #003326;
+    background-color: #eff5f4;
+    padding: 12px 20px;  /* Adjust padding to match the desired button size */
+    font-size: 18px;  /* Adjust font size as needed */
+    font-weight: bold;
+    border:  #003326;  /* No border */
+    border-radius: 30px;  /* Rounded corners */
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap; /* Ensures that the items remain in a row */
+    transition: box-shadow 0.3s ease-in-out, background-color 0.2s;  /* Smooth transitions for hover effects */
+    box-shadow: 
+        0 8px 16px rgba(0, 102, 77, 0.3),  /* Bottom shadow */
+        0 -8px 16px rgba(0, 102, 77, 0.2); /* Top shadow, slightly lighter */
+}
+
+.new-tour-button:hover {
+    box-shadow: 
+        0 5px 30px rgba(0, 102, 77, 0.45), /* More pronounced bottom shadow on hover */
+        0 -5px 30px rgba(0, 102, 77, 0.35); /* More pronounced top shadow on hover */
+}
+.user-tours-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    
+}

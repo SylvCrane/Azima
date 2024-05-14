@@ -1,185 +1,155 @@
 import React, { useState, useEffect } from 'react';
-import { savePhotos } from './savePhotos.js';
-import axios from 'axios';
-
-const params = new URLSearchParams(window.location.search);
-  console.log(params);
-const houseID = params.get('houseID');
-console.log("houseid: ",houseID)
-
+import '../../css/publish.css'; // Ensure this path is correct
 
 function Save() {
-  const [formData, setFormData] = useState({
-    thumbnail: '', // Assuming this will be handled differently, maybe file upload
-    bathrooms: '',
-    livingAreas: '',
-    sqFootage: '',
-    price: '',
-    dateListed: '',
-    location: '',
-    kitchen: '',
-    backyard: false,
-    laundryRoom: false,
-  });
-  const [file, setFile] = useState(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [saveSuccessful, setSaveSuccessful] = useState(false);
+    const [formData, setFormData] = useState({
+        bedroom: '',
+        bathrooms: '',
+        livingAreas: '',
+        kitchens: '',
+        backyard: false,
+        laundryRoom: false,
+        sqFootage: '',
+        price: '',
+        dateListed: new Date().toISOString().substr(0, 10), // Set current date as default
+        location: '',
+        public: false,
+    });
+    const [file, setFile] = useState(null);
+    const [submitting, setIsSubmitting] = useState(false);
+    const [saveSuccessful, setSaveSuccessful] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
 
     useEffect(() => {
-      if (saveSuccessful) {
-        const deleteImages = async () => {
-          try {
-            const response = await axios.delete(`http://localhost:8082/api/image`);
-            console.log(response.data.msg);
-            
-            // Additional logic to handle successful deletion
-          } catch (error) {
-            console.error('Error deleting images:', error.response ? error.response.data : error.message);
-            // Error handling logic
-          }
-          window.location.href = `/tours`;
-        };
+        if (saveSuccessful) {
+            window.location.href = `/account`; // Redirect to account page when save is successful (their tour should be saved here).
+        }
+    }, [saveSuccessful]);
 
-        deleteImages();
-      }
-  }, [saveSuccessful]); 
-
-  const handleChange = (event) => {
-    const { name, value, type, checked } = event.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: type === 'checkbox' ? checked : value,
-    }));
-
-  };
-  const handleFileChange = (event) => {
-    const newFile = event.target.files[0];
-    setFile(newFile); // Update the file state with the new file object
-  };
-  const handleSubmit = async (event) => {
-    console.log(formData);
-    event.preventDefault();
-    if (!file) {
-      alert('Please upload a thumbnail image.');
-      return;
-    }
-    setIsSubmitting(true);
-   
-      
-    try {
-      // Save all photos at once; savePhotos should handle the array of rooms
- await savePhotos([{ name: 'thumbnail', file }], {houseID: houseID});
-
-      // Fetch image references only after all photos have been saved
-   // Assuming this is the format
-
-
-
-  } catch (error) {
-    console.error('Error during the saving process:', error);
-  }
-  };
-  useEffect(() => {
-    // Define the event listener
-    console.log(formData);
-    const handleImageUploadSuccess = async (e) => {
-      console.log('upload success');
-      try {
-        const res = await axios.get(`http://localhost:8082/api/image/${e.detail.houseId}`);
-        const response = res.data; 
-       console.log(response);
-    
-     
-        const updatedFormData = { ...formData };
-        // simulate fetching data and updating it based on fetched data
-        updatedFormData.thumbnail = response[0].imageURL;
-        setFormData(updatedFormData);
-         console.log(updatedFormData);
-
-         const putResponse = await axios.put(`http://localhost:8082/api/house/house/update/${e.detail.houseId}`, updatedFormData);
-         console.log('House updated successfully:', putResponse.data);
-
-         // Optionally set state to reflect that save operation was successful
-         setSaveSuccessful(true);
-         
-        
-      } catch (error) {
-        console.error('Failed to fetch image data', error);
-      }
-
+    const handleChange = (event) => {
+        const { name, value, type, checked } = event.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: type === 'checkbox' ? checked : value,
+        }));
     };
 
-    // Attach event listener
-    document.addEventListener("imageUploadSuccess", handleImageUploadSuccess);
-    return () => {
-        document.removeEventListener("imageUploadSuccess", handleImageUploadSuccess);
-      };
-    }, [formData]);
+    const handleFileChange = (event) => {
+        setFile(event.target.files[0]);
+    };
 
-  return (
-    <div className="Save">
-      <h1>House info</h1>
-      <div className="form-container">
-        <form onSubmit={handleSubmit} className="inputForm">
-          <div className="form-group">
-            <div>
-              <span>Number of Bathrooms</span>
-              <input type="number" name="bathrooms" placeholder="" value={formData.bathrooms} onChange={handleChange} required /><br />
-            </div>
-            <div>
-              <span>Number of Living Areas</span>
-              <input type="number" name="livingAreas" placeholder="" value={formData.livingAreas} onChange={handleChange} required /><br />
-            </div>
-            <div>
-              <span>Number of Kitchens</span>
-              <input type="number" name="kitchen" placeholder="" value={formData.kitchen} onChange={handleChange} required /><br />
-            </div>
+    // Ensures that all fields (except the checkboxes) are filled
+    const validateForm = (formData, file) => {
+        const newErrors = [];
+        
+        if (!formData.bedroom || formData.bedroom.trim() === '') newErrors.push('Number of bedrooms is required');
+        if (!formData.bathrooms || formData.bathrooms.trim() === '') newErrors.push('Number of bathrooms is required');
+        if (!formData.livingAreas || formData.livingAreas.trim() === '') newErrors.push('Number of living areas is required');
+        if (!formData.sqFootage || formData.sqFootage.trim() === '') newErrors.push('Square footage is required');
+        if (!formData.price || formData.price.trim() === '') newErrors.push('Price is required');
+        if (!formData.dateListed || formData.dateListed.trim() === '') newErrors.push('Date available is required');
+        if (!formData.location || formData.location.trim() === '') newErrors.push('Address is required');
+        if (!file) newErrors.push('File upload is required');
+    
+        return newErrors;
+    };
 
-            <label>
-              Backyard:
-              <input type="checkbox" name="backyard" checked={formData.backyard} onChange={handleChange} />
-            </label><br />
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const newErrors = validateForm(formData, file); // Pass formData and file here
+        if (newErrors.length > 0) {
+            setAlertMessage(newErrors.join('. '));
+            setSuccessMessage('');
+            return;
+        }
+        setIsSubmitting(true);
+        setIsSubmitting(false);
+        setSaveSuccessful(true); // Assuming success for demonstration
+        setAlertMessage('');
+        setSuccessMessage('Form submitted successfully!');
+    };
 
-            <label>
-              Laundry Room:
-              <input type="checkbox" name="laundryRoom" checked={formData.laundryRoom} onChange={handleChange} />
-            </label><br />
+    return (
+        <div className="Save">
+            <h1>House Info</h1>
+            <div className="form-container">
+                <form onSubmit={handleSubmit} className="inputForm">
+                    <div className="number-group">
+                        <div className="form-group">
+                            <label>Number of Bedrooms</label>
+                            <input type="number" name="bedroom" value={formData.bedroom} onChange={handleChange} min="0" required />
+                        </div>
+                        <div className="form-group">
+                            <label>Number of Bathrooms</label>
+                            <input type="number" name="bathrooms" value={formData.bathrooms} onChange={handleChange} min="0" required />
+                        </div>
+                        <div className="form-group">
+                            <label>Number of Living Areas</label>
+                            <input type="number" name="livingAreas" value={formData.livingAreas} onChange={handleChange} min="0" required />
+                        </div>
+                    </div>
+                    <div className="text-group">
+                        <div className="form-group">
+                            <label>Square Footage</label>
+                            <input type="text" name="sqFootage" value={formData.sqFootage} onChange={handleChange} required />
+                        </div>
+                        <div className="form-group">
+                            <label>Price</label>
+                            <input type="text" name="price" value={formData.price} onChange={handleChange} required />
+                        </div>
+                    </div>
+                    <div className="line-group">
+                        <div className="date-group">
+                            <div className="form-group">
+                                <label>Date Available</label>
+                                <input type="date" name="dateListed" value={formData.dateListed} onChange={handleChange} required />
+                            </div>
+                        </div>
+                        <div className="textbox-group">
+                            <div className="form-group">
+                                <label>Address</label>
+                                <input type="text" name="location" value={formData.location} onChange={handleChange} required />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="checkbox-group">
+                        <div className="form-group">
+                            <label>Laundry Room:</label>
+                            <input type="checkbox" name="laundryRoom" checked={formData.laundryRoom} onChange={handleChange} />
+                        </div>
+                        <div className="form-group">
+                            <label>Backyard:</label>
+                            <input type="checkbox" name="backyard" checked={formData.backyard} onChange={handleChange} />
+                        </div>
+                        <div className="form-group">
+                            <label>Share Publicly:</label>
+                            <input type="checkbox" name="public" checked={formData.public} onChange={handleChange} />
+                        </div>
+                    </div>
 
-            <div>
-              <span>Sq Footage</span>
-              <input type="text" name="sqFootage" placeholder="Square Footage" value={formData.sqFootage} onChange={handleChange} required /><br />
+                    <div className="file-container">
+                        <label className="custom-file-upload">
+                            Upload a Thumbnail
+                            <input type="file" style={{ display: 'none' }} onChange={handleFileChange} />
+                        </label>
+                        <p>Selected file: {file ? file.name : 'None'}</p>
+                    </div>
+
+                    <div className="submit-button-container">
+                        <button type="submit" className="submit">Submit</button>
+                    </div>
+
+                    {successMessage && 
+                        <div className="success">{successMessage}</div>
+                    }
+                    {alertMessage && 
+                        <div className="alert">{alertMessage}</div>
+                    }
+                </form>
             </div>
-            <div>
-              <span>Price</span>
-              <input type="text" name="price" placeholder="Price" value={formData.price} onChange={handleChange} required /><br />
-            </div>
-            <div>
-              <span>Date Available</span>
-              <input type="date" name="dateListed" value={formData.dateListed} onChange={handleChange} required /><br />
-            </div>
-            <div>
-              <span>Address</span>
-              <input type="text" name="location" placeholder="" value={formData.location} onChange={handleChange} required /><br />
-            </div>
-          </div>
-          <div className="file-container" onClick={() => document.getElementById('fileInput').click()}>
-            <label className="custom-file-upload" >
-              Upload a Thumbnail
-              <input
-                id="fileInput"
-                type="file"
-                accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"
-                style={{ display: 'none' }}
-                onChange={handleFileChange}
-              />
-            </label>
-            <p>Selected file: {file ? file.name : 'None'}</p>
-          </div>
-          <button className ='submit'type="submit" form="houseInfoForm" onClick={handleSubmit} style={{ marginTop: '20px' }}>Submit </button>
-        </form>
-      </div>
-    </div>
-  );
+        </div>
+    );
 }
 
 export default Save;

@@ -9,6 +9,11 @@ const houseSchema = new Schema({
         required: true,
         trim: true
     },
+    houseName: {
+        type: String,
+        required: true,
+        trim: true
+    },
     portals: [portalSchema],
     images: [imageSchema],
     thumbnail: String, 
@@ -52,7 +57,7 @@ const houseSchema = new Schema({
         required: true,
         trim: true
     },
-    kitchen: {
+    bedrooms: {
         type: Number,
         required: true,
         trim: true
@@ -67,11 +72,17 @@ const houseSchema = new Schema({
         required: true,
         trim: true
     },
-    backyard: {
+    public: {
         type: Boolean,
+        default: false,
+      
+    },
+    author: {
+        type: String,
         required: true,
         trim: true
     }
+  
     
 });
 

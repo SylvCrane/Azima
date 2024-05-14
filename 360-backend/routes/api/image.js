@@ -3,17 +3,40 @@ const multer = require('multer');
 const path = require("path");
 let Image = require('../../models/Image');
 
-const upload = multer();
+// Set up multer for file storage
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+      cb(null, 'public/images'); // Will save house images uploaded in these folders.
+  },
+  filename: function(req, file, cb) {
+      const imageName = file.originalname;
+      cb(null, imageName);
+  }
+});
 
-router.post('/', upload.none(), (req, res) => {
+const fileFilter = (req, file, cb) => {
+  const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+
+  if (allowedFileTypes.includes(file.mimetype))
+  {
+      cb (null, true);
+  }
+  else
+  {
+      cb(null, false);
+  }
+}
+const upload = multer({ storage, fileFilter });
+
+router.post('/', upload.single('image'), (req, res) => {
     let imageData = {
         ...req.body,
-        houseID: req.houseId // Use the houseId passed from the parent route
+        houseID: req.body.houseID // Ensure this matches the field sent from the frontend
     };
 
     Image.create(imageData)
         .then(image => res.json({ msg: 'Image added successfully'}))
-        .catch(err => res.status(404).json({error: 'Unable to add image'}));
+        .catch(err => res.status(404).json({ error: 'Unable to add image' }));
 });
 
 router.get('/', (req, res) => {

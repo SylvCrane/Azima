@@ -4,7 +4,7 @@ nav {
     display: flex; /* places content to the right */
     justify-content: space-between; 
     align-items: center;
-    background-color: #00664d;
+    background: #00664d;
     color: white;
     position: sticky;
     margin: 0;
@@ -79,7 +79,43 @@ nav .menu {
     overflow: hidden;
     outline: none;
     margin-top: 5px;
+
 }
+
+/* .account-button:hover {
+    background-color: #087f6e; 
+} */
+
+
+// PROFILE IMAGE
+.profile-image-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.profile-image-container {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;  
+    overflow: hidden;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-image {
+  
+    object-fit: cover;
+}
+
+/* Makes the profile image not go rectangular when hovered */
+.profile-image-container:hover {
+    border-radius: 50%;
+}
+
+
 
 .dropdown {
     margin-bottom: 5px;
@@ -130,14 +166,13 @@ nav .menu {
 }
 
 .logout-btn,
-.logout-btn:hover,
 .logout-btn:focus,
 .logout-btn:active {
     border-radius: 25px;
     border: 1px solid #004d39;
-    background-color: #00805e;
+    background-color: #0EB49A;
     color: #ffffff;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: bold;
     padding: 12px 42px;
     letter-spacing: 1px;
@@ -149,6 +184,11 @@ nav .menu {
     margin-bottom: 5px;
     display: block;
     cursor: pointer;
+}
+
+.logout-btn:hover {
+    border-radius: 25px;
+    background-color: #087f6e; /* Darker shade for hover effect */
 }
 
 .logout-btn:active {

@@ -1,4 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Alatsi&family=Flow+Circular&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Ramabhadra&family=Rubik:ital,wght@0,300..900;1,300..900&family=Varela+Round&display=swap');
+/* https://fonts.google.com/selection/embed */
+
+* {
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+  font-size: 14px;
+  box-sizing: border-box;
+  margin: 0;
+}
+
 #aframe-container {
+  position: relative; 
   width: 100vw;
   height: 100vh;
  overflow: hidden;
@@ -7,7 +21,6 @@
   padding:0;
  
 }
-
 body{
   background-color: #2b2b2b;
   color: white; 
@@ -17,7 +30,6 @@ body{
   overflow:hidden;
   display: flex;
 }
-
 #aframe-container-add {
   width: 75vw;
   height: 75vh;
@@ -25,7 +37,6 @@ body{
  
  
 }
-
 #overlay {
   position: fixed;
 
@@ -61,7 +72,7 @@ body{
   border-radius: 4px;  
   cursor: pointer;    
   outline: none;      
-  font-family: Mazzard; 
+  font-family: Rubik; 
   font-weight: 700;
   font-size: 25px;
 }
@@ -81,7 +92,7 @@ body{
   border-radius: 4px;  
   cursor: pointer;    
   outline: none;      
-  font-family: Mazzard; 
+  font-family: Rubik; 
   font-weight: 700;
   font-size: 25px;
   bottom: 10%;       
@@ -105,6 +116,7 @@ body{
   /* Hide overflow */
   overflow-x: auto; 
   flex-shrink: 0;
+
 }
 
 .inputForm, .fileForm {
@@ -139,7 +151,7 @@ body{
   border-radius: 4px;  
   cursor: pointer;    
   outline: none;      
-  font-family: Mazzard; 
+  font-family: Rubik; 
   font-weight: 700;
   font-size: 25px;
 }
@@ -176,7 +188,6 @@ body{
   color: white;
   font-size: 36px;
   font-weight: bold;
-  font-family: Mazzard;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -196,10 +207,8 @@ body{
   padding: 6px 12px;
   cursor: pointer;
   border-radius: 20px;
- 
-  font-family: Mazzard;
   font-weight: 700;
- overflow: wrap;
+  overflow: wrap;
   font-size: 20px;
   margin:100px 0.5%;
   max-width: 190px;
@@ -207,10 +216,8 @@ body{
   transition: background-color 0.2s; /* smooth transition for hover effect */
 }
 p span{
-  font-family: Mazzard;
   font-weight: 700;
   font-size: 15px;
-
 }
 
 /* Add a hover effect to visually indicate it's clickable */
@@ -218,7 +225,6 @@ p span{
   background-color: #eee;
 }
 input[type="text"]{
-  font-family: Mazzard;
   color: white;
   padding: 6px 12px;
   font-weight: 700;
@@ -240,9 +246,131 @@ input[type="text"]{
  
 }
 
+
+.zoom-controls {
+  display: flex;
+  z-index: 1000;
+  position: absolute;
+  justify-content: center; /* Center the buttons horizontally */
+  align-items: center; /* Align the buttons vertically */
+left: 71%;
+  top: 75%;
+  gap: 10px; /* Space between buttons */
+}
+
+/* General style for both zoom buttons */
+.zoom-controls button {
+  border: none;
+  
+  background: none;
+  cursor: pointer;
+  width: 40px;        /* Consistent size for easy clicking */
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease-in-out; /* Smooth scaling transition */
+}
+
+/* Hover effect to provide visual feedback */
+.zoom-controls button:hover {
+  transform: scale(1.1); /* Slightly enlarge buttons on hover */
+}
+
+/* Style for the images within the buttons to ensure they fit well */
+.zoom-controls img {
+  width: 100%;        /* Take up full button size */
+  height: auto;       /* Maintain aspect ratio */
+  display: block;     /* Remove any extra spacing */
+}
+
+/* Accessibility: Focus styles */
+
+.portal-sidebar {
+  position: fixed;
+ /* Start off screen */
+  top: 20%;
+  right: 0;
+  width: 300px;
+  height: 60vh;
+  border-radius: 10px;
+  background: #ffffff6a;
+  z-index: 1000; /* Ensure it appears above the scene */
+  transform: translateX(300px); /* Start off-screen to the right */
+  transition: transform 0.5s ease-out;
+}
+.portal-sidebar-content {
+  position: fixed;
+ /* Start off screen */
+  
+  right: 0;
+  width: 300px;
+  height: 49vh;
+  overflow-y: auto;
+  z-index: 1000; /* Ensure it appears above the scene */
+}
+
+.portal-sidebar-content ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+.portal-sidebar-content li {
+  padding: 10px;
+  margin: 10px;
+  cursor: pointer;
+  display:flex;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: #ffffff; /* Slightly more transparency for contrast */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border for separating items */
+  transition: background-color 0.3s; /* Smooth background color transition on hover */
+  border-radius: 10px;;
+  flex-direction: row;
+}
+
+
+.portal-sidebar-content li:hover {
+  background: #eeeeee; /* Lighter background on hover for better contrast */
+}
+.portal-sidebar-content{
+  scrollbar-width: none; /* For Firefox */
+  scrollbar-gutter: stable both-edges; /* Avoids content reflow in supporting browsers */
+}
+
+/* For Chrome, Edge, and Safari */
+.portal-sidebar-content::-webkit-scrollbar {
+  display: none;
+}
+.portal-sidebar-content li img {
+  flex-shrink: 0; /* Prevent the image from shrinking */
+  margin-right: 10px; /* Add some space between the image and the text */
+}
+
+.portal-sidebar-header {
+  color: #09483E; /* Choose a text color that stands out against the background */
+  padding: 16px; /* Adjust padding to your preference */
+  font-size: 1.5em; /* Adjust font size to your preference */
+  text-align: center; /* Center the header text */
+ /* Slightly different background for contrast */
+ font-weight:700;
+}
+.toggle-list-btn {
+  position: absolute;
+  top: 50%; /* Center the button vertically */
+  right: 100%; /* Position it to the left of the sidebar */
+  transform: translateY(-50%); /* Align the center of the button with the vertical center of the sidebar */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1010; /* Above the sidebar-content */
+}
+
 .inputForm h1 {
   margin-bottom: 5px;  /* Brings the header closer to the input box */
 }
+
 
 .color-picker {
   display: flex;
@@ -277,7 +405,6 @@ input[type="text"]{
   padding: 10px;
   border-radius: 4px; /* Optional: Adds rounded corners */
   color: white;
-  font-family: Mazzard; 
   font-weight: 700;/* Text color */
   box-shadow: 0 2px 4px rgba(0,0,0,0.3); /* Optional: Adds subtle shadow for depth */
 }
@@ -347,6 +474,7 @@ input[type="text"]{
 
 .select-gallery {
   max-width: 34vh;
+  font-weight: 700;
   background-color: #2b2b2b;
   padding: 10px 10px;
   color: white;
@@ -417,24 +545,214 @@ width:100%;
 .close-gallery:hover {
   color:#ffffff /* Slightly lighter than gallery background */
 }
-#saveHouseBtn {
+#saveBtn {
   position: absolute;
   top: 20px; /* Adjust as needed */
-  right: 20px; /* Adjust as needed */
+  left: 20px; /* Adjust as needed */
   z-index: 1000; /* Ensure it's above the A-frame scene */
   border: none;        
-  background-color: #0EB49A;  
+ 
   color: white;       
   font-size: 16px;     
   border-radius: 4px;  
   cursor: pointer;    
-  outline: none;      
-  font-family: Mazzard; 
+  outline: none;
   font-weight: 700;
   font-size: 25px;
   padding: 15px 48px; 
   /* Adjust as needed */
 }
-#saveHouseBtn:hover {
-  background-color:#4ABFAA;
+
+#exitBtn {
+  position: fixed; /* Use fixed positioning to keep the button in view */
+  top: 20px;       /* Distance from the top of the viewport */
+  left: 20px;     /* Distance from the right of the viewport, adjusted for typical close button placement */
+  z-index: 1000;   /* High z-index to ensure it appears above other content */
+  border: none;    /* No border for a cleaner look */
+  background-color: transparent; /* Transparent background to let the X image show through */
+  cursor: pointer; /* Cursor indicates clickable */
+  outline: none;   /* Remove outline to avoid focus border */
+  padding: 10px;   /* Padding around the image for easier clicking */
+   /* Height of the button */
+
+}
+
+.exitContainer{
+  flex-direction: column;
+}
+
+.exitContainer #exitOptions{
+  visibility: hidden; /* Hide by default */
+  opacity: 0; 
+  display:flex;
+ color:white;
+ position: fixed; /* Use fixed positioning to keep the button in view */
+   /* Distance from the right of the viewport, adjusted for typical close button placement */
+ z-index: 1000;   /* High z-index to ensure it appears above other content */
+ border: none;    /* No border for a cleaner look */
+ background-color: transparent; /* Transparent background to let the X image show through */
+ cursor: pointer; /* Cursor indicates clickable */
+ outline: none;   /* Remove outline to avoid focus border */
+  font-weight: 600;
+  font-size: 25px;
+  left:40px;
+  top: 80px;
+  flex-direction: column; 
+  transition: opacity 0.5s ease, visibility 0.5s;
+}
+
+.exitContainer:hover #exitOptions {
+  visibility: visible; /* Make visible on hover */
+  opacity: 1; 
+  
+}
+#exitBtn img {
+  display: block; /* Remove any extra space below the image */
+  width: 100%;    /* Full width of the button */
+  height: auto;   /* Maintain aspect ratio */
+
+}
+#exitOptions{
+  flex-direction: column;
+}
+
+
+#exitOptions span {
+  transition: color 0.3s ease; /* Smooth transition for the color change */
+  cursor: pointer; /* Indicates that the item is clickable */
+  padding: 5px 0; /* Add some padding for better readability and clickability */
+}
+
+#exitOptions span:hover {
+  color: #0EB49A; /* Change to a different color on hover */
+}
+
+#saveBtn {
+  position: fixed; /* Use fixed positioning to keep the button in view */
+  top: 20px;       /* Distance from the top of the viewport */
+  left: 20px;     /* Distance from the right of the viewport, adjusted for typical close button placement */
+  z-index: 1000;   /* High z-index to ensure it appears above other content */
+  border: none;    /* No border for a cleaner look */
+  background-color: transparent; /* Transparent background to let the X image show through */
+  cursor: pointer; /* Cursor indicates clickable */
+  outline: none;   /* Remove outline to avoid focus border */
+  padding: 10px;   /* Padding around the image for easier clicking */
+   /* Height of the button */
+
+}
+
+.saveContainer{
+  flex-direction: row;
+}
+
+.saveContainer #saveOptions{
+  visibility: hidden; /* Hide by default */
+  opacity: 0; 
+ color:white;
+ position: fixed; /* Use fixed positioning to keep the button in view */
+   /* Distance from the right of the viewport, adjusted for typical close button placement */
+ z-index: 1000;   /* High z-index to ensure it appears above other content */
+ border: none;    /* No border for a cleaner look */
+ background-color: transparent; /* Transparent background to let the X image show through */
+ cursor: pointer; /* Cursor indicates clickable */
+ outline: none;   /* Remove outline to avoid focus border */
+  font-weight: 600;
+  font-size: 25px;
+  left:40px;
+  top: 70px;
+  transition: opacity 0.5s ease, visibility 0.5s;
+  display: flex;           /* Enables flexbox */
+  flex-direction: column; 
+gap:10px;
+}
+#saveOptions{
+  flex-direction: column;
+}
+
+#saveOptions span {
+  transition: color 0.3s ease; /* Smooth transition for the color change */
+  cursor: pointer; /* Indicates that the item is clickable */
+  padding: 5px 0; /* Add some padding for better readability and clickability */
+}
+
+#saveOptions span:hover {
+  color: #0EB49A; /* Change to a different color on hover */
+}
+
+
+.saveContainer:hover #saveOptions{
+  visibility: visible; /* Make visible on hover */
+  opacity: 1; 
+  
+}
+#saveBtn img {
+  display: block; /* Remove any extra space below the image */
+  width: 100%;    /* Full width of the button */
+  height: auto;   /* Maintain aspect ratio */
+
+}
+
+
+
+.details {
+  position: fixed; /* Fixed position relative to the viewport */
+  bottom: 0;
+  left: 0;
+  background: rgba(22, 22, 22, 0.8); /* Semi-transparent background */
+  color: #ffffff; /* Text color */
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 9999;
+  border-top-right-radius: 30px; /* Rounded top right corner */
+}
+.details-content {
+  display: flex;
+  align-items: center;
+}
+#closeBtn{
+  visibility: hidden; /* Hide by default */
+  opacity: 0; 
+  transition: opacity 0.5s ease, visibility 0.5s;
+}
+.details:hover #closeBtn
+{
+  visibility: visible; /* Hide by default */
+  opacity: 1; 
+}
+.house-icon {
+  font-size: 24px; /* Large size for the house icon */
+  margin-right: 10px;
+}
+
+.house-address {
+  margin-right: 20px;
+}
+
+.house-details {
+  display: flex;
+  align-items: center;
+}
+
+.details-icon {
+  font-size: 20px; /* Slightly smaller size for detail icons */
+}
+
+.details-text {
+  margin-right: 15px;
+
+}
+.details-content {
+  display: flex;
+  align-items: center;
+}
+
+.house-icon, .details-icon {
+  margin-right: 8px;
+}
+
+.details-text {
+  margin-right: 16px; /* Adjust as needed */
 }

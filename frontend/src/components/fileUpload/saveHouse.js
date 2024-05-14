@@ -1,18 +1,12 @@
-/*import RoomContainer from "./RoomContainer";*/
+//import RoomContainer from "./RoomContainer";
 import axios from 'axios';
-/*import { mongoSubmit } from "./mongoSubmit";*/
+//import { mongoSubmit } from "./mongoSubmit";
 
 
-
-
-export async function saveHouse( houseID, imageReferences) {
-
-
-
-
-
+export async function saveHouse( houseID, imageReferences, user, houseName) {
     const houseData = {
         houseID: houseID,
+        houseName: houseName,
         rooms: imageReferences.length, // Or any other logic to determine room count
         images: imageReferences, // Map your room data to your image schema
         // Add an empty array for portals
@@ -25,13 +19,15 @@ export async function saveHouse( houseID, imageReferences) {
         price: 0.00,
         dateListed: new Date().toISOString(),
         location: "Unknown",
-        kitchen: 1,
+        bedrooms: 1,
         backyard: false,
         laundryRoom: false,
         dateAvailable: new Date().toISOString(),
-      };
+        author: user,
+        public: false,
+    };
 
-        const response = await axios.post('http://localhost:8082/api/house/house', houseData);
+    const response = await axios.post('http://localhost:8082/api/house/house', houseData);
         console.log(response.data.msg);
         clearImages();
         return response.data.msg;
@@ -47,4 +43,4 @@ export async function saveHouse( houseID, imageReferences) {
           console.error('Error deleting images:', error.response ? error.response.data : error.message);
           // Error handling logic
         }
-      }
+    }

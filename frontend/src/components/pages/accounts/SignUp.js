@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "../../../css/style.css";
 import "../../../css/accounts.css";
-import { useNavigate } from 'react-router-dom';
-import { useUser } from "../../UserState";
+import { useNavigate, Link } from 'react-router-dom';
+import { useUser } from "../../../authentication/UserState";
 
-export const SignUp = (props) => {
+
+export const SignUp = () => {
     
     /* State variables for the input types - useState hook will first get the user input then set that input into the second variable */
     const [firstName, setFirstName] = useState("");
@@ -12,6 +13,7 @@ export const SignUp = (props) => {
     const [company, setCompany] = useState("");
     const [signUpEmail, setSignUpEmail] = useState("");
     const [signUpPassword, setSignUpPassword] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
     const [alertMessage, setAlertMessage] = useState(""); // Variable that stores message at the bottom of page depending on whether user input.
     const [user, setUser] = useUser();
 
@@ -40,6 +42,7 @@ export const SignUp = (props) => {
 
         if (incorrectMessage) {
             setAlertMessage(incorrectMessage);
+            setSuccessMessage("");
             return;
         }
 
@@ -66,15 +69,20 @@ export const SignUp = (props) => {
             console.log(data, "userSignup");
             
             if (data.status === "ok") {
-                setAlertMessage("You are now registered with Azima!");
+                setSuccessMessage("You are now registered with Azima!");
                 setUser ({
                     isAuthenticated: true,
-                    email: data.email, // Refer to email object directly (since the email is being registered it should not be in mongodb yet)
+                    email: data.user.email, // Refer to email object directly (since the email is being registered it should not be in mongodb yet)
+                    firstName: data.user.firstName,
+                    lastName: data.user.lastName,
+                    company: data.user.company
                 });
+                setAlertMessage("");
                 console.log("user registration authenticated");
 
             } else {
                 setAlertMessage("Email is already in use. Please login instead.");
+                setSuccessMessage("");
             }
 
         });  
@@ -82,35 +90,39 @@ export const SignUp = (props) => {
 
     // Navigates to editor page once sign up is authenticated
     useEffect (() => {
-        if (user.isAuthenticated) {
-            navigate("/editor");
+        if (user?.isAuthenticated) {
+            navigate("/account");
         }
-    });
+    }, [navigate, user]);
 
     return (
-
-        <div className="signup-container">
-            <br/>
-            <form className="signup-form" onSubmit={handleSubmit}>
-                <br/><h1>Create an account</h1>
-                <p>Please enter your details to register</p>
+        <div className="account-container">
+            <div className="signup-container">
                 <br/>
-                <input value={firstName} name="firstName" onChange={(e) => setFirstName(e.target.value)} id="firstName" placeholder="First Name *" required /><br/>
-                <input value={lastName} name="lastName" onChange={(e) => setLastName(e.target.value)} id="lastName" placeholder="Last Name *" required/><br/>
-                <input value={company} name="company" onChange={(e) => setCompany(e.target.value)} id="company" placeholder="Company" autoComplete="off"/><br/>
-                <input value={signUpEmail} onChange={(e) => setSignUpEmail(e.target.value)} id="loginEmail" placeholder="email@gmail.com *" required/><br/>
-                <input value={signUpPassword} onChange={(e) => setSignUpPassword(e.target.value)} type="password" id="loginPassword" placeholder="******** *" required/><br/>
-                <br/>
-                <button type="submit">sign up</button>
-                <div className= "required-text"> <br/> (* Required fields must be filled in to create an account)<br/> </div>
-                <br/>
-                { alertMessage && (
-                    <div className="alert">{ alertMessage }</div>
-                )} <br/>
-
-                <button className="link-btn" type ="button" onClick={() => navigate('/account/login')}>Already have an account? Sign in here.</button><br/><br/>
-            </form>
-            <br/>
+                <form className="signup-form" onSubmit={handleSubmit}>
+                    <br/><h1>Create an account</h1>
+                    <p>Please enter your details to register</p>
+                    <br/>
+                    <input value={firstName} name="firstName" onChange={(e) => setFirstName(e.target.value)} id="firstName" placeholder="First Name *" required /><br/>
+                    <input value={lastName} name="lastName" onChange={(e) => setLastName(e.target.value)} id="lastName" placeholder="Last Name *" required/><br/>
+                    <input value={company} name="company" onChange={(e) => setCompany(e.target.value)} id="company" placeholder="Company" autoComplete="off"/><br/>
+                    <input value={signUpEmail} onChange={(e) => setSignUpEmail(e.target.value)} id="loginEmail" placeholder="email@gmail.com *" required/><br/>
+                    <input value={signUpPassword} onChange={(e) => setSignUpPassword(e.target.value)} type="password" id="loginPassword" placeholder="******** *" required/><br/>
+                    <br/>
+                    <button type="submit">sign up</button>
+                    <div className= "required-text"> <br/> (* Required fields must be filled in to create an account)<br/> </div>
+                    <br/>
+                    <Link className="link-btn" to = "/account/login">Already have an account? Sign in here.</Link><br/><br/>
+                    {successMessage && 
+                        <div className="success">{successMessage}</div>
+                    }
+                    {alertMessage && 
+                        <div className="alert">{alertMessage}</div>
+                    } 
+                    <br></br>
+                </form>
+                <br></br>
+            </div>
         </div>
     )
 }
