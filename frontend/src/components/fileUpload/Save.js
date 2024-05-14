@@ -3,6 +3,7 @@ import '../../css/publish.css'; // Ensure this path is correct
 
 function Save() {
     const [formData, setFormData] = useState({
+        bedroom: '',
         bathrooms: '',
         livingAreas: '',
         kitchens: '',
@@ -15,14 +16,16 @@ function Save() {
         public: false,
     });
     const [file, setFile] = useState(null);
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitting, setIsSubmitting] = useState(false);
     const [saveSuccessful, setSaveSuccessful] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
 
     useEffect(() => {
         if (saveSuccessful) {
             window.location.href = `/tours`; // Redirect on successful save
         }
-    }, [saveSuccessful]); 
+    }, [saveSuccessful]);
 
     const handleChange = (event) => {
         const { name, value, type, checked } = event.target;
@@ -36,12 +39,35 @@ function Save() {
         setFile(event.target.files[0]);
     };
 
+    // Ensures that all fields (except the checkboxes are filled )
+    const validateForm = (formData, file) => {
+      const newErrors = [];
+      
+      if (!formData.bedroom || formData.bedroom.trim() === '') newErrors.push('Number of bedrooms is required');
+      if (!formData.bathrooms || formData.bathrooms.trim() === '') newErrors.push('Number of bathrooms is required');
+      if (!formData.livingAreas || formData.livingAreas.trim() === '') newErrors.push('Number of living areas is required');
+      if (!formData.sqFootage || formData.sqFootage.trim() === '') newErrors.push('Square footage is required');
+      if (!formData.price || formData.price.trim() === '') newErrors.push('Price is required');
+      if (!formData.dateListed || formData.dateListed.trim() === '') newErrors.push('Date available is required');
+      if (!formData.location || formData.location.trim() === '') newErrors.push('Address is required');
+      if (!file) newErrors.push('File upload is required');
+  
+      return newErrors;
+  };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
+        const newErrors = validateForm();
+        if (newErrors.length > 0) {
+            setAlertMessage(newErrors.join('. '));
+            setSuccessMessage('');
+            return;
+        }
         setIsSubmitting(true);
-        // Implement your submission logic here
         setIsSubmitting(false);
         setSaveSuccessful(true); // Assuming success for demonstration
+        setAlertMessage('');
+        setSuccessMessage('Form submitted successfully!');
     };
 
     return (
@@ -50,7 +76,7 @@ function Save() {
             <div className="form-container">
                 <form onSubmit={handleSubmit} className="inputForm">
                     <div className="number-group">
-                    <div className="form-group">
+                        <div className="form-group">
                             <label>Number of Bedrooms</label>
                             <input type="number" name="bedroom" value={formData.bedroom} onChange={handleChange} required />
                         </div>
@@ -62,8 +88,8 @@ function Save() {
                             <label>Number of Living Areas</label>
                             <input type="number" name="livingAreas" value={formData.livingAreas} onChange={handleChange} required />
                         </div>
-                        </div>
-                        <div className="text-group">
+                    </div>
+                    <div className="text-group">
                         <div className="form-group">
                             <label>Square Footage</label>
                             <input type="text" name="sqFootage" value={formData.sqFootage} onChange={handleChange} required />
@@ -72,22 +98,22 @@ function Save() {
                             <label>Price</label>
                             <input type="text" name="price" value={formData.price} onChange={handleChange} required />
                         </div>
-                        </div>
-                        <div className="line-group">
+                    </div>
+                    <div className="line-group">
                         <div className="date-group">
-                        <div className="form-group">
-                            <label>Date Available</label>
-                            <input type="date" name="dateListed" value={formData.dateListed} onChange={handleChange} required />
-                        </div>
+                            <div className="form-group">
+                                <label>Date Available</label>
+                                <input type="date" name="dateListed" value={formData.dateListed} onChange={handleChange} required />
+                            </div>
                         </div>
                         <div className="textbox-group">
-                        <div className="form-group">
-                            <label>Address</label>
-                            <input type="text" name="location" value={formData.location} onChange={handleChange} required />
+                            <div className="form-group">
+                                <label>Address</label>
+                                <input type="text" name="location" value={formData.location} onChange={handleChange} required />
+                            </div>
                         </div>
-                        </div>
-                        </div>
-                        <div className="checkbox-group">
+                    </div>
+                    <div className="checkbox-group">
                         <div className="form-group">
                             <label>Laundry Room:</label>
                             <input type="checkbox" name="laundryRoom" checked={formData.laundryRoom} onChange={handleChange} />
@@ -98,10 +124,10 @@ function Save() {
                         </div>
                         <div className="form-group">
                             <label>Share Publicly:</label>
-                            <input type="checkbox" name="public" checked={formData.publoc} onChange={handleChange} />
+                            <input type="checkbox" name="public" checked={formData.public} onChange={handleChange} />
                         </div>
-                        </div>
-            
+                    </div>
+
                     <div className="file-container">
                         <label className="custom-file-upload">
                             Upload a Thumbnail
@@ -113,6 +139,13 @@ function Save() {
                     <div className="submit-button-container">
                         <button type="submit" className="submit">Submit</button>
                     </div>
+
+                    {successMessage && 
+                        <div className="success">{successMessage}</div>
+                    }
+                    {alertMessage && 
+                        <div className="alert">{alertMessage}</div>
+                    }
                 </form>
             </div>
         </div>

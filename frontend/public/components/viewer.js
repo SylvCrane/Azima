@@ -132,8 +132,7 @@ function loadImageSelector(houseId , scrollContainer) {
 document.addEventListener('edit', function (){
 
    
-    
-    
+
 
     const gallery = document.getElementById('gallery');
     const tab = document.getElementById('tab');
@@ -162,12 +161,6 @@ loadImageSelector(houseID, select);
         }
       
         
-        
-       
-            
-        
-        
-       
       
             let image = img.children[0];
             console.log(image.src);
@@ -176,10 +169,6 @@ loadImageSelector(houseID, select);
             caption.style.color = "#0EB49A";
             selected = img
             
-          
-
-       
-        
        
      
        });
@@ -217,14 +206,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let isDown = false;
     let startX;
     let scrollLeft;
-
-
-
-
-   
-
-
-
 
   
     gallery.addEventListener('click', (e) => {
@@ -281,5 +262,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   
 });
-
-

@@ -63,8 +63,8 @@ const TourContainer = ({ house }) => {
              
             </div>
             <div className="public-private-indicator">
-                            {house.public ? 'Public' : 'Private'}
-                        </div>
+                {house.public ? 'Public' : 'Private'}
+            </div>
         </div>
         </>
         

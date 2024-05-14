@@ -1,13 +1,15 @@
 /* BRANDYNS CSS HE PUT IN MY STYLE CSS (putting it in this css file so its less confusing) */
 
-.editor-form {
+.editor-page .editor-form {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  margin-bottom: 50px;
+  margin-top: 50px;
 }
 
-.inputForm {
+.editor-page .inputForm {
   margin-top: 10px;
   display: flex;
   flex-direction: column;
@@ -16,7 +18,7 @@
   margin-bottom: 20px;
 }
 
-.forms-container {
+.editor-page .forms-container {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -25,7 +27,7 @@
   max-width: 90vw;
 }
 
-.form-instance {
+.editor-page .form-instance {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -34,9 +36,9 @@
   align-items: center;
 }
 
-#saveButton,
-#addButton,
-#cancelButton {
+.editor-page #saveButton,
+.editor-page #addButton,
+.editor-page #cancelButton {
   padding: 10px 20px;
   border: none;
   background-color: #0EB49A;
@@ -48,28 +50,26 @@
   margin: 5px;
 }
 
-#saveButton:hover,
-#addButton:hover,
-#cancelButton:hover {
-  background-color: #087f6e; /* Darker shade for hover effect */
+.editor-page #saveButton:hover,
+.editor-page #addButton:hover,
+.editor-page #cancelButton:hover {
+  background-color: #087f6e;
 }
 
-
-/* Responsive adjustments for smaller screens */
 @media screen and (max-width: 768px) {
-  .forms-container {
-      flex-direction: column;
-      align-items: center;
+  .editor-page .forms-container {
+    flex-direction: column;
+    align-items: center;
   }
 }
 
-.logo {
+.editor-page .logo {
   height: 7vmin;
   pointer-events: none;
 }
 
-.file-container,
-.file-upload-container {
+.editor-page .file-container,
+.editor-page .file-upload-container {
   padding: 20px;
   border: 2px dashed #ccc;
   display: flex;
@@ -80,8 +80,8 @@
   cursor: pointer;
 }
 
-.custom-upload,
-.custom-file-upload {
+.editor-page .custom-upload,
+.editor-page .custom-file-upload {
   padding: 10px 20px;
   border-radius: 5px;
   display: inline-block;

@@ -1,5 +1,6 @@
 .user-page {
-    width: 50%;
+    width: 100%;
+    max-width: 800px; /* Optional: set a max-width for better responsiveness */
     margin: 20px auto;
     padding: 20px;
     display: flex;
@@ -7,28 +8,30 @@
     align-items: center;
 }
 
-.profile-section {
+.profile-section,
+.tours-section {
     width: 100%;
+    padding: 20px;
+    margin-top: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+
+
+   
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    margin-top: 20px; /* Added margin to separate from navbar */
-    border: 2px solid #ccc;
-    border-radius: 10px;
-    padding: 20px;
-    background-color: #f9f9f9;
+
+    
+    
+    
+
 }
 
-.tours-section { 
-    width: 100%;
-    padding: 20px;
-    border: 2px solid #ccc;
-    border-radius: 10px;
-    /* margin-top: 20px;
-    background-color: #f9f9f9; */
-    margin: auto;
-    background-color: #f9f9f9;
+.tours-section {
+    margin-top: 20px; /* Ensure spacing between sections */
 }
 
 .profile-image-container {
@@ -65,6 +68,10 @@
     margin-bottom: 20px;
 }
 
+.user-details p {
+    padding-left: 25px; /* Add padding to the left of text elements */
+}
+
 .user-details label {
     font-weight: bold;
     margin-bottom: 5px;
@@ -90,28 +97,6 @@
 .edit-btn:hover {
     background-color: #087f6e; /* Darker shade for hover effect */
 }
-
-/* .profile-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
-}
-
-.profile-buttons button {
-    flex: 1;
-    padding: 10px 20px;
-    border: none;
-    background-color: #0EB49A;
-    color: white;
-    font-size: 18px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: 700;
-}
-
-.profile-buttons button:hover {
-    background-color: #087f6e; /* Darker shade for hover effect */
 
 .form-container {
     border: 2px solid #ccc;

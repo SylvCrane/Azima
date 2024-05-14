@@ -1,5 +1,4 @@
-
-  .tours-page {
+.tours-page {
     margin-top: 15px; 
 }
 
@@ -12,6 +11,7 @@
     overflow: hidden;
     background: #ffffff;
 }
+
 
 
 .card.non-public {
@@ -32,7 +32,6 @@
     display:none;
     
 }
-  
 .tours-content {
     display: flex;
     flex-direction: row;
@@ -63,6 +62,7 @@
     white-space: nowrap; /* Keeps the address in a single line */
 }
   
+
 .author {
     position: absolute; /* Position absolutely within .thumbnail */
     top: 10px; /* Distance from the top of .thumbnail */
@@ -77,7 +77,6 @@
     text-overflow: ellipsis; /* Adds ellipsis if text is too long */
     white-space: nowrap; /* Keeps the address in a single line */
 }
-
 .thumbnail img {
     max-width: 100%;
     display: block;
@@ -93,7 +92,6 @@
     margin: auto auto;
     border-radius: 10px;
 }
-
 .card.non-public  .details {
     display: flex;
     justify-content: space-between;
@@ -103,7 +101,7 @@
     margin: auto auto;
     border-radius: 10px;
 }
-
+  
 .btn{
     font-weight: bold;
     background-color: #0EB49A;
@@ -146,6 +144,7 @@
 .detail img {
     margin-right: 8px;
     max-height: 40px;
+
 }
 
 .price {
@@ -188,13 +187,12 @@
         0 5px 30px rgba(0, 102, 77, 0.45), /* More pronounced bottom shadow on hover */
         0 -5px 30px rgba(0, 102, 77, 0.35); /* More pronounced top shadow on hover */
 }
-
 .user-tours-page {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    width: 100%;
     text-align: center;
     
 }
