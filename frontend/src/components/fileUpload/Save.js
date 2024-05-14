@@ -39,25 +39,25 @@ function Save() {
         setFile(event.target.files[0]);
     };
 
-    // Ensures that all fields (except the checkboxes are filled )
+    // Ensures that all fields (except the checkboxes) are filled
     const validateForm = (formData, file) => {
-      const newErrors = [];
-      
-      if (!formData.bedroom || formData.bedroom.trim() === '') newErrors.push('Number of bedrooms is required');
-      if (!formData.bathrooms || formData.bathrooms.trim() === '') newErrors.push('Number of bathrooms is required');
-      if (!formData.livingAreas || formData.livingAreas.trim() === '') newErrors.push('Number of living areas is required');
-      if (!formData.sqFootage || formData.sqFootage.trim() === '') newErrors.push('Square footage is required');
-      if (!formData.price || formData.price.trim() === '') newErrors.push('Price is required');
-      if (!formData.dateListed || formData.dateListed.trim() === '') newErrors.push('Date available is required');
-      if (!formData.location || formData.location.trim() === '') newErrors.push('Address is required');
-      if (!file) newErrors.push('File upload is required');
-  
-      return newErrors;
-  };
+        const newErrors = [];
+        
+        if (!formData.bedroom || formData.bedroom.trim() === '') newErrors.push('Number of bedrooms is required');
+        if (!formData.bathrooms || formData.bathrooms.trim() === '') newErrors.push('Number of bathrooms is required');
+        if (!formData.livingAreas || formData.livingAreas.trim() === '') newErrors.push('Number of living areas is required');
+        if (!formData.sqFootage || formData.sqFootage.trim() === '') newErrors.push('Square footage is required');
+        if (!formData.price || formData.price.trim() === '') newErrors.push('Price is required');
+        if (!formData.dateListed || formData.dateListed.trim() === '') newErrors.push('Date available is required');
+        if (!formData.location || formData.location.trim() === '') newErrors.push('Address is required');
+        if (!file) newErrors.push('File upload is required');
+    
+        return newErrors;
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const newErrors = validateForm();
+        const newErrors = validateForm(formData, file); // Pass formData and file here
         if (newErrors.length > 0) {
             setAlertMessage(newErrors.join('. '));
             setSuccessMessage('');
@@ -78,15 +78,15 @@ function Save() {
                     <div className="number-group">
                         <div className="form-group">
                             <label>Number of Bedrooms</label>
-                            <input type="number" name="bedroom" value={formData.bedroom} onChange={handleChange} required />
+                            <input type="number" name="bedroom" value={formData.bedroom} onChange={handleChange} min="0" required />
                         </div>
                         <div className="form-group">
                             <label>Number of Bathrooms</label>
-                            <input type="number" name="bathrooms" value={formData.bathrooms} onChange={handleChange} required />
+                            <input type="number" name="bathrooms" value={formData.bathrooms} onChange={handleChange} min="0" required />
                         </div>
                         <div className="form-group">
                             <label>Number of Living Areas</label>
-                            <input type="number" name="livingAreas" value={formData.livingAreas} onChange={handleChange} required />
+                            <input type="number" name="livingAreas" value={formData.livingAreas} onChange={handleChange} min="0" required />
                         </div>
                     </div>
                     <div className="text-group">
