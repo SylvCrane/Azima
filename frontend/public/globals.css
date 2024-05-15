@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Alatsi&family=Flow+Circular&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Ramabhadra&family=Rubik:ital,wght@0,300..900;1,300..900&family=Varela+Round&display=swap');
 /* https://fonts.google.com/selection/embed */
 
@@ -16,12 +15,13 @@
   position: relative; 
   width: 100vw;
   height: 100vh;
- overflow: hidden;
+  overflow: hidden;
   display: flex;
   margin:0;
   padding:0;
  
 }
+
 body{
   background-color: #2b2b2b;
   color: white; 
@@ -66,6 +66,7 @@ body{
   bottom: 3%;       
   right: 30px;         
   padding: 10px 100px;  
+  width: 10%;
   border: none;        
   background-color: #0EB49A;  
   color: white;       
@@ -75,7 +76,11 @@ body{
   outline: none;      
   font-family: Rubik; 
   font-weight: 700;
-  font-size: 25px;
+  font-size: 20px;
+  text-align: center; /* Center text horizontally */
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Center text vertically */
+  justify-content: center; /* Center text horizontally */
 }
 
 #saveButton:hover {
@@ -84,23 +89,28 @@ body{
 
 #cancelButton {
   position: fixed;     
-
-  padding: 10px 88px;  
+  padding: 10px 100px; 
   border: none;        
   background-color: #0EB49A;  
-  color: white;       
-  font-size: 16px;     
+  color: white;         
   border-radius: 4px;  
   cursor: pointer;    
   outline: none;      
   font-family: Rubik; 
   font-weight: 700;
-  font-size: 25px;
+  font-size: 20px;
   bottom: 10%;       
   right: 30px;  
-
+  width: 10%;
+  text-align: center; /* Center text horizontally */
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Center text vertically */
+  justify-content: center; /* Center text horizontally */
 }
 
+#cancelButton:hover {
+  background-color: #4ABFAA;  
+}
 
 
 .forms-container {
@@ -155,9 +165,6 @@ body{
   font-family: Rubik; 
   font-weight: 700;
   font-size: 25px;
-}
-#cancelButton:hover {
-  background-color: #4ABFAA;  
 }
 
 
@@ -254,9 +261,9 @@ input[type="text"]{
   position: absolute;
   justify-content: center; /* Center the buttons horizontally */
   align-items: center; /* Align the buttons vertically */
-left: 71%;
-  top: 75%;
   gap: 10px; /* Space between buttons */
+  bottom: 20%; /* Adjust the value to place it under the scroll gallery */
+  right: 7%; /* Align with the right edge of the select-gallery */
 }
 
 /* General style for both zoom buttons */
@@ -300,6 +307,7 @@ left: 71%;
   transform: translateX(300px); /* Start off-screen to the right */
   transition: transform 0.5s ease-out;
 }
+
 .portal-sidebar-content {
   position: fixed;
  /* Start off screen */
@@ -398,8 +406,8 @@ left: 71%;
 }
 .toggle-text-container {
   position: fixed; /* or `absolute` depending on your layout */
-  bottom: 17%; /* Adjust the value to place it under the scroll gallery */
-  right: 11%; /* Align with the right edge of the select-gallery */
+  bottom: 30%; /* Adjust the value to place it under the scroll gallery */
+  right: 8%; /* Align with the right edge of the select-gallery */
   transform: translateX(50%); /* Center align under the gallery */
   z-index: 101; /* Ensure it's above the gallery and other content */
   background-color: #2b2b2b; /* Match gallery background */
@@ -472,28 +480,41 @@ left: 71%;
   z-index: 100; 
 }
 
-
 .select-gallery {
-  max-width: 34vh;
-  font-weight: 700;
-  background-color: #2b2b2b;
-  padding: 10px 10px;
-  color: white;
-  position: fixed;
+  position: absolute;
+  top: -100px; /* Adjust as needed */
+  left: 0;
+  width: 200px; /* Adjust as needed */
+  background-color: rgba(43, 43, 43, 0.8);
+  z-index: 101;
+  padding: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   white-space: nowrap;
-  top: 60%;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  right: 11%;
-  transform: translateX(50%);
-  z-index: 100;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  margin-top: 10%;
 }
+
 .scroll-container{
-  overflow-x: scroll;
-width:100%;
+  /* display: flex;
+  flex-direction: column; 
+  overflow-y: auto;
+  height: calc(100vh - 100px); Adjust the height to fit within the viewport */
+
+  display: flex;
+  flex-direction: row; /* Change to row direction */
+  overflow-x: auto;
+  height: auto; /* Adjust height to fit content */
+  white-space: nowrap; /* Prevent line breaks */
 
 }
+
+/* For when wanting teh gallery to be in a column */
+.scroll-container.column-layout {
+  flex-direction: column; /* Change to column direction */
+  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: hidden; /* Hide horizontal overflow */
+  height: calc(100vh - 100px); /* Adjust the height to fit within the viewport */
+}
+
 
 .scroll-container::-webkit-scrollbar {
   display: none; /* Chrome, Safari, and Opera */
@@ -505,12 +526,16 @@ width:100%;
   display: none; /* Chrome, Safari, and Opera */
 }
 .gallery.is-active {
-  opacity: 1; /* Fully visible */
-  transform: translateX(50%) translateY(0); /* Slide into final position */
+  display: flex;
+  flex-direction: row; /* Horizontal */
+  justify-content: center;
+  opacity: 1;
+  transform: translateX(50%) translateY(0);
 }
 .gallery img {
   height: 80px; /* Adjust based on your preference */
   margin-right: 4px;
+  display: inline-block; /* Align images horizontally */
 }
 .select-gallery img {
   height: 80px; /* Adjust based on your preference */
@@ -520,10 +545,8 @@ width:100%;
 .image-container {
   display: inline-block; /* Align images horizontally */
   text-align: center; /* Center the captions */
- 
-
   padding-top: 10px;
- 
+
 }
 
 .caption {
@@ -757,3 +780,22 @@ gap:10px;
 .details-text {
   margin-right: 16px; /* Adjust as needed */
 }
+
+.instruction {
+  position: fixed;
+  bottom: 60px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  z-index: 1000;
+  font-size: 16px;
+  width: 55%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin-top: 20px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-left: 20%;
+}
+

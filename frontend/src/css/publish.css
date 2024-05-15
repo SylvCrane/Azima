@@ -8,6 +8,8 @@
     padding: 20px;
     background: #f9f9f9;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+    margin-bottom: 50px;
   }
   
   .Save .inputForm {

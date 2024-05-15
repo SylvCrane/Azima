@@ -1,0 +1,774 @@
+@import url('https://fonts.googleapis.com/css2?family=Alatsi&family=Flow+Circular&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Ramabhadra&family=Rubik:ital,wght@0,300..900;1,300..900&family=Varela+Round&display=swap');
+/* https://fonts.google.com/selection/embed */
+
+* {
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+  font-size: 14px;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+#aframe-container {
+  position: relative; 
+  width: 100vw;
+  height: 100vh;
+ overflow: hidden;
+  display: flex;
+  margin:0;
+  padding:0;
+ 
+}
+body{
+  background-color: #2b2b2b;
+  color: white; 
+  width: 100vw;
+  height: 100vh;
+  margin:0;
+  overflow:hidden;
+  display: flex;
+}
+#aframe-container-add {
+  width: 75vw;
+  height: 75vh;
+  padding:50px;
+ 
+ 
+}
+#overlay {
+  position: fixed;
+
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 0.8s ;
+}
+
+
+
+#overlay-add{
+  position: fixed;
+  margin: 50px;
+  width: 75vw;
+  height: 75vh;
+  background: black;
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
+#saveButton {
+  position: fixed;     
+  bottom: 3%;       
+  right: 30px;         
+  padding: 10px 100px;  
+  border: none;        
+  background-color: #0EB49A;  
+  color: white;       
+  font-size: 16px;     
+  border-radius: 4px;  
+  cursor: pointer;    
+  outline: none;      
+  font-family: Rubik; 
+  font-weight: 700;
+  font-size: 25px;
+}
+
+#saveButton:hover {
+  background-color: #4ABFAA;  
+}
+
+#cancelButton {
+  position: fixed;     
+
+  padding: 10px 88px;  
+  border: none;        
+  background-color: #0EB49A;  
+  color: white;       
+  font-size: 16px;     
+  border-radius: 4px;  
+  cursor: pointer;    
+  outline: none;      
+  font-family: Rubik; 
+  font-weight: 700;
+  font-size: 25px;
+  bottom: 10%;       
+  right: 30px;  
+
+}
+
+
+
+.forms-container {
+  display: flex; /* Use flexbox to layout child elements */
+  flex-wrap: wrap; /* Allow items to wrap to next line at the end of the container */
+  column-gap: 300px;
+  row-gap: 10px;/* Add some space between the forms */
+  justify-content: flex-start; /* Align forms to the start (left) horizontally */
+  align-items: flex-start; /* Align forms to the start (top) vertically */
+  padding: 20px; /* Add some padding around the container */
+  margin:100px 100px; /* Remove default margin */
+/* Adjust margin to position the container closer to the top-left */
+  max-width: 82%; /* Adjust max-width to account for padding */
+  /* Hide overflow */
+  overflow-x: auto; 
+  flex-shrink: 0;
+
+}
+
+.inputForm, .fileForm {
+ /* Remove default margin */
+  width: auto; /* Allow the form width to grow with content */
+  min-width: 250px; /* Set a minimum width for each form */
+}
+
+
+#addButton {
+  position: fixed;
+ 
+  padding: 10px 20px;
+  background-color: #0EB49A;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+
+#addButton {
+
+  
+  position: fixed;     
+
+  padding: 10px 88px;  
+  border: none;        
+  background-color: #0EB49A;  
+  color: white;       
+  font-size: 16px;     
+  border-radius: 4px;  
+  cursor: pointer;    
+  outline: none;      
+  font-family: Rubik; 
+  font-weight: 700;
+  font-size: 25px;
+}
+#cancelButton:hover {
+  background-color: #4ABFAA;  
+}
+
+
+
+
+
+
+.color-picker-container input[type="color"] {
+  width: 200px;
+  height: 100px;
+  cursor: pointer;
+ 
+  
+}
+
+
+.plus-button {
+  position: absolute;
+  
+  width: 50px;
+  height: 50px;
+
+  top: 50%;        /* Place the top edge of the button at the center of the container */
+  left: 50%;       /* Place the left edge of the button at the center of the container */
+  transform: translate(-10%, -90%);  
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  color: white;
+  font-size: 36px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s;
+  z-index: 1000; /* Ensure it appears above the A-Frame content */
+}
+
+.plus-button:hover {
+  color:#4ABFAA;
+}
+
+
+.file-upload-container {
+  border: 3px solid #ccc;
+  position: fixed;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 20px;
+  font-weight: 700;
+  overflow: wrap;
+  font-size: 20px;
+  margin:100px 0.5%;
+  max-width: 190px;
+  max-height: 200px;
+  transition: background-color 0.2s; /* smooth transition for hover effect */
+}
+p span{
+  font-weight: 700;
+  font-size: 15px;
+}
+
+/* Add a hover effect to visually indicate it's clickable */
+.file-upload-container:hover {
+  background-color: #eee;
+}
+input[type="text"]{
+  color: white;
+  padding: 6px 12px;
+  font-weight: 700;
+  border-radius: 15px;
+  font-size: 20px;
+  flex-wrap: wrap;
+  background-color: transparent; 
+  display: block;  /* Added to move the input to its own line */
+  width: 100%;  /* Takes full width of its parent */
+  box-sizing: border-box;  /* Ensures padding and border are included in total width */
+}
+
+
+
+.inputForm{
+  position: absolute;
+
+  width: 250px;
+ 
+}
+
+
+.zoom-controls {
+  display: flex;
+  z-index: 1000;
+  position: absolute;
+  justify-content: center; /* Center the buttons horizontally */
+  align-items: center; /* Align the buttons vertically */
+  gap: 10px; /* Space between buttons */
+  bottom: 20%; /* Adjust the value to place it under the scroll gallery */
+  right: 7%; /* Align with the right edge of the select-gallery */
+}
+
+/* General style for both zoom buttons */
+.zoom-controls button {
+  border: none;
+  
+  background: none;
+  cursor: pointer;
+  width: 40px;        /* Consistent size for easy clicking */
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease-in-out; /* Smooth scaling transition */
+}
+
+/* Hover effect to provide visual feedback */
+.zoom-controls button:hover {
+  transform: scale(1.1); /* Slightly enlarge buttons on hover */
+}
+
+/* Style for the images within the buttons to ensure they fit well */
+.zoom-controls img {
+  width: 100%;        /* Take up full button size */
+  height: auto;       /* Maintain aspect ratio */
+  display: block;     /* Remove any extra spacing */
+}
+
+/* Accessibility: Focus styles */
+
+.portal-sidebar {
+  position: fixed;
+ /* Start off screen */
+  top: 20%;
+  right: 0;
+  width: 300px;
+  height: 60vh;
+  border-radius: 10px;
+  background: #ffffff6a;
+  z-index: 1000; /* Ensure it appears above the scene */
+  transform: translateX(300px); /* Start off-screen to the right */
+  transition: transform 0.5s ease-out;
+}
+.portal-sidebar-content {
+  position: fixed;
+ /* Start off screen */
+  
+  right: 0;
+  width: 300px;
+  height: 49vh;
+  overflow-y: auto;
+  z-index: 1000; /* Ensure it appears above the scene */
+}
+
+.portal-sidebar-content ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+.portal-sidebar-content li {
+  padding: 10px;
+  margin: 10px;
+  cursor: pointer;
+  display:flex;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: #ffffff; /* Slightly more transparency for contrast */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border for separating items */
+  transition: background-color 0.3s; /* Smooth background color transition on hover */
+  border-radius: 10px;;
+  flex-direction: row;
+}
+
+
+.portal-sidebar-content li:hover {
+  background: #eeeeee; /* Lighter background on hover for better contrast */
+}
+.portal-sidebar-content{
+  scrollbar-width: none; /* For Firefox */
+  scrollbar-gutter: stable both-edges; /* Avoids content reflow in supporting browsers */
+}
+
+/* For Chrome, Edge, and Safari */
+.portal-sidebar-content::-webkit-scrollbar {
+  display: none;
+}
+.portal-sidebar-content li img {
+  flex-shrink: 0; /* Prevent the image from shrinking */
+  margin-right: 10px; /* Add some space between the image and the text */
+}
+
+.portal-sidebar-header {
+  color: #09483E; /* Choose a text color that stands out against the background */
+  padding: 16px; /* Adjust padding to your preference */
+  font-size: 1.5em; /* Adjust font size to your preference */
+  text-align: center; /* Center the header text */
+ /* Slightly different background for contrast */
+ font-weight:700;
+}
+.toggle-list-btn {
+  position: absolute;
+  top: 50%; /* Center the button vertically */
+  right: 100%; /* Position it to the left of the sidebar */
+  transform: translateY(-50%); /* Align the center of the button with the vertical center of the sidebar */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1010; /* Above the sidebar-content */
+}
+
+.inputForm h1 {
+  margin-bottom: 5px;  /* Brings the header closer to the input box */
+}
+
+
+.color-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: fixed;
+  right: 5%;  
+  top: 4%;
+  
+   /* Ensures it appears above most other content */
+}
+
+.color-picker h1{
+  margin-bottom: 5px;
+}
+
+.color-option {
+  position: relative;
+}
+
+.color-option input[type="radio"] {
+  visibility: hidden;
+  position: absolute;
+}
+.toggle-text-container {
+  position: fixed; /* or `absolute` depending on your layout */
+  bottom: 30%; /* Adjust the value to place it under the scroll gallery */
+  right: 11%; /* Align with the right edge of the select-gallery */
+  transform: translateX(50%); /* Center align under the gallery */
+  z-index: 101; /* Ensure it's above the gallery and other content */
+  background-color: #2b2b2b; /* Match gallery background */
+  padding: 10px;
+  border-radius: 4px; /* Optional: Adds rounded corners */
+  color: white;
+  font-weight: 700;/* Text color */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3); /* Optional: Adds subtle shadow for depth */
+}
+
+/* Improve the look of the label and checkbox */
+.toggle-text-container label {
+  cursor: pointer; /* Indicates the label is clickable */
+  display: inline-flex; /* Aligns the checkbox and label text */
+  align-items: center; /* Centers items vertically */
+}
+
+.toggle-text-container input[type="checkbox"] {
+  margin-right: 5px; /* Space between the checkbox and label text */
+}
+.color-display {
+  display: block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.color-option input[type="radio"]:checked + .color-display {
+  border: 2px solid #ffffff;
+}
+.tab, .gallery {
+  clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+  background-color: #333;
+  color: white;
+  position: fixed;
+  top: 0;
+  right: 50%;
+  transform: translateX(50%);
+  z-index: 100;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab {
+  padding: 0px 20px;
+  /* Use a background image or pseudo-element for the arrow */
+
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px 20px;
+}
+
+.gallery {
+  opacity: 0; /* Start fully transparent */
+  transform: translateY(-100%); /* Start off-screen */
+  padding: 0px 10%;
+  white-space: nowrap;
+  max-width: 70vh;
+
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  background-color: #2b2b2b;
+  color: black;
+  transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition for opacity and transform */
+  position: fixed;
+  top: 0;
+
+  transform: translateX(50%) translateY(-100%);
+  z-index: 100; 
+}
+
+.select-gallery {
+  max-width: 100%;
+  font-weight: 700;
+  background-color: #2b2b2b;
+  padding: 10px 10px;
+  color: white;
+  position: absolute;
+  white-space: nowrap;
+  top: 20px; /* Adjusted to position it at the top */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  right: 11%; /* Adjust as needed */
+  transform: translateX(50%);
+  z-index: 100;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.scroll-container{
+  overflow-x: scroll;
+width:100%;
+
+}
+
+.scroll-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
+.gallery::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
+.select-gallery::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
+.gallery.is-active {
+  opacity: 1; /* Fully visible */
+  transform: translateX(50%) translateY(0); /* Slide into final position */
+}
+.gallery img {
+  height: 80px; /* Adjust based on your preference */
+  margin-right: 4px;
+}
+.select-gallery img {
+  height: 80px; /* Adjust based on your preference */
+  margin-right: 4px;
+}
+
+.image-container {
+  display: inline-block; /* Align images horizontally */
+  text-align: center; /* Center the captions */
+ 
+
+  padding-top: 10px;
+ 
+}
+
+.caption {
+  display: block; /* Ensure captions appear below images */
+  color: white; /* Match the gallery's color scheme */
+  margin-top: 5px; /* Space between the image and its caption */
+}
+.close-gallery {
+  display: block;
+  margin: 1px auto; /* Center the button below the images */
+
+  background-color: transparent; /* Match gallery background */
+  color: #f0f0f0; /* Arrow color */
+  border: none; /* Remove default button styling */
+  cursor: pointer; /* Indicate clickable */
+  font-size: 20px; /* Adjust size of the arrow */
+}
+
+/* Optional: Add hover effect */
+.close-gallery:hover {
+  color:#ffffff /* Slightly lighter than gallery background */
+}
+#saveBtn {
+  position: absolute;
+  top: 20px; /* Adjust as needed */
+  left: 20px; /* Adjust as needed */
+  z-index: 1000; /* Ensure it's above the A-frame scene */
+  border: none;        
+ 
+  color: white;       
+  font-size: 16px;     
+  border-radius: 4px;  
+  cursor: pointer;    
+  outline: none;
+  font-weight: 700;
+  font-size: 25px;
+  padding: 15px 48px; 
+  /* Adjust as needed */
+}
+
+#exitBtn {
+  position: fixed; /* Use fixed positioning to keep the button in view */
+  top: 20px;       /* Distance from the top of the viewport */
+  left: 20px;     /* Distance from the right of the viewport, adjusted for typical close button placement */
+  z-index: 1000;   /* High z-index to ensure it appears above other content */
+  border: none;    /* No border for a cleaner look */
+  background-color: transparent; /* Transparent background to let the X image show through */
+  cursor: pointer; /* Cursor indicates clickable */
+  outline: none;   /* Remove outline to avoid focus border */
+  padding: 10px;   /* Padding around the image for easier clicking */
+   /* Height of the button */
+
+}
+
+.exitContainer{
+  flex-direction: column;
+}
+
+.exitContainer #exitOptions{
+  visibility: hidden; /* Hide by default */
+  opacity: 0; 
+  display:flex;
+ color:white;
+ position: fixed; /* Use fixed positioning to keep the button in view */
+   /* Distance from the right of the viewport, adjusted for typical close button placement */
+ z-index: 1000;   /* High z-index to ensure it appears above other content */
+ border: none;    /* No border for a cleaner look */
+ background-color: transparent; /* Transparent background to let the X image show through */
+ cursor: pointer; /* Cursor indicates clickable */
+ outline: none;   /* Remove outline to avoid focus border */
+  font-weight: 600;
+  font-size: 25px;
+  left:40px;
+  top: 80px;
+  flex-direction: column; 
+  transition: opacity 0.5s ease, visibility 0.5s;
+}
+
+.exitContainer:hover #exitOptions {
+  visibility: visible; /* Make visible on hover */
+  opacity: 1; 
+  
+}
+#exitBtn img {
+  display: block; /* Remove any extra space below the image */
+  width: 100%;    /* Full width of the button */
+  height: auto;   /* Maintain aspect ratio */
+
+}
+#exitOptions{
+  flex-direction: column;
+}
+
+
+#exitOptions span {
+  transition: color 0.3s ease; /* Smooth transition for the color change */
+  cursor: pointer; /* Indicates that the item is clickable */
+  padding: 5px 0; /* Add some padding for better readability and clickability */
+}
+
+#exitOptions span:hover {
+  color: #0EB49A; /* Change to a different color on hover */
+}
+
+#saveBtn {
+  position: fixed; /* Use fixed positioning to keep the button in view */
+  top: 20px;       /* Distance from the top of the viewport */
+  left: 20px;     /* Distance from the right of the viewport, adjusted for typical close button placement */
+  z-index: 1000;   /* High z-index to ensure it appears above other content */
+  border: none;    /* No border for a cleaner look */
+  background-color: transparent; /* Transparent background to let the X image show through */
+  cursor: pointer; /* Cursor indicates clickable */
+  outline: none;   /* Remove outline to avoid focus border */
+  padding: 10px;   /* Padding around the image for easier clicking */
+   /* Height of the button */
+
+}
+
+.saveContainer{
+  flex-direction: row;
+}
+
+.saveContainer #saveOptions{
+  visibility: hidden; /* Hide by default */
+  opacity: 0; 
+ color:white;
+ position: fixed; /* Use fixed positioning to keep the button in view */
+   /* Distance from the right of the viewport, adjusted for typical close button placement */
+ z-index: 1000;   /* High z-index to ensure it appears above other content */
+ border: none;    /* No border for a cleaner look */
+ background-color: transparent; /* Transparent background to let the X image show through */
+ cursor: pointer; /* Cursor indicates clickable */
+ outline: none;   /* Remove outline to avoid focus border */
+  font-weight: 600;
+  font-size: 25px;
+  left:40px;
+  top: 70px;
+  transition: opacity 0.5s ease, visibility 0.5s;
+  display: flex;           /* Enables flexbox */
+  flex-direction: column; 
+gap:10px;
+}
+#saveOptions{
+  flex-direction: column;
+}
+
+#saveOptions span {
+  transition: color 0.3s ease; /* Smooth transition for the color change */
+  cursor: pointer; /* Indicates that the item is clickable */
+  padding: 5px 0; /* Add some padding for better readability and clickability */
+}
+
+#saveOptions span:hover {
+  color: #0EB49A; /* Change to a different color on hover */
+}
+
+
+.saveContainer:hover #saveOptions{
+  visibility: visible; /* Make visible on hover */
+  opacity: 1; 
+  
+}
+#saveBtn img {
+  display: block; /* Remove any extra space below the image */
+  width: 100%;    /* Full width of the button */
+  height: auto;   /* Maintain aspect ratio */
+
+}
+
+
+
+.details {
+  position: fixed; /* Fixed position relative to the viewport */
+  bottom: 0;
+  left: 0;
+  background: rgba(22, 22, 22, 0.8); /* Semi-transparent background */
+  color: #ffffff; /* Text color */
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 9999;
+  border-top-right-radius: 30px; /* Rounded top right corner */
+}
+.details-content {
+  display: flex;
+  align-items: center;
+}
+#closeBtn{
+  visibility: hidden; /* Hide by default */
+  opacity: 0; 
+  transition: opacity 0.5s ease, visibility 0.5s;
+}
+.details:hover #closeBtn
+{
+  visibility: visible; /* Hide by default */
+  opacity: 1; 
+}
+.house-icon {
+  font-size: 24px; /* Large size for the house icon */
+  margin-right: 10px;
+}
+
+.house-address {
+  margin-right: 20px;
+}
+
+.house-details {
+  display: flex;
+  align-items: center;
+}
+
+.details-icon {
+  font-size: 20px; /* Slightly smaller size for detail icons */
+}
+
+.details-text {
+  margin-right: 15px;
+
+}
+.details-content {
+  display: flex;
+  align-items: center;
+}
+
+.house-icon, .details-icon {
+  margin-right: 8px;
+}
+
+.details-text {
+  margin-right: 16px; /* Adjust as needed */
+}
+
+.instruction {
+  position: fixed;
+  bottom: 60px;
+  left: 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  z-index: 1000;
+  font-size: 16px;
+  max-width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin-top: 20px;
+  margin-left: 40px;
+}

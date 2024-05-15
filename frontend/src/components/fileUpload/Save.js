@@ -72,8 +72,8 @@ function Save() {
 
     return (
         <div className="Save">
-            <h1>House Info</h1>
             <div className="form-container">
+                <h1>Tour Info</h1>
                 <form onSubmit={handleSubmit} className="inputForm">
                     <div className="number-group">
                         <div className="form-group">
