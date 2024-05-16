@@ -25,7 +25,7 @@ export async function savePhotos(images, houseID) {
                 console.log(`${pair[0]}, ${pair[1]}`);
             }
 
-            mongoSubmit(mongoImageData, houseID.houseID, newImageName);
+            await mongoSubmit(mongoImageData, houseID.houseID, newImageName);
         } else {
             console.error('Input file is undefined or does not have a name property:', input);
         }
