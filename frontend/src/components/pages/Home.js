@@ -7,9 +7,7 @@ import rotation360 from "../../assets/360rotation.png";
 import MetaQuest2 from "../../assets/MetaQuest.png";
 import { FlipCards } from "./FlipCard";
 import AzimaLogo from "../../assets/LogoAsset.svg";
-import MailSVG from "../../assets/mail-icon2.svg";
-// import HomeIamge from "../../assets/IMG_20230731_115159_562.jpg";
-
+import MailSVG from "../../assets/mail-icon.svg";
 
 export const Home = () => {
 
@@ -76,8 +74,6 @@ export const Home = () => {
                         <p>Once you've created the portals and linked your images, you can save and publish your tour. By default, all tours will be displayed only on your account. However, you have the option to share them publicly, making them available on our tours page for other users to explore.</p>
                     </div>
                 </div>
-                
-
 
                 <div className="vr-container">
                     <img src={MetaQuest2} alt="Meta Quest 2" className="meta-image"></img>
@@ -91,7 +87,8 @@ export const Home = () => {
 
                 <div className="common-container">
                     <h1>Common Questions</h1>
-                    <p>Click on a card to reveal the answer</p>
+                    <h4>Click on a card to reveal the answer</h4>
+                    <br></br><br></br>
                     <FlipCards/>
                 </div>
             </div>

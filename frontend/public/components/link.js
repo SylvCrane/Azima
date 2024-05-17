@@ -183,7 +183,7 @@ AFRAME.registerComponent("linker", {
     .then(data => {
         console.log('Document saved:', data);
         console.log("Processing UI changes post-save");
-
+   
         let formContainer = document.getElementById("formContainer");
         let saveContainer = document.getElementById("saveContainer");
 
@@ -210,11 +210,21 @@ AFRAME.registerComponent("linker", {
 
         if (container) {
             console.log("Adjusting container and overlay dimensions and padding");
-            container.style.width = "100vw";
-            container.style.height = "100vh";
+            container.style.position = 'relative';
+            container.style.width = '100vw';
+            container.style.height = '100vh';
+            container.style.overflow = 'hidden';
+            container.style.display = 'flex';
+            container.style.margin = '0 0 0 0';
+            container.style.padding = '0';
             overlay.style.width = "100vw";
             overlay.style.height = "100vh";
-            container.style.padding = "0px";
+            
+           
+        }
+        let sidebar = document.getElementById('portal-sidebar');
+        if (sidebar) {
+            sidebar.style.display = 'none'; // Show sidebar if it was hidden
         }
 
         formContainer.innerHTML = '';
@@ -301,6 +311,7 @@ serializeText: function(triangles) {
       overlay.style.width = "100vw";
       overlay.style.height = "100vh";
       container.style.padding = "0px";
+      container.style.margin = "0px";
     }
 
     formContainer.innerHTML ='';

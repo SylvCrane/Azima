@@ -47,6 +47,15 @@
     border-radius: 10px;
     max-width: 70%;
 }
+.thumbnail{
+    scrollbar-width: none; /* For Firefox */
+    scrollbar-gutter: stable both-edges; /* Avoids content reflow in supporting browsers */
+  }
+  
+  /* For Chrome, Edge, and Safari */
+  .thumbnail::-webkit-scrollbar {
+    display: none;
+  }
   
 .address {
     position: absolute; /* Position absolutely within .thumbnail */
@@ -66,10 +75,24 @@
 
 .author {
     position: absolute; /* Position absolutely within .thumbnail */
+    top: 45px; /* Distance from the top of .thumbnail */
+    left: 10px; /* Distance from the left of .thumbnail */
+    color: white; /* Assuming you want the text to be white */
+    font-size: 12px; /* Make the address text a bit larger */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better readability */
+    padding: 5px 10px; /* Some padding around the text */
+    border-radius: 5px; /* Optionally round the corners */
+    max-width: 90%; /* Limit the width of the address box */
+    overflow: hidden; /* Prevents text spillover */
+    text-overflow: ellipsis; /* Adds ellipsis if text is too long */
+    white-space: nowrap; /* Keeps the address in a single line */
+}
+.houseName {
+    position: absolute; /* Position absolutely within .thumbnail */
     top: 10px; /* Distance from the top of .thumbnail */
     left: 10px; /* Distance from the left of .thumbnail */
     color: white; /* Assuming you want the text to be white */
-    font-size: 14px; /* Make the address text a bit larger */
+    font-size: 20px; /* Make the address text a bit larger */
     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better readability */
     padding: 5px 10px; /* Some padding around the text */
     border-radius: 5px; /* Optionally round the corners */
@@ -103,7 +126,8 @@
     border-radius: 10px;
 }
   
-.explore-btn{
+.tours-page .explore-btn{
+    display:block;
     font-weight: bold;
     background-color: #0EB49A;
     color: white;
@@ -114,10 +138,53 @@
     font-size: 22px;
     margin: 10px 0;
     border: none;
+
 }
 
+.explore-btn{
+    display:block;
+    font-weight: bold;
+    background-color: #0EB49A;
+    color: white;
+    padding: 20px 35px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 22px;
+    margin: 10px 0;
+    border: none;
+
+}
 .explore-btn:hover{
     background-color: #087f6e; /* Darker shade for hover effect */
+}
+.delete-btn{
+    display:flex;
+    font-weight: bold;
+    background-color:#F08080 ;
+    color: white;
+    padding: 20px 35px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 22px;
+    margin: 10px 0;
+    border: none;
+
+}
+.tours-page .delete-btn{
+    display:none;
+    
+
+}
+
+.delete-btn:hover{
+    background-color: #d94848; /* Darker shade for hover effect */
+}
+.options{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
 }
 
 .detail {
@@ -193,7 +260,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 90%;
     text-align: center;
     
 }

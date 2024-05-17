@@ -23,7 +23,7 @@ export const UserTours = () => {
                 console.error('Failed to fetch houses:', error);
             }
         };
-    
+
         fetchHouses();
     }, [houseId, user.email]); // Effect runs whenever houseId changes
     

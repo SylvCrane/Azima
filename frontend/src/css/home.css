@@ -36,7 +36,7 @@ html, body {
 
 .home-page-bottom-nav {
     background-color: #00664d;
-    height: 100px;
+    height: 120px;
     width: 100%;
     display: flex;
     justify-content: space-between; /* Distribute space evenly */
@@ -44,6 +44,8 @@ html, body {
     padding: 20px 10%; /* Adjust padding as needed */
     color: white;
 }
+
+
 
 .footer-left, .footer-right {
     display: flex;
@@ -54,21 +56,19 @@ html, body {
 }
 
 .footer-left {
-    align-items: flex-start; /* Align left content to the start */
-    text-align: center; /* Ensure text is aligned to the left */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    text-align: center; /* Ensure text is centered */
     font-size: 10px;
 }
 
 .footer-right, 
-.footer-right a  {
-    align-items: flex-end; /* Align right content to the end */
-    text-align: center; /* Ensure text is aligned to the right */
+.footer-right a {
+    align-items: center; /* Align right content to the center */
+    text-align: center; /* Ensure text is aligned to the center */
     justify-content: center;
-    align-items: center;
-    font-size: 11px;
-    margin-left: 10px; /* Adjust the value as needed */
+    font-size: 12px;
 }
-
 
 .logo-image {
     width: 60px;
@@ -76,13 +76,10 @@ html, body {
     margin-bottom: 10px; /* Add some space between the image and the text */
 }
 
-
-
 .mail-image {
     width: 40px;
     margin-bottom: 10px;
 }
-
 
 .footer-right a {
     color: white;
@@ -165,7 +162,7 @@ b.home-subheading {
 }
 
 .examples:hover {
-    background-color: #e0ebe9;
+    background-color: #639c91;
 }
 
 .azima-menu {

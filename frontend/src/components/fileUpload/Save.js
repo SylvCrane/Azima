@@ -38,7 +38,7 @@ function Save() {
                     console.error('Error deleting images:', error.response ? error.response.data : error.message);
                     // Error handling logic
                 }
-                window.location.href = `/tours`;
+                window.location.href = `/account`;
             };
             deleteImages();
         }
@@ -102,7 +102,7 @@ function Save() {
             setSuccessMessage('Form submitted successfully!');
         } catch (error) {
             console.error('Error during the saving process:', error);
-            setAlertMessage('Error during the saving process. Please try again.');
+            setAlertMessage('Error during the saving process. Check that your input is correct and try again.');
             setSuccessMessage('');
         } finally {
             setIsSubmitting(false);

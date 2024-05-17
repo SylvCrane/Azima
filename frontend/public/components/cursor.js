@@ -8,6 +8,7 @@ AFRAME.registerComponent('toggle-thickness', {
       this.removecounter = 1;
       this.addcounter = 1;
 
+      this.instructionText = document.createElement('div');
       this.portalManager = document.createElement('a-entity');
       this.portalManager.setAttribute('portal-manager', '');
       this.el.appendChild(this.portalManager);
@@ -28,8 +29,15 @@ AFRAME.registerComponent('toggle-thickness', {
       this.addListeners();
 
       // Create instructional text element
-    this.instructionText = document.createElement('div');
-    this.instructionText.innerText = 'Click the circle, then the plus, and move the circle to add or remove a portal.';
+      this.createInstructionalText();
+      // Set up inactivity timeout
+      this.resetInactivityTimeout(5000);
+  
+  },
+
+
+  createInstructionalText: function() {
+    this.instructionText.innerText = 'Click and drag on the screen to look around.';
     this.instructionText.style.position = 'fixed';
     this.instructionText.style.top = '65%';
     this.instructionText.style.left = '50%';
@@ -42,12 +50,34 @@ AFRAME.registerComponent('toggle-thickness', {
     this.instructionText.style.fontFamily = 'Rubik, sans-serif';
     this.instructionText.style.fontSize = '16px';
     this.instructionText.style.textAlign = 'center';
+    this.instructionText.style.display = 'none'; // Initially hide the instructional text
 
     // Append the instructional text to the body if on the A-Frame page
-   document.body.appendChild(this.instructionText);
-  
+    document.body.appendChild(this.instructionText);
   },
-  addListeners: function() {
+
+  showInstructionText: function() {
+    if (this.instructionText) {
+      this.instructionText.style.display = 'block';
+    }
+},
+hideInstructionText: function() {
+    if (this.instructionText) {
+      this.instructionText.style.display = 'none';
+    }
+},
+
+resetInactivityTimeout: function(timeOut) {
+    clearTimeout(this.inactivityTimeout);
+    this.inactivityTimeout = setTimeout(() => {
+      this.showInstructionText('Click and drag on the screen to look around.');
+    }, timeOut);
+  },
+
+addListeners: function() {
+    console.log("Adding listeners");
+    // Add your event listeners here
+
       this.boundHandleaddPortalClick = this.handleaddPortalClick.bind(this);
       this.boundHandleRemovePortalClick = this.handleRemovePortalClick.bind(this);
 
@@ -140,6 +170,9 @@ AFRAME.registerComponent('toggle-thickness', {
       }
   },
   handlePlusClick: function() {
+    this.resetInactivityTimeout(0);
+    this.instructionText.innerText = 'Drag the cursor to the option you want, then Click to select.';
+    this.showInstructionText();
       this.addPortal = this.createPortal('Add Portal', '#4ABFAA');
       this.removePortal = this.createPortal('Remove Portal', '#4ABFAA');
       this.addListeners();
@@ -183,6 +216,11 @@ AFRAME.registerComponent('toggle-thickness', {
       });
   },
   handleCursorClick: function() {
+    this.resetInactivityTimeout(0);
+    this.instructionText.innerText = 'Click the plus to open the portal manager.';
+    this.showInstructionText();
+ 
+
       let currentRadiusOuter = this.el.getAttribute('geometry').radiusOuter;
       let newRadiusOuter
       if (this.isThick) {
@@ -190,6 +228,14 @@ AFRAME.registerComponent('toggle-thickness', {
           this.el.sceneEl.remove(this.removePortal);
           this.el.sceneEl.remove(this.addPortal);
           this.plus.remove();
+          this.resetInactivityTimeout(5000);
+          this.instructionText.innerText = 'Click and drag on the screen to look around.';
+    
+          setTimeout(() => {
+            this.hideInstructionText();
+            // After hiding the text, reset the inactivity timeout to show it again after 5 seconds
+            this.resetInactivityTimeout(5000);
+        }, 0);
       } else {
           document.body.appendChild(this.plus);
           newRadiusOuter = currentRadiusOuter + 0.01;
@@ -341,90 +387,8 @@ AFRAME.registerComponent('toggle-thickness', {
      document.dispatchEvent(new Event("edit"));
      console.log("edit sent");
 
-      // Add event listener for the cancel button
-    document.getElementById('cancelButton').addEventListener('click', function() {
-      let container = document.getElementById('aframe-container');
-      let overlay = document.getElementById('overlay');
 
-      // Reset container styles
-      container.style.position = 'relative';
-      container.style.width = '100vw';
-      container.style.height = '100vh';
-      container.style.overflow = 'hidden';
-      container.style.display = 'flex';
-      container.style.margin = '0';
-      container.style.padding = '0';
 
-      // Reset overlay styles
-      overlay.style.width = '100vw';
-      overlay.style.height = '100vh';
-
-      // Optionally hide or reset any other elements
-      let formContainer = document.getElementById('formContainer');
-      formContainer.innerHTML = ''; // Clear the form container
-
-      // Reset the camera field of view if it was changed
-      let camera = document.querySelector('[camera]');
-      camera.setAttribute('camera', 'fov', '80'); // Reset FOV to default or desired value
-
-      // Additional reset actions if needed
-      // Remove event listeners or reset other states
-
-      // Hide or reset any other custom elements
-      let sidebar = document.getElementById('portal-sidebar');
-      if (sidebar) {
-          sidebar.style.display = 'block'; // Show sidebar if it was hidden
-      }
-
-      let saveContainer = document.getElementById('saveContainer');
-      if (saveContainer) {
-          saveContainer.style.display = 'block'; // Show save container if it was hidden
-      }
-  });
-
-   // Add event listener for the save button
-   document.getElementById('saveButton').addEventListener('click', function() {
-    // Implement save functionality here
-    // For example, save form data, update state, etc.
-
-    let container = document.getElementById('aframe-container');
-    let overlay = document.getElementById('overlay');
-
-    // Reset container styles
-    container.style.position = 'relative';
-    container.style.width = '100vw';
-    container.style.height = '100vh';
-    container.style.overflow = 'hidden';
-    container.style.display = 'flex';
-    container.style.margin = '0';
-    container.style.padding = '0';
-
-    // Reset overlay styles
-    overlay.style.width = '100vw';
-    overlay.style.height = '100vh';
-
-    // Optionally hide or reset any other elements
-    let formContainer = document.getElementById('formContainer');
-    formContainer.innerHTML = ''; // Clear the form container
-
-    // Reset the camera field of view if it was changed
-    let camera = document.querySelector('[camera]');
-    camera.setAttribute('camera', 'fov', '80'); // Reset FOV to default or desired value
-
-    // Additional reset actions if needed
-    // Remove event listeners or reset other states
-
-    // Hide or reset any other custom elements
-    let sidebar = document.getElementById('portal-sidebar');
-    if (sidebar) {
-        sidebar.style.display = 'block'; // Show sidebar if it was hidden
-    }
-
-    let saveContainer = document.getElementById('saveContainer');
-    if (saveContainer) {
-        saveContainer.style.display = 'block'; // Show save container if it was hidden
-    }
-});
 
  },
 });

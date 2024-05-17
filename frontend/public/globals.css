@@ -262,8 +262,8 @@ input[type="text"]{
   justify-content: center; /* Center the buttons horizontally */
   align-items: center; /* Align the buttons vertically */
   gap: 10px; /* Space between buttons */
-  bottom: 20%; /* Adjust the value to place it under the scroll gallery */
-  right: 7%; /* Align with the right edge of the select-gallery */
+  bottom: 25%; /* Adjust the value to place it under the scroll gallery */
+  right: 18%; /* Align with the right edge of the select-gallery */
 }
 
 /* General style for both zoom buttons */
@@ -386,7 +386,7 @@ input[type="text"]{
   flex-direction: column;
   gap: 10px;
   position: fixed;
-  right: 5%;  
+  right: 4%;  
   top: 4%;
   
    /* Ensures it appears above most other content */
@@ -394,6 +394,7 @@ input[type="text"]{
 
 .color-picker h1{
   margin-bottom: 5px;
+  font-size: 24px;
 }
 
 .color-option {
@@ -406,12 +407,12 @@ input[type="text"]{
 }
 .toggle-text-container {
   position: fixed; /* or `absolute` depending on your layout */
-  bottom: 30%; /* Adjust the value to place it under the scroll gallery */
-  right: 8%; /* Align with the right edge of the select-gallery */
+  bottom: 20%; /* Adjust the value to place it under the scroll gallery */
+  right: 9%; /* Align with the right edge of the select-gallery */
   transform: translateX(50%); /* Center align under the gallery */
   z-index: 101; /* Ensure it's above the gallery and other content */
   background-color: #2b2b2b; /* Match gallery background */
-  padding: 10px;
+  padding: 15px 35px;
   border-radius: 4px; /* Optional: Adds rounded corners */
   color: white;
   font-weight: 700;/* Text color */
@@ -423,6 +424,7 @@ input[type="text"]{
   cursor: pointer; /* Indicates the label is clickable */
   display: inline-flex; /* Aligns the checkbox and label text */
   align-items: center; /* Centers items vertically */
+  font-size: 20px;
 }
 
 .toggle-text-container input[type="checkbox"] {
@@ -430,8 +432,8 @@ input[type="text"]{
 }
 .color-display {
   display: block;
-  width: 50px;
-  height: 50px;
+  width: 75px;
+  height: 75px;
   border-radius: 50%;
   cursor: pointer;
   border: 2px solid transparent;
