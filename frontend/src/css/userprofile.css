@@ -8,9 +8,21 @@
     align-items: center;
 }
 
-.profile-section,
-.tours-section {
+.profile-section
+{
     width: 100%;
+    padding: 20px;
+    margin-top: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.tours-section {
+    width: 180%;
     padding: 20px;
     margin-top: 20px;
     border: 2px solid #ccc;
