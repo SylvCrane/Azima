@@ -1,5 +1,6 @@
 .tours-page {
-    margin-top: 15px; 
+    padding-top: 20px; 
+    padding-bottom: 20px;
 }
 
 
@@ -42,7 +43,7 @@
 .thumbnail{
     position: relative;
     display: flex; /* Assuming multiple images would be displayed in a row */
- /* Allows for horizontal scrolling */
+/* Allows for horizontal scrolling */
     border-radius: 10px;
     max-width: 70%;
 }
@@ -102,7 +103,7 @@
     border-radius: 10px;
 }
   
-.btn{
+.explore-btn{
     font-weight: bold;
     background-color: #0EB49A;
     color: white;
@@ -115,7 +116,7 @@
     border: none;
 }
 
-.btn:hover{
+.explore-btn:hover{
     background-color: #087f6e; /* Darker shade for hover effect */
 }
 
@@ -184,16 +185,15 @@
 
 .new-tour-button:hover {
     box-shadow: 
-        0 5px 30px rgba(0, 102, 77, 0.4), /* More pronounced bottom shadow on hover */
+        0 5px 30px rgba(0, 102, 77, 0.45), /* More pronounced bottom shadow on hover */
         0 -5px 30px rgba(0, 102, 77, 0.35); /* More pronounced top shadow on hover */
 }
 .user-tours-page {
     display: flex;
-    width: 100%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    width: 100%;
     text-align: center;
     
 }
