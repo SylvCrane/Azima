@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import "../../css/tour.css";
 import "../../css/style.css";
 import bathIcon from '../../assets/bath-solid.svg';
 import bedIcon from '../../assets/bed-solid.svg';
 import livingAreaIcon from '../../assets/couch-solid.svg';
 import floorAreaIcon from '../../assets/expand-solid.svg';
+import axios from 'axios';
 
 const TourContainer = ({ house }) => {
     // Function to handle the click event of the "Explore" button
@@ -17,15 +18,45 @@ const TourContainer = ({ house }) => {
         // Navigate to the AFrame URL
         window.location.href = `/tours/aframe?houseID=${encodeURIComponent(house.houseID)}`;
     };
+    const [userDetails, setUserDetails] = useState(null);
+
+    useEffect(() => {
+        const fetchUserDetails = async () => {
+            try {
+                const response = await axios.get('http://localhost:8082/api/userprofile/search/'+house.author);
+
+                const users = response.data;
+                console.log(users.user.username);
+                
+                setUserDetails(users.user.username);
+            } catch (error) {
+                console.error('Error fetching user details:', error);
+            }
+        };
+
+        fetchUserDetails();
+    }, [house.author]);
+
+
+    const getUserName = () => {
+        if (userDetails) {
+            return userDetails;
+        }
+        return 'Unknown';
+    };
+
+    
+    
+
+
     const cardClass = `card ${house.public ? 'public' : 'non-public'}`;
     return (
-        <>
-        <br></br>
         <div className={cardClass}>
             <div className="tours-content">
                 <div className="thumbnail">
                     <div className="address">{house.location}</div>
-                    <div className="author">{house.author}</div>
+                    <div className="author">{getUserName()}</div>
+                    <div className="houseName">{house.houseName}</div>
                     {/*<img src={house.thumbnail} alt="Main Photo of Property" />*/}
                     <img src={house.thumbnail} alt="Property" />
                 </div>
@@ -63,11 +94,9 @@ const TourContainer = ({ house }) => {
              
             </div>
             <div className="public-private-indicator">
-                {house.public ? 'Public' : 'Private'}
-            </div>
+                            {house.public ? 'Public' : 'Private'}
+                        </div>
         </div>
-        </>
-        
     );
 }
 

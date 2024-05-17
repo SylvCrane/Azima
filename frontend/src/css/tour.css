@@ -75,10 +75,24 @@
 
 .author {
     position: absolute; /* Position absolutely within .thumbnail */
+    top: 45px; /* Distance from the top of .thumbnail */
+    left: 10px; /* Distance from the left of .thumbnail */
+    color: white; /* Assuming you want the text to be white */
+    font-size: 12px; /* Make the address text a bit larger */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better readability */
+    padding: 5px 10px; /* Some padding around the text */
+    border-radius: 5px; /* Optionally round the corners */
+    max-width: 90%; /* Limit the width of the address box */
+    overflow: hidden; /* Prevents text spillover */
+    text-overflow: ellipsis; /* Adds ellipsis if text is too long */
+    white-space: nowrap; /* Keeps the address in a single line */
+}
+.houseName {
+    position: absolute; /* Position absolutely within .thumbnail */
     top: 10px; /* Distance from the top of .thumbnail */
     left: 10px; /* Distance from the left of .thumbnail */
     color: white; /* Assuming you want the text to be white */
-    font-size: 14px; /* Make the address text a bit larger */
+    font-size: 20px; /* Make the address text a bit larger */
     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better readability */
     padding: 5px 10px; /* Some padding around the text */
     border-radius: 5px; /* Optionally round the corners */
