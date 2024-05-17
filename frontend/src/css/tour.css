@@ -43,10 +43,19 @@
 .thumbnail{
     position: relative;
     display: flex; /* Assuming multiple images would be displayed in a row */
-/* Allows for horizontal scrolling */
+    overflow-x: auto; /* Allows for horizontal scrolling */
     border-radius: 10px;
     max-width: 70%;
 }
+.thumbnail{
+    scrollbar-width: none; /* For Firefox */
+    scrollbar-gutter: stable both-edges; /* Avoids content reflow in supporting browsers */
+  }
+  
+  /* For Chrome, Edge, and Safari */
+  .thumbnail::-webkit-scrollbar {
+    display: none;
+  }
   
 .address {
     position: absolute; /* Position absolutely within .thumbnail */
