@@ -1,7 +1,7 @@
 .flip-card-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 40px;
   padding: 20px;
 }
 
@@ -38,7 +38,7 @@
   background-color: #fff;
   padding-left: 15px;
   padding-right: 15px;
-  border: 1.5px solid #004d39;
+  border-radius: 20px;
 }
 
 .font-color {
@@ -47,7 +47,7 @@
 
 .flip-card-front {
   color: black;
-  background-color: #a2c3bd;
+  background-color: #93cbc3;
 }
 
 .flip-card-back {

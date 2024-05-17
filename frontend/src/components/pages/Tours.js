@@ -36,6 +36,7 @@ export const Tours = () => {
     }, [houseId]);
     return (
         <div className="tours-page">
+            <br></br>
             <h1>Tours</h1><br></br>
             <p>Featured tours for you to view</p><br></br><br></br>
             <div className="new-tour-button-container">

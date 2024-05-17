@@ -7,7 +7,7 @@ import rotation360 from "../../assets/360rotation.png";
 import MetaQuest2 from "../../assets/MetaQuest.png";
 import { FlipCards } from "./FlipCard";
 import AzimaLogo from "../../assets/LogoAsset.svg";
-import MailSVG from "../../assets/mail-icon2.svg";
+import MailSVG from "../../assets/mail-icon.svg";
 // import HomeIamge from "../../assets/IMG_20230731_115159_562.jpg";
 
 
@@ -91,7 +91,8 @@ export const Home = () => {
 
                 <div className="common-container">
                     <h1>Common Questions</h1>
-                    <p>Click on a card to reveal the answer</p>
+                    <h4>Click on a card to reveal the answer</h4>
+                    <br></br><br></br>
                     <FlipCards/>
                 </div>
             </div>
@@ -99,20 +100,12 @@ export const Home = () => {
             <div className="home-page-bottom-nav">
                 <div className="footer-left">
                     <img src={AzimaLogo} alt="Azima" className="logo-image"></img>
-                    <br></br>
                     © 2024 Azima. All Rights Reserved.
-                </div>
-                <div className="footer-center">
-                    <a href="/about">About</a>
-                    <br/>
-                    <a href="/tours">Tours</a>
-                    <br/>
-                    <a href="/help">Help</a>
                 </div>
                 <div className="footer-right">
                     <img src={MailSVG} alt="mail" className="mail-image"></img>
                     Contact us at<br/>
-                    <a href="mailto:azimatours@gmail.com">azimatours@gmail.com</a>
+                    <a href="/help">azimatours@gmail.com</a>
                 </div>
             </div>
         </div>
