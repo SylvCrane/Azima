@@ -20,7 +20,7 @@ export const Home = () => {
             <div className="home-page-nav">
                 <h1 className="home-header">Explore Every Angle: <br/>
                     Experience 360° Virtual Tours!</h1><br/><br/>
-                <p className="home-subheading">Easily create, edit and distribute your own virtual tour with <b className="home-subheading">Azima</b>, <br/>
+                <p className="home-subheading">Easily create, edit and publish your own virtual tour with <b className="home-subheading">Azima</b>, <br/>
                 the leading software solution for producing immersive 360° tours. </p><br/><br/>
                 No coding expertise required. 
                 <br/>Simply follow the outlined steps to begin your tour at absolutely no cost! <br/><br/>
