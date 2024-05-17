@@ -1,74 +1,123 @@
 import React, { useState, useEffect } from 'react';
 import '../../css/publish.css'; // Ensure this path is correct
 
+
+import { savePhotos } from './savePhotos.js';
+import axios from 'axios';
+
+const params = new URLSearchParams(window.location.search);
+  console.log(params);
+const houseID = params.get('houseID');
+console.log("houseid: ",houseID)
+
+
 function Save() {
-    const [formData, setFormData] = useState({
-        bedroom: '',
-        bathrooms: '',
-        livingAreas: '',
-        kitchens: '',
-        backyard: false,
-        laundryRoom: false,
-        sqFootage: '',
-        price: '',
-        dateListed: new Date().toISOString().substr(0, 10), // Set current date as default
-        location: '',
-        public: false,
-    });
-    const [file, setFile] = useState(null);
-    const [submitting, setIsSubmitting] = useState(false);
-    const [saveSuccessful, setSaveSuccessful] = useState(false);
-    const [alertMessage, setAlertMessage] = useState('');
-    const [successMessage, setSuccessMessage] = useState('');
+  const [formData, setFormData] = useState({
+    thumbnail: '', // Assuming this will be handled differently, maybe file upload
+    bathrooms: '',
+    livingAreas: '',
+    sqFootage: '',
+    price: '',
+    dateListed: '',
+    location: '',
+    kitchen: '',
+    backyard: false,
+    laundryRoom: false,
+  });
+  const [file, setFile] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [saveSuccessful, setSaveSuccessful] = useState(false);
 
     useEffect(() => {
-        if (saveSuccessful) {
-            window.location.href = `/account`; // Redirect to account page when save is successful (their tour should be saved here).
-        }
-    }, [saveSuccessful]);
+      if (saveSuccessful) {
+        const deleteImages = async () => {
+          try {
+            const response = await axios.delete(`http://localhost:8082/api/image`);
+            console.log(response.data.msg);
+            
+            // Additional logic to handle successful deletion
+          } catch (error) {
+            console.error('Error deleting images:', error.response ? error.response.data : error.message);
+            // Error handling logic
+          }
+          window.location.href = `/tours`;
+        };
 
-    const handleChange = (event) => {
-        const { name, value, type, checked } = event.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: type === 'checkbox' ? checked : value,
-        }));
-    };
+        deleteImages();
+      }
+  }, [saveSuccessful]); 
 
-    const handleFileChange = (event) => {
-        setFile(event.target.files[0]);
-    };
+  const handleChange = (event) => {
+    const { name, value, type, checked } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: type === 'checkbox' ? checked : value,
+    }));
 
-    // Ensures that all fields (except the checkboxes) are filled
-    const validateForm = (formData, file) => {
-        const newErrors = [];
-        
-        if (!formData.bedroom || formData.bedroom.trim() === '') newErrors.push('Number of bedrooms is required');
-        if (!formData.bathrooms || formData.bathrooms.trim() === '') newErrors.push('Number of bathrooms is required');
-        if (!formData.livingAreas || formData.livingAreas.trim() === '') newErrors.push('Number of living areas is required');
-        if (!formData.sqFootage || formData.sqFootage.trim() === '') newErrors.push('Square footage is required');
-        if (!formData.price || formData.price.trim() === '') newErrors.push('Price is required');
-        if (!formData.dateListed || formData.dateListed.trim() === '') newErrors.push('Date available is required');
-        if (!formData.location || formData.location.trim() === '') newErrors.push('Address is required');
-        if (!file) newErrors.push('File upload is required');
+  };
+  const handleFileChange = (event) => {
+    const newFile = event.target.files[0];
+    setFile(newFile); // Update the file state with the new file object
+  };
+  const handleSubmit = async (event) => {
+    console.log(formData);
+    event.preventDefault();
+    if (!file) {
+      alert('Please upload a thumbnail image.');
+      return;
+    }
+    setIsSubmitting(true);
+   
+      
+    try {
+      // Save all photos at once; savePhotos should handle the array of rooms
+ await savePhotos([{ name: 'thumbnail', file }], {houseID: houseID});
+
+      // Fetch image references only after all photos have been saved
+   // Assuming this is the format
+
+
+
+  } catch (error) {
+    console.error('Error during the saving process:', error);
+  }
+  };
+  useEffect(() => {
+    // Define the event listener
+    console.log(formData);
+    const handleImageUploadSuccess = async (e) => {
+      console.log('upload success');
+      try {
+        const res = await axios.get(`http://localhost:8082/api/image/${e.detail.houseId}`);
+        const response = res.data; 
+       console.log(response);
     
-        return newErrors;
+     
+        const updatedFormData = { ...formData };
+        // simulate fetching data and updating it based on fetched data
+        updatedFormData.thumbnail = response[0].imageURL;
+        setFormData(updatedFormData);
+         console.log(updatedFormData);
+
+         const putResponse = await axios.put(`http://localhost:8082/api/house/house/update/${e.detail.houseId}`, updatedFormData);
+         console.log('House updated successfully:', putResponse.data);
+
+         // Optionally set state to reflect that save operation was successful
+         setSaveSuccessful(true);
+         
+        
+      } catch (error) {
+        console.error('Failed to fetch image data', error);
+      }
+
     };
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        const newErrors = validateForm(formData, file); // Pass formData and file here
-        if (newErrors.length > 0) {
-            setAlertMessage(newErrors.join('. '));
-            setSuccessMessage('');
-            return;
-        }
-        setIsSubmitting(true);
-        setIsSubmitting(false);
-        setSaveSuccessful(true); // Assuming success for demonstration
-        setAlertMessage('');
-        setSuccessMessage('Form submitted successfully!');
-    };
+    // Attach event listener
+    document.addEventListener("imageUploadSuccess", handleImageUploadSuccess);
+    return () => {
+        document.removeEventListener("imageUploadSuccess", handleImageUploadSuccess);
+      };
+    }, [formData]);
 
     return (
         <div className="Save">
@@ -140,12 +189,7 @@ function Save() {
                         <button type="submit" className="submit">Submit</button>
                     </div>
 
-                    {successMessage && 
-                        <div className="success">{successMessage}</div>
-                    }
-                    {alertMessage && 
-                        <div className="alert">{alertMessage}</div>
-                    }
+                    
                 </form>
             </div>
         </div>

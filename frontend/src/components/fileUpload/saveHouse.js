@@ -10,7 +10,7 @@ export async function saveHouse( houseID, imageReferences, user, houseName) {
 
   
  
-
+    console.log(imageReferences);
 
 
     const houseData = {

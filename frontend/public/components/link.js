@@ -183,7 +183,7 @@ AFRAME.registerComponent("linker", {
     .then(data => {
         console.log('Document saved:', data);
         console.log("Processing UI changes post-save");
-
+   
         let formContainer = document.getElementById("formContainer");
         let saveContainer = document.getElementById("saveContainer");
 
@@ -210,11 +210,13 @@ AFRAME.registerComponent("linker", {
 
         if (container) {
             console.log("Adjusting container and overlay dimensions and padding");
+            container.style.margin = "0px";
             container.style.width = "100vw";
             container.style.height = "100vh";
             overlay.style.width = "100vw";
             overlay.style.height = "100vh";
             container.style.padding = "0px";
+           
         }
 
         formContainer.innerHTML = '';

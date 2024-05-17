@@ -341,46 +341,7 @@ AFRAME.registerComponent('toggle-thickness', {
      document.dispatchEvent(new Event("edit"));
      console.log("edit sent");
 
-      // Add event listener for the cancel button
-    document.getElementById('cancelButton').addEventListener('click', function() {
-      let container = document.getElementById('aframe-container');
-      let overlay = document.getElementById('overlay');
 
-      // Reset container styles
-      container.style.position = 'relative';
-      container.style.width = '100vw';
-      container.style.height = '100vh';
-      container.style.overflow = 'hidden';
-      container.style.display = 'flex';
-      container.style.margin = '0';
-      container.style.padding = '0';
-
-      // Reset overlay styles
-      overlay.style.width = '100vw';
-      overlay.style.height = '100vh';
-
-      // Optionally hide or reset any other elements
-      let formContainer = document.getElementById('formContainer');
-      formContainer.innerHTML = ''; // Clear the form container
-
-      // Reset the camera field of view if it was changed
-      let camera = document.querySelector('[camera]');
-      camera.setAttribute('camera', 'fov', '80'); // Reset FOV to default or desired value
-
-      // Additional reset actions if needed
-      // Remove event listeners or reset other states
-
-      // Hide or reset any other custom elements
-      let sidebar = document.getElementById('portal-sidebar');
-      if (sidebar) {
-          sidebar.style.display = 'block'; // Show sidebar if it was hidden
-      }
-
-      let saveContainer = document.getElementById('saveContainer');
-      if (saveContainer) {
-          saveContainer.style.display = 'block'; // Show save container if it was hidden
-      }
-  });
 
    // Add event listener for the save button
    document.getElementById('saveButton').addEventListener('click', function() {
