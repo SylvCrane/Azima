@@ -58,7 +58,7 @@ const TourContainer = ({ house }) => {
                             </span>
                         </div>
                     </div>
-                    <button className="btn" onClick={handleExploreClick}>Explore</button>
+                    <button className="explore-btn" onClick={handleExploreClick}>Explore</button>
                 </div>
              
             </div>

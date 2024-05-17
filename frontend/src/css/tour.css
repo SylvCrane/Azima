@@ -1,5 +1,6 @@
 .tours-page {
-    margin-top: 15px; 
+    padding-top: 20px; 
+    padding-bottom: 20px;
 }
 
 
@@ -102,7 +103,7 @@
     border-radius: 10px;
 }
   
-.btn{
+.explore-btn{
     font-weight: bold;
     background-color: #0EB49A;
     color: white;
@@ -115,7 +116,7 @@
     border: none;
 }
 
-.btn:hover{
+.explore-btn:hover{
     background-color: #087f6e; /* Darker shade for hover effect */
 }
 
