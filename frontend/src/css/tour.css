@@ -126,7 +126,8 @@
     border-radius: 10px;
 }
   
-.explore-btn{
+.tours-page .explore-btn{
+    display:block;
     font-weight: bold;
     background-color: #0EB49A;
     color: white;
@@ -137,10 +138,53 @@
     font-size: 22px;
     margin: 10px 0;
     border: none;
+
 }
 
+.explore-btn{
+    display:block;
+    font-weight: bold;
+    background-color: #0EB49A;
+    color: white;
+    padding: 20px 35px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 22px;
+    margin: 10px 0;
+    border: none;
+
+}
 .explore-btn:hover{
     background-color: #087f6e; /* Darker shade for hover effect */
+}
+.delete-btn{
+    display:flex;
+    font-weight: bold;
+    background-color:#F08080 ;
+    color: white;
+    padding: 20px 35px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 22px;
+    margin: 10px 0;
+    border: none;
+
+}
+.tours-page .delete-btn{
+    display:none;
+    
+
+}
+
+.delete-btn:hover{
+    background-color: #d94848; /* Darker shade for hover effect */
+}
+.options{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
 }
 
 .detail {

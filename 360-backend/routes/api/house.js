@@ -78,8 +78,8 @@ Notes:
     - Should delete every photo associated with the house
     - Import method from other route?
 */
-router.delete('/house/:id', (req, res) => {
-    House.findByIdAndRemove(req.params.id, req.body)
+router.delete('/house/:houseID', (req, res) => {
+    House.findOneAndDelete({ "houseID": req.params.houseID })
         .then(() => res.json({ msg: 'House successfully deleted' }))
         .catch(() => res.status(404).json({ error: 'No such house' }));
 });

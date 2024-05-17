@@ -26,7 +26,7 @@ const TourContainer = ({ house }) => {
                 const response = await axios.get('http://localhost:8082/api/userprofile/search/'+house.author);
 
                 const users = response.data;
-                console.log(users.user.username);
+              
                 
                 setUserDetails(users.user.username);
             } catch (error) {
@@ -44,9 +44,25 @@ const TourContainer = ({ house }) => {
         }
         return 'Unknown';
     };
+const handleDeleteClick = () => {
+    if (window.confirm('Are you sure you want to delete this house?')) {
+        console.log('Deleting house with ID:', house.houseID);
+        
+        axios.delete(`http://localhost:8082/api/house/house/${house.houseID}`)
+            .then(response => {
+                console.log('House deleted successfully');
+                // Refresh the page to reflect the removal of the portal
+                window.location.reload();
+                // Perform any additional actions after successful deletion
+            })
+            .catch(error => {
+                console.error('Error deleting house:', error);
+                // Handle the error appropriately
+            });
+    }
+};
 
-    
-    
+  
 
 
     const cardClass = `card ${house.public ? 'public' : 'non-public'}`;
@@ -89,7 +105,10 @@ const TourContainer = ({ house }) => {
                             </span>
                         </div>
                     </div>
+                    <div className="options">
                     <button className="explore-btn" onClick={handleExploreClick}>Explore</button>
+                    <button className="delete-btn" onClick={handleDeleteClick}>Remove</button>
+                    </div>
                 </div>
              
             </div>
