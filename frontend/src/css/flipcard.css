@@ -43,6 +43,7 @@
 
 .font-color {
   color: #003325;
+  font-weight: bold;
 }
 
 .flip-card-front {
@@ -54,4 +55,12 @@
   color: black;
   transform: rotateY(180deg);
   background-color: #e0ebe9;
+}
+
+@media (max-width: 900px) {
+
+  .flip-card-grid {
+    grid-template-columns: 1fr;  /* Sets the grid to a single column */
+  }
+  
 }

@@ -74,9 +74,9 @@ export const Home = () => {
                         <img src={editor2} alt="editor2" className="editor2"></img><br/>
                     </div>
                     <div className="save-view-container">
-                        <h3>3. Save & View</h3>
+                        <h3>3. Save & View</h3><br></br>
                         <p>Once you've created the portals and linked your images, you can save and publish your tour. By default, all tours will be displayed only on your account. However, you have the option to share them publicly, making them available on our tours page for other users to explore.</p>
-                        <br></br>
+                        <br></br><br></br>
                         <button className="explore-tours-btn" onClick={() => redirect('/tours')}>Explore tours now!</button>
                     </div>
                 </div>
