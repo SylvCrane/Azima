@@ -129,7 +129,7 @@ function RoomContainer() {
                     </div>
                 ))}
             </div>
-
+            <br></br>
             <div>
                 <button onClick={addRoom} id="addButton">Add Room</button>
                 <button onClick={handleSave} id="saveButton">Save All</button>

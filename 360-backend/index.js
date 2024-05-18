@@ -16,6 +16,7 @@ const loginRouter = require("./routes/api/login");
 const userProfileRouter = require("./routes/api/userprofile");
 const forgotPasswordRouter = require('./routes/api/forgotpassword');
 const helpRouter = require('./routes/api/help');
+const resetPasswordRouter = require("./routes/api/resetpassword");
 
 
 connectDB(); // Call connectDB import so mongoDB is connected
@@ -38,10 +39,8 @@ app.use('/api/house', houseRouter);
 app.use('/api/image', imageRouter);
 app.use('/api/portal', portalRouter);
 app.use('/api/forgot-password', forgotPasswordRouter);
-app.use('/', forgotPasswordRouter); // KEEP THIS SO THAT THE GET METHOD WORKS. 
+app.use('/', resetPasswordRouter); // KEEP THIS SO THAT THE GET METHOD WORKS. 
 app.use('/api/help', helpRouter);
-
-
 
 // print server is running when starting server - nodemon app
 const port = process.env.PORT || 8082;

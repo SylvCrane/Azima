@@ -28,19 +28,16 @@ export const UserTours = () => {
     }, [houseId, user.email]); // Effect runs whenever houseId changes
     
     return (
-        
-          
-            <div className="user-tours-page">
-                <h1>My Tours</h1><br></br>
-                <p>Tours you have created</p><br></br><br></br>
-                <div className="new-tour-button-container">
-                    <button className="new-tour-button" onClick={() => navigate("/editor")}>+ Create a new tour!</button>
-                </div>
-                <br></br><br></br>
-                {houses.map((house) => (
-                    <TourContainer key={house.houseID} house={house} />
-                ))}
+        <div className="user-tours-page">
+            <h1>My Tours</h1><br></br>
+            <p>Tours you have created</p><br></br><br></br>
+            <div className="new-tour-button-container">
+                <button className="new-tour-button" onClick={() => navigate("/editor")}>+ Create a new tour!</button>
             </div>
-        
+            <br></br><br></br>
+            {houses.map((house) => (
+                <TourContainer key={house.houseID} house={house} />
+            ))}
+        </div>
     );
 };
