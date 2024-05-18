@@ -19,6 +19,7 @@ export const ResetPassword = () => {
             setAlertMessage("Password must contain a minimum of eight characters, at least one uppercase letter and one number.");
             setSuccessMessage("");
             return;
+            
         }
 
         fetch(`http://localhost:8082/api/account/reset-password/${id}/${token}`, {
@@ -28,15 +29,18 @@ export const ResetPassword = () => {
                 Accept: "application/json",
             },
             body: JSON.stringify({
-                resetPassword,
+                password: resetPassword,
             }),
         })
+       
         .then((res) => res.json())
         .then((data) => {
+
             if (data.status === "ok") {
                 setSuccessMessage("Password updated successfully! Login with your new password.");
                 setAlertMessage("");
-            } else if (data.state === "no_update") {
+            } 
+            else if (data.status === "no_update") {
                 setAlertMessage("Failed to update password. Try again.");
                 setSuccessMessage("");
             }
