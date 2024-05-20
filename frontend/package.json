@@ -35,16 +35,13 @@
     "styled-components": "^6.1.8",
     "url": "^0.11.3",
     "util": "^0.12.5",
-    "vite-plugin-rewrite-all": "^1.0.2",
     "web-vitals": "^3.5.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set PORT=3000 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "start-backend": "cd ../360-backend && npm start",
-    "dev": "concurrently \"npm start\" \"npm run start-backend\""
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -67,7 +64,6 @@
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "babel-plugin-react-html-attrs": "^3.0.5",
-    "concurrently": "^8.2.2",
     "dotenv": "^16.4.5",
     "process": "^0.11.10"
   }
