@@ -43,8 +43,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "prestart-backend": "cp ../360-backend/.env .",
     "start-backend": "cd ../360-backend && npm start",
-    "dev": "concurrently \"npm start\" \"npm run start-backend\""
+    "dev": "npm run prestart-backend && concurrently \"npm start\" \"npm run start-backend\""
   },
   "eslintConfig": {
     "extends": [
