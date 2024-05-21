@@ -1,0 +1,92 @@
+.container {
+  color: #004d38; 
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+  min-height: 85vh; 
+}
+
+.help-message {
+  margin: 0 auto; 
+  text-align: center; 
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+
+}
+
+p.message {
+  font-size: 16px;
+}
+
+.help-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 20px auto;
+
+  width: 45%; /* Increased width */
+  padding: 30px; /* More padding for better spacing */
+  border-radius: 10px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.help-form:hover {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); /* Removing top shadow by increasing vertical offset and reducing opacity to 0 */
+}
+
+.help-form input, 
+.help-form textarea {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc; /* Adding a border to inputs */
+  border-radius: 5px;
+  width: 80%;
+}
+
+.help-form textarea {
+  resize: none; /* Prevent textarea from being resizable */
+  height: 100px;
+  background-color: #ccc;
+  height: 150px;
+
+}
+
+button[type=submit] {
+  border-radius: 30px;
+  border: 1px solid #004d39;
+  background-color: #0EB49A;
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 12px 30px;
+  width: 200px;
+  text-transform: uppercase;
+  white-space: nowrap; /* Ensures that the items remain in a row */
+}
+
+button[type=submit]:hover {
+  background-color: #087f6e; /* Darker shade for hover effect */
+}
+
+
+@media (max-width: 770px) {
+  .help-form {
+    width: 90%; /* Adjusts the form width for smaller screens */
+    padding: 20px; /* Slightly less padding to fit small screens */
+  }
+  
+  .help-message {
+    width: 60%;
+  }
+
+  .help-form input, 
+  .help-form textarea {
+    width: 70%; /* Inputs and textarea take full width of the form */
+
+  }
+
+}

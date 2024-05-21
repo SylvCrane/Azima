@@ -1,0 +1,165 @@
+.Save .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    max-width: 90vw;
+    margin: auto;
+    padding: 20px;
+    background: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .Save .inputForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .Save .text-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+  }
+  
+  .Save .number-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    width: 110%;
+  }
+  
+  .Save .line-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+  }
+  
+  .Save .number-group label {
+    font-size: 14px;
+  }
+  
+  .Save .textbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .Save .date-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    width: 30%;
+  }
+  
+  .Save .checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 60%;
+  }
+  
+  .Save .checkbox-group label {
+    font-size: 14px;
+  }
+  
+  .Save .checkbox-group .form-group {
+    flex: 20px 1 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .Save .number-group .form-group {
+    flex: 1 1 100px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .Save .text-group .form-group {
+    flex: 1 1 120px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .Save .textbox-group .form-group {
+    flex: 1 1 120px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .Save .date-group .form-group {
+    flex: 1 1 120px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .Save .form-group {
+    flex: 1 1 220px;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .Save input[type="text"],
+  .Save input[type="date"],
+  .Save input[type="checkbox"],
+  .Save select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 9px;
+    font-family: "Rubik", sans-serif;
+  }
+  
+  .Save input[type="number"] {
+    width: 70%;
+    padding: 10px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    border: 2px solid #ccc;
+    border-radius: 9px;
+    font-family: "Rubik", sans-serif;
+  }
+  
+  .Save .file-container {
+    width: 90%;
+    padding: 20px;
+    border: 2px dashed #ccc;
+    background-color: #fff;
+  }
+  
+  .Save .custom-file-upload {
+    width: 100%;
+    padding: 15px;
+    background-color: #f0f0f0;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 9px;
+  }
+  
+  .Save .submit {
+    width: 100%;
+    padding: 20px 100px;
+    font-size: 18px;
+    background-color: #0eb49a;
+    color: white;
+    border: none;
+    border-radius: 11px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .Save .submit:hover {
+    background-color: #087f6e;
+  }

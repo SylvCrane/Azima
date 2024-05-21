@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import "../../../css/style.css";
 import "../../../css/accounts.css";
-import { useNavigate } from 'react-router-dom';
-import { useUser } from "../../UserState";
+import { useNavigate, Link } from 'react-router-dom';
+import { useUser } from "../../../authentication/UserState";
 
-export const Login = (props) => {
+export const Login = () => {
 
     // Use state variables
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
     const [alertMessage, setAlertMessage] = useState(""); // Variable that stores message at the bottom of page depending on whether user input.
     const [user, setUser] = useUser();
 
@@ -26,11 +27,12 @@ export const Login = (props) => {
         // First check is email address entered is a valid email address
         if(!emailRegex.test(loginEmail)) {
             setAlertMessage("Invalid email address");
+            setSuccessMessage("");
             return;
         }
 
         // Fetch api once validation of user input is successful 
-        fetch("http://localhost:5000/login", {
+        fetch("http://localhost:8082/api/login", {
             method: "POST",
             crossDomain: true, 
             headers: {
@@ -47,50 +49,66 @@ export const Login = (props) => {
         .then((res) => res.json())
         .then((data) => {
             console.log(data, "userLogin");
-
+            
             if (data.status === "ok") {
-                setAlertMessage("Logged in successfully!");
+                setSuccessMessage("Logged in successfully!");
                 setUser ({
                     isAuthenticated: true,
                     email: data.user.email,
+                    firstName: data.user.firstName,
+                    lastName: data.user.lastName,
+                    bio: data.user.bio,
+                    company: data.user.company,
+                    location: data.user.location,
+                    profileImage: data.user.profileImage
                 });
+                setAlertMessage("");
                 console.log("user login authenticated");
-                navigate('/editor'); // Will redirect user to the editor page to start creating their tours. 
             } 
             else if (data.error === "email_not_found") {
                 setAlertMessage("Email not found. Please check email address again.");
+                setSuccessMessage("");
             } 
             else if (data.error === "incorrect_password") {
                 setAlertMessage("Incorrect password. Please check password again.");
+                setSuccessMessage("");
             } 
             else {
                 setAlertMessage("Cannot login. Please check details again.");
+                setSuccessMessage("");
             }
         });
     }
 
     useEffect (() => {
-        if (user.isAuthenticated) {
-            navigate("/editor");
+        if (user?.isAuthenticated) {
+            navigate("/account");
         }
-    });
+    }, [navigate, user]);
+
 
     return (
-        <div className="login-container">
-            <form className="login-form" onSubmit={handleSubmit}>
-                <h1>LOGIN</h1><br/>
-                <input value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} id="loginEmail" placeholder="email@gmail.com" required/><br/>
-                <input value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} type="password" id="loginPassword" placeholder="********" required/>
-                <br/>
-                <br/><button type="submit">Sign In</button><br/>
-                <br/><button className="link-btn">Forgot password?</button><br/>
-                <br/>
-                { alertMessage && (
-                    <div className="alert">{ alertMessage }</div>
-                )} <br/>
-
-                <button className="link-btn" type ="button" onClick={() => props.onFormSwitch('signup-form')}>Don't have an account? Register here.</button><br/>
-            </form>
-        </div>  
+        <div className="account-container">
+            <div className="login-container">
+                <form className="login-form" onSubmit={handleSubmit}>
+                    <h1>Welcome back</h1>
+                    <p>Please enter your details to sign in</p><br/>
+                    <input value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} id="loginEmail" placeholder="email@gmail.com" required/><br/>
+                    <input value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} type="password" id="loginPassword" placeholder="********" required/>
+                    <br/>
+                    <br/><button type="submit">Sign In</button><br></br><br></br>
+                    <br/><button className="link-btn" type ="button" onClick={() => navigate('/account/forgot-password')}>Forgot password?</button><br/>
+                    <br/>
+                    <Link className="link-btn" to ="/account/signup">Don't have an account? Register here.</Link>
+                    <br></br><br></br>
+                    {successMessage && 
+                        <div className="success">{successMessage}</div>
+                    }
+                    {alertMessage && 
+                        <div className="alert">{alertMessage}</div>
+                    }
+                </form>
+            </div>  
+        </div>
     )
 }

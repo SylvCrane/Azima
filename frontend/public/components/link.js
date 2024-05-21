@@ -4,6 +4,7 @@ AFRAME.registerComponent("linker", {
 
 
   init: function () {
+
     console.log("[linker] Component initialized.");
     console.log(this.el);
     this.initializeVariables();
@@ -14,7 +15,7 @@ AFRAME.registerComponent("linker", {
     let window = document.createElement("a-entity");
     window.setAttribute("loader", "");
     this.el.sceneEl.appendChild(window);
-   this.color;
+    this.color;
 
     this.identifier = null;
     this.hoverTimeout = null;
@@ -35,6 +36,22 @@ AFRAME.registerComponent("linker", {
     select.addEventListener('click', (e) => {
       this.handleSelection(e);
     });
+    const toggleTextCheckbox = document.getElementById("toggleText");
+    if (toggleTextCheckbox) {
+      toggleTextCheckbox.addEventListener('change', (event) => {
+
+        if (event.target.checked) {
+          // If the checkbox is checked, re-add the text based on the current selection
+          if (this.selected) {
+            this.addText(this.selected.children[1].innerText);
+          }
+        } else {
+          // If the checkbox is unchecked, remove the text
+          this.removeText();
+        }
+      });
+    }
+  
     
   },
 
@@ -42,7 +59,7 @@ AFRAME.registerComponent("linker", {
     this.boundHandleFourPointsCaptured =
       this.handleFourPointsCaptured.bind(this);
     this.boundHandleFourPointsRemoved = this.handleFourPointsRemoved.bind(this);
-
+    
 
     
     // Add event listeners
@@ -117,6 +134,7 @@ AFRAME.registerComponent("linker", {
  
     this.triangles = [];
     this.positions = null;
+    console.log(this.el, this.el.parentNode);
     if (this.el && this.el.parentNode) {
       this.el.parentNode.removeChild(this.el);
       console.log('linker removed');
@@ -134,78 +152,78 @@ AFRAME.registerComponent("linker", {
   },
 
   save: function () {
+    console.log("Save called at:", new Date().toISOString()); // Log the exact time the save is called
     const params = new URLSearchParams(window.parent.location.search);
-    console.log(params);
-  const houseID = params.get('houseID');
-  console.log("houseID before loadImageData call: ", houseID);
-    let eventData =  JSON.stringify({
-      destination: this.el.getAttribute("id"),
-      location: this.el.getAttribute("class"),
-      houseID: houseID,
-      triangles: this.serializeTriangles(this.triangles),
-      textData: this.serializeText(this.triangles),
-    });
-    
-    fetch('http://localhost:8082/api/house/house/' +houseID+'/portals', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json',
-      },
-      body: eventData,
-  })
-  .then(response => {
-      if (!response.ok) {
-          throw new Error('Network response was not ok');
-      }
-      return response.json();
-  })
-  .then(data => console.log('Document saved:', data))
-  .catch(error => console.error('Error saving document:', error));
+    const houseID = params.get('houseID');
+    console.log("House ID:", houseID);
 
-
-
-
-
-    let formContainer = document.getElementById("formContainer");
-    this.el.sceneEl.emit("createWindow", eventData);
-    console.log("[linker] Event 'createWindow' emitted with event details:", eventData);
-    let container = document.getElementById("aframe-container");
-    let overlay = document.getElementById("overlay");
-    let camera = this.el.sceneEl.querySelector("[camera]");
-    this.cursor.setAttribute("toggle-thickness", "");
-    this.cursor.setAttribute("geometry", {
-      radiusOuter: 0.03,
-      radiusInner: 0.02,
+    let eventData = JSON.stringify({
+        destination: this.el.getAttribute("id"),
+        location: this.el.getAttribute("class"),
+        houseID: houseID,
+        triangles: this.serializeTriangles(this.triangles),
+        textData: this.serializeText(this.triangles),
     });
 
-    camera.setAttribute("camera", "fov", "80");
-    
-    const colorOptions = document.querySelectorAll(
-      '.color-picker input[type="radio"]'
-    );
-    colorOptions.forEach((option) => {
-      option.removeEventListener("change", this.handleColorInput);
-    });
-    
-   
+    console.log("Event data prepared:", eventData);
 
-    this.remove();
+    fetch('http://localhost:8082/api/house/house/' + houseID + '/portals', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: eventData,
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Document saved:', data);
+        console.log("Processing UI changes post-save");
 
-    if (container) {
-      container.style.width = "100vw";
-      container.style.height = "100vh";
-      overlay.style.width = "100vw";
-      overlay.style.height = "100vh";
-      container.style.padding = "0px";
-    }
+        let formContainer = document.getElementById("formContainer");
+        let saveContainer = document.getElementById("saveContainer");
 
-  
-    formContainer.innerHTML ='';
-this.remove();
-  
-  },
+        console.log("Emitting createWindow now with eventData:", eventData);
+        this.el.sceneEl.emit("createWindow", eventData);
+        console.log("[linker] Event 'createWindow' emitted with event details:", eventData);
 
+        let container = document.getElementById("aframe-container");
+        let overlay = document.getElementById("overlay");
+        let camera = this.el.sceneEl.querySelector("[camera]");
 
+        console.log("Setting cursor thickness and FOV changes");
+        this.cursor.setAttribute("toggle-thickness", "");
+
+        let newFov = 80;
+        camera.setAttribute("camera", "fov", newFov);
+        this.el.sceneEl.emit('fovChanged', { fov: newFov });
+
+        console.log("Removing color-picker event listeners");
+        const colorOptions = document.querySelectorAll('.color-picker input[type="radio"]');
+        colorOptions.forEach((option) => {
+            option.removeEventListener("change", this.handleColorInput);
+        });
+
+        if (container) {
+            console.log("Adjusting container and overlay dimensions and padding");
+            container.style.width = "100vw";
+            container.style.height = "100vh";
+            overlay.style.width = "100vw";
+            overlay.style.height = "100vh";
+            container.style.padding = "0px";
+        }
+
+        formContainer.innerHTML = '';
+        saveContainer.style.display = 'flex';
+        console.log("Calling remove method to clean up");
+        this.remove();
+    })
+    .catch(error => console.error('Error saving document:', error));
+},
 
   serializeTriangles: function(triangles) {
     console.log("Serializing triangles:", triangles);
@@ -259,6 +277,7 @@ serializeText: function(triangles) {
     let sky = document.querySelector('a-sky');
     let camera = this.el.sceneEl.querySelector("[camera]");
     let formContainer = document.getElementById("formContainer");
+    let saveContainer = document.getElementById("saveContainer");
     const colorOptions = document.querySelectorAll(
       '.color-picker input[type="radio"]'
     );
@@ -269,13 +288,10 @@ serializeText: function(triangles) {
 
     this.cursor.setAttribute("toggle-thickness", "");
     sky.removeAttribute("markable");
-    this.cursor.setAttribute("geometry", {
-      radiusOuter: 0.03,
-      radiusInner: 0.02,
-    });
-
-    camera.setAttribute("camera", "fov", "80");
-
+    
+    let newFov =80;
+    camera.setAttribute("camera", "fov", newFov );
+    this.el.sceneEl.emit('fovChanged', { fov: newFov });
   
   
 
@@ -288,6 +304,7 @@ serializeText: function(triangles) {
     }
 
     formContainer.innerHTML ='';
+    saveContainer.style.display = 'flex';
 this.remove();
   },
   
@@ -316,6 +333,8 @@ this.remove();
 
           text.setAttribute("value", input);
           text.setAttribute("align", "center");
+          text.setAttribute("font", "./assets/MazzardM-Regular-msdf.json");
+          text.setAttribute("negate", "false");
 
           let rotation = camera.getAttribute("rotation").y;
           let angle = THREE.MathUtils.degToRad(rotation);

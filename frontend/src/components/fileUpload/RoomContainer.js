@@ -3,128 +3,139 @@ import RoomForm from './RoomForm';
 import axios from 'axios';
 import { savePhotos } from './savePhotos.js';
 import { saveHouse } from './saveHouse.js';
+import "../../css/editor.css";
+import { useUser } from "../../authentication/UserState.js";
 
+let counter = 0;
 
-let counter =0;
+function RoomContainer() {
+    const [houseName, setHouseName] = useState('');
+    const [rooms, setRooms] = useState([]);
+    const [saveSuccessful, setSaveSuccessful] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
+    const [user] = useUser();
+    const [houseID, setHouseID] = useState('');
 
-
-
-
-function RoomContainer(props) {
-    let saved =false;
-  const [houseName, setHouseName] = useState('');
-  const [rooms, setRooms] = useState([]);
-  const [saveSuccessful, setSaveSuccessful] = useState(false);
-  let response = [];
-
-
-
-useEffect(() => {
-    if (saveSuccessful) {
-        const event = new CustomEvent('saveSuccessful', { detail: { houseID: houseName } });
-        window.dispatchEvent(event);
-        console.log(event.detail.houseID);
-        // Navigate to a different URL if needed, or handle the event in another way
-        window.location.href = `/editor/aframe?houseID=${encodeURIComponent(houseName)}`;
-    }
-}, [saveSuccessful, houseName]); 
-
-
-  useEffect(() => {
-    // Define the event listener
-    const handleImageUploadSuccess = async (e) => {
-      try {
-        const res = await axios.get(`http://localhost:8082/api/image/${e.detail.houseId}`);
-        const response = res.data; 
-        if (response.length === counter) { // Assuming you want to check if there's any data
-          saveHouse(e.detail.houseId, response).then(() => {
-            
-            setSaveSuccessful(true);
-          }).catch(error => {
-            console.error('Failed to save house', error);
-          });
+    useEffect(() => {
+        if (saveSuccessful) {
+            const event = new CustomEvent('saveSuccessful', { detail: { houseID: houseID, houseName: houseName } });
+            window.dispatchEvent(event);
+            window.location.href = `/editor/aframe?houseID=${encodeURIComponent(houseID)}`;
         }
-      } catch (error) {
-        console.error('Failed to fetch image data', error);
-      }
+    }, [saveSuccessful, houseName, houseID]);
+
+    useEffect(() => {
+        const handleImageUploadSuccess = async (e) => {
+            try {
+                const res = await axios.get(`http://localhost:8082/api/image/${e.detail.houseId}`);
+                const response = res.data;
+                const username = user.email;
+                if (response.length === counter) {
+                    saveHouse(e.detail.houseId, response, username, houseName).then(() => {
+                        setSaveSuccessful(true);
+                    }).catch(error => {
+                        console.error('Failed to save house', error);
+                        setAlertMessage('Failed to save house. Please try again.');
+                    });
+                }
+            } catch (error) {
+                console.error('Failed to fetch image data', error);
+                setAlertMessage('Failed to fetch image data. Please try again.');
+            }
+        };
+        document.addEventListener("imageUploadSuccess", handleImageUploadSuccess);
+        return () => {
+            document.removeEventListener("imageUploadSuccess", handleImageUploadSuccess);
+        };
+    }, [houseName, user.email]);
+
+    const addRoom = () => {
+        setRooms([...rooms, { id: counter++, name: '', file: null }]);
     };
 
-    // Attach event listener
-    document.addEventListener("imageUploadSuccess", handleImageUploadSuccess);
-    return () => {
-        document.removeEventListener("imageUploadSuccess", handleImageUploadSuccess);
-      };
-    }, []);
+    const removeRoom = (id) => {
+        setRooms(rooms.filter(room => room.id !== id));
+        counter--;
+    };
 
-  const addRoom = () => {
-    setRooms([...rooms, { id:counter++, name: '', file: null }]);
-    console.log(rooms);
-    console.log(counter);
-  };
+    const updateRoom = (id, name, file) => {
+        const newRooms = rooms.map(room => (room.id === id ? { ...room, name, file } : room));
+        setRooms(newRooms);
+    };
 
-  const removeRoom = (id) => {
-    setRooms(rooms.filter(room => room.id !== id));
-    counter--;
-  };
+    const handleHouseNameChange = (e) => {
+        setHouseName(e.target.value);
+    };
 
-  const updateRoom = (id, name, file) => {
-    const newRooms = rooms.map(room => (room.id === id ? { ...room, name, file } : room));
-    setRooms(newRooms);
+    const validateForm = () => {
+        const newErrors = [];
+        if (!houseName.trim()) newErrors.push('Tour name is required');
+        if (rooms.length === 0) newErrors.push('At least one room must be added');
+        rooms.forEach((room, index) => {
+            if (!room.name.trim()) newErrors.push(`Room ${index + 1} name is required`);
+            if (!room.file) newErrors.push(`Room ${index + 1} file is required`);
+        });
+        return newErrors;
+    };
 
-  };
+    const handleSave = async () => {
+        const newErrors = validateForm();
+        if (newErrors.length > 0) {
+            setAlertMessage(newErrors.join('. '));
+            setSuccessMessage('');
+            return;
+        }
+        const houseid = generateUniqueIdentifier();
+        setHouseID(houseid);
+        try {
+            await savePhotos(rooms, { houseID: houseid });
+        } catch (error) {
+            console.error('Error during the saving process:', error);
+            setAlertMessage('Error during the saving process. Please try again.');
+        }
+    };
 
-  const handleHouseNameChange = (e) => {
-    setHouseName(e.target.value);
-    
-    
-  };
+    const generateUniqueIdentifier = () => {
+        return "id-" + Date.now() + "-" + Math.random().toString(36).substr(2, 9);
+    };
 
-  const handleSave = async () => {
-    try {
-        // Save all photos at once; savePhotos should handle the array of rooms
-        await savePhotos(rooms, { houseID: houseName });
-
-        // Fetch image references only after all photos have been saved
-     // Assuming this is the format
-
-
-
-    } catch (error) {
-      console.error('Error during the saving process:', error);
-    }
-  };
-  
-
-
-    if (saveSuccessful) {
-        // The navigation logic has been moved to useEffect for better practices
-        return null;
-      } else {
     return (
-      <div>
-        <form className="inputForm">
-          <h1>House Name</h1>
-          <input
-            type="text"
-            placeholder="Enter text"
-            value={houseName}
-            onChange={handleHouseNameChange}
-          />
-        </form>
-        <button onClick={addRoom} id="addButton">Add Room</button>
-        <div className="forms-container">
-          {rooms.map(room => (
-            <RoomForm
-              key={room.id}
-              onRemove={() => removeRoom(room.id)}
-              onUpdate={(name, file) => updateRoom(room.id, name, file)}
-            />
-          ))}
+        <div className="editor-form">
+            <form className="inputForm">
+                <h1>Tour Name</h1>
+                <input
+                    type="text"
+                    placeholder="Type your tour name"
+                    value={houseName}
+                    onChange={handleHouseNameChange}
+                />
+            </form>
+
+            <div className="forms-container">
+                {rooms.map(room => (
+                    <div className="form-instance" key={room.id}>
+                        <RoomForm
+                            onRemove={() => removeRoom(room.id)}
+                            onUpdate={(name, file) => updateRoom(room.id, name, file)}
+                        />
+                    </div>
+                ))}
+            </div>
+
+            <div>
+                <button onClick={addRoom} id="addButton">Add Room</button>
+                <button onClick={handleSave} id="saveButton">Save All</button>
+            </div>
+            <br></br>
+            {successMessage && 
+                <div className="success">{successMessage}</div>
+            }
+            {alertMessage && 
+                <div className="alert">{alertMessage}</div>
+            }
         </div>
-        <button onClick={handleSave} id="saveButton">Save All</button>
-     
-      </div>
     );
-  }
 }
+
 export default RoomContainer;
