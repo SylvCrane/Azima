@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "../../../css/style.css";
 import "../../../css/userprofile.css";
+import "../../../css/style.css";
 import { useUser } from "../../../authentication/UserState";
 import { UserTours } from "./UserTours";
 import AccountLogo from '../../../assets/AzimaAccountLogo.svg';
@@ -46,4 +46,3 @@ export const UserProfile = () => {
         </div>  
     );
 };
-

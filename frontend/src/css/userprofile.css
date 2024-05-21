@@ -65,11 +65,9 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    border: 2px solid #ccc;
-    padding: 15px;
-    border-radius: 10px;
     background-color: #f9f9f9; /* Add light background color */
     margin-bottom: 20px;
+    
 }
 
 .user-details p {

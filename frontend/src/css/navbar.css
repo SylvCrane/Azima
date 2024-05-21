@@ -194,6 +194,8 @@ nav .menu {
     margin-bottom: 10px; /* Adjust the value as needed */
 }
 
+
+
 /* Media query to handle when user is on smaller screen */
 @media (max-width: 50em) {
     nav .menu {
