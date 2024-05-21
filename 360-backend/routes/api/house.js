@@ -10,13 +10,17 @@ const upload = multer();
 router.get('/house/public', (req, res) => {
     House.find({ public: true })
         .then(houses => {
+            console.log('Fetched houses:', houses); // Debugging log
             if (houses.length > 0) {
                 res.json({ data: houses });
             } else {
                 res.status(200).json({ data: [], message: 'No public houses found' });
             }
         })
-        .catch(err => res.status(500).json({ error: 'Server error', details: err.message }));
+        .catch(err => {
+            console.error('Error fetching public houses:', err); // Debugging log
+            res.status(500).json({ error: 'Server error', details: err.message });
+        });
 });
 router.post('/house', (req, res) => {
     console.log(req.body);  // Log incoming request data
@@ -74,8 +78,8 @@ Notes:
     - Should delete every photo associated with the house
     - Import method from other route?
 */
-router.delete('/house/:id', (req, res) => {
-    House.findByIdAndRemove(req.params.id, req.body)
+router.delete('/house/:houseID', (req, res) => {
+    House.findOneAndDelete({ "houseID": req.params.houseID })
         .then(() => res.json({ msg: 'House successfully deleted' }))
         .catch(() => res.status(404).json({ error: 'No such house' }));
 });

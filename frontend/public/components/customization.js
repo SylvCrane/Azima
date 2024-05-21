@@ -61,9 +61,12 @@ document.getElementById("saveButton").addEventListener("click", function () {
       tab.style.display = '';  // Adjust display of the 'tab' element
       asset = document.createElement("img");  // Reset the asset element
   } else {
-      console.log("Asset id or src is not set");  // Log if asset conditions are not met
+      console.log("Asset id or src is not set"); 
+   
   }
 });
+
+
   document.getElementById("cancelButton").addEventListener("click", function () {
     let tab = document.getElementById('tab');
     let event = new Event("cancel");

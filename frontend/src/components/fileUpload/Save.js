@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../css/publish.css'; // Ensure this path is correct
+import axios from 'axios';
+import { savePhotos } from './savePhotos.js';
 
 function Save() {
     const [formData, setFormData] = useState({
@@ -14,16 +16,31 @@ function Save() {
         dateListed: new Date().toISOString().substr(0, 10), // Set current date as default
         location: '',
         public: false,
+        thumbnail: '',
     });
     const [file, setFile] = useState(null);
-    const [submitting, setIsSubmitting] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [saveSuccessful, setSaveSuccessful] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
 
+    const params = new URLSearchParams(window.location.search);
+    const houseID = params.get('houseID');
+
     useEffect(() => {
         if (saveSuccessful) {
-            window.location.href = `/account`; // Redirect to account page when save is successful (their tour should be saved here).
+            const deleteImages = async () => {
+                try {
+                    const response = await axios.delete(`http://localhost:8082/api/image`);
+                    console.log(response.data.msg);
+                    // Additional logic to handle successful deletion
+                } catch (error) {
+                    console.error('Error deleting images:', error.response ? error.response.data : error.message);
+                    // Error handling logic
+                }
+                window.location.href = `/account`;
+            };
+            deleteImages();
         }
     }, [saveSuccessful]);
 
@@ -36,7 +53,8 @@ function Save() {
     };
 
     const handleFileChange = (event) => {
-        setFile(event.target.files[0]);
+        const newFile = event.target.files[0];
+        setFile(newFile); // Update the file state with the new file object
     };
 
     // Ensures that all fields (except the checkboxes) are filled
@@ -64,16 +82,61 @@ function Save() {
             return;
         }
         setIsSubmitting(true);
-        setIsSubmitting(false);
-        setSaveSuccessful(true); // Assuming success for demonstration
-        setAlertMessage('');
-        setSuccessMessage('Form submitted successfully!');
+
+        try {
+            // Save the thumbnail
+            await savePhotos([{ name: 'thumbnail', file }], { houseID });
+
+            // Fetch image references only after all photos have been saved
+            const res = await axios.get(`http://localhost:8082/api/image/${houseID}`);
+            const response = res.data;
+
+            const updatedFormData = { ...formData, thumbnail: response[0].imageURL };
+
+            // Update house data with form data
+            const putResponse = await axios.put(`http://localhost:8082/api/house/house/update/${houseID}`, updatedFormData);
+            console.log('House updated successfully:', putResponse.data);
+
+            setSaveSuccessful(true); // Assuming success for demonstration
+            setAlertMessage('');
+            setSuccessMessage('Form submitted successfully!');
+        } catch (error) {
+            console.error('Error during the saving process:', error);
+            setAlertMessage('Error during the saving process. Check that your input is correct and try again.');
+            setSuccessMessage('');
+        } finally {
+            setIsSubmitting(false);
+        }
     };
+
+    useEffect(() => {
+        const handleImageUploadSuccess = async (e) => {
+            try {
+                const res = await axios.get(`http://localhost:8082/api/image/${e.detail.houseId}`);
+                const response = res.data;
+
+                const updatedFormData = { ...formData, thumbnail: response[0].imageURL };
+                setFormData(updatedFormData);
+
+                const putResponse = await axios.put(`http://localhost:8082/api/house/house/update/${e.detail.houseId}`, updatedFormData);
+                console.log('House updated successfully:', putResponse.data);
+
+                setSaveSuccessful(true);
+            } catch (error) {
+                console.error('Failed to fetch image data', error);
+            }
+        };
+
+        document.addEventListener("imageUploadSuccess", handleImageUploadSuccess);
+        return () => {
+            document.removeEventListener("imageUploadSuccess", handleImageUploadSuccess);
+        };
+    }, [formData]);
 
     return (
         <div className="Save">
-            <h1>House Info</h1>
             <div className="form-container">
+                <h1>Tour Info</h1>
                 <form onSubmit={handleSubmit} className="inputForm">
                     <div className="number-group">
                         <div className="form-group">
@@ -137,7 +200,7 @@ function Save() {
                     </div>
 
                     <div className="submit-button-container">
-                        <button type="submit" className="submit">Submit</button>
+                        <button type="submit" className="submit" disabled={isSubmitting}>Submit</button>
                     </div>
 
                     {successMessage && 

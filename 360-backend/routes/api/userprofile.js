@@ -44,9 +44,9 @@ router.put('/', upload.single('profileImage'), async (req, res) => {
         user.email = email ||  user.email;
         user.firstName = firstName || user.firstName;
         user.lastName = lastName || user.lastName;
-        user.bio = bio !== undefined ? bio : user.bio;
-        user.company = company !== undefined ? company : user.company;
-        user.location = location !== undefined ? location : user.location;
+        user.bio = bio !== "" ? bio : user.bio;
+        user.company = company !== "" ? company : user.company;
+        user.location = location !== "" ? location : user.location;
 
         // Update the profile image if a new one was uploaded
         if (req.file) {

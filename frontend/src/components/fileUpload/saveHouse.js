@@ -3,7 +3,16 @@ import axios from 'axios';
 //import { mongoSubmit } from "./mongoSubmit";
 
 
+
+
+
 export async function saveHouse( houseID, imageReferences, user, houseName) {
+
+  
+ 
+    console.log(imageReferences);
+
+
     const houseData = {
         houseID: houseID,
         houseName: houseName,
@@ -25,9 +34,9 @@ export async function saveHouse( houseID, imageReferences, user, houseName) {
         dateAvailable: new Date().toISOString(),
         author: user,
         public: false,
-    };
+      };
 
-    const response = await axios.post('http://localhost:8082/api/house/house', houseData);
+        const response = await axios.post('http://localhost:8082/api/house/house', houseData);
         console.log(response.data.msg);
         clearImages();
         return response.data.msg;
@@ -43,4 +52,4 @@ export async function saveHouse( houseID, imageReferences, user, houseName) {
           console.error('Error deleting images:', error.response ? error.response.data : error.message);
           // Error handling logic
         }
-    }
+      }

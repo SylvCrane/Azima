@@ -1,70 +1,46 @@
-const router = require('express').Router();
-const multer = require('multer');
-const path = require("path");
-let Image = require('../../models/Image');
+// Login API
+const express = require("express");
+const router = express.Router();
+const dot = require("dotenv");
+dot.config().parsed;
+const bcrypt = require("bcryptjs");
+const JWT = require('jsonwebtoken');
+const JWT_SECRET = process.env.JWT_SECRET;
+const User = require("../../models/UserDetails");
 
-// Set up multer for file storage
-const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-      cb(null, 'public/images'); // Will save house images uploaded in these folders.
-  },
-  filename: function(req, file, cb) {
-      const imageName = file.originalname;
-      cb(null, imageName);
-  }
-});
+router.post("/", async(req,res) => {
+    const {email, password} = req.body;
 
-const fileFilter = (req, file, cb) => {
-  const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-
-  if (allowedFileTypes.includes(file.mimetype))
-  {
-      cb (null, true);
-  }
-  else
-  {
-      cb(null, false);
-  }
-}
-const upload = multer({ storage, fileFilter });
-
-router.post('/', upload.single('image'), (req, res) => {
-    let imageData = {
-        ...req.body,
-        houseID: req.body.houseID // Ensure this matches the field sent from the frontend
-    };
-
-    Image.create(imageData)
-        .then(image => res.json({ msg: 'Image added successfully'}))
-        .catch(err => res.status(404).json({ error: 'Unable to add image' }));
-});
-
-router.get('/', (req, res) => {
-    Image.find()
-        .then(images => res.json(images))
-        .catch(err => 
-            console.error(err));
-});
-
-router.delete('/', async (req, res) => {
     try {
+        const existingUser = await User.findOne({email});
+        if (!existingUser) {
+            return res.json({status: "error", error: "email_not_found"});
+        }
 
-      const result = await Image.deleteMany({ }); // Ensure field name matches your schema
-      
-      if (result.deletedCount > 0) {
-        res.json({ msg: `${result.deletedCount} images deleted successfully` });
-      } else {
-        res.status(404).json({ error: 'No images found for the specified house ID' });
-      }
-    } catch (err) {
-      res.status(500).json({ error: 'Server error while deleting images' });
+        if(await bcrypt.compare(password, existingUser.password)) {
+            const token = JWT.sign({}, JWT_SECRET);
+
+            // Return complete user profile
+            return res.json({
+                status: "ok",
+                user: {
+                    email: existingUser.email,
+                    firstName: existingUser.firstName,
+                    lastName: existingUser.lastName,
+                    bio: existingUser.bio,
+                    company: existingUser.company,
+                    location: existingUser.location,
+                    profileImage: existingUser.profileImage
+                },
+                token,
+            });
+        }
+        res.json({status: "error", error: "incorrect_password"});
     }
-  });
-
-router.get('/:houseID', (req, res) => {
-    Image.find( { "houseID" : req.params.houseID} )
-        .then(image => res.json(image))
-        .catch(err => res.status(404).json({ noimagefound: 'No Image Found'}));
+    catch (e) {
+        console.log(e);
+        res.json({status: "error", message: e.message});
+    }
 });
 
 module.exports = router;

@@ -14,6 +14,7 @@ export async function mongoSubmit(mongo, houseId, newImageName) {
         }
     })
     .then(res => {
+        
         const event = new CustomEvent('imageUploadSuccess', { detail: { houseId: houseId } });
         document.dispatchEvent(event);
         console.log("The mongo submission was successful");

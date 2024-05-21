@@ -1,19 +1,28 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.home-page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Full viewport height */
+}
+
 .home-page {
-    display: center;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 100px; /* Minimum height of the page to fill the viewport */
-    text-align: center;
+    flex: 1; /* Take up remaining space */
     padding-top: 50px;
     padding-bottom: 50px;
 }
 
 .home-page-nav {
     font-size: 16px;
-    height: 460px;
     width: 100%;
-    position: center;
     text-align: center;
     align-items: center;
     background-color: #00664d;
@@ -23,6 +32,81 @@
     background: #00664d;
     background: -webkit-linear-gradient(top, #00664d, #008065);
     background: linear-gradient(to bottom, #00664d, #008065)
+}
+
+.home-page-bottom-nav {
+    background-color: #00664d;
+    height: 120px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* Distribute space evenly */
+    align-items: center; /* Center vertically */
+    padding: 20px 10%; /* Adjust padding as needed */
+    color: white;
+}
+
+
+
+.footer-left, .footer-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    text-align: center;
+}
+
+.footer-left {
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    text-align: center; /* Ensure text is centered */
+    font-size: 10px;
+}
+
+.footer-right, 
+.footer-right a {
+    align-items: center; /* Align right content to the center */
+    text-align: center; /* Ensure text is aligned to the center */
+    justify-content: center;
+    font-size: 14px;
+}
+
+.logo-image {
+    width: 60px;
+    object-fit: contain;
+    margin-bottom: 10px; /* Add some space between the image and the text */
+}
+
+.editor1 {
+    width: 950px;  /* Set the desired width */
+    height: 592px; /* Set the desired height */
+    border: 1px solid #ccc;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover; /* contain */
+}
+
+.editor2 {
+    width: 950px;  /* Set the desired width */
+    height: 473px; /* Set the desired height */
+    border: 1px solid #000;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover; /* contain */
+}
+
+.mail-image {
+    width: 50px;
+    margin-bottom: 10px;
+}
+
+.footer-right a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.footer-right a:hover {
+    text-decoration: underline;
 }
 
 h1.home-header {
@@ -37,61 +121,228 @@ b.home-subheading {
     font-size: 18px;
 }
 
-.edit-upload-container {
-    display: center;
+.introduction {
+    text-align: center;
+    padding: 20px;
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.intro-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 10px 0;
+    text-align: center;
+}
+
+.description {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    max-width: 55%; /* Set a max width to control the width of the text */
+    margin: 0 auto 20px auto; /* Center the container */
+    text-align: left; /* Align text to the left */
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: 1px solid #004d39;
+}
+
+.get-started {
+    background-color: #0EB49A;
+    color: white;
+    font-weight: bold;
+}
+
+.get-started:hover {
+    background-color: #087f6e;
+}
+
+.examples {
+    background-color: #a2c3bd;
+    color: #004d38;
+    font-weight: bold;
+}
+
+.examples:hover {
+    background-color: #639c91;
+}
+
+.azima-menu {
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     padding-top: 50px;
-    padding-bottom: 50px;
-    height: 70%; 
-    width: 70%; 
-    border-radius: 10px;
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3); 
-    transition: box-shadow 0.3s ease-in-out;
+    padding-bottom: 40px;
 }
 
-.capture-container,
-.save-view-container {
+.capture-container {
     display: flex;
-    flex-direction: row; 
-    justify-content: space-around; /* Distributes space evenly around items */
-    align-items: center; 
-    text-align: center;
-    height: 70%; 
-    width: 70%; 
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 70%;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3); 
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
     transition: box-shadow 0.3s ease-in-out;
+    margin-bottom: 50px;
+    background-color: #f5f5f5; /* Light gray background */
+}
+
+.capture-image {
+    width: 60%;
+    object-fit: contain;
+}
+
+.capture-text {
+    width: 30%;
+    margin: 0 20px;
+}
+
+
+
+.edit-upload-container,
+.save-view-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 30px;
+    width: 70%;
+    border-radius: 10px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s ease-in-out;
+    margin-bottom: 50px;
+    background-color: #f5f5f5; /* Light gray background */
 }
 
 .capture-container:hover,
 .edit-upload-container:hover,
 .save-view-container:hover {
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5); /* Slightly larger and a bit more opacity on hover */
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
 }
 
-.capture-text {
-    width: 30%; /* Ensures text takes up only necessary space */
-    margin: 0 20px; /* Adds margin on both sides */
+.vr-container {
+    background-color: #f2f2f2; /* Light gray background */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around; /* Distributes space evenly around items */
+    align-items: center;
+    text-align: left;
+    width: 85%;
+    height: auto; /* Change this to auto to let the container adjust its height */
+    padding: 15px; /* Reduce padding to remove excess white space */
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Soft drop shadow */
+    transition: box-shadow 0.3s ease-in-out;
+    flex-wrap: wrap; /* Ensure items wrap if needed */
+    margin: 20px auto; /* Center the container and add vertical margin */
 }
 
-.capture-image {
+.meta-image {
+    max-width: 100%; /* Ensure the image does not exceed the container width */
+    height: auto;
+    object-fit: contain;
+    flex: 1 1 45%; /* Allow the image to grow and shrink within the container */
+    min-width: 150px; /* Ensure a minimum width for the image */
+}
+
+.vr-text {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Ensure the text content is centered vertically */
+    align-items: center;
+    flex: 1 1 45%; /* Allow the text to grow and shrink within the container */
+    min-width: 250px; /* Ensure a minimum width for the text container */
+    margin: 0; /* Remove any default margin */
+}
+
+.vr-text h3 {
+    font-size: 30px; /* Adjust font size if necessary */
+    text-align: center;
+}
+
+.vr-text span {
+    font-size: 16px; /* Adjust font size if necessary */
+    line-height: 1.5; /* Adjust line height for readability */
+    margin-bottom: 10px; /* Adds space between spans */
+    justify-content: center; /* Ensure the text content is centered vertically */
+    align-items: center;
+}
+
+.meta-image {
+    margin-top: 10%;
     width: 60%; /* Restrict image width */
     object-fit: contain; /* Keeps image aspect ratio */
 }
 
-.edit-upload-container {
+.common-container {
+    margin-top: 50px;
+}
+
+.explore-tours-btn {
+    background-color: #087f6e;
+    color: #ffff;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: 1px solid black;
+    font-weight: bold;
 
 }
 
-@media (max-width: 767px){
+.explore-tours-btn:hover {
+    background-color: #004d39;
+}
 
+@media (max-width: 767px){
     .home-page-nav {
-      padding-left: 50px; /* Add padding to the left */
-      padding-right: 50px; /* Add padding to the right */
-      height: 600px;
+        padding-left: 50px; /* Add padding to the left */
+        padding-right: 50px; /* Add padding to the right */
+        height: 600px;
     }
-  }
+
+    .capture-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 30px;
+        width: 70%;
+    }
+    
+    .capture-image {
+        width: 100%;
+        object-fit: contain;
+    }
+    
+    .capture-text {
+        width: 80%;
+    }
+    
+}

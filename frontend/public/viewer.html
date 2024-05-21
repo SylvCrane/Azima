@@ -15,16 +15,18 @@
     <script src="./components/window.js"></script>
     <script src="./components/viewer.js"></script>
    
-    <script src ="./components/points.js"></script>
-    <script src ="./components/link.js"></script>
-    <script  src="./components/customization.js"></script>
-    <script src ="./components/cursor.js"></script>
+
+
+   
+
     
    
     <script  src="./components/loader.js"></script>
     <script  src="./components/loadin.js"></script>
+    <script  src="./components/tour.js"></script>
     <script  src="./components/save.js"></script>
-   
+    <script  src="./components/cursor.js"></script>
+  
  
   </head>
   <body>
@@ -54,6 +56,8 @@
     <a-assets>
 
     </a-assets>
+   
+
 
     
     <a-entity camera wasd-controls look-controls position="0 0 0" >
@@ -66,29 +70,30 @@
                 raycaster="showLine: true; lineColor: red; lineOpacity: 1"
                 raycaster="far: 10; showLine: true"
                 super-hands=" colliderEvent: raycaster-intersection; colliderEventProperty: els; colliderEndEvent:raycaster-intersection-cleared; colliderEndEventProperty: clearedEls;"
-               >
+                toggle-tutorial dynamic-cursor>
       </a-entity>
     </a-entity>
-
-
-
-
-
+ 
+    
     <a-sky  rotation= "1 180 2 " radius="20" 
    ></a-sky>
 
  
   </a-scene>
+
+
  
    </div>
-   <div class="exitContainer"> 
+   <canvas id="hiddenCanvas"></canvas> 
+   <div class="exitContainer">
+    
     <button id="exitBtn" style="border: none; background: none;">
-      <img src="./assets/xmark-solid.svg" alt="Close" style="width: 40px; height: 40px;">
+      <img src="./assets/xmark-solid2.svg" alt="Close" style="width: 40px; height: 40px;">
       
   </button>
   <div id="exitOptions">
     <span id="exitTour">Exit Tour</span>
-    <span id="Details">House Details</span>
+    <span id="Details">Tour Details</span>
 
   </div>
   </div>
