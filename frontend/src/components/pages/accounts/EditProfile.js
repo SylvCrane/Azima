@@ -59,7 +59,7 @@ export const EditProfile = () => {
             }
             
     
-            axios.put("http://localhost:8082/api/userprofile", formData, {
+            axios.put("https://azimatours.onrender.com/api/userprofile", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
                 }

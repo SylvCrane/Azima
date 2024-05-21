@@ -27,7 +27,7 @@ export const ForgotPassword = () => {
         }
 
         // Fetch api once validation of user input is successful 
-        fetch("http://localhost:8082/api/forgot-password", {
+        fetch("https://azimatours.onrender.com/api/forgot-password", {
             method: "POST",
             crossDomain: true, 
             headers: {

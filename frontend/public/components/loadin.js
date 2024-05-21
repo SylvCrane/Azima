@@ -39,7 +39,7 @@ console.log("houseid: ",houseID)
 
 
   function loadImageData(houseId) {
-    fetch('http://localhost:8082/api/house/house/puller/' + houseId)
+    fetch('https://azimatours.onrender.com/api/house/house/puller/' + houseId)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Network response was not ok (${response.status})`);
@@ -107,7 +107,7 @@ function setupHiddenCanvas(imageUrl, rotationDegrees) {
 
 
   function loadPortalData(houseId) {
-    fetch('http://localhost:8082/api/house/house/puller/' + houseId)
+    fetch('https://azimatours.onrender.com/api/house/house/puller/' + houseId)
     .then(response => {
         if (!response.ok) {
             throw new Error(`Network response was not ok (${response.status})`);
@@ -145,7 +145,7 @@ function setupHiddenCanvas(imageUrl, rotationDegrees) {
 }
 
 function loadWIPPortalData(houseId) {
-  fetch('http://localhost:8082/api/portal/' + houseId)
+  fetch('https://azimatours.onrender.com/api/portal/' + houseId)
   .then(response => {
       if (!response.ok) {
           throw new Error(`Network response was not ok (${response.status})`);

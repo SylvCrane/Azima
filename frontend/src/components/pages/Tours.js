@@ -12,7 +12,7 @@ export const Tours = () => {
     useEffect(() => {
         const fetchHouses = async () => {
             try {
-                let url = 'http://localhost:8082/api/house/house/public';
+                let url = 'https://azimatours.onrender.com/api/house/house/public';
                 if (houseId) {
                     url += '/puller/' + houseId; // Correct the URL to ensure it's valid
                 }
