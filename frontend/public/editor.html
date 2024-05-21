@@ -9,7 +9,7 @@
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.misc.min.js"></script>
     <script src="https://unpkg.com/super-hands@^3.0.3/dist/super-hands.min.js"></script>
-
+    <script  src="./components/save.js"></script>
   
     <script src="./components/superhands.js"></script>
     <script src="./components/window.js"></script>
@@ -18,14 +18,15 @@
     <script src ="./components/points.js"></script>
     <script src ="./components/link.js"></script>
     <script  src="./components/customization.js"></script>
-    <script src ="./components/cursor.js"></script>
+
     
    
     <script  src="./components/loader.js"></script>
     <script  src="./components/loadin.js"></script>
-    <script  src="./components/save.js"></script>
+    <script src ="./components/menus.js"></script>
     <script  src="./components/capture.js"></script>
     <script  src="./components/remove.js"></script>
+    <script  src="./components/cursor.js"></script>
    
  
   </head>
@@ -93,11 +94,13 @@
 
    
     </a-scene>
+    <canvas id="hiddenCanvas"></canvas>
+
     
   
   <div class=saveContainer id="saveContainer"> 
     <button id="saveBtn" style="border: none; background: none;">
-      <img src=" ./assets/xmark-solid.svg" alt="Close" style="width: 40px; height: 40px;">
+      <img src=" ./assets/xmark-solid2.svg" alt="Close" style="width: 40px; height: 40px;">
       
   </button>
   <div id="saveOptions">

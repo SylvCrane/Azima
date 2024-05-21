@@ -48,7 +48,7 @@ button[type=submit] {
   font-weight: bold;
   cursor: pointer;
   padding: 12px 30px;
-  width: 150px;
+  width: 155px;
   text-transform: uppercase;
 }
 
@@ -87,7 +87,7 @@ button[type=submit]:hover {
   }
 
   .join-btn {
-    border-radius: 25px;
+    border-radius: 20px;
     border: 1px solid #004d39;
     background-color: #0EB49A;
     color: white;

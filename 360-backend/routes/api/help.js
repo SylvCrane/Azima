@@ -32,7 +32,8 @@ router.post("/", async (req, res) => {
             status: "ok",
             message: "Email sent successfully!"
         });
-    } catch (error) {
+    } 
+    catch (error) {
         console.error("Failed to save help details or send email:", error);
         res.status(500).json({
             status: "error",

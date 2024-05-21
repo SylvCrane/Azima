@@ -17,13 +17,11 @@ import { ForgotPassword } from "./components/pages/ForgotPassword";
 import { ProtectedRoute } from "./authentication/ProtectedRoute";
 import { UserTours } from "./components/pages/accounts/UserTours";
 import { EditProfile } from "./components/pages/accounts/EditProfile";
+import { ResetPassword } from "./components/pages/ResetPassword";
 
 function App() {
   const [email, setEmail] = useState(""); // State to hold authenticated user's email
-  // const loggedIn = window.localStorage.getItem("isLoggedIn");
-  // console.log(loggedIn, "login");
   const location = useLocation();
-
 
   const shouldHideNavbar = (pathname) => {
     return pathname.startsWith("/editor/aframe") || pathname.startsWith("/tours/aframe");
@@ -43,11 +41,12 @@ function App() {
           <Route path="/account/signup" element={<SignUp setEmail={setEmail} />} />
           <Route path="/account/login" element={<Login setEmail={setEmail} />} />
           <Route path="/account/forgot-password" element={<ForgotPassword />} />
+          <Route path="/account/reset-password/:id/:token" element={<ResetPassword />} />
           <Route path="/account" element={<ProtectedRoute> <UserProfile /> </ProtectedRoute>} /> {/* User must be authenticated to go to this page */}
           <Route path="/account/edit-profile" element={<ProtectedRoute> <EditProfile /> </ProtectedRoute>} /> {/* User must be authenticated to go to this page */}
           <Route path="/account/my-tours" element={<ProtectedRoute> <UserTours/> </ProtectedRoute>} /> {/* User must be authenticated to go to this page */}
           <Route path="/editor/aframe" element={<ProtectedRoute><AFrame /></ProtectedRoute>} /> {/* User must be authenticated to go to this page */}
-          <Route path="/tours/aframe" element={<ProtectedRoute><AFrame /></ProtectedRoute>} /> {/* User must be authenticated to go to this page */}
+          <Route path="/tours/aframe" element={<AFrame />} /> {/* DON'T make a protected route otherwise tours in tours page cant be viewed if a user is not signed in. */}
           <Route path="/editor/save" element={<ProtectedRoute><Save /></ProtectedRoute>} />
         </Routes>
       </UserProvider>

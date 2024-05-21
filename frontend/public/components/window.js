@@ -54,6 +54,7 @@ AFRAME.registerComponent("window", {
         
                 if (current) {
                     for (let c of current) {
+                      console.log("pushing: ",c, "position: ", c.getAttribute("position"));
                         if (c.tagName.toLowerCase() === "a-entity") {
                             this.push(c);
                         }
@@ -61,6 +62,7 @@ AFRAME.registerComponent("window", {
                 }
                 if (next) {
                     for (let n of next) {
+                      console.log("pulling: ",n, "position: ", n.getAttribute("position"));
                         if (n.tagName.toLowerCase() === "a-entity") {
                             this.pull(n);
                         }
@@ -145,9 +147,10 @@ AFRAME.registerComponent("window", {
     }
   },
 
+
   hover: function (e) {
     let intersectedEl = e.detail.els[0];
-    console.log(e.detail.els[0].parentNode);
+
 
     if (intersectedEl.parentNode === this.el) {
       // Change from parent check to this.el
@@ -160,13 +163,13 @@ AFRAME.registerComponent("window", {
   },
 
   calcOffset: function (target) {
-
+    
     let totalX = 0;
     let totalY = 0;
     let totalZ = 0;
     let vertexCount = 0;
 
-   let triangles = this.el.querySelectorAll("a-triangle");
+   let triangles = target.querySelectorAll("a-triangle");
     triangles.forEach((triangle) => {
       ["vertex-a", "vertex-b", "vertex-c"].forEach((vertexAttribute) => {
         let vertex = triangle.getAttribute(vertexAttribute);
@@ -191,34 +194,44 @@ AFRAME.registerComponent("window", {
   },
 
   push: function (target) {
-    target.setAttribute("position", `0 0 0`);
-    console.log("push" ,target, target.getAttribute("position"));
+    
+   
 
     let midpoint = this.calcOffset(target);
-    console.log(midpoint);
+    
     target.setAttribute(
       "position",
       `${midpoint.x} ${midpoint.y} ${midpoint.z}`
     );
-    console.log("pushed" ,target, target.getAttribute("position"));
+   console.log("pushed: " ,target, "position: ", target.getAttribute("position"));
     
   },
   pull: function (target) {
-    console.log("pull" ,target, target.getAttribute("position"));
-    target.setAttribute("position", `0 0 0`);
-    console.log("pulled" ,target, target.getAttribute("position"));
    
+    target.setAttribute("position", `0 0 0`);
+   
+    console.log("pulled: " ,target, "position: ", target.getAttribute("position"));
   },
   load: function (id) {
     console.log("ID:", id); // Log the value of id
     let assets = document.querySelector('a-assets');
     let images = assets.querySelectorAll('img');
-
-    // Now you have a NodeList of all the image elements inside <a-assets>
-    // You can iterate over this NodeList like an array
+  
     images.forEach((img) => {
-      if(img.id===id){
+      if(img.id === id){
         let sky = document.querySelector("a-sky");
+        let canvas = document.getElementById("hiddenCanvas");
+        let context = canvas.getContext('2d');
+        let image = new Image();
+        
+        
+        image.crossOrigin = "Anonymous";
+        image.src = img.src; // Set image source to trigger onload
+        image.onload = () => {
+          canvas.width = image.width; // Set canvas size to image size
+          canvas.height = image.height/1.2;
+          context.drawImage(image, 0, 0); // Draw the image onto the canvas
+        };
         console.log("Class before:", sky.className); // Log the class attribute before updating
         sky.setAttribute("src", img.src);
         sky.setAttribute("class", img.id);

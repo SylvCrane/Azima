@@ -20,25 +20,31 @@ function RoomContainer() {
     useEffect(() => {
         if (saveSuccessful) {
             const event = new CustomEvent('saveSuccessful', { detail: { houseID: houseID, houseName: houseName } });
+            console.log('seve successful sent');
             window.dispatchEvent(event);
-            window.location.href = `/editor/aframe?houseID=${encodeURIComponent(houseID)}`;
+             window.location.href = `/editor/aframe?houseID=${encodeURIComponent(houseID)}`;
         }
     }, [saveSuccessful, houseName, houseID]);
 
     useEffect(() => {
         const handleImageUploadSuccess = async (e) => {
             try {
+             
+                console.log('counter', counter);
                 const res = await axios.get(`http://localhost:8082/api/image/${e.detail.houseId}`);
                 const response = res.data;
                 const username = user.email;
                 if (response.length === counter) {
                     saveHouse(e.detail.houseId, response, username, houseName).then(() => {
                         setSaveSuccessful(true);
+                        
                     }).catch(error => {
                         console.error('Failed to save house', error);
+                       
                         setAlertMessage('Failed to save house. Please try again.');
                     });
                 }
+                counter++;
             } catch (error) {
                 console.error('Failed to fetch image data', error);
                 setAlertMessage('Failed to fetch image data. Please try again.');
@@ -90,6 +96,7 @@ function RoomContainer() {
         setHouseID(houseid);
         try {
             await savePhotos(rooms, { houseID: houseid });
+            counter = 1;
         } catch (error) {
             console.error('Error during the saving process:', error);
             setAlertMessage('Error during the saving process. Please try again.');
@@ -122,7 +129,7 @@ function RoomContainer() {
                     </div>
                 ))}
             </div>
-
+            <br></br>
             <div>
                 <button onClick={addRoom} id="addButton">Add Room</button>
                 <button onClick={handleSave} id="saveButton">Save All</button>
