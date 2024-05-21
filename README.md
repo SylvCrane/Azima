@@ -30,7 +30,7 @@ This is an open source project open to contributions. To contribute:
 4. Submit a pull request to the main branch and request a review from the listed authors.
 
 ## Authors
-This project was developed by the following team: 
+This project was developed by the following developers: 
 - Brandyn Cronin
 - Maxinne Santico
 - Navjot Sandhu
