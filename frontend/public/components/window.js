@@ -145,9 +145,10 @@ AFRAME.registerComponent("window", {
     }
   },
 
+
   hover: function (e) {
     let intersectedEl = e.detail.els[0];
-    console.log(e.detail.els[0].parentNode);
+
 
     if (intersectedEl.parentNode === this.el) {
       // Change from parent check to this.el
@@ -213,12 +214,22 @@ AFRAME.registerComponent("window", {
     console.log("ID:", id); // Log the value of id
     let assets = document.querySelector('a-assets');
     let images = assets.querySelectorAll('img');
-
-    // Now you have a NodeList of all the image elements inside <a-assets>
-    // You can iterate over this NodeList like an array
+  
     images.forEach((img) => {
-      if(img.id===id){
+      if(img.id === id){
         let sky = document.querySelector("a-sky");
+        let canvas = document.getElementById("hiddenCanvas");
+        let context = canvas.getContext('2d');
+        let image = new Image();
+        
+        
+        image.crossOrigin = "Anonymous";
+        image.src = img.src; // Set image source to trigger onload
+        image.onload = () => {
+          canvas.width = image.width; // Set canvas size to image size
+          canvas.height = image.height/1.2;
+          context.drawImage(image, 0, 0); // Draw the image onto the canvas
+        };
         console.log("Class before:", sky.className); // Log the class attribute before updating
         sky.setAttribute("src", img.src);
         sky.setAttribute("class", img.id);
