@@ -37,8 +37,8 @@ export const Home = () => {
                     <h2 className="intro-title">What is a 360° Virtual Tour?</h2>
                     <p className="description">
                         A 360° Virtual Tour is an interactive digital representation of a physical space, created from interconnected panoramic images.
-                        This allows users to navigate and explore the location in a seamless 360-degree view.
-                        By clicking or tapping on the screen, users can virtually "walk" through the space, experiencing it as if they were physically there.
+                        This allows you to navigate and explore the location in a seamless 360-degree view.
+                        By clicking or tapping on the screen, you can virtually "walk" through the space, experiencing it as if you were physically there!
                         <br></br><br></br>
                         With Azima, you can design and host your own 360° virtual tours using your panoramic images, incorporating portals to seamlessly navigate between different spaces within your tour.
                     </p>
