@@ -39,15 +39,15 @@ AFRAME.registerComponent('dynamic-cursor', {
       }
 
       const intersections = this.raycaster.intersectObjects(this.el.sceneEl.object3D.children, true);
-      if (intersections.length > 0 && intersections[0].object.el.nodeName.toLowerCase() === 'a-sky') {
-        console.log('Intersected with a-sky element.');
+      if (intersections.length > 0 && intersections[0].object.el.nodeName.toLowerCase() === 'a-sky'&& intersections[0].object.el.nodeName!== null){
+      
         const uv = intersections[0].uv;
-        console.log('UV coordinates:', uv);
+   
         if (uv) {
           const imageX = Math.floor(uv.x * this.canvas.width);
           const imageY = Math.floor(uv.y * this.canvas.height);
           const color = this.getPixelColor(imageX, imageY);
-          console.log('color at intersection:', color);
+
           if (this.lastColor !== color) {
             const contrastingColor = this.getContrastingColor(color);
             this.updateCursorColor(contrastingColor);
@@ -77,6 +77,6 @@ AFRAME.registerComponent('dynamic-cursor', {
     updateCursorColor: function(color) {
       const cursorElement = this.el;
       cursorElement.setAttribute('material', 'color', color);
-      console.log(`Cursor color updated to: ${color}`);
+
     }
 });
