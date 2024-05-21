@@ -167,7 +167,7 @@ AFRAME.registerComponent("linker", {
 
     console.log("Event data prepared:", eventData);
 
-    fetch('http://localhost:8082/api/house/house/' + houseID + '/portals', {
+    fetch('https://azimatours.onrender.com/api/house/house/' + houseID + '/portals', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

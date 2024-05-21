@@ -31,7 +31,7 @@ function Save() {
         if (saveSuccessful) {
             const deleteImages = async () => {
                 try {
-                    const response = await axios.delete(`http://localhost:8082/api/image`);
+                    const response = await axios.delete(`https://azimatours.onrender.com/api/image`);
                     console.log(response.data.msg);
                     // Additional logic to handle successful deletion
                 } catch (error) {
@@ -88,13 +88,13 @@ function Save() {
             await savePhotos([{ name: 'thumbnail', file }], { houseID });
 
             // Fetch image references only after all photos have been saved
-            const res = await axios.get(`http://localhost:8082/api/image/${houseID}`);
+            const res = await axios.get(`https://azimatours.onrender.com/api/image/${houseID}`);
             const response = res.data;
 
             const updatedFormData = { ...formData, thumbnail: response[0].imageURL };
 
             // Update house data with form data
-            const putResponse = await axios.put(`http://localhost:8082/api/house/house/update/${houseID}`, updatedFormData);
+            const putResponse = await axios.put(`https://azimatours.onrender.com/api/house/house/update/${houseID}`, updatedFormData);
             console.log('House updated successfully:', putResponse.data);
 
             setSaveSuccessful(true); // Assuming success for demonstration
@@ -112,13 +112,13 @@ function Save() {
     useEffect(() => {
         const handleImageUploadSuccess = async (e) => {
             try {
-                const res = await axios.get(`http://localhost:8082/api/image/${e.detail.houseId}`);
+                const res = await axios.get(`https://azimatours.onrender.com/api/image/${e.detail.houseId}`);
                 const response = res.data;
 
                 const updatedFormData = { ...formData, thumbnail: response[0].imageURL };
                 setFormData(updatedFormData);
 
-                const putResponse = await axios.put(`http://localhost:8082/api/house/house/update/${e.detail.houseId}`, updatedFormData);
+                const putResponse = await axios.put(`https://azimatours.onrender.com/api/house/house/update/${e.detail.houseId}`, updatedFormData);
                 console.log('House updated successfully:', putResponse.data);
 
                 setSaveSuccessful(true);

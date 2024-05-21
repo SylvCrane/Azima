@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   function fetchAndInjectDetails(houseId, container) {
     // Fetch house details from the backend
-    fetch(`http://localhost:8082/api/house/house/puller/${houseId}`)
+    fetch(`https://azimatours.onrender.com/api/house/house/puller/${houseId}`)
 
       .then(response => response.json())
       .then(houseDetails => {
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function publishHouse(houseId){
     // Fetch existing house data to compare portals
-    fetch(`http://localhost:8082/api/house/house/puller/${houseId}`)
+    fetch(`https://azimatours.onrender.com/api/house/house/puller/${houseId}`)
     .then(response => {
         if (!response.ok) {
             throw new Error(`Network response was not ok (${response.status})`);
@@ -130,7 +130,7 @@ function publishHouse(houseId){
         console.log(existingHouseData[0]);
         const existingPortals = existingHouseData[0].portals || [];
          console.log(existingPortals);
-        fetch('http://localhost:8082/api/portal/'+houseId)
+        fetch('https://azimatours.onrender.com/api/portal/'+houseId)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Network response was not ok (${response.status})`);
@@ -145,7 +145,7 @@ function publishHouse(houseId){
 
             if (uniquePortals.length > 0) {
                 // Proceed with update if there are new, unique portals
-                fetch(`http://localhost:8082/api/house/house/portals/${houseId}`, {
+                fetch(`https://azimatours.onrender.com/api/house/house/portals/${houseId}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -175,7 +175,7 @@ function publishHouse(houseId){
 }
 function saveQuit(houseId){
     // Fetch existing house data to compare portals
-    fetch(`http://localhost:8082/api/house/house/puller/${houseId}`)
+    fetch(`https://azimatours.onrender.com/api/house/house/puller/${houseId}`)
     .then(response => {
         if (!response.ok) {
             throw new Error(`Network response was not ok (${response.status})`);
@@ -187,7 +187,7 @@ function saveQuit(houseId){
         console.log(existingHouseData[0]);
         const existingPortals = existingHouseData[0].portals || [];
          console.log(existingPortals);
-        fetch('http://localhost:8082/api/portal/'+houseId)
+        fetch('https://azimatours.onrender.com/api/portal/'+houseId)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Network response was not ok (${response.status})`);
@@ -202,7 +202,7 @@ function saveQuit(houseId){
 
             if (uniquePortals.length > 0) {
                 // Proceed with update if there are new, unique portals
-                fetch(`http://localhost:8082/api/house/house/portals/${houseId}`, {
+                fetch(`https://azimatours.onrender.com/api/house/house/portals/${houseId}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -232,7 +232,7 @@ function saveQuit(houseId){
     });
 }
 function clearPortals(houseId){
-    fetch(`http://localhost:8082/api/portal/${houseId}`, {
+    fetch(`https://azimatours.onrender.com/api/portal/${houseId}`, {
         method: 'DELETE',
     })
     .then(response => {

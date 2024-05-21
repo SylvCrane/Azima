@@ -31,7 +31,7 @@ function RoomContainer() {
             try {
              
                 console.log('counter', counter);
-                const res = await axios.get(`http://localhost:8082/api/image/${e.detail.houseId}`);
+                const res = await axios.get(`https://azimatours.onrender.com/api/image/${e.detail.houseId}`);
                 const response = res.data;
                 const username = user.email;
                 if (response.length === counter) {

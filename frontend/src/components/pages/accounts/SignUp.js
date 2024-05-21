@@ -47,7 +47,7 @@ export const SignUp = () => {
         }
 
         // Fetch api once validation of user input is successful 
-        fetch("http://localhost:8082/api/signup", {
+        fetch("https://azimatours.onrender.com/api/signup", {
             method: "POST",
             crossDomain: true, 
             headers: {

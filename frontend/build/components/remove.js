@@ -53,8 +53,8 @@ if (counter === -1){
     }
 
     // Define API endpoints
-    const deletePortalUrl = `http://localhost:8082/api/portal/portal/${houseID}?location=${encodeURIComponent(location)}&destination=${encodeURIComponent(destination)}`;
-    const deleteNestedPortalUrl = `http://localhost:8082/api/house/house/${houseID}/portal?location=${encodeURIComponent(location)}&destination=${encodeURIComponent(destination)}`;
+    const deletePortalUrl = `https://azimatours.onrender.com/api/portal/portal/${houseID}?location=${encodeURIComponent(location)}&destination=${encodeURIComponent(destination)}`;
+    const deleteNestedPortalUrl = `https://azimatours.onrender.com/api/house/house/${houseID}/portal?location=${encodeURIComponent(location)}&destination=${encodeURIComponent(destination)}`;
 
     // Use fetch to send a DELETE request to delete the portal directly
     fetch(deletePortalUrl, {
