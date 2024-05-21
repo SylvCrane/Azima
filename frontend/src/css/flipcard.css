@@ -1,7 +1,7 @@
 .flip-card-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 40px;
   padding: 20px;
 }
 
@@ -38,20 +38,29 @@
   background-color: #fff;
   padding-left: 15px;
   padding-right: 15px;
-  border: 1.5px solid #004d39;
+  border-radius: 20px;
 }
 
 .font-color {
   color: #003325;
+  font-weight: bold;
 }
 
 .flip-card-front {
   color: black;
-  background-color: #a2c3bd;
+  background-color: #93cbc3;
 }
 
 .flip-card-back {
   color: black;
   transform: rotateY(180deg);
   background-color: #e0ebe9;
+}
+
+@media (max-width: 900px) {
+
+  .flip-card-grid {
+    grid-template-columns: 1fr;  /* Sets the grid to a single column */
+  }
+  
 }

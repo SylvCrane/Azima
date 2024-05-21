@@ -263,7 +263,7 @@ input[type="text"]{
   align-items: center; /* Align the buttons vertically */
   gap: 10px; /* Space between buttons */
   bottom: 25%; /* Adjust the value to place it under the scroll gallery */
-  right: 18%; /* Align with the right edge of the select-gallery */
+  right: 28%; /* Align with the right edge of the select-gallery */
 }
 
 /* General style for both zoom buttons */

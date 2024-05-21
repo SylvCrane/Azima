@@ -36,7 +36,7 @@ html, body {
 
 .home-page-bottom-nav {
     background-color: #00664d;
-    height: 300px;
+    height: 120px;
     width: 100%;
     display: flex;
     justify-content: space-between; /* Distribute space evenly */
@@ -45,7 +45,9 @@ html, body {
     color: white;
 }
 
-.footer-left, .footer-center, .footer-right {
+
+
+.footer-left, .footer-right {
     display: flex;
     flex-direction: column;
     justify-content: center; /* Center content vertically */
@@ -54,53 +56,53 @@ html, body {
 }
 
 .footer-left {
-    align-items: flex-start; /* Align left content to the start */
-    text-align: left; /* Ensure text is aligned to the left */
-    font-size: 12px;
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    text-align: center; /* Ensure text is centered */
+    font-size: 10px;
 }
 
 .footer-right, 
-.footer-right a  {
-    align-items: flex-end; /* Align right content to the end */
-    text-align: center; /* Ensure text is aligned to the right */
+.footer-right a {
+    align-items: center; /* Align right content to the center */
+    text-align: center; /* Ensure text is aligned to the center */
     justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    margin-left: 10px; /* Adjust the value as needed */
+    font-size: 14px;
 }
 
-
 .logo-image {
-    width: 180px;
+    width: 60px;
     object-fit: contain;
     margin-bottom: 10px; /* Add some space between the image and the text */
 }
 
-.footer-center {
-    margin-left: 30px; /* Adjust the value as needed */
+.editor1 {
+    width: 950px;  /* Set the desired width */
+    height: 592px; /* Set the desired height */
+    border: 1px solid #ccc;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover; /* contain */
 }
 
-.footer-center a {
-    color: white;
-    text-decoration: none;
-    margin-bottom: 10px;
-    font-size: 20px;
-}
-
-.footer-center a:hover {
-    text-decoration: underline;
+.editor2 {
+    width: 950px;  /* Set the desired width */
+    height: 473px; /* Set the desired height */
+    border: 1px solid #000;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover; /* contain */
 }
 
 .mail-image {
-    width: 60px;
-
+    width: 50px;
     margin-bottom: 10px;
 }
-
 
 .footer-right a {
     color: white;
     text-decoration: none;
+    font-size: 14px;
 }
 
 .footer-right a:hover {
@@ -155,7 +157,6 @@ b.home-subheading {
 .btn {
     padding: 10px 20px;
     font-size: 1rem;
-    border: none;
     border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -179,7 +180,7 @@ b.home-subheading {
 }
 
 .examples:hover {
-    background-color: #e0ebe9;
+    background-color: #639c91;
 }
 
 .azima-menu {
@@ -248,16 +249,21 @@ b.home-subheading {
     align-items: center;
     text-align: left;
     width: 85%;
-    height: 600px;
-    padding: 30px;
+    height: auto; /* Change this to auto to let the container adjust its height */
+    padding: 15px; /* Reduce padding to remove excess white space */
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Soft drop shadow */
     transition: box-shadow 0.3s ease-in-out;
+    flex-wrap: wrap; /* Ensure items wrap if needed */
+    margin: 20px auto; /* Center the container and add vertical margin */
 }
 
 .meta-image {
-    width: 20%; /* Make the image take up the full width of its container */
+    max-width: 100%; /* Ensure the image does not exceed the container width */
+    height: auto;
     object-fit: contain;
+    flex: 1 1 45%; /* Allow the image to grow and shrink within the container */
+    min-width: 150px; /* Ensure a minimum width for the image */
 }
 
 .vr-text {
@@ -266,6 +272,9 @@ b.home-subheading {
     flex-direction: column;
     justify-content: center; /* Ensure the text content is centered vertically */
     align-items: center;
+    flex: 1 1 45%; /* Allow the text to grow and shrink within the container */
+    min-width: 250px; /* Ensure a minimum width for the text container */
+    margin: 0; /* Remove any default margin */
 }
 
 .vr-text h3 {
@@ -291,10 +300,49 @@ b.home-subheading {
     margin-top: 50px;
 }
 
+.explore-tours-btn {
+    background-color: #087f6e;
+    color: #ffff;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: 1px solid black;
+    font-weight: bold;
+
+}
+
+.explore-tours-btn:hover {
+    background-color: #004d39;
+}
+
 @media (max-width: 767px){
     .home-page-nav {
         padding-left: 50px; /* Add padding to the left */
         padding-right: 50px; /* Add padding to the right */
         height: 600px;
     }
+
+    .capture-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 30px;
+        width: 70%;
+    }
+    
+    .capture-image {
+        width: 100%;
+        object-fit: contain;
+    }
+    
+    .capture-text {
+        width: 80%;
+    }
+    
 }

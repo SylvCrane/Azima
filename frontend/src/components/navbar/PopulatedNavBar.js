@@ -64,6 +64,7 @@ export const PopulatedNavBar = () => {
         )}
 
         <li><NavLink to ="/about"><h3>About</h3></NavLink></li>
+        <li><NavLink to ="/help"><h3>Help</h3></NavLink></li>
 
         {/* When user is not logged in */}
         {!user?.isAuthenticated && (
