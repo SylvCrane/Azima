@@ -7,7 +7,7 @@ const path = require('path');
 // Set up multer for file storage
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, 'public/images'); // Will save profile images uploaded in these folders.
+        cb(null, 'public/uploads'); // Will save profile images uploaded in these folders.
     },
     filename: function(req, file, cb) {
         const imageName = file.originalname;
@@ -50,7 +50,7 @@ router.put('/', upload.single('profileImage'), async (req, res) => {
 
         // Update the profile image if a new one was uploaded
         if (req.file) {
-            user.profileImage = `https://azimatours.onrender.com/images/${req.file.filename}`;
+            user.profileImage = `https://azimatours.onrender.com/uploads/${req.file.filename}`;
         }
 
         await user.save();
