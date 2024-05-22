@@ -4,7 +4,8 @@ const dot = require("dotenv");
 dot.config().parsed; 
 const mongoose = require("mongoose");
 const mongodb = process.env.MONGODB_URI;
-const User = require("../../models/UserDetails.js")
+const User = require("../../models/UserDetails.js");
+const bcrypt = require("bcryptjs");
 
 describe('POST /signup', () => {
     beforeAll(async () => {
@@ -41,4 +42,31 @@ describe('POST /signup', () => {
             expect(response.body.user.email).toBe("email@example.com");
         });
     });
+
+
+    describe("given the email is already registered", () => {
+        beforeEach(async () => {
+            // Create a user before testing duplicate email
+            await User.create({
+                firstName: "firstName",
+                lastName: "lastName",
+                email: "existing@example.com",
+                password: "password"
+            });
+        });
+
+        test("should respond with a 400 status code", async () => {
+            const response = await request(app).post("/api/signup").send({
+                firstName: "firstName",
+                lastName: "lastName",
+                email: "existing@example.com",
+                password: "password"
+            });
+
+            expect(response.statusCode).toBe(400);
+            expect(response.body.status).toBe("error");
+            expect(response.body.error).toBe("Email is already registered. Login instead");
+        });
+    });
+
 });

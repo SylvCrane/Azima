@@ -10,7 +10,7 @@ router.post("/", async(req,res) => {
         // First, check if user's email already exists in the database
         const existingUser = await user.findOne({email});
         if (existingUser) {
-            return res.send({error: "Email is registered already. Please login instead"});
+            return res.status(400).json({ status: "error", error: "Email is already registered. Login instead" });
         }
         
         // Encrypt the password

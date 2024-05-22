@@ -14,7 +14,7 @@ router.post("/", async(req,res) => {
     try {
         const existingUser = await User.findOne({email});
         if (!existingUser) {
-            return res.json({status: "error", error: "email_not_found"});
+            return res.status(400).json({status: "error", error: "email_not_found"});
         }
 
         if(await bcrypt.compare(password, existingUser.password)) {
@@ -35,7 +35,7 @@ router.post("/", async(req,res) => {
                 token,
             });
         }
-        res.json({status: "error", error: "incorrect_password"});
+        res.status(400).json({status: "error", error: "incorrect_password"});
     }
     catch (e) {
         console.log(e);
