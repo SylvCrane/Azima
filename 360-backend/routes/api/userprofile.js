@@ -7,7 +7,7 @@ const path = require('path');
 // Set up multer for file storage
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, 'public/uploads'); // Will save profile images uploaded in these folders.
+        cb(null, 'public/images'); // Will save profile images uploaded in these folders.
     },
     filename: function(req, file, cb) {
         const imageName = file.originalname;
