@@ -80,12 +80,28 @@ console.log("houseid: ",houseID)
                     skyEl.setAttribute('src', firstImageUrl);
                     skyEl.setAttribute('class', data[0].images[0].name);
                     console.log('Sky image updated successfully with:', firstImageUrl);
+                    setupHiddenCanvas(firstImageUrl); 
                 }
             }
         })
         .catch(error => {
             console.error('Failed to load image data:', error);
         });
+}
+function setupHiddenCanvas(imageUrl, rotationDegrees) {
+  const canvas = document.getElementById('hiddenCanvas');
+
+  const context = canvas.getContext('2d');
+  const image = new Image();
+  image.src = imageUrl;
+
+  console.log('Image URL:', image.src);
+  image.crossOrigin = "Anonymous";
+  image.onload = () => {
+    canvas.width = image.width;
+    canvas.height = image.height/1.2;
+    context.drawImage(image, 0, 0);
+  };
 }
 
 

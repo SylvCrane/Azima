@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const exitTourButton = document.getElementById('exitTour');
     if (exitTourButton) {
+        console.log('clicked');
       exitTourButton.addEventListener('click', () => {
        navigateToTours();
       });
@@ -44,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
       detailsElement.addEventListener('click', () => {
         // Fetch and inject house details
         fetchAndInjectDetails(houseID, detailsContainer);
+        console.log('clicked');
       });
     }
   });
