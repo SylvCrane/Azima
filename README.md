@@ -13,7 +13,7 @@ Optional but helpful tools:
 - **Postman**: For API testing. Download from [Postman](https://www.postman.com/downloads/).
 
 ## Installation
-- To start this project, you can either clone this repository or download the zip code and open the folders on Visual Studio Code.
+- To start this project, you will need to clone this repository and open the folders on Visual Studio Code.
 - Ensure you are on the main branch to get the latest code. 
 
 ## Setup
