@@ -50,7 +50,7 @@ router.put('/', upload.single('profileImage'), async (req, res) => {
 
         // Update the profile image if a new one was uploaded
         if (req.file) {
-            user.profileImage = `https://azimatours.onrender.com/uploads/${req.file.filename}`;
+            user.profileImage = `https://azimatours.onrender.com/images/${req.file.filename}`;
         }
 
         await user.save();
