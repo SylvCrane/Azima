@@ -23,7 +23,7 @@ const TourContainer = ({ house }) => {
     useEffect(() => {
         const fetchUserDetails = async () => {
             try {
-                const response = await axios.get('http://localhost:8082/api/userprofile/search/'+house.author);
+                const response = await axios.get('https://azimatours.onrender.com/api/userprofile/search/'+house.author);
 
                 const users = response.data;
               
@@ -48,7 +48,7 @@ const handleDeleteClick = () => {
     if (window.confirm('Are you sure you want to delete this house?')) {
         console.log('Deleting house with ID:', house.houseID);
         
-        axios.delete(`http://localhost:8082/api/house/house/${house.houseID}`)
+        axios.delete(`https://azimatours.onrender.com/api/house/house/${house.houseID}`)
             .then(response => {
                 console.log('House deleted successfully');
                 // Refresh the page to reflect the removal of the portal

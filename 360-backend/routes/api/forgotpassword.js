@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
 
         const secret = JWT_SECRET + existingUser.password;
         const token = JWT.sign({ email: existingUser.email, id: existingUser._id }, secret, { expiresIn: '20m' });
-        const link = `http://localhost:8082/account/reset-password/${existingUser._id}/${token}`;
+        const link = `https://azimatours.onrender.com/account/reset-password/${existingUser._id}/${token}`;
         console.log(link);
 
         const subject = 'Password Reset';

@@ -46,7 +46,7 @@ export const Help = () => {
     };
 
     // Fetch call to send the help message to the server
-    fetch("http://localhost:8082/api/help", requestOptions)
+    fetch("https://azimatours.onrender.com/api/help", requestOptions)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');

@@ -22,7 +22,7 @@ export const ResetPassword = () => {
             
         }
 
-        fetch(`http://localhost:8082/api/account/reset-password/${id}/${token}`, {
+        fetch(`https://azimatours.onrender.com/api/account/reset-password/${id}/${token}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

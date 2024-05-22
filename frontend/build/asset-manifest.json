@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.0d605df3.css",
+    "main.js": "/static/js/main.6661ff9c.js",
+    "static/media/MetaQuest.png": "/static/media/MetaQuest.37054d7ffb76d6f640ae.png",
+    "static/media/360cameras.png": "/static/media/360cameras.a5b256dcaa1157af56db.png",
+    "static/media/editor-final.jpg": "/static/media/editor-final.cd6ee5acc1537daeb3f2.jpg",
+    "static/media/editor-first.jpg": "/static/media/editor-first.144b49de1eed96eb6636.jpg",
+    "static/media/360rotation.png": "/static/media/360rotation.80a1fee1d4253e5f9527.png",
+    "static/media/TextAsset.svg": "/static/media/TextAsset.d6bf5f72389de0fd32abca571c28fc64.svg",
+    "static/media/LogoAsset.svg": "/static/media/LogoAsset.d21ea0e974e74f3315189ef3cb57c63e.svg",
+    "static/media/bath-solid.svg": "/static/media/bath-solid.f83cbfebf471be9b93c267302be26735.svg",
+    "index.html": "/index.html",
+    "static/media/expand-solid.svg": "/static/media/expand-solid.6e4feac4a6152e8bb60a47dcec4d2745.svg",
+    "static/media/couch-solid.svg": "/static/media/couch-solid.1736d825622e7273a3fd897e15353dc6.svg",
+    "static/media/AzimaAccountLogo.svg": "/static/media/AzimaAccountLogo.ae697da44f49294118c308631efa3374.svg",
+    "static/media/mail-icon.svg": "/static/media/mail-icon.912d9f32ae008b4f82ef8f0ccb813a32.svg",
+    "static/media/bed-solid.svg": "/static/media/bed-solid.3e6ffe7cd02d08b5ca6fb55dda96c5c6.svg",
+    "main.0d605df3.css.map": "/static/css/main.0d605df3.css.map",
+    "main.6661ff9c.js.map": "/static/js/main.6661ff9c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0d605df3.css",
+    "static/js/main.6661ff9c.js"
+  ]
+}

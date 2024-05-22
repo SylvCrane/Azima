@@ -36,7 +36,7 @@ export async function saveHouse( houseID, imageReferences, user, houseName) {
         public: false,
       };
 
-        const response = await axios.post('http://localhost:8082/api/house/house', houseData);
+        const response = await axios.post('https://azimatours.onrender.com/api/house/house', houseData);
         console.log(response.data.msg);
         clearImages();
         return response.data.msg;
@@ -44,7 +44,7 @@ export async function saveHouse( houseID, imageReferences, user, houseName) {
     
     async function clearImages() {
         try {
-          const response = await axios.delete(`http://localhost:8082/api/image`);
+          const response = await axios.delete(`https://azimatours.onrender.com/api/image`);
           console.log(response.data.msg);
           
           // Additional logic to handle successful deletion

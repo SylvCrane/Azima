@@ -39,7 +39,7 @@ console.log("houseid: ",houseID)
 
 
   function loadImageData(houseId) {
-    fetch('http://localhost:8082/api/house/house/puller/' + houseId)
+    fetch('https://azimatours.onrender.com/api/house/house/puller/' + houseId)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Network response was not ok (${response.status})`);
@@ -80,6 +80,7 @@ console.log("houseid: ",houseID)
                     skyEl.setAttribute('src', firstImageUrl);
                     skyEl.setAttribute('class', data[0].images[0].name);
                     console.log('Sky image updated successfully with:', firstImageUrl);
+                    setupHiddenCanvas(firstImageUrl); 
                 }
             }
         })
@@ -87,11 +88,26 @@ console.log("houseid: ",houseID)
             console.error('Failed to load image data:', error);
         });
 }
+function setupHiddenCanvas(imageUrl, rotationDegrees) {
+  const canvas = document.getElementById('hiddenCanvas');
+
+  const context = canvas.getContext('2d');
+  const image = new Image();
+  image.src = imageUrl;
+
+  console.log('Image URL:', image.src);
+  image.crossOrigin = "Anonymous";
+  image.onload = () => {
+    canvas.width = image.width;
+    canvas.height = image.height/1.2;
+    context.drawImage(image, 0, 0);
+  };
+}
 
 
 
   function loadPortalData(houseId) {
-    fetch('http://localhost:8082/api/house/house/puller/' + houseId)
+    fetch('https://azimatours.onrender.com/api/house/house/puller/' + houseId)
     .then(response => {
         if (!response.ok) {
             throw new Error(`Network response was not ok (${response.status})`);
@@ -129,7 +145,7 @@ console.log("houseid: ",houseID)
 }
 
 function loadWIPPortalData(houseId) {
-  fetch('http://localhost:8082/api/portal/' + houseId)
+  fetch('https://azimatours.onrender.com/api/portal/' + houseId)
   .then(response => {
       if (!response.ok) {
           throw new Error(`Network response was not ok (${response.status})`);

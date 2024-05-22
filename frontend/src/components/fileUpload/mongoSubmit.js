@@ -1,14 +1,14 @@
 import axios from 'axios';
 
 export async function mongoSubmit(mongo, houseId, newImageName) {
-    const imageURL = "http://localhost:8082/images/"+ newImageName;
+    const imageURL = "https://azimatours.onrender.com/images/"+ newImageName;
     console.log("newImageName: " ,newImageName);
     mongo.append('imageURL', imageURL);
     console.log("mongo name:", mongo.get('name'));
     console.log("mongo imageURL:", mongo.get('imageURL'));
     console.log("mongo houseID:", mongo.get('houseID'));
     houseId = mongo.get('houseID');
-    axios.post('http://localhost:8082/api/image/' ,mongo, {
+    axios.post('https://azimatours.onrender.com/api/image/' ,mongo, {
         headers: {
             "Content-Type": "multipart/form-data"
         }
