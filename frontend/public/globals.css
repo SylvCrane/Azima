@@ -357,6 +357,10 @@ input[type="text"]{
   margin-right: 10px; /* Add some space between the image and the text */
 }
 
+#hiddenCanvas {
+display: none;;
+ 
+}
 .portal-sidebar-header {
   color: #09483E; /* Choose a text color that stands out against the background */
   padding: 16px; /* Adjust padding to your preference */
@@ -611,7 +615,7 @@ input[type="text"]{
   visibility: hidden; /* Hide by default */
   opacity: 0; 
   display:flex;
- color:white;
+  color:#0EB49A;
  position: fixed; /* Use fixed positioning to keep the button in view */
    /* Distance from the right of the viewport, adjusted for typical close button placement */
  z-index: 1000;   /* High z-index to ensure it appears above other content */
@@ -650,7 +654,7 @@ input[type="text"]{
 }
 
 #exitOptions span:hover {
-  color: #0EB49A; /* Change to a different color on hover */
+  color:  #9FD3CB; /* Change to a different color on hover */
 }
 
 #saveBtn {
@@ -674,7 +678,7 @@ input[type="text"]{
 .saveContainer #saveOptions{
   visibility: hidden; /* Hide by default */
   opacity: 0; 
- color:white;
+  color:#0EB49A;
  position: fixed; /* Use fixed positioning to keep the button in view */
    /* Distance from the right of the viewport, adjusted for typical close button placement */
  z-index: 1000;   /* High z-index to ensure it appears above other content */
@@ -702,7 +706,7 @@ gap:10px;
 }
 
 #saveOptions span:hover {
-  color: #0EB49A; /* Change to a different color on hover */
+  color: #9FD3CB; /* Change to a different color on hover */
 }
 
 
