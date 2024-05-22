@@ -23,7 +23,7 @@ connectDB(); // Call connectDB import so mongoDB is connected
 console.log("DB connected")
 
 //app.use(express.json()); // allows the data from frontend to be transferred to backend/json file
-app.use(cors({origin: true, credentials: true}));
+app.use(cors({origin: 'https://azima.vercel.app', credentials: true}));
 
 // Init middleware
 app.use(express.json({extended: false})); // Allows Express to read data sent using a POST or PUT request. It is used for recognizing incoming objects as JSON objects. 
