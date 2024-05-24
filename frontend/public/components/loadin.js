@@ -107,7 +107,7 @@ function setupHiddenCanvas(imageUrl, rotationDegrees) {
 
 
   function loadPortalData(houseId) {
-    fetch('https://azimatours.onrender.com/api/house/house/puller/' + houseId)
+    fetch('https://azimatours.onrender.com/api/house/house/' + houseId + '/portals')
     .then(response => {
         if (!response.ok) {
             throw new Error(`Network response was not ok (${response.status})`);

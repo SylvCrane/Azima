@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 function loadImages(houseId) {
     console.log("loadImageData called with houseId:", houseId);
-    console.log("URL = "    + 'https://azimatours.onrender.com/api/house/house/puller/' + houseId);
+    console.log("URL = "    + 'https://azimatours.onrender.com/api/house/house/' + houseId+ '/images');
     fetch('https://azimatours.onrender.com/api/house/house/puller/' + houseId)
     
         .then(response => {
@@ -87,7 +87,7 @@ function loadImages(houseId) {
 }
 function loadImageSelector(houseId , scrollContainer) {
     console.log("loadImageData called with houseId:", houseId);
-    fetch('https://azimatours.onrender.com/api/house/house/puller/' + houseId)
+    fetch('https://azimatours.onrender.com/api/house/house/' + houseId + '/images')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Network response was not ok (${response.status})`);
