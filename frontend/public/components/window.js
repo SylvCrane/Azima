@@ -235,6 +235,7 @@ AFRAME.registerComponent("window", {
         console.log("Class before:", sky.className); // Log the class attribute before updating
         sky.setAttribute("src", img.src);
         sky.setAttribute("class", img.id);
+        console.log(sky.getAttribute("src"));
         console.log("Class after:", sky.className);
       }
     });
