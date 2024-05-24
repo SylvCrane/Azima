@@ -45,7 +45,7 @@ function RoomContainer() {
                         setAlertMessage('Failed to save house. Please try again.');
                     });
                 }
-                counter++;
+             
             } catch (error) {
                 console.error('Failed to fetch image data', error);
                 setAlertMessage('Failed to fetch image data. Please try again.');
