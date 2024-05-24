@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function loadImages(houseId) {
     console.log("loadImageData called with houseId:", houseId);
     console.log("URL = "    + 'https://azimatours.onrender.com/api/house/house/' + houseId+ '/images');
-    fetch('https://azimatours.onrender.com/api/house/house/puller/' + houseId)
+    fetch('https://azimatours.onrender.com/api/house/house/' + houseId + '/images')
     
         .then(response => {
             if (!response.ok) {
