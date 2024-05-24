@@ -33,6 +33,7 @@ function RoomContainer() {
                 console.log('counter', counter);
                 const res = await axios.get(`https://azimatours.onrender.com/api/image/${e.detail.houseId}`);
                 const response = res.data;
+                console.log(response.length);
                 const username = user.email;
                 if (response.length === counter) {
                     saveHouse(e.detail.houseId, response, username, houseName).then(() => {
@@ -86,6 +87,7 @@ function RoomContainer() {
     };
 
     const handleSave = async () => {
+        console.log(counter);
         const newErrors = validateForm();
         if (newErrors.length > 0) {
             setAlertMessage(newErrors.join('. '));
