@@ -36,6 +36,7 @@ export const UserProfile = () => {
                             </div>
                             <br></br>
                                 <button className="edit-btn" onClick={handleProfileEdit}>Edit Profile</button>
+                            <br></br>
                         </div>
                         <div className="tours-section">
                             <UserTours/>
