@@ -96,7 +96,7 @@ function RoomContainer() {
         setHouseID(houseid);
         try {
             await savePhotos(rooms, { houseID: houseid });
-            counter = 1;
+      
         } catch (error) {
             console.error('Error during the saving process:', error);
             setAlertMessage('Error during the saving process. Please try again.');
