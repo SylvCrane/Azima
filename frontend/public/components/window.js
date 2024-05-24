@@ -237,6 +237,7 @@ AFRAME.registerComponent("window", {
         sky.setAttribute("class", img.id);
         console.log(sky.getAttribute("src"));
         console.log("Class after:", sky.className);
+        
       }
     });
   }
