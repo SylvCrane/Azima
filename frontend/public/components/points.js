@@ -1,3 +1,7 @@
+/**
+ * points.js
+ * Description: Manages the marking and capturing of points in the A-Frame scene for creating portals. Handles user interactions to draw points and form triangles, and listens for save and cancel events.
+ */
 
 AFRAME.registerComponent("markable", {
   init: function () {
@@ -10,9 +14,18 @@ AFRAME.registerComponent("markable", {
     this.maxPoints = 4;
     this.cursor = document.getElementById("cursorRing");
 
+    /**
+     * save Event Listener
+     * Listens for the save event to save the current state by removing points and event listeners.
+     */
     document.body.addEventListener("save", () => {
       this.save();
     });
+
+    /**
+     * cancel Event Listener
+     * Listens for the cancel event to reset the current state by removing points and event listeners.
+     */
     document.body.addEventListener("cancel", () => {
       this.cancel();
     });
@@ -20,9 +33,22 @@ AFRAME.registerComponent("markable", {
     this.boundMouseDownHandler = this.mouseDownHandler.bind(this);
     this.boundMouseUpHandler = this.mouseUpHandler.bind(this);
 
+    /**
+     * mousedown Event Listener
+     * Listens for the mousedown event on the element to capture the initial position for drawing points.
+     */
     this.el.addEventListener("mousedown", this.boundMouseDownHandler);
+
+    /**
+     * mouseup Event Listener
+     * Listens for the mouseup event on the element to finalize the position and draw points if conditions are met.
+     */
     this.el.addEventListener("mouseup", this.boundMouseUpHandler);
 
+    /**
+     * raycaster-intersection Event Listener
+     * Listens for the raycaster intersection event on the cursor to highlight intersected points.
+     */
     this.cursor.addEventListener("raycaster-intersection", (e) => {
       if (this.newPoints) {
         this.newPoints.forEach((point) => {
@@ -32,6 +58,11 @@ AFRAME.registerComponent("markable", {
         });
       }
     });
+
+    /**
+     * raycaster-intersection-cleared Event Listener
+     * Listens for the raycaster intersection cleared event on the cursor to reset the color of points.
+     */
     this.cursor.addEventListener("raycaster-intersection-cleared", (e) => {
       if (this.newPoints) {
         this.newPoints.forEach((point) => {
@@ -43,6 +74,11 @@ AFRAME.registerComponent("markable", {
     });
   },
 
+  /**
+   * draw()
+   * Draws a new point at the captured initial position and appends it to the scene.
+   * If the maximum number of points is reached, initializes the triangles.
+   */
   draw: function () {
     console.log("[markable] Point captured at:", this.initPos);
     console.log(this.el);
@@ -75,6 +111,12 @@ AFRAME.registerComponent("markable", {
       this.initTriangles();
     }
   },
+
+  /**
+   * erase(point)
+   * Erases the specified point from the scene and updates the internal state.
+   * @param {HTMLElement} point - The point element to be removed.
+   */
   erase: function (point) {
     const index = this.newPoints.indexOf(point);
     if (this.pointCounter === 4) {
@@ -92,6 +134,10 @@ AFRAME.registerComponent("markable", {
     }
   },
 
+  /**
+   * initTriangles()
+   * Emits the fourPointsCaptured event with the captured positions to initialize the creation of triangles.
+   */
   initTriangles: function () {
     console.log(
       "[markable] Emitting 'fourPointsCaptured' event with positions:",
@@ -105,6 +151,11 @@ AFRAME.registerComponent("markable", {
     });
     console.log("[markable] Event 'fourPointsCaptured' emitted.");
   },
+
+  /**
+   * save()
+   * Saves the current state by removing all points and event listeners.
+   */
   save: function () {
     if (this.newPoints) {
       this.newPoints.forEach((point) => {
@@ -119,11 +170,13 @@ AFRAME.registerComponent("markable", {
       this.el.removeEventListener("mouseup", this.boundMouseUpHandler);
     }
   },
-  cancel: function () {
-    console.log("cancel recieved");
 
-    console.log("cancel event triggered");
-    
+  /**
+   * cancel()
+   * Cancels the current operation by removing all points and resetting the state.
+   */
+  cancel: function () {
+    console.log("cancel received");
 
     if (this.newPoints) {
       this.newPoints.forEach((point) => {
@@ -136,14 +189,17 @@ AFRAME.registerComponent("markable", {
       this.pointCounter = 0;
       this.clickPositions = [];
       this.newPoints = [];
-      
-      
     }
     this.el.removeEventListener("mousedown", this.boundMouseDownHandler);
-      this.el.removeEventListener("mouseup", this.boundMouseUpHandler);
-      this.el.removeAttribute("markable");
+    this.el.removeEventListener("mouseup", this.boundMouseUpHandler);
+    this.el.removeAttribute("markable");
   },
 
+  /**
+   * mouseDownHandler(e)
+   * Handles the mousedown event to capture the initial position for drawing points.
+   * @param {Event} e - The event object from the mousedown event.
+   */
   mouseDownHandler: function (e) {
     release = null;
 
@@ -152,6 +208,11 @@ AFRAME.registerComponent("markable", {
     }
   },
 
+  /**
+   * mouseUpHandler(e)
+   * Handles the mouseup event to finalize the position and draw points if conditions are met.
+   * @param {Event} e - The event object from the mouseup event.
+   */
   mouseUpHandler: function (e) {
     if (e.detail && e.detail.intersection) {
       release = e.detail.intersection.point;
@@ -164,10 +225,14 @@ AFRAME.registerComponent("markable", {
         console.log("draw");
         this.draw();
       }
-    } else {
     }
   },
 
+  /**
+   * generateUniqueIdentifier()
+   * Generates a unique identifier for the component instance.
+   * @returns {string} - A unique identifier string.
+   */
   generateUniqueIdentifier: function () {
     return "id-" + Date.now() + "-" + Math.random().toString(36).substr(2, 9);
   },

@@ -1,4 +1,7 @@
-
+/**
+ * viewer.js
+ * Description: Manages the gallery view and image loading in the Azima platform. Handles user interactions with the gallery, image selection, and transitions.
+ */
 
 function toggleGallery() {
     var gallery = document.getElementById("gallery");
@@ -31,62 +34,24 @@ function toggleGallery() {
 // Ensure this code runs after the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function() {
     var tab = document.querySelector(".tab");
+
+    /**
+     * click Event Listener (tab)
+     * Listens for click events on the tab element to toggle the gallery visibility.
+     */
     tab.addEventListener('click', toggleGallery); // Setup click event listener on tab
+
     const params = new URLSearchParams(window.parent.location.search);
     console.log(params);
-  const houseID = params.get('houseID');
-  console.log("houseID before loadImageData call: ", houseID);
-  loadImages(houseID);
-    
-    
+    const houseID = params.get('houseID');
+    console.log("houseID before loadImageData call: ", houseID);
+    loadImages(houseID);
 });
+
 function loadImages(houseId) {
     console.log("loadImageData called with houseId:", houseId);
-    console.log("URL = "    + 'https://azimatours.onrender.com/api/house/house/puller' + houseId);
-    fetch('https://azimatours.onrender.com/api/house/house/puller/' + houseId )
-    
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Network response was not ok (${response.status})`);
-            }
-            return response.json(); // Parse the JSON of the response
-        })
-        .then(data => {
-            console.log('House loaded successfully:', data);
+    console.log("URL = " + 'https://azimatours.onrender.com/api/house/house/puller/' + houseId);
 
-            const scroll  = document.querySelector('.scroll-container');
-            
-
-            if (scroll && Array.isArray(data[0].images)) {
-                data[0].images.forEach((image) => {
-                  let container =  document.createElement("div");
-                  container.className = "image-container";
-                  container.id = "image-container"
-                    let imgEl = document.createElement("img");
-                    let caption = document.createElement('span');
-                    caption.className = "caption";
-                    caption.id = "caption";
-                    caption.textContent= image.name;
-                    imgEl.setAttribute("id", `${image.name}`);
-                    imgEl.setAttribute("src", image.imageURL);
-
-                  container.appendChild(imgEl);
-                  container.appendChild(caption);
-                    scroll.appendChild(container);
-                });
-
-                console.log('All images added to <viewer>.', scroll);
-
-                // Assuming the data is an array of image URLs, and you want the first one
-              
-            }
-        })
-        .catch(error => {
-            console.error('Failed to load image data:', error);
-        });
-}
-function loadImageSelector(houseId , scrollContainer) {
-    console.log("loadImageData called with houseId:", houseId);
     fetch('https://azimatours.onrender.com/api/house/house/puller/' + houseId)
         .then(response => {
             if (!response.ok) {
@@ -97,31 +62,27 @@ function loadImageSelector(houseId , scrollContainer) {
         .then(data => {
             console.log('House loaded successfully:', data);
 
-           let scroll = scrollContainer;
-            
+            const scroll = document.querySelector('.scroll-container');
 
             if (scroll && Array.isArray(data[0].images)) {
                 data[0].images.forEach((image) => {
-                  let container =  document.createElement("div");
-                  container.className = "image-container";
-                  container.id = "image-container"
+                    let container = document.createElement("div");
+                    container.className = "image-container";
+                    container.id = "image-container";
                     let imgEl = document.createElement("img");
                     let caption = document.createElement('span');
                     caption.className = "caption";
                     caption.id = "caption";
-                    caption.textContent= image.name;
+                    caption.textContent = image.name;
                     imgEl.setAttribute("id", `${image.name}`);
                     imgEl.setAttribute("src", image.imageURL);
 
-                  container.appendChild(imgEl);
-                  container.appendChild(caption);
+                    container.appendChild(imgEl);
+                    container.appendChild(caption);
                     scroll.appendChild(container);
                 });
 
                 console.log('All images added to <viewer>.', scroll);
-
-                // Assuming the data is an array of image URLs, and you want the first one
-              
             }
         })
         .catch(error => {
@@ -129,95 +90,153 @@ function loadImageSelector(houseId , scrollContainer) {
         });
 }
 
-document.addEventListener('edit', function (){
+function loadImageSelector(houseId, scrollContainer) {
+    console.log("loadImageData called with houseId:", houseId);
 
-   
+    fetch('https://azimatours.onrender.com/api/house/house/puller/' + houseId)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Network response was not ok (${response.status})`);
+            }
+            return response.json(); // Parse the JSON of the response
+        })
+        .then(data => {
+            console.log('House loaded successfully:', data);
 
+            let scroll = scrollContainer;
 
+            if (scroll && Array.isArray(data[0].images)) {
+                data[0].images.forEach((image) => {
+                    let container = document.createElement("div");
+                    container.className = "image-container";
+                    container.id = "image-container";
+                    let imgEl = document.createElement("img");
+                    let caption = document.createElement('span');
+                    caption.className = "caption";
+                    caption.id = "caption";
+                    caption.textContent = image.name;
+                    imgEl.setAttribute("id", `${image.name}`);
+                    imgEl.setAttribute("src", image.imageURL);
+
+                    container.appendChild(imgEl);
+                    container.appendChild(caption);
+                    scroll.appendChild(container);
+                });
+
+                console.log('All images added to <viewer>.', scroll);
+            }
+        })
+        .catch(error => {
+            console.error('Failed to load image data:', error);
+        });
+}
+
+/**
+ * edit Event Listener
+ * Listens for the edit event to set up the image selector for editing.
+ */
+document.addEventListener('edit', function() {
     const gallery = document.getElementById('gallery');
     const tab = document.getElementById('tab');
     tab.style.display = 'none';
-    
-
 
     const select = document.getElementById("scroll");
     const params = new URLSearchParams(window.parent.location.search);
     console.log(params);
-  const houseID = params.get('houseID');
-  console.log("houseID before loadImageData call: ", houseID);
-loadImageSelector(houseID, select);
+    const houseID = params.get('houseID');
+    console.log("houseID before loadImageData call: ", houseID);
+    loadImageSelector(houseID, select);
 
     let isDown = false;
     let startX;
-    let scrollLeft; 
+    let scrollLeft;
     let selected;
-     console.log(select);
-     select.addEventListener('click', (e) => {
+    console.log(select);
+
+    /**
+     * click Event Listener (select)
+     * Listens for click events on the select element to handle image selection.
+     */
+    select.addEventListener('click', (e) => {
         let img = e.target.closest(".image-container");
 
-        if(selected){
-        selected.children[0].style.border = "";
-        selected.children[1].style.color = "white";
+        if (selected) {
+            selected.children[0].style.border = "";
+            selected.children[1].style.color = "white";
         }
-      
-        
-      
-            let image = img.children[0];
-            console.log(image.src);
-            image.style.border = '2px solid #0EB49A';
-           let  caption = img.children[1];
-            caption.style.color = "#0EB49A";
-            selected = img
-            
-       
-     
-       });
-       select.addEventListener('mousedown', (e) => {
-           isDown = true;
-           startX = e.pageX - select.offsetLeft;
-           scrollLeft = select.scrollLeft;
-           
-       });
-   
-       select.addEventListener('mouseleave', () => {
-           isDown = false;
-       });
-   
-       select.addEventListener('mouseup', () => {
-           isDown = false;
-       });
-   
-       select.addEventListener('mousemove', (e) => {
-           if (!isDown) return;
-           e.preventDefault();
-           const x = e.pageX - select.offsetLeft;
-           const walk = (x - startX) * 3; // The number 3 determines the speed of the scroll
-           select.scrollLeft = scrollLeft - walk;
-       });
 
+        let image = img.children[0];
+        console.log(image.src);
+        image.style.border = '2px solid #0EB49A';
+        let caption = img.children[1];
+        caption.style.color = "#0EB49A";
+        selected = img;
+    });
 
-    let inner = gallery.innerHTML;
-  
+    /**
+     * mousedown Event Listener (select)
+     * Listens for mousedown events on the select element to initiate scrolling.
+     */
+    select.addEventListener('mousedown', (e) => {
+        isDown = true;
+        startX = e.pageX - select.offsetLeft;
+        scrollLeft = select.scrollLeft;
+    });
+
+    /**
+     * mouseleave Event Listener (select)
+     * Listens for mouseleave events on the select element to stop scrolling.
+     */
+    select.addEventListener('mouseleave', () => {
+        isDown = false;
+    });
+
+    /**
+     * mouseup Event Listener (select)
+     * Listens for mouseup events on the select element to stop scrolling.
+     */
+    select.addEventListener('mouseup', () => {
+        isDown = false;
+    });
+
+    /**
+     * mousemove Event Listener (select)
+     * Listens for mousemove events on the select element to handle scrolling.
+     */
+    select.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - select.offsetLeft;
+        const walk = (x - startX) * 3; // The number 3 determines the speed of the scroll
+        select.scrollLeft = scrollLeft - walk;
+    });
 });
+
+/**
+ * DOMContentLoaded Event Listener
+ * Listens for the DOMContentLoaded event to set up the gallery and image interactions.
+ */
 document.addEventListener('DOMContentLoaded', function() {
     const gallery = document.getElementById('scroll-container');
-   
-     
+
     let isDown = false;
     let startX;
     let scrollLeft;
 
-  
+    /**
+     * click Event Listener (gallery)
+     * Listens for click events on the gallery element to change the sky image and handle the overlay transition.
+     */
     gallery.addEventListener('click', (e) => {
         let img = e.target;
         let src = img.src;
         let overlay = document.getElementById('overlay'); // Assuming you have an overlay element
-    
+
         // Start fade-in effect for the overlay
         overlay.style.transition = 'opacity 0.5s ease-in-out';
         overlay.style.opacity = '1';
         overlay.style.zIndex = '1000';
-    
+
         // Wait for the fade-in to complete
         setTimeout(() => {
             let sky = document.querySelector('a-sky');
@@ -228,37 +247,51 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.dispatchEvent(new CustomEvent("move", { detail: detail }));
                 console.log("move sent");
             }
-    
+
             // Start fade-out after setting the new sky image
             overlay.style.opacity = '0';
             // Listen for the end of the fade-out transition
             overlay.addEventListener('transitionend', () => {
                 overlay.style.zIndex = '-1'; // Ensure the overlay goes back to being non-interactive
             }, { once: true }); // This ensures the event listener is removed after it fires once
-    
+
         }, 500); // Adjust this timeout based on how long you want the transition to take
     });
+
+    /**
+     * mousedown Event Listener (gallery)
+     * Listens for mousedown events on the gallery element to initiate scrolling.
+     */
     gallery.addEventListener('mousedown', (e) => {
         isDown = true;
         startX = e.pageX - gallery.offsetLeft;
         scrollLeft = gallery.scrollLeft;
-        
-    });
+        });
+        /**
+ * mouseleave Event Listener (gallery)
+ * Listens for mouseleave events on the gallery element to stop scrolling.
+ */
+gallery.addEventListener('mouseleave', () => {
+    isDown = false;
+});
 
-    gallery.addEventListener('mouseleave', () => {
-        isDown = false;
-    });
+/**
+ * mouseup Event Listener (gallery)
+ * Listens for mouseup events on the gallery element to stop scrolling.
+ */
+gallery.addEventListener('mouseup', () => {
+    isDown = false;
+});
 
-    gallery.addEventListener('mouseup', () => {
-        isDown = false;
-    });
-
-    gallery.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - gallery.offsetLeft;
-        const walk = (x - startX) * 3; // The number 3 determines the speed of the scroll
-        gallery.scrollLeft = scrollLeft - walk;
-    });
-  
+/**
+ * mousemove Event Listener (gallery)
+ * Listens for mousemove events on the gallery element to handle scrolling.
+ */
+gallery.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - gallery.offsetLeft;
+    const walk = (x - startX) * 3; // The number 3 determines the speed of the scroll
+    gallery.scrollLeft = scrollLeft - walk;
+});
 });

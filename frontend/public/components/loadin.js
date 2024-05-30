@@ -1,32 +1,47 @@
+/**
+ * loadin.js
+ * Description: Manages the initial loading process for the Azima platform, including loading house images, portals, and work-in-progress (WIP) portals. It also handles the overlay transition effect.
+ */
+
 document.addEventListener("DOMContentLoaded", function() {
   const params = new URLSearchParams(window.parent.location.search);
-  console.log(params);
   const houseID = params.get('houseID');
-  console.log("houseid: ",houseID);
-  
+  console.log("houseid: ", houseID);
+
   loadImageData(houseID);
   loadPortalData(houseID);
   loadWIPPortalData(houseID);
 
   const overlay = document.getElementById('overlay');
-  // Ensure the initial opacity is set to '1'
-  overlay.style.opacity = '1';
+  overlay.style.opacity = '1'; // Ensure the initial opacity is set to '1'
 
+  /**
+   * fadeOutOverlay()
+   * Handles the transition of the overlay by setting its opacity to 0 and changing its z-index after the transition ends.
+   */
   function fadeOutOverlay() {
-    // Listen for the end of the transition to change the z-index
+    /**
+     * transitionend Event Listener
+     * Listens for the end of the transition to change the z-index of the overlay.
+     */
     overlay.addEventListener('transitionend', function() {
       overlay.style.zIndex = '0';
     });
 
-    // Delay the fade-out to give the transition time to apply
     setTimeout(() => {
       overlay.style.opacity = '0';
     }, 500);
   }
 
+  /**
+   * loadImageData(houseId)
+   * Fetches image data for the specified house and appends each image to the A-Frame assets element.
+   * Updates the sky element with the first image and sets up a hidden canvas for image processing.
+   * @param {string} houseId - The ID of the house to load images for.
+   */
   function loadImageData(houseId) {
     let counter = 0;
-    fetch('https://azimatours.onrender.com/api/house/house/puller/' + houseId )
+    fetch('https://azimatours.onrender.com/api/house/house/puller/' + houseId)
       .then(response => {
         if (!response.ok) {
           throw new Error(`Network response was not ok (${response.status})`);
@@ -41,34 +56,38 @@ document.addEventListener("DOMContentLoaded", function() {
           const totalImages = data[0].images.length;
 
           data[0].images.forEach((image) => {
-            // Create a new <img> element for each image
             let imgEl = document.createElement("img");
             imgEl.setAttribute("id", `${image.name}`);
             imgEl.setAttribute("src", image.imageURL);
             imgEl.setAttribute("crossorigin", "anonymous");
 
-            // Append the <img> element to the <a-assets> element
             assetsEl.appendChild(imgEl);
-            imgEl.addEventListener('load', function () {
+
+            /**
+             * load Event Listener
+             * Listens for the load event on each image element to track the loading progress and update the entity material.
+             */
+            imgEl.addEventListener('load', function() {
               console.log('Image loaded successfully:', imgEl);
               counter++;
 
-              // Check if all images have been loaded
               if (counter === totalImages) {
                 console.log('All images loaded.');
                 fadeOutOverlay();
               }
-              
+
               var entityEl = document.querySelector('a-entity');
-              entityEl.setAttribute('material', 'src', '#'+imgEl.id);
+              entityEl.setAttribute('material', 'src', '#' + imgEl.id);
             });
 
-            // Also, listen for the error event in case the image fails to load
+            /**
+             * error Event Listener
+             * Listens for the error event on each image element to handle loading errors and track the loading progress.
+             */
             imgEl.addEventListener('error', function() {
               console.error('Failed to load image:', imgEl.src);
               counter++;
 
-              // Check if all images have been attempted to load
               if (counter === totalImages) {
                 console.log('All images attempted to load.');
                 fadeOutOverlay();
@@ -78,7 +97,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
           console.log('All images added to <a-assets>.', assetsEl);
 
-          // Assuming the data is an array of image URLs, and you want the first one
           const firstImageUrl = data[0].images[0].imageURL;
           const skyEl = document.querySelector('a-sky');
 
@@ -86,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function() {
             skyEl.setAttribute('src', firstImageUrl);
             skyEl.setAttribute('class', data[0].images[0].name);
             console.log('Sky image updated successfully with:', firstImageUrl);
-            setupHiddenCanvas(firstImageUrl); 
+            setupHiddenCanvas(firstImageUrl);
           }
         }
       })
@@ -95,6 +113,11 @@ document.addEventListener("DOMContentLoaded", function() {
       });
   }
 
+  /**
+   * setupHiddenCanvas(imageUrl)
+   * Sets up a hidden canvas element for processing the specified image URL.
+   * @param {string} imageUrl - The URL of the image to be processed on the canvas.
+   */
   function setupHiddenCanvas(imageUrl) {
     const canvas = document.getElementById('hiddenCanvas');
     const context = canvas.getContext('2d');
@@ -110,6 +133,12 @@ document.addEventListener("DOMContentLoaded", function() {
     };
   }
 
+  /**
+   * loadPortalData(houseId)
+   * Fetches portal data for the specified house and creates window entities in the A-Frame scene.
+   * Emits a loadWindows event for each portal with the corresponding data.
+   * @param {string} houseId - The ID of the house to load portals for.
+   */
   function loadPortalData(houseId) {
     fetch('https://azimatours.onrender.com/api/house/house/puller/' + houseId)
       .then(response => {
@@ -130,9 +159,11 @@ document.addEventListener("DOMContentLoaded", function() {
             windowEntity.setAttribute("id", `window-${index}`);
             sceneEl.appendChild(windowEntity);
 
-            // Ensure the entity is part of the scene before emitting the event
             if (sceneEl.contains(windowEntity)) {
-              // Use setTimeout to ensure the DOM has updated
+              /**
+               * loadWindows Event Emitter
+               * Emits a loadWindows event for each portal after ensuring the entity is part of the scene.
+               */
               setTimeout(() => {
                 sceneEl.emit('loadWindows', { detail: { id: `window-${index}`, data: windowData } }, false);
               }, 100);
@@ -145,6 +176,12 @@ document.addEventListener("DOMContentLoaded", function() {
       });
   }
 
+  /**
+   * loadWIPPortalData(houseId)
+   * Fetches work-in-progress (WIP) portal data for the specified house and creates window entities in the A-Frame scene.
+   * Emits a loadWindows event for each WIP portal with the corresponding data.
+   * @param {string} houseId - The ID of the house to load WIP portals for.
+   */
   function loadWIPPortalData(houseId) {
     fetch('https://azimatours.onrender.com/api/portal/' + houseId)
       .then(response => {
@@ -156,23 +193,21 @@ document.addEventListener("DOMContentLoaded", function() {
       .then(data => {
         console.log('WIP Portal loaded:', data);
         const sceneEl = document.querySelector('a-scene');
-        let loadedPortalIds = new Set(); // Set to keep track of loaded portal IDs
+        let loadedPortalIds = new Set();
 
         if (sceneEl && Array.isArray(data) && data.length > 0) {
           data.forEach((windowData, index) => {
-            // Check if the portal ID has already been processed
-            console.log(windowData._id);
             if (!loadedPortalIds.has(windowData._id)) {
-              loadedPortalIds.add(windowData._id); // Mark this ID as loaded
-              console.log(loadedPortalIds);
-              // Create a new portal entity and append it to the scene
+              loadedPortalIds.add(windowData._id);
               let windowEntity = document.createElement("a-entity");
               windowEntity.setAttribute("loader", "");
               windowEntity.setAttribute("id", `wip-portal-${index}`);
               sceneEl.appendChild(windowEntity);
-              console.log("appended", windowEntity);
 
-              // Optionally, emit an event after ensuring the entity is part of the scene
+              /**
+               * loadWindows Event Emitter
+               * Emits a loadWindows event for each WIP portal after ensuring the entity is part of the scene.
+               */
               setTimeout(() => {
                 sceneEl.emit('loadWindows', { detail: { id: `wip-portal-${index}`, data: windowData } }, false);
                 console.log("emitted loadwindows with", windowData);
