@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./styles/globals.css">
+    <meta charset="utf-8">
+    <title>Azima</title>
+    <meta name="description" content="Azima">
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.misc.min.js"></script>
+    <script src="https://unpkg.com/super-hands@^3.0.3/dist/super-hands.min.js"></script>
+
+    <script src="./components/loadin.js"></script>
+    <script src="./components/superhands.js"></script>
+    <script src="./components/points.js"></script>
+    <script src="./components/link.js"></script>
+    <script src="./components/cursor.js"></script>
+    <script src="./components/customization.js"></script>
+    <script src="./components/window.js"></script>
+  </head>
+  <body>
+    <div id="overlay"></div>
+    <div id="aframe-container">
+      <a-scene embedded> 
+        <a-assets></a-assets>
+        
+        <a-entity camera look-controls position="0 -0.5 0">
+          <!-- Cursor Entity -->
+        </a-entity>
+        
+        <a-plane position="0 -2.48 0" rotation="-90 0 0" scale="4 4 4" color="black"></a-plane>
+        <a-plane position="0 2.48 0" rotation="90 0 0" scale="4 4 4" shader="flat" color="black"></a-plane>
+        <a-sky src="./assets/Untitled-5.png" radius="1.5" scale="-1 5 1" geometry="primitive: cylinder" rotation="0 29 0"></a-sky>
+        <a-sky rotation="0 -120 0"></a-sky>
+      </a-scene>
+    </div>
+
+    <!-- Add buttons for mobile compatibility -->
+    <button id="buttonUp" class="control-button">Up</button>
+    <button id="buttonDown" class="control-button">Down</button>
+
+    <style>
+      .control-button {
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;
+        padding: 10px 20px;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      #buttonUp {
+        bottom: 100px;
+      }
+      #buttonDown {
+        bottom: 50px;
+      }
+    </style>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const moveCamera = (direction) => {
+          const camera = document.querySelector("[camera]");
+          if (camera) {
+            let position = camera.getAttribute("position");
+            console.log(`Current camera position: x=${position.x}, y=${position.y}, z=${position.z}`);
+            
+            if (direction === "up" && position.y < 1.5) {
+              position.y += 0.5;
+              console.log("Moving camera up.");
+            } else if (direction === "down" && position.y > -1.5) {
+              position.y -= 0.5;
+              console.log("Moving camera down.");
+            }
+            
+            camera.setAttribute("position", position);
+            console.log(`New camera position: x=${position.x}, y=${position.y}, z=${position.z}`);
+          } else {
+            console.log("Camera not found.");
+          }
+        };
+
+        document.addEventListener("keydown", function(event) {
+          if (event.key === "ArrowUp") {
+            moveCamera("up");
+          } else if (event.key === "ArrowDown") {
+            moveCamera("down");
+          }
+        });
+
+        // Mobile buttons setup
+        const buttonUp = document.getElementById("buttonUp");
+        const buttonDown = document.getElementById("buttonDown");
+
+        buttonUp.addEventListener("click", () => moveCamera("up"));
+        buttonDown.addEventListener("click", () => moveCamera("down"));
+      });
+    </script>
+  </body>
+</html>

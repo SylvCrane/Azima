@@ -22,9 +22,14 @@ export const AFrame = () => {
     }, []);
 
     // Determine the content based on the path
-    const iframeSrc = location.pathname.includes("/editor/aframe") ?
-        `${process.env.PUBLIC_URL}/editor.html` :
-        `${process.env.PUBLIC_URL}/viewer.html`;
+    let iframeSrc;
+    if (location.pathname.includes("/editor/aframe")) {
+        iframeSrc = `${process.env.PUBLIC_URL}/editor.html`;
+    } else if (location.pathname.includes("/viewer/aframe")) {
+        iframeSrc = `${process.env.PUBLIC_URL}/viewer.html`;
+    } else if (location.pathname.includes("/cylinder/aframe")) {
+        iframeSrc = `${process.env.PUBLIC_URL}/cylinder.html`;
+    }
 
     return (
         <div className="editor-page" style={{ width: '100vw', height: '100vh', overflow: 'hidden' }}>
