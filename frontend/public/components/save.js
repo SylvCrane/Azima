@@ -1,4 +1,4 @@
-import { navigateToSave, navigateToTours } from './navigation'; // Add missing import for navigateToSave and navigateToTours
+ // Add missing import for navigateToSave and navigateToTours
  // Add missing import for encodeURIComponent
 /**
  * save.js
