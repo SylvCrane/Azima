@@ -24,8 +24,9 @@ function App() {
   const location = useLocation();
 
   const shouldHideNavbar = (pathname) => {
-    return pathname.startsWith("/editor/aframe") || pathname.startsWith("/tours/aframe");
+    return pathname.startsWith("/editor/aframe") || pathname.startsWith("/tours/aframe") || pathname.startsWith("/cylinder/aframe");
   };
+
 
   return (
     <div className="App">
@@ -48,6 +49,7 @@ function App() {
           <Route path="/editor/aframe" element={<ProtectedRoute><AFrame /></ProtectedRoute>} /> {/* User must be authenticated to go to this page */}
           <Route path="/tours/aframe" element={<AFrame />} /> {/* DON'T make a protected route otherwise tours in tours page cant be viewed if a user is not signed in. */}
           <Route path="/editor/save" element={<ProtectedRoute><Save /></ProtectedRoute>} />
+          <Route path="/cylinder/aframe" element={<AFrame />} /> {/* Add the cylinder route */}
         </Routes>
       </UserProvider>
     </div>
