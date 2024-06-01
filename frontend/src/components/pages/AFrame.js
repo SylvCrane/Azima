@@ -22,10 +22,10 @@ export const AFrame = () => {
     }, []);
 
     // Determine the content based on the path
-    let iframeSrc;
+   let iframeSrc;
     if (location.pathname.includes("/editor/aframe")) {
         iframeSrc = `${process.env.PUBLIC_URL}/editor.html`;
-    } else if (location.pathname.includes("/viewer/aframe")) {
+    } else if (location.pathname.includes("/tours/aframe")) {
         iframeSrc = `${process.env.PUBLIC_URL}/viewer.html`;
     } else if (location.pathname.includes("/cylinder/aframe")) {
         iframeSrc = `${process.env.PUBLIC_URL}/cylinder.html`;
