@@ -2,13 +2,25 @@
 import axios from 'axios';
 //import { mongoSubmit } from "./mongoSubmit";
 
-
+async function houseIDExists(houseID) {
+  try {
+    const response = await axios.get('https://azimatours.onrender.com/api/house/house/puller/$(houseId}');
+    return response.data.exists; // Assuming the response returns { exists: true/false }
+  } catch (error) {
+    console.error('Error checking if houseID exists:', error.response ? error.response.data : error.message);
+    throw error; // Re-throw the error to handle it in the calling function
+  }
+}
 
 
 
 export async function saveHouse( houseID, imageReferences, user, houseName) {
 
-  
+  const exists = await houseIDExists(houseID);
+  if (exists) {
+    return; // Do nothing if house ID already exists
+  }
+
  
     console.log(imageReferences);
 
