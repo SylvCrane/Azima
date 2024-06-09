@@ -37,6 +37,7 @@ function RoomContainer() {
                 const username = user.email;
                 if (response.length === counter) {
                     saveHouse(e.detail.houseId, response, username, houseName).then(() => {
+                        counter=   0;
                         setSaveSuccessful(true);
                         
                     }).catch(error => {
