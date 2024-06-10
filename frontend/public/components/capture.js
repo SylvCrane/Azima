@@ -35,6 +35,7 @@ AFRAME.registerComponent('portal-manager', {
         this.handleListClick = this.handleListClick.bind(this);
         this.updatePortals = this.updatePortals.bind(this);
         this.capturePortal = this.capturePortal.bind(this);
+  
 
         // Listen for scene updates or other triggers to refresh portal list
         this.el.sceneEl.addEventListener('portal-update', this.updatePortals);
@@ -59,7 +60,13 @@ AFRAME.registerComponent('portal-manager', {
                 }
             });
         });
+  
+    
+        // Set up the click event listener for the portal list
+      
     },
+
+
 
     /**
      * selectPortal(portalEntity)
@@ -68,6 +75,7 @@ AFRAME.registerComponent('portal-manager', {
      * If the user cancels the deletion a log message indicates the cancellation.
      */
     selectPortal: function(portalEntity) {
+      
         if (portalEntity) {
           console.log('Portal selected:', portalEntity);
           
@@ -81,7 +89,8 @@ AFRAME.registerComponent('portal-manager', {
             console.log('Portal deletion cancelled.');
           }
         }
-    },
+    
+      },
 
     /**
      * handleListClick(event)
@@ -95,7 +104,6 @@ AFRAME.registerComponent('portal-manager', {
            this.selectPortal(target.portalData);
         }
     },
-
     /**
      * capturePortal(portalEntity)
      * Responsible for capturing an image of a specified portal entity.
@@ -122,6 +130,8 @@ AFRAME.registerComponent('portal-manager', {
         // Show only the relevant portal triangles and text for the capture
         objectsToCapture.forEach(obj => obj.object3D.visible = true);
 
+      
+    
         // Calculate the bounding box of the portal's content
         let box = new THREE.Box3();
         objectsToCapture.forEach(obj => {
@@ -154,7 +164,10 @@ AFRAME.registerComponent('portal-manager', {
         console.log('Capturing portal');
 
         this.renderer.setSize(256, 256); // Set the desired size
-        this.renderer = new THREE.WebGLRenderer({ antialias: true });
+        
+
+            this.renderer = new THREE.WebGLRenderer({ antialias: true });
+        
         this.renderer.setClearColor(0x000000, 0);
         this.renderer.render(this.el.sceneEl.object3D, this.captureCamera);
         let imgData = this.renderer.domElement.toDataURL();
@@ -167,6 +180,7 @@ AFRAME.registerComponent('portal-manager', {
         console.log('Captured image data:', imgData);
         return imgData;
     },
+
 
     /**
      * updatePortals()
@@ -182,39 +196,45 @@ AFRAME.registerComponent('portal-manager', {
         const list = document.getElementById("portal-list");
         list.innerHTML=''; // Clear existing content
         const portals = this.el.sceneEl.querySelectorAll('[window]');
-        portals.forEach((portal, index) => {
-            if(portal.className === sky.className){
-                const imgSrc = this.capturePortal(portal);
-                const listItem = document.createElement('li');
-                listItem.portalData = portal; // Store portal data directly on the element for easy access
-                const img = document.createElement('img');
-                img.src = imgSrc;
-                img.style.width = '100px';
-                img.style.height = '100px';
-                img.alt = `Portal ${index + 1}`;
 
-                img.addEventListener('mouseenter', () => this.highlightPortal(portal));
-                img.addEventListener('mouseleave', () => this.restorePortal(portal));
-                const textContainer = document.createElement('div');
-                textContainer.style.display = 'flex';
-                textContainer.style.flexDirection = 'column';
-                textContainer.style.justifyContent = 'center';
-                textContainer.style.marginLeft = '10px';
-    
-                const portalText = document.createElement('span');
-                const detailText = document.createElement('span');
-                portalText.textContent = `Portal ${index + 1}:`;
-                detailText.textContent = `Links ${portal.className} and ${portal.id}`;
-                portalText.style.color = portal.querySelector('a-triangle').getAttribute('material').color;
-                detailText.style.color = '#2b2b2b';
-    
-                textContainer.appendChild(portalText);
-                textContainer.appendChild(detailText);
-                listItem.appendChild(img);
-                listItem.appendChild(textContainer);
-                list.appendChild(listItem);
+        portals.forEach((portal, index) => {
+            if(portal.className===sky.className){
+            const imgSrc = this.capturePortal(portal);
+            const listItem = document.createElement('li');
+            listItem.portalData = portal; // Store portal data directly on the element for easy access
+            const img = document.createElement('img');
+            img.src = imgSrc;
+            img.style.width = '100px';
+            img.style.height = '100px';
+            img.alt = `Portal ${index + 1}`;
+
+            img.addEventListener('mouseenter', () => this.highlightPortal(portal));
+            img.addEventListener('mouseleave', () => this.restorePortal(portal));
+
+            const textContainer = document.createElement('div');
+            textContainer.style.display = 'flex';
+            textContainer.style.flexDirection = 'column';
+            textContainer.style.justifyContent = 'center';
+            textContainer.style.marginLeft = '10px';
+
+            const portalText = document.createElement('span');
+            const detailText = document.createElement('span');
+            portalText.textContent = `Portal ${index + 1}:`;
+            detailText.textContent = `Links ${portal.className} and ${portal.id}`;
+            portalText.style.color = portal.querySelector('a-triangle').getAttribute('material').color;
+            detailText.style.color = '#2b2b2b';
+
+            textContainer.appendChild(portalText);
+            textContainer.appendChild(detailText);
+            listItem.appendChild(img);
+            listItem.appendChild(textContainer);
+            list.appendChild(listItem);
             }
         });
+    
+
+    
+    
         // Show the sidebar if it was initially hidden
         this.sidebar.style.display = 'block';
     },
@@ -227,6 +247,8 @@ AFRAME.registerComponent('portal-manager', {
      */
     highlightPortal: function(portal) {
         // Change material or other properties to highlight the portal
+      
+
         portal.querySelectorAll('a-triangle').forEach((triangle) => {
             const material = triangle.getAttribute('material');
             triangle.setAttribute('data-original-color', material.color); // Store the original color
