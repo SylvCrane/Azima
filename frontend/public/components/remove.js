@@ -54,8 +54,8 @@ function exitSidebar() {
  * @param {string} houseID - The ID of the house to which the portal belongs.
  */
 function sendDeleteRequest(portalEntity, houseID) {
-    counter *= -1;
-    if (counter === -1){
+    
+    
         const location = portalEntity.className; // Assuming this is the intended use of 'className'
         const destination = portalEntity.id; // Assuming 'id' maps to 'destination'
     
@@ -111,7 +111,7 @@ function sendDeleteRequest(portalEntity, houseID) {
                 console.error('Error removing portal:', error);
         });
     
-    }
+    
 /**
  * refreshScene(portalEntity)
  * Refreshes the scene by emitting a reloadScene event with the details of the portal entity.
