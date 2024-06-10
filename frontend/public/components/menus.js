@@ -295,7 +295,9 @@ this.el.setAttribute('geometry', {
 */
 handleCursorClick: function() {
 this.resetInactivityTimeout(0);
+if(this.instructionText.innerText!=null){
 this.instructionText.innerText = 'Click the plus to open the portal manager.';
+}
 this.showInstructionText();
 let currentRadiusOuter = this.el.getAttribute('geometry').radiusOuter;
 let newRadiusOuter;
