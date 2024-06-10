@@ -112,3 +112,15 @@
     font-size: 15px; 
     color: red;
 }
+
+@media (max-width: 767px){
+
+    .user-details {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        
+    }
+}
