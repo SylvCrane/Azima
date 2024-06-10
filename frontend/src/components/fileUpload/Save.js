@@ -102,7 +102,7 @@ function Save() {
             setSuccessMessage('Form submitted successfully!');
         } catch (error) {
             console.error('Error during the saving process:', error);
-            setAlertMessage('Error during the saving process. Check that your input is correct and try again.');
+            //setAlertMessage('Error during the saving process. Check that your input is correct and try again.');
             setSuccessMessage('');
         } finally {
             setIsSubmitting(false);
@@ -154,7 +154,7 @@ function Save() {
                     </div>
                     <div className="text-group">
                         <div className="form-group">
-                            <label>Square Footage</label>
+                            <label>Area (m²)</label>
                             <input type="text" name="sqFootage" value={formData.sqFootage} onChange={handleChange} required />
                         </div>
                         <div className="form-group">
