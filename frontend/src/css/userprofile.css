@@ -116,7 +116,7 @@
 @media (max-width: 767px){
 
     .user-details {
-        width: 50%;
+        width: 20%;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
