@@ -154,7 +154,7 @@ function Save() {
                     </div>
                     <div className="text-group">
                         <div className="form-group">
-                            <label>Square Footage</label>
+                            <label>Area (m²)</label>
                             <input type="text" name="sqFootage" value={formData.sqFootage} onChange={handleChange} required />
                         </div>
                         <div className="form-group">
