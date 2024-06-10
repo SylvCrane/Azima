@@ -396,46 +396,65 @@ return;
 formContainer.innerHTML = '';
 let viewNameForm = document.createElement('div');
 viewNameForm.innerHTML = `
-  <div class="color-picker" id="color-picker">
-    <h1>Select a color:</h1>
-    <label class="color-option">
-      <input type="radio" name="color" value="#FFffff">
-      <span class="color-display" style="background-color: #Ffffff;"></span>
-    </label>
-    <label class="color-option">
-      <input type="radio" name="color" value="#9FD3CB">
-      <span class="color-display" style="background-color: #9FD3CB;"></span>
-    </label>
-    <label class="color-option">
-      <input type="radio" name="color" value="#4ABFAA">
-      <span class="color-display" style="background-color: #4ABFAA;"></span>
-    </label>
-    <label class="color-option">
-      <input type="radio" name="color" value="#0EB49A">
-      <span class="color-display" style="background-color: #0EB49A;"></span>
-    </label>
-    <label class="color-option">
-      <input type="radio" name="color" value="#0A7A68">
-      <span class="color-display" style="background-color: #0A7A68"></span>
-    </label>
-    <label class="color-option">
-      <input type="radio" name="color" value="#09483E">
-      <span class="color-display" style="background-color: #09483E;"></span>
-    </label>
-  </div>
+<div class="color-picker" id="color-picker">
+   <h1>Select a color:</h1>
+   <label class="color-option">
+       <input type="radio" name="color" value="#FFffff">
+       <span class="color-display" style="background-color: #Ffffff;"></span>
+   </label>
+   <label class="color-option">
+       <input type="radio" name="color" value="#9FD3CB">
+       <span class="color-display" style="background-color: #9FD3CB;"></span>
+   </label>
+   <label class="color-option">
+       <input type="radio" name="color" value="#4ABFAA">
+       <span class="color-display" style="background-color: #4ABFAA;"></span>
+   </label>
+   <label class="color-option">
+       <input type="radio" name="color" value="#0EB49A">
+       <span class="color-display" style="background-color: #0EB49A;"></span>
+   </label>
+   <label class="color-option">
+       <input type="radio" name="color" value="#0A7A68">
+       <span class="color-display" style="background-color: #0A7A68"></span>
+   </label>
+   <label class="color-option">
+       <input type="radio" name="color" value="#09483E">
+       <span class="color-display" style="background-color: #09483E;"></span>
+   </label>
+ </div>
 
-  <div class="zoom-controls">
-    <button id="zoomInBtn" style="border: none; background: none;">
-      <img src="./assets/magnifying-glass-plus-solid.svg" alt="Close" style="width: 30px; height: 30px;">
-    </button>
-    <button id="zoomOutBtn" style="border: none; background: none;">
-      <img src="./assets/magnifying-glass-minus-solid.svg" alt="Close" style="width: 30px; height: 30px;">
-    </button>
-  </div>
+ <div class="zoom-controls">
+ <button id="zoomInBtn" style="border: none; background: none;">
+  <img src="./assets/magnifying-glass-plus-solid.svg" alt="Close" style="width: 30px; height: 30px;">
 
-  <div class="select-gallery" id="select-gallery">
-    <div class="scroll-container" id="scroll"></div>
+</button>
+<button id="zoomOutBtn" style="border: none; background: none;">
+<img src="./assets/magnifying-glass-minus-solid.svg" alt="Close" style="width: 30px; height: 30px;">
+
+</button>
+</div>
+
+<div class="select-gallery" id="select-gallery">
+  <div class="scroll-container" id="scroll">
+ 
   </div>
+ 
+  
+  </div>
+</div>
+</div>
+<div class="toggle-text-container">
+<label><input type="checkbox" id="toggleText" checked>Show text</label>
+</div>
+<div>
+<button id="saveButton">Save</button><br/>
+<button id="cancelButton">Cancel</button>
+</div>
+<div class="instruction">
+ To create a portal, select the four points of the door/area you want as your entry point. <br/>
+ Then select the room on the side where you want the portal to link to.
+</div>
 `;
 
 formContainer.appendChild(viewNameForm);
