@@ -102,7 +102,7 @@ function Save() {
             setSuccessMessage('Form submitted successfully!');
         } catch (error) {
             console.error('Error during the saving process:', error);
-            setAlertMessage('Error during the saving process. Check that your input is correct and try again.');
+            //setAlertMessage('Error during the saving process. Check that your input is correct and try again.');
             setSuccessMessage('');
         } finally {
             setIsSubmitting(false);
