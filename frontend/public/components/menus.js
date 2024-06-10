@@ -12,8 +12,7 @@ AFRAME.registerComponent('toggle-thickness', {
     this.plus.innerText = "+";
     this.removecounter = 1;
     this.addcounter = 1;
-    this.defaultColor = 'white';
-    this.highlightColor = 'yellow';
+
 
     this.instructionText = document.createElement('div');
     this.portalManager = document.createElement('a-entity');
@@ -219,16 +218,8 @@ AFRAME.registerComponent('toggle-thickness', {
    * @param {Event} evt - The event object from the raycaster intersection.
    */
   handleHover: function(evt) {
-    this.canvas = document.getElementById('hiddenCanvas');
-    const intersection = evt.detail.els[0];
-    if (intersection) {
-      const uv = intersection.uv;
-      const imageX = Math.floor(uv.x * this.canvas.width);
-      const imageY = Math.floor(uv.y * this.canvas.height);
-      const color = this.getPixelColor(imageX, imageY);
-      console.log(`Cursor is hovering over color: ${color}`);
-      this.el.setAttribute('material', 'color', color === 'rgb(255, 255, 255)' ? this.highlightColor : this.defaultColor);
-    }
+
+   
     if (evt.detail.els.includes(this.addPortal)) {
       this.cursor.setAttribute('material', 'opacity: 0.5');
     }
@@ -241,7 +232,7 @@ AFRAME.registerComponent('toggle-thickness', {
    */
   handleHoverEnd: function(evt) {
     if (!evt.detail.els) {
-      this.el.setAttribute('material', 'color', this.defaultColor);
+   
       this.cursor.setAttribute('material', 'opacity:1');
     }
   },
@@ -405,46 +396,65 @@ return;
 formContainer.innerHTML = '';
 let viewNameForm = document.createElement('div');
 viewNameForm.innerHTML = `
-  <div class="color-picker" id="color-picker">
-    <h1>Select a color:</h1>
-    <label class="color-option">
-      <input type="radio" name="color" value="#FFffff">
-      <span class="color-display" style="background-color: #Ffffff;"></span>
-    </label>
-    <label class="color-option">
-      <input type="radio" name="color" value="#9FD3CB">
-      <span class="color-display" style="background-color: #9FD3CB;"></span>
-    </label>
-    <label class="color-option">
-      <input type="radio" name="color" value="#4ABFAA">
-      <span class="color-display" style="background-color: #4ABFAA;"></span>
-    </label>
-    <label class="color-option">
-      <input type="radio" name="color" value="#0EB49A">
-      <span class="color-display" style="background-color: #0EB49A;"></span>
-    </label>
-    <label class="color-option">
-      <input type="radio" name="color" value="#0A7A68">
-      <span class="color-display" style="background-color: #0A7A68"></span>
-    </label>
-    <label class="color-option">
-      <input type="radio" name="color" value="#09483E">
-      <span class="color-display" style="background-color: #09483E;"></span>
-    </label>
-  </div>
+<div class="color-picker" id="color-picker">
+   <h1>Select a color:</h1>
+   <label class="color-option">
+       <input type="radio" name="color" value="#FFffff">
+       <span class="color-display" style="background-color: #Ffffff;"></span>
+   </label>
+   <label class="color-option">
+       <input type="radio" name="color" value="#9FD3CB">
+       <span class="color-display" style="background-color: #9FD3CB;"></span>
+   </label>
+   <label class="color-option">
+       <input type="radio" name="color" value="#4ABFAA">
+       <span class="color-display" style="background-color: #4ABFAA;"></span>
+   </label>
+   <label class="color-option">
+       <input type="radio" name="color" value="#0EB49A">
+       <span class="color-display" style="background-color: #0EB49A;"></span>
+   </label>
+   <label class="color-option">
+       <input type="radio" name="color" value="#0A7A68">
+       <span class="color-display" style="background-color: #0A7A68"></span>
+   </label>
+   <label class="color-option">
+       <input type="radio" name="color" value="#09483E">
+       <span class="color-display" style="background-color: #09483E;"></span>
+   </label>
+ </div>
 
-  <div class="zoom-controls">
-    <button id="zoomInBtn" style="border: none; background: none;">
-      <img src="./assets/magnifying-glass-plus-solid.svg" alt="Close" style="width: 30px; height: 30px;">
-    </button>
-    <button id="zoomOutBtn" style="border: none; background: none;">
-      <img src="./assets/magnifying-glass-minus-solid.svg" alt="Close" style="width: 30px; height: 30px;">
-    </button>
-  </div>
+ <div class="zoom-controls">
+ <button id="zoomInBtn" style="border: none; background: none;">
+  <img src="./assets/magnifying-glass-plus-solid.svg" alt="Close" style="width: 30px; height: 30px;">
 
-  <div class="select-gallery" id="select-gallery">
-    <div class="scroll-container" id="scroll"></div>
+</button>
+<button id="zoomOutBtn" style="border: none; background: none;">
+<img src="./assets/magnifying-glass-minus-solid.svg" alt="Close" style="width: 30px; height: 30px;">
+
+</button>
+</div>
+
+<div class="select-gallery" id="select-gallery">
+  <div class="scroll-container" id="scroll">
+ 
   </div>
+ 
+  
+  </div>
+</div>
+</div>
+<div class="toggle-text-container">
+<label><input type="checkbox" id="toggleText" checked>Show text</label>
+</div>
+<div>
+<button id="saveButton">Save</button><br/>
+<button id="cancelButton">Cancel</button>
+</div>
+<div class="instruction">
+ To create a portal, select the four points of the door/area you want as your entry point. <br/>
+ Then select the room on the side where you want the portal to link to.
+</div>
 `;
 
 formContainer.appendChild(viewNameForm);

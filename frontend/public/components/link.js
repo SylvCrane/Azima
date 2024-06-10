@@ -158,36 +158,84 @@ AFRAME.registerComponent("linker", {
    * Constructs the necessary data and sends a POST request to the server.
    */
   save: function () {
+    console.log("Save called at:", new Date().toISOString()); // Log the exact time the save is called
     const params = new URLSearchParams(window.parent.location.search);
     const houseID = params.get('houseID');
+    console.log("House ID:", houseID);
 
     let eventData = JSON.stringify({
-      destination: this.el.getAttribute("id"),
-      location: this.el.getAttribute("class"),
-      houseID: houseID,
-      triangles: this.serializeTriangles(this.triangles),
-      textData: this.serializeText(this.triangles),
+        destination: this.el.getAttribute("id"),
+        location: this.el.getAttribute("class"),
+        houseID: houseID,
+        triangles: this.serializeTriangles(this.triangles),
+        textData: this.serializeText(this.triangles),
     });
 
+    console.log("Event data prepared:", eventData);
+
     fetch('https://azimatours.onrender.com/api/house/house/' + houseID + '/portals', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: eventData,
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: eventData,
     })
     .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
     })
     .then(data => {
-      this.el.sceneEl.emit("createWindow", eventData);
-      this.remove();
+        console.log('Document saved:', data);
+        console.log("Processing UI changes post-save");
+   
+        let formContainer = document.getElementById("formContainer");
+        let saveContainer = document.getElementById("saveContainer");
+
+        console.log("Emitting createWindow now with eventData:", eventData);
+        this.el.sceneEl.emit("createWindow", eventData);
+        console.log("[linker] Event 'createWindow' emitted with event details:", eventData);
+
+        let container = document.getElementById("aframe-container");
+        let overlay = document.getElementById("overlay");
+        let camera = this.el.sceneEl.querySelector("[camera]");
+
+        console.log("Setting cursor thickness and FOV changes");
+        this.cursor.setAttribute("toggle-thickness", "");
+
+        let newFov = 80;
+        camera.setAttribute("camera", "fov", newFov);
+        this.el.sceneEl.emit('fovChanged', { fov: newFov });
+
+        console.log("Removing color-picker event listeners");
+        const colorOptions = document.querySelectorAll('.color-picker input[type="radio"]');
+        colorOptions.forEach((option) => {
+            option.removeEventListener("change", this.handleColorInput);
+        });
+        if (container) {
+            console.log("Adjusting container and overlay dimensions and padding");
+            container.style.position = 'relative';
+            container.style.width = '100vw';
+            container.style.height = '100vh';
+            container.style.overflow = 'hidden';
+            container.style.display = 'flex';
+            container.style.margin = '0 0 0 0';
+            container.style.padding = '0';
+            overlay.style.width = "100vw";
+            overlay.style.height = "100vh";
+        }
+        let sidebar = document.getElementById('portal-sidebar');
+        if (sidebar) {
+            sidebar.style.display = 'none'; // Show sidebar if it was hidden
+        }
+        formContainer.innerHTML = '';
+        saveContainer.style.display = 'flex';
+        console.log("Calling remove method to clean up");
+        this.remove();
     })
     .catch(error => console.error('Error saving document:', error));
-  },
+},
 
   /**
    * serializeTriangles(triangles)
