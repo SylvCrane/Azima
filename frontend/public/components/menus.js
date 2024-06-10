@@ -12,8 +12,7 @@ AFRAME.registerComponent('toggle-thickness', {
     this.plus.innerText = "+";
     this.removecounter = 1;
     this.addcounter = 1;
-    this.defaultColor = 'white';
-    this.highlightColor = 'yellow';
+
 
     this.instructionText = document.createElement('div');
     this.portalManager = document.createElement('a-entity');
@@ -219,16 +218,8 @@ AFRAME.registerComponent('toggle-thickness', {
    * @param {Event} evt - The event object from the raycaster intersection.
    */
   handleHover: function(evt) {
-    this.canvas = document.getElementById('hiddenCanvas');
-    const intersection = evt.detail.els[0];
-    if (intersection) {
-      const uv = intersection.uv;
-      const imageX = Math.floor(uv.x * this.canvas.width);
-      const imageY = Math.floor(uv.y * this.canvas.height);
-      const color = this.getPixelColor(imageX, imageY);
-      console.log(`Cursor is hovering over color: ${color}`);
-      this.el.setAttribute('material', 'color', color === 'rgb(255, 255, 255)' ? this.highlightColor : this.defaultColor);
-    }
+
+   
     if (evt.detail.els.includes(this.addPortal)) {
       this.cursor.setAttribute('material', 'opacity: 0.5');
     }
@@ -241,7 +232,7 @@ AFRAME.registerComponent('toggle-thickness', {
    */
   handleHoverEnd: function(evt) {
     if (!evt.detail.els) {
-      this.el.setAttribute('material', 'color', this.defaultColor);
+   
       this.cursor.setAttribute('material', 'opacity:1');
     }
   },
