@@ -243,7 +243,9 @@ AFRAME.registerComponent('toggle-thickness', {
    */
   handlePlusClick: function() {
     this.resetInactivityTimeout(0);
+    if(this.instructionText &&this.instructionText.innerText!=null){
     this.instructionText.innerText = 'Drag the cursor to the option you want, then Click to select.';
+    }
     this.showInstructionText();
     this.addPortal = this.createPortal('Add Portal', '#4ABFAA');
 this.removePortal = this.createPortal('Remove Portal', '#4ABFAA');
@@ -307,8 +309,9 @@ if (this.isThick) {
   this.el.sceneEl.remove(this.addPortal);
   this.plus.remove();
   this.resetInactivityTimeout(5000);
+  if(this.instructionText &&this.instructionText.innerText!=null){
   this.instructionText.innerText = 'Click and drag on the screen to look around.';
-
+  }
   setTimeout(() => {
     this.hideInstructionText();
     this.resetInactivityTimeout(5000);
